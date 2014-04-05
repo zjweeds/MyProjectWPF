@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="BillManageMain.Pages.TabMangePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded">
+    <Grid Style="{StaticResource ContentRoot}">
+            <!-- TODO: set @SelectedSource -->
+            <mui:ModernTab  x:Name="mtab" Layout="Tab">
+            <mui:ModernTab.Links>
+                <mui:Link x:Name="link1"  DisplayName="常用票夹" Source=""/>
+                <!--<mui:Link x:Name="link2"  DisplayName="这是第二个例子" />-->
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
+    </Grid>
+</UserControl>

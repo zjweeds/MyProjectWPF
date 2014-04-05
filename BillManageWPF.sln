@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillManageWPF", "BillManageWPF\BillManageWPF.csproj", "{AC19324C-EAAA-4CB0-8E21-1EFAC5A9CB38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\Controllers.csproj", "{A541AFB5-0EAC-48FA-B7A8-1D3A327A95AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillManageMain", "BillManageMain\BillManageMain.csproj", "{6D326C9F-2798-44F2-9AC0-06B28032BA3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC19324C-EAAA-4CB0-8E21-1EFAC5A9CB38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC19324C-EAAA-4CB0-8E21-1EFAC5A9CB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC19324C-EAAA-4CB0-8E21-1EFAC5A9CB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC19324C-EAAA-4CB0-8E21-1EFAC5A9CB38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A541AFB5-0EAC-48FA-B7A8-1D3A327A95AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A541AFB5-0EAC-48FA-B7A8-1D3A327A95AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A541AFB5-0EAC-48FA-B7A8-1D3A327A95AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A541AFB5-0EAC-48FA-B7A8-1D3A327A95AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D326C9F-2798-44F2-9AC0-06B28032BA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D326C9F-2798-44F2-9AC0-06B28032BA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D326C9F-2798-44F2-9AC0-06B28032BA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D326C9F-2798-44F2-9AC0-06B28032BA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

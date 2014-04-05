@@ -1,0 +1,50 @@
+﻿<Window  x:Class="BillManageWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BillManageWPF"  
+        BorderThickness="1,0" 
+        WindowStyle="None" 
+         Height="400" Width="650"
+        AllowsTransparency="True" Loaded="Window_Loaded" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        >
+
+    <Grid Background="SkyBlue" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="285*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="34*"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="title" Content="票" Margin="170,105,312,200" FontSize="65" FontFamily="Microsoft Sans Serif"  >
+            <Label.Foreground>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="0.25" />
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        
+        <Label Name="title1" Content="据" Margin="270,105,212,200" FontSize="65" FontFamily="Microsoft Sans Serif"  >
+            <Label.Foreground>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="0.25" />
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        
+        <Label Name="title2" Content="通" Margin="370,105,112,200" FontSize="65" FontFamily="Mistral"  >
+            <Label.Foreground>
+                <LinearGradientBrush>
+                    <GradientStop Color="White" Offset="0.25" />
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        
+        <local:UCProcessBar x:Name="PBar" Margin="136,350,34,0" Opacity="0">
+        </local:UCProcessBar>
+
+        <local:UCLogin x:Name="Login" Margin="344,30,44,15"  Opacity="0" Grid.ColumnSpan="3" Width="Auto" >
+        </local:UCLogin>
+        <Button Name="btnExit"   Content="X" BorderBrush="SkyBlue"  Foreground="White" Background="SkyBlue"  FontSize="20" HorizontalAlignment="Left" Margin="32,-3,0,0" VerticalAlignment="Top" Width="35" Grid.Column="2" Height="39" Click="Button_Click_1"/>
+        <Button Name="btnMin" Content="-" BorderBrush="SkyBlue"  Foreground="White" Background="SkyBlue"  FontSize="35" HorizontalAlignment="Left" Margin="0,-10,0,0" VerticalAlignment="Top" Width="35" Grid.Column="2" Height="48" Click="Button_Click"/>
+    </Grid>
+</Window>
