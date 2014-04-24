@@ -15,13 +15,21 @@ namespace Controllers.Moders
 {
   public  class SoftConfigModer
     {
-      public string softKey { get; set; }
-      public string softServerIP { get; set; }
-      public string softDBName { get; set; }
+      public String softKey { get; set; }
+      public String softServerIP { get; set; }
+      public String softDBName { get; set; }
 
-      public string softDBUser { get; set; }
+      public String softDBUser { get; set; }
 
-      public string softDBPwd { get; set; }
+      public String softDBPwd { get; set; }
+
+      public String softImagePath { get; set; }
+      public String softConfigPath { get; set; }
+      public SoftConfigModer()
+      {
+          softImagePath = AppDomain.CurrentDomain.BaseDirectory + @"\\ImageCache\";
+          softConfigPath = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs\"; 
+      }
   
     }
 }

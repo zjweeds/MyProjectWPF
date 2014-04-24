@@ -18,7 +18,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 用户工号
        /// </summary>
-       public string ID
+       public  String ID
        {
            get;
            set;
@@ -27,7 +27,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 用户姓名
        /// </summary>
-       public string Name
+       public   String Name
        {
            get;
            set;
@@ -36,7 +36,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 用户密码
        /// </summary>
-       public string Pwd
+       public  String Pwd
        {
            get;
            set;
@@ -45,7 +45,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 用户头像
        /// </summary>
-       public byte Photo
+       public  byte[] Photo
        {
            get;
            set;
@@ -54,8 +54,8 @@ namespace Controllers.Moders
        /// <summary>
        /// 用户性别
        /// </summary>
-       public int m_sex;
-       public string Sex
+       public  int m_sex;
+       public  String Sex
        {
            get
            {
@@ -85,7 +85,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 所属公司ID
        /// </summary>
-       public int CompanyID
+       public  int CompanyID
        {
            get;
            set;
@@ -94,7 +94,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 所属公司
        /// </summary>
-       public string Company
+       public  String Company
        {
            get;
            set;
@@ -103,7 +103,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 所属部门
        /// </summary>
-       public string Department
+       public  String Department
        {
            get;
            set;
@@ -112,7 +112,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 职位
        /// </summary>
-       public string Position
+       public   String Position
        {
            get;
            set;
@@ -121,7 +121,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 出生日期
        /// </summary>
-       public DateTime Birthday
+       public  DateTime Birthday
        {
            get;
            set;
@@ -130,7 +130,7 @@ namespace Controllers.Moders
        /// <summary>
        /// 入职时间
        /// </summary>
-       public DateTime EntryDate
+       public  DateTime EntryDate
        {
            get;
            set;
@@ -139,11 +139,18 @@ namespace Controllers.Moders
        /// <summary>
        /// 备注
        /// </summary>
-       public string Remark
+       public  String Remark
        {
            get;
            set;
        }
-
+       /// <summary>
+       /// 当前操作账套
+       /// </summary>
+       public  String Op_BillSet
+       {
+           get;
+           set;
+       }
     }
 }

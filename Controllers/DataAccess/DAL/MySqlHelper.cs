@@ -68,6 +68,43 @@ namespace Controllers.DataAccess.DAL
         {
             get { return m_Cmd; }
         }
+
+       /// <summary>
+       /// 插入数据，返回自增ID
+       /// </summary>
+       /// <param name="strSql"></param>
+       /// <param name="sqlPar"></param>
+       /// <returns></returns>
+        public int ExecSqlReturnId(string strSql, List<SqlParameter> sqlPar)
+        {
+            int intReturnValue;
+            m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandText = strSql;
+            if (sqlPar != null)
+            {
+                foreach (SqlParameter sqlpItem in sqlPar)
+                {
+                    m_Cmd.Parameters.Add(sqlpItem);
+                }
+            }
+            try
+            {
+                if (m_Conn.State == ConnectionState.Closed)
+                {
+                    m_Conn.Open();
+                }
+                intReturnValue = Convert .ToInt32 (m_Cmd.ExecuteScalar());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+            }
+            return intReturnValue;
+        }
         
         /// <summary>
         /// 通过Transact-SQL语句提交数据
@@ -154,7 +191,7 @@ namespace Controllers.DataAccess.DAL
         public DataSet GetDataSet(string strSql, string strTable,List<SqlParameter> sqlPar)
         {
             DataSet ds = null;
-             m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandType = CommandType.Text;
             m_Cmd.CommandText = strSql;
             if (sqlPar != null)
             {
@@ -236,7 +273,30 @@ namespace Controllers.DataAccess.DAL
             Dr.Close();
             return item;
         }
+        public object GetSingleObject(string strSql)
+        {
+            object obj = null;
+            m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandText = strSql;           
+            try
+            {
+                if (m_Conn.State == ConnectionState.Closed)
+                {
+                    m_Conn.Open();
+                }
+                obj = m_Cmd.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+                throw e;//向上一层抛出异常（上一层使用try{}catch{}）或立刻中断(上一层未使用try{}catch{})
+            }
+            finally
+            {
+                m_Conn.Close();
+            }
 
+            return obj;
+        }
         /// <summary>
         /// 重新封装ExecuteScalar方法，得到结果集中的第一行的第一列
         /// </summary>
@@ -247,9 +307,12 @@ namespace Controllers.DataAccess.DAL
             object obj = null;
             m_Cmd.CommandType = CommandType.Text;
             m_Cmd.CommandText = strSql;
-            foreach (SqlParameter sqlItem in sqlList)
+            if (sqlList != null)
             {
-                m_Cmd.Parameters.Add(sqlItem);
+                foreach (SqlParameter sqlItem in sqlList)
+                {
+                    m_Cmd.Parameters.Add(sqlItem);
+                }
             }
             try
             {
@@ -271,20 +334,52 @@ namespace Controllers.DataAccess.DAL
             return obj;
         }
 
+       /// <summary>
+        /// 通过Transact-SQL语句，得到DataTable实例
+       /// </summary>
+       /// <param name="strSql"></param>
+       /// <returns></returns>
+        public DataTable GetDataTable(string strSql)
+        {
+            DataTable dt = null;
+            SqlDataAdapter sda = null;
+            m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandText = strSql;            
+            try
+            {
+                sda = new SqlDataAdapter(m_Cmd);
+                dt = new DataTable();
+                sda.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return dt; //dt.Rows.Count可能等于零
+        }
         /// <summary>
         /// 通过Transact-SQL语句，得到DataTable实例
         /// </summary>
         /// <param name="strSqlCode">Transact-SQL语句</param>
         /// <param name="strTableName">数据表的名称</param>
         /// <returns>DataTable实例的引用</returns>
-        public DataTable GetDataTable(string strSql, string strTableName)
+        public DataTable GetDataTable(string strSql, string strTableName, List<SqlParameter> sqlPar)
         {
             DataTable dt = null;
             SqlDataAdapter sda = null;
-
+            m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandText = strSql;
+            if (sqlPar != null)
+            {
+                foreach (SqlParameter sp in sqlPar)
+                {
+                    m_Cmd.Parameters.Add(sp);
+                }
+            }
             try
             {
-                sda = new SqlDataAdapter(strSql, m_Conn);
+                sda= new SqlDataAdapter(m_Cmd);
                 dt = new DataTable(strTableName);
                 sda.Fill(dt);
             }

@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using System.Data;
 using Controllers.Moders.TableModers;
 using Controllers.Business;
+using BillManageMain;
 
 namespace BillManageWPF
 {
@@ -30,7 +31,7 @@ namespace BillManageWPF
     /// </summary>
     public partial class UCLogin : UserControl
     {
-        public MainWindow mw { get; set; }
+        public LoginWindow lw { get; set; }
         public CompanyService ComSer = null;
         public UCLogin()
         {
@@ -40,7 +41,12 @@ namespace BillManageWPF
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            mw.DoCallBack();
+            lw.DoCallBack();
+            MainWindow wmv = new MainWindow();
+            wmv.Show();
+            lw.Close();
+            //BillManageMain.MainWindow bmw = new BillManageMain.MainWindow();
+           
         }
 
         public void LoadCompany()

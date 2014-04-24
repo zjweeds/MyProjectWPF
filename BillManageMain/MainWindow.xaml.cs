@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BillManageMain.Pages;
 
 namespace BillManageMain
 {
@@ -24,7 +25,6 @@ namespace BillManageMain
         public MainWindow()
         {
             InitializeComponent();
-        }
-       
+        }       
     }
 }

@@ -1,0 +1,34 @@
+﻿<UserControl x:Name="BillTemplateEdit" x:Class="BillManageMain.Pages.UserControlPages.BillTemplateAdd"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"         
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="450" Loaded="BillTemplateAdd_Loaded">
+    <Grid>
+        <Canvas Margin="0,-5,0,5">
+            <GroupBox Header="预览" Canvas.Left="10" Canvas.Top="165" Height="150" Width="435">
+                <Canvas Name="panel">
+                    <Image Name="ImageBG"  HorizontalAlignment="Left" Height="120" Margin="10,5,0,0" VerticalAlignment="Top" Width="400"/>
+                </Canvas>
+                        <!--<Image Name="ImageBG"  HorizontalAlignment="Left" Height="120" Margin="10,5,0,0" VerticalAlignment="Top" Width="400"/>-->
+            </GroupBox>
+            <GroupBox Header="属性设置" Canvas.Left="10" Canvas.Top="5" Height="160" Width="435">
+                <StackPanel>
+                    <Grid Height="125" Width="395" Margin="14,0">
+                        <TextBox HorizontalAlignment="Left" Height="26" Margin="20,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" x:Name="tbBillName"/>
+                        <TextBox HorizontalAlignment="Left" Height="26" Margin="220,9,0,0" Width="150"  TextWrapping="Wrap" VerticalAlignment="Top" Name="tbWidth"  />
+                        <TextBox HorizontalAlignment="Left" Height="26" Margin="220,46,0,0" Width="150"  TextWrapping="Wrap" VerticalAlignment="Top" Name="tbHeigth"  />
+                        <TextBox HorizontalAlignment="Left" Height="26" Margin="20,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" x:Name="tbBillCodeLegth" />
+                        <TextBox Margin="20,84,85,15" TextWrapping="Wrap" x:Name="tbImagePath" />
+                        <Button Content="..." Margin="330,83,33,16" RenderTransformOrigin="1,0.5" Click="Button_Click"/>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+            <Button  Name="tbNext" Content="下一步" Canvas.Left="275" Canvas.Top="320" Width="75" Click="tbNext_Click"/>
+            <Button Name="tbExit" Content="退  出" Canvas.Left="365" Canvas.Top="320" Width="75"/>
+
+
+        </Canvas>
+    </Grid>
+</UserControl>

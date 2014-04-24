@@ -37,6 +37,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,8 +61,40 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UserControls\MyLink.cs" />
-    <Compile Include="UserControls\UserPanel.xaml.cs">
+    <Compile Include="Forms\FormSetTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSetTemplate.designer.cs">
+      <DependentUpon>FormSetTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PropertyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PropertyForm.Designer.cs">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TemplateMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TemplateMain.Designer.cs">
+      <DependentUpon>TemplateMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BasePages\BillSetTabPage.xaml.cs">
+      <DependentUpon>BillSetTabPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BasePages\ViewBasicPage.xaml.cs">
+      <DependentUpon>ViewBasicPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\ZhiPiao.xaml.cs">
+      <DependentUpon>ZhiPiao.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserControlPages\BillTemplateAdd.xaml.cs">
+      <DependentUpon>BillTemplateAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserControlPages\BillTemplateView.xaml.cs">
+      <DependentUpon>BillTemplateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserControlPages\UserPanel.xaml.cs">
       <DependentUpon>UserPanel.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -86,46 +120,68 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SettingsAppearanceViewModel.cs" />
-    <Page Include="Pages\Home.xaml">
+    <Page Include="Pages\BasePages\BillSetTabPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Settings.xaml">
+    <Page Include="Pages\BasePages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Pages\Home.xaml.cs">
+    <Page Include="Pages\BasePages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="Pages\BasePages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Settings.xaml.cs">
+    <Compile Include="Pages\BasePages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TabMangePage.xaml.cs">
-      <DependentUpon>TabMangePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Page Include="Pages\TabMangePage.xaml">
+    <Page Include="Pages\BasePages\ViewBasicPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UserPanel.xaml">
+    <Page Include="Pages\BillTemplateList\ZhiPiao.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserControlPages\BillTemplateAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserControlPages\BillTemplateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserControlPages\UserPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\BillManageWPF\BillManageWPF.csproj">
-      <Project>{ac19324c-eaaa-4cb0-8e21-1efac5a9cb38}</Project>
-      <Name>BillManageWPF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Controllers\Controllers.csproj">
       <Project>{a541afb5-0eac-48fa-b7a8-1d3a327a95ad}</Project>
       <Name>Controllers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FormSetTemplate.resx">
+      <DependentUpon>FormSetTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PropertyForm.resx">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TemplateMain.resx">
+      <DependentUpon>TemplateMain.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
