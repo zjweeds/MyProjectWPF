@@ -19,7 +19,7 @@ namespace Controllers.Business
     public class CompanyService
     {
         CompanAccess comAcess = new CompanAccess();
-        public List<CompanyModer> GetAllCompanyFields(string sFields, string sWhere)
+        public List<CompanyModer> GetAllCompanyFields(String sFields, String sWhere)
         {
             return comAcess.GetAllCompanyFields(sFields, sWhere);
         }

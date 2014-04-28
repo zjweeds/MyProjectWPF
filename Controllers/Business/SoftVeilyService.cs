@@ -11,7 +11,7 @@ namespace Controllers.Business
 {
     public class SoftVeilyService
     {
-        public SoftVerify GetSoftVeily(string softkey)
+        public SoftVerify GetSoftVeily(String softkey)
         {
             DataSet ds = new SoftVeilyAccess().GetSoftVerify(softkey);
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Controllers.Business;
+using BillManageWPF.softConfig;
 
 namespace BillManageWPF
 {
@@ -54,10 +55,11 @@ namespace BillManageWPF
                     {
                         if (MessageBox.Show("您是第一次运行程序！或者是系统配置文件丢失\n转到配置页面么？", "软件提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                         {
-                            ConfigWindow cfw = new ConfigWindow();
-                            cfw.Top = this.Top;
-                            cfw.Left = this.Left;
-                            cfw.Show();
+                            WindowSoftConfig wsf = new WindowSoftConfig(this);
+                            wsf.Top = this.Top;
+                            wsf.Left = this.Left;
+                            wsf.Show();
+                            this.WindowState = System.Windows.WindowState.Minimized;
                         }
                         else
                         {
@@ -70,7 +72,7 @@ namespace BillManageWPF
             }
             else
             {
-                if (title.Margin.Left < 210)
+                if (title.Margin.Left < 156)
                 {
                     title.Margin = new Thickness(title.Margin.Left + 3, title.Margin.Top, title.Margin.Right - 3, title.Margin.Bottom);
                     title1.Margin = new Thickness(title1.Margin.Left + 3, title1.Margin.Top, title1.Margin.Right - 3, title1.Margin.Bottom);

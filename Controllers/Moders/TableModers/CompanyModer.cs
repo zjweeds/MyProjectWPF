@@ -23,12 +23,12 @@ namespace Controllers.Moders.TableModers
         /// <summary>
         /// 公司名称
         /// </summary>
-        public string CIName { get; set; }
+        public String CIName { get; set; }
 
         /// <summary>
         /// 公司简介
         /// </summary>
-        public string CIDescription { get; set; }
+        public String CIDescription { get; set; }
 
         /// <summary>
         ///父公司ID
@@ -38,7 +38,7 @@ namespace Controllers.Moders.TableModers
         /// <summary>
         /// 记录创建人ID
         /// </summary>
-        public string CICreaterID { get; set; }
+        public String CICreaterID { get; set; }
 
         /// <summary>
         /// 创建时间

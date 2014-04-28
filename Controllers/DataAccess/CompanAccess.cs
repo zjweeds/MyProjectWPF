@@ -30,17 +30,17 @@ namespace Controllers.DataAccess
        /// <param name="sFields">要显示的字段</param>
        /// <param name="sWhere">查询条件</param>
        /// <returns>sql查询语句</returns>
-        public StringBuilder GetSelectString(string sFields, string sWhere)
+        public StringBuilder GetSelectString(String sFields, String sWhere)
         {
             StringBuilder sbSqlString = new StringBuilder();
-            if ((sFields == null) || (sFields == string.Empty))
+            if ((sFields == null) || (sFields == String.Empty))
             {
                 //字段为null时，默认返回列
                 sFields = " * ";
             }
             sbSqlString.Append("select  " + sFields + " from CompanyInfo   with (nolock) ");
             sbSqlString.Append(" where 1=1  and CIIsEnable = 1");
-            if ((sWhere != null) && (sWhere != string.Empty))
+            if ((sWhere != null) && (sWhere != String.Empty))
             {
                 sbSqlString.Append(" and  " + sWhere);
             }
@@ -116,13 +116,13 @@ namespace Controllers.DataAccess
         /// <param name="sFields"></param>
         /// <param name="sWhere"></param>
         /// <returns></returns>
-        public List<CompanyModer> GetAllCompanyFields(string sFields,string sWhere)
+        public List<CompanyModer> GetAllCompanyFields(String sFields,String sWhere)
         {
             SqlDataReader sdr=  m_sqlHelper.GetDataReader(GetSelectString(sFields, sWhere).ToString(), null);
             return GetList(sdr);           
         }
 
-        public DataSet GetCompanToDataSet(string sFields, string sWhere)
+        public DataSet GetCompanToDataSet(String sFields, String sWhere)
         {
             return m_sqlHelper.GetDataSet(GetSelectString(sFields, sWhere).ToString(), "Company",null);
         }

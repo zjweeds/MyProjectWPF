@@ -77,6 +77,12 @@ namespace Controllers.Business
                 throw ex;
             }
         }
+        
+        /// <summary>
+        /// 根据模板编号返回datatable
+        /// </summary>
+        /// <param name="billTemplateID"></param>
+        /// <returns></returns>
         public DataTable SelectDataTableByID(int billTemplateID)
         {
             StringBuilder sbsql = new StringBuilder();
@@ -84,49 +90,76 @@ namespace Controllers.Business
             sbsql.Append(" from TemplateInfo with(nolock) ");
             sbsql.Append(" where 1=1 ");
             sbsql.Append("       and TIID = @TIID ");
+            sbsql.Append("       and TIIsEnable = 1");
             List<SqlParameter> SqlPars = new List<SqlParameter>();
             SqlPars.Add(new SqlParameter("@TIID", SqlDbType.Int));
             SqlPars[0].Value = billTemplateID;
             return  sqlhelper.GetDataTable(sbsql.ToString(), "", SqlPars);
         }
+       
         /// <summary>
-        /// 根据模版号返回模板实体
+        /// 根据datatable返回模板实体
         /// </summary>
         /// <param name="billTemplateID"></param>
         /// <returns></returns>
-        public BillTemplatModer SelectModerByID(int billTemplateID)
+        public List<BillTemplatModer> GetTemplateModerListByDataTable(DataTable dtitem)
         {
-            DataTable dtitem = SelectDataTableByID(billTemplateID);
-            if (dtitem != null && dtitem.Rows.Count > 0)
+            try
             {
-                BillTemplatModer btm = new BillTemplatModer();
-                btm.TIID = Convert.ToInt32(dtitem.Rows[0][0]);
-                btm.TIName = Convert.ToString(dtitem.Rows[0][1]);
-                btm.TIBackground = dtitem.Rows[0][2] as byte[];
-                btm.TIWidth = Convert.ToInt32(dtitem.Rows[0][3]);
-                btm.TIHeight = Convert.ToInt32(dtitem.Rows[0][4]);
-                btm.TITTID = Convert.ToInt32(dtitem.Rows[0][5]);
-                btm.TICodeLegth = Convert.ToInt32(dtitem.Rows[0][6]);
-                return btm;
+                List<BillTemplatModer> btmlist = new List<BillTemplatModer>();
+                //DataTable dtitem = SelectDataTableByID(billTemplateID);
+                if (dtitem != null && dtitem.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dtitem.Rows.Count; i++)
+                    {
+                        BillTemplatModer btm = new BillTemplatModer();
+                        btm.TIID = Convert.ToInt32(dtitem.Rows[i][0]);
+                        btm.TIName = Convert.ToString(dtitem.Rows[i][1]);
+                        btm.TIBackground = dtitem.Rows[i][2] as byte[];
+                        btm.TIWidth = Convert.ToInt32(dtitem.Rows[i][3]);
+                        btm.TIHeight = Convert.ToInt32(dtitem.Rows[i][4]);
+                        btm.TITTID = Convert.ToInt32(dtitem.Rows[i][5]);
+                        btm.TICodeLegth = Convert.ToInt32(dtitem.Rows[i][6]);
+                        btmlist.Add(btm);
+                    }
+                    return btmlist;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
 
+      
+       
 
-        public int GetTemplateTypeIdByName(String TypeName)
+        /// <summary>
+        /// 根据页面编号 返回模板datatable
+        /// </summary>
+        /// <param name="pageID"></param>
+        /// <returns></returns>
+        public DataTable GetTemplateListByTypePageID(int pageID)
         {
-            String sql = "select TTID from TemplateType where TTName = '"+TypeName+"' and TTIsEnable = 1 ";
-            object ob=sqlhelper.GetSingleObject(sql);
-            if (ob != null)
+            try
             {
-                return (int)ob;
+                StringBuilder sbsql = new StringBuilder();
+                sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
+                sbsql.Append(" from TemplateInfo with(nolock) ");
+                sbsql.Append(" join TemplateType with(nolock) ");
+                sbsql.Append("     on TemplateType.TTID = TemplateInfo.TITTID ");
+                sbsql.Append(" where 1=1 ");
+                sbsql.AppendFormat(" and TemplateType.TTIPageID ='{0}' ", pageID);
+                sbsql.Append("       and TTIsEnable = 1 and TIIsEnable = 1");
+                return sqlhelper.GetDataTable(sbsql.ToString());
             }
-            else
+            catch(Exception ex)
             {
-                return 0;
+                throw ex;
             }
         }
     }

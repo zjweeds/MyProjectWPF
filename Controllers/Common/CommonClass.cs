@@ -4,12 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Controllers.DataAccess.DAL;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Controllers.Common
 {
     public class CommonClass
     {
-        public Font GetFontByString(string str)
+        /// <summary>
+        /// 字体对象格式化成字符串
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public Font GetFontByString(String str)
         {
             try
             {
@@ -20,20 +28,27 @@ namespace Controllers.Common
             {
                 throw ex;
             }
-        }
+        }   
     }
+
     public class ComboxItem
     {
-        public string Text = "";
+        /// <summary>
+        /// 显示文本
+        /// </summary>
+        public String Text = "";
 
-        public string Value = "";
-        public ComboxItem(string _Text, string _Value)
+        /// <summary>
+        /// 值
+        /// </summary>
+        public String Value = "";
+        public ComboxItem(String _Text, String _Value)
         {
             Text = _Text;
             Value = _Value;
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             return Text;
         }

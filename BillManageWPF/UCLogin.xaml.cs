@@ -21,8 +21,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using Controllers.Moders.TableModers;
+using Controllers.Common;
 using Controllers.Business;
-using BillManageMain;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace BillManageWPF
 {
@@ -33,20 +35,32 @@ namespace BillManageWPF
     {
         public LoginWindow lw { get; set; }
         public CompanyService ComSer = null;
+        DispatcherTimer _timer = new DispatcherTimer();
+        int Count = 0;
         public UCLogin()
         {
             this.ComSer = new CompanyService();
             InitializeComponent();           
         }
+        public void LoginAsyc()
+        {
+            Thread th = new Thread(new ThreadStart(() =>
+            {
+                System.Threading.Thread.Sleep(3000);
+               
+            })
+            );
+            th.Start();
+        }
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            lw.DoCallBack();
-            MainWindow wmv = new MainWindow();
-            wmv.Show();
-            lw.Close();
-            //BillManageMain.MainWindow bmw = new BillManageMain.MainWindow();
-           
+           // LoginAsyc();
+            _timer.Start();  
+             
+                     
         }
 
         public void LoadCompany()
@@ -54,15 +68,35 @@ namespace BillManageWPF
             DataSet dsItem = ComSer.GetAllCompanyNames();
             if (dsItem != null)
             {
+                //new CommonClass().SetComboBoxItemByDataTable(dsItem.Tables[0], cbbCompany, "CIName", "CIName");
                 for (int i = 0; i < dsItem.Tables[0].Rows.Count; i++)
                 {
                     cbbCompany.Items.Add(dsItem.Tables[0].Rows[i][0].ToString());
                 }
             }
         }
+        public void timer_tick(object sender, EventArgs e)
+        {
+            Count++;
+            if (Count < 6)
+            {
+                lw.DoCallBack();
+            }
+            else
+            {              
+                MainWindow wmv = new MainWindow();
+                wmv.WindowState = WindowState.Maximized;
+                wmv.Show(); 
+                _timer.Stop();
+                lw.Close(); 
+            }
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             LoadCompany();
+            _timer.Interval=TimeSpan.FromMilliseconds(1000);
+            _timer.Tick += new EventHandler(timer_tick);
+                      
         }
     }
 }

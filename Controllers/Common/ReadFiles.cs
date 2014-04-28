@@ -10,7 +10,7 @@ namespace Controllers.Common
     public class ReadFiles
     {
         [DllImport("kernel32")] //引入“shell32.dll”API文件
-        public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        public static extern int GetPrivateProfileString(String section, String key, String def, StringBuilder retVal, int size, String filePath);
 
         public ReadFiles()
         {
@@ -24,7 +24,7 @@ namespace Controllers.Common
         /// <param name="def">没有找到内容时返回的默认值</param>
         /// <param name="filePath">要读取的INI文件</param>
         /// <returns>读取的节点内容</returns>
-        public static string GetIniFileString(string section, string key, string def, string filePath)
+        public static String GetIniFileString(String section, String key, String def, String filePath)
         {
             StringBuilder temp = new StringBuilder(1024);
             GetPrivateProfileString(section, key, def, temp, 1024, filePath);

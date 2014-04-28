@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 using Controllers.Moders.TableModers;
 using Controllers.Common;
 using Controllers.Business;
-using BillManageMain.Forms;
+using BillManageWPF.Forms;
 
-namespace BillManageMain.Pages.UserControlPages
+namespace BillManageWPF.Pages.UserControlPages
 {
     /// <summary>
     /// BillTemplateAdd.xaml 的交互逻辑

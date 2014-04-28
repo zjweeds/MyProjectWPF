@@ -12,7 +12,7 @@ namespace Controllers.DataAccess
     public class UserAccess
     {
         UserModer userModer = new UserModer();
-        private StringBuilder GetSelectString(string showFields,string swhere)
+        private StringBuilder GetSelectString(String showFields,String swhere)
         {
             StringBuilder sbSql =new StringBuilder();
             sbSql.Append("select "+ showFields + "from UserInfo  UI ");
@@ -21,7 +21,7 @@ namespace Controllers.DataAccess
             //sbSql.Append()
             return sbSql;
         }
-        public UserModer GetUserInfo(List<string> slists)
+        public UserModer GetUserInfo(List<String> slists)
         {
            //
             return null;

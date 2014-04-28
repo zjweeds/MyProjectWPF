@@ -24,10 +24,10 @@ namespace Controllers.Common
             Boolean iZhSh_bool = true;//是否含有整数,默认有(0则视为没有)
 
             string NumStr;//整个数字字符串
-            string NumStr_Zh;//整数部分
-            string NumSr_X = "";//小数部分
-            string NumStr_DQ;//当前的数字字符
-            string NumStr_R = "";//返回的字符串
+            String NumStr_Zh;//整数部分
+            String NumSr_X = "";//小数部分
+            String NumStr_DQ;//当前的数字字符
+            String NumStr_R = "";//返回的字符串
 
             Num = Math.Round(Num, 2);//四舍五入取两位
 

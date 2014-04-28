@@ -17,10 +17,33 @@ using Controllers.Common;
 namespace Controllers.DataAccess.DAL
 {
    public  class MySqlHelper
-    {
-        private SqlConnection m_Conn = null;
-        private SqlCommand m_Cmd = null;
-        public MySqlHelper(string strConn)
+   {
+        #region 只读属性
+        /// <summary>
+        /// 数据库连接
+        /// </summary>
+        private SqlConnection m_Conn;
+        public SqlConnection Conn
+        {
+            get { return m_Conn; }
+        }
+             
+        /// <summary>
+        /// 数据库命令
+        /// </summary>
+        private SqlCommand m_Cmd;
+        public SqlCommand Cmd
+        {
+            get{return m_Cmd;}
+        }
+        #endregion
+
+        #region 重载的构造函数
+        /// <summary>
+        /// 直接根据 数据库连接字符串构建
+        /// </summary>
+        /// <param name="strConn"></param>
+        public MySqlHelper(String strConn)
         {
             try
             {
@@ -33,19 +56,20 @@ namespace Controllers.DataAccess.DAL
                 throw e;
             }
         }
+        
         /// <summary>
-        /// 创建数据库连接和SqlCommand实例
+        /// 无参构造函数，从配置文件中读取连接字符串
         /// </summary>
         public MySqlHelper()
         {
-            string strServer = ReadFiles.GetIniFileString("DataBase", "Server", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-            string database = ReadFiles.GetIniFileString("DataBase", "Database", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+            String strServer = ReadFiles.GetIniFileString("DataBase", "Server", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+            String database = ReadFiles.GetIniFileString("DataBase", "Database", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
             //获取登录用户
-            string strUserID = ReadFiles.GetIniFileString("DataBase", "UserID", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+            String strUserID = ReadFiles.GetIniFileString("DataBase", "UserID", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
             //获取登录密码
-            string strPwd = ReadFiles.GetIniFileString("DataBase", "Pwd", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+            String strPwd = ReadFiles.GetIniFileString("DataBase", "Pwd", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
             //数据库连接字符串
-            string strConn = "Server = " + strServer + ";Database = " + database + ";User id=" + strUserID + ";PWD=" + strPwd;
+            String strConn = "Server = " + strServer + ";Database = " + database + ";User id=" + strUserID + ";PWD=" + strPwd;
             strConn = "server=.;database = BillManage;User id =sa ; PWD = zhaojian ";
             try
             {
@@ -58,24 +82,16 @@ namespace Controllers.DataAccess.DAL
                 throw e;
             }
         }
-      
-        public SqlConnection Conn
-        {
-            get { return m_Conn; }
-        }
+        #endregion
 
-        public SqlCommand Cmd
-        {
-            get { return m_Cmd; }
-        }
-
-       /// <summary>
-       /// 插入数据，返回自增ID
-       /// </summary>
-       /// <param name="strSql"></param>
-       /// <param name="sqlPar"></param>
-       /// <returns></returns>
-        public int ExecSqlReturnId(string strSql, List<SqlParameter> sqlPar)
+        #region 公共方法
+        /// <summary>
+        /// 插入数据，返回自增ID
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <param name="sqlPar"></param>
+        /// <returns></returns>
+        public int ExecSqlReturnId(String strSql, List<SqlParameter> sqlPar)
         {
             int intReturnValue;
             m_Cmd.CommandType = CommandType.Text;
@@ -111,7 +127,7 @@ namespace Controllers.DataAccess.DAL
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <returns>受影响的行数</returns>
-        public int ExecDataBySql(string strSql,List<SqlParameter> sqlPar)
+        public int ExecDataBySql(String strSql,List<SqlParameter> sqlPar)
         {
             int intReturnValue;
             m_Cmd.CommandType = CommandType.Text;
@@ -141,13 +157,42 @@ namespace Controllers.DataAccess.DAL
             }
             return intReturnValue;
         }
-       
+
+        /// <summary>
+        /// 通过Transact-SQL语句提交数据
+        /// </summary>
+        /// <param name="strSql"></param>
+        /// <returns></returns>
+        public int ExecDataBySql(String strSql)
+        {
+            int intReturnValue;
+            m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandText = strSql;           
+            try
+            {
+                if (m_Conn.State == ConnectionState.Closed)
+                {
+                    m_Conn.Open();
+                }
+                intReturnValue = m_Cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+            }
+            return intReturnValue;
+        }
+
         /// <summary>
         /// 多条Transact-SQL语句提交数据
         /// </summary>
         /// <param name="strSqls">使用List泛型封装多条SQL语句</param>
         /// <returns>bool值(提交是否成功)</returns>
-        public bool ExecDataBySqls(List<string> strSqls)
+        public bool ExecDataBySqls(List<String> strSqls)
         {
             
                 bool booIsSucceed;
@@ -160,7 +205,7 @@ namespace Controllers.DataAccess.DAL
                 try
                 {
                     m_Cmd.Transaction = sqlTran;
-                    foreach (string item in strSqls)
+                    foreach (String item in strSqls)
                     {
                         m_Cmd.CommandType = CommandType.Text;
                         m_Cmd.CommandText = item;
@@ -181,14 +226,14 @@ namespace Controllers.DataAccess.DAL
                 }
                 return booIsSucceed;          
         }
-
+        
         /// <summary>
         /// 通过Transact-SQL语句得到DataSet实例
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <param name="strTable">相关的数据表</param>
         /// <returns>DataSet实例的引用</returns>
-        public DataSet GetDataSet(string strSql, string strTable,List<SqlParameter> sqlPar)
+        public DataSet GetDataSet(String strSql, String strTable,List<SqlParameter> sqlPar)
         {
             DataSet ds = null;
             m_Cmd.CommandType = CommandType.Text;
@@ -219,7 +264,7 @@ namespace Controllers.DataAccess.DAL
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <returns>SqlDataReader实例的引用</returns>
-        public SqlDataReader GetDataReader(string strSql,List<SqlParameter> sqlPar)
+        public SqlDataReader GetDataReader(String strSql,List<SqlParameter> sqlPar)
         {
             SqlDataReader sdr;
             m_Cmd.CommandType = CommandType.Text;
@@ -257,7 +302,7 @@ namespace Controllers.DataAccess.DAL
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <returns>该数值</returns>
-        public int GetNumberOf(string strSql,List<SqlParameter> sqlPar)
+        public int GetNumberOf(String strSql,List<SqlParameter> sqlPar)
         {
             int item;
             SqlDataReader Dr = this.GetDataReader(strSql, sqlPar);
@@ -273,7 +318,13 @@ namespace Controllers.DataAccess.DAL
             Dr.Close();
             return item;
         }
-        public object GetSingleObject(string strSql)
+
+       /// <summary>
+       /// 执行SQL，返回符合条件的第一行第一列值
+       /// </summary>
+       /// <param name="strSql"></param>
+       /// <returns></returns>
+        public object GetSingleObject(String strSql)
         {
             object obj = null;
             m_Cmd.CommandType = CommandType.Text;
@@ -302,7 +353,7 @@ namespace Controllers.DataAccess.DAL
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <returns>结果集中的第一行的第一列</returns>
-        public object GetSingleObject(string strSql,List<SqlParameter> sqlList)
+        public object GetSingleObject(String strSql,List<SqlParameter> sqlList)
         {
             object obj = null;
             m_Cmd.CommandType = CommandType.Text;
@@ -339,7 +390,7 @@ namespace Controllers.DataAccess.DAL
        /// </summary>
        /// <param name="strSql"></param>
        /// <returns></returns>
-        public DataTable GetDataTable(string strSql)
+        public DataTable GetDataTable(String strSql)
         {
             DataTable dt = null;
             SqlDataAdapter sda = null;
@@ -364,7 +415,7 @@ namespace Controllers.DataAccess.DAL
         /// <param name="strSqlCode">Transact-SQL语句</param>
         /// <param name="strTableName">数据表的名称</param>
         /// <returns>DataTable实例的引用</returns>
-        public DataTable GetDataTable(string strSql, string strTableName, List<SqlParameter> sqlPar)
+        public DataTable GetDataTable(String strSql, String strTableName, List<SqlParameter> sqlPar)
         {
             DataTable dt = null;
             SqlDataAdapter sda = null;
@@ -397,7 +448,7 @@ namespace Controllers.DataAccess.DAL
         /// <param name="strProcedureName">存储过程名称</param>
         /// <param name="inputParameters">存储过程的参数数组</param>
         /// <returns>DataTable实例的引用</returns>
-        public DataTable GetDataTable(string strProcedureName, SqlParameter[] inputParameters)
+        public DataTable GetDataTable(String strProcedureName, SqlParameter[] inputParameters)
         {
             DataTable dt = new DataTable();
             SqlDataAdapter sda = null;
@@ -422,6 +473,7 @@ namespace Controllers.DataAccess.DAL
                 throw ex;
             }
             return dt; //dt.Rows.Count可能等于零
-        } 
-    }
+        }
+        #endregion
+   }
 }

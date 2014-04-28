@@ -43,8 +43,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,9 +66,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ConfigWindow.xaml.cs">
-      <DependentUpon>ConfigWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -73,12 +73,6 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SettingsAppearanceViewModel.cs" />
-    <Compile Include="Forms\FormSetTemplate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormSetTemplate.designer.cs">
-      <DependentUpon>FormSetTemplate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\PropertyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,9 +88,11 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyCode\ComHelper.cs" />
+    <Compile Include="MyCode\PickBox.cs" />
     <Compile Include="MyControls\MaskTextBox.cs" />
-    <Compile Include="Pages\BasePages\BillSetTabPage.xaml.cs">
-      <DependentUpon>BillSetTabPage.xaml</DependentUpon>
+    <Compile Include="Pages\BasePages\BillManagePage.xaml.cs">
+      <DependentUpon>BillManagePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BasePages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -107,14 +103,41 @@
     <Compile Include="Pages\BasePages\ViewBasicPage.xaml.cs">
       <DependentUpon>ViewBasicPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BillTemplateList\ZhiPiao.xaml.cs">
-      <DependentUpon>ZhiPiao.xaml</DependentUpon>
+    <Compile Include="Pages\BillTemplateList\TemplateProperyEdit.xaml.cs">
+      <DependentUpon>TemplateProperyEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\view_0.xaml.cs">
+      <DependentUpon>view_0.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\BillSetEdit.xaml.cs">
+      <DependentUpon>BillSetEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\view_1.xaml.cs">
+      <DependentUpon>view_1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\view_2.xaml.cs">
+      <DependentUpon>view_2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\view_3.xaml.cs">
+      <DependentUpon>view_3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\view_4.xaml.cs">
+      <DependentUpon>view_4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BillTemplateList\view_5.xaml.cs">
+      <DependentUpon>view_5.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserControlPages\BillTemplateAdd.xaml.cs">
       <DependentUpon>BillTemplateAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UserControlPages\BillTemplateView.xaml.cs">
-      <DependentUpon>BillTemplateView.xaml</DependentUpon>
+    <Compile Include="softConfig\DataBaseAdd.xaml.cs">
+      <DependentUpon>DataBaseAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="softConfig\UCUserCofig.xaml.cs">
+      <DependentUpon>UCUserCofig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="softConfig\WindowSoftConfig.xaml.cs">
+      <DependentUpon>WindowSoftConfig.xaml</DependentUpon>
     </Compile>
     <Compile Include="UCLogin.xaml.cs">
       <DependentUpon>UCLogin.xaml</DependentUpon>
@@ -122,13 +145,6 @@
     <Compile Include="UCProcessBar.xaml.cs">
       <DependentUpon>UCProcessBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserConfig.xaml.cs">
-      <DependentUpon>UserConfig.xaml</DependentUpon>
-    </Compile>
-    <Page Include="ConfigWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Content\About.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -153,9 +169,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\BasePages\BillSetTabPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\BasePages\BillManagePage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BasePages\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -169,27 +185,59 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\BillTemplateList\ZhiPiao.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\BillTemplateList\TemplateProperyEdit.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillTemplateList\view_0.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillTemplateList\BillSetEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillTemplateList\view_1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillTemplateList\view_2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillTemplateList\view_3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillTemplateList\view_4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BillTemplateList\view_5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\UserControlPages\BillTemplateAdd.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\UserControlPages\BillTemplateView.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="softConfig\DataBaseAdd.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="softConfig\UCUserCofig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="softConfig\WindowSoftConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UCLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UCProcessBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,9 +256,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Forms\FormSetTemplate.resx">
-      <DependentUpon>FormSetTemplate.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PropertyForm.resx">
       <DependentUpon>PropertyForm.cs</DependentUpon>
     </EmbeddedResource>

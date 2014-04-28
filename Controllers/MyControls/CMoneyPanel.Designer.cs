@@ -69,7 +69,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CMoneyPanel_MouseMove);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CMoneyPanel_MouseDown);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CMoneyPanel_MouseUp);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CMoneyPanel_KeyDown);
+           // this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CMoneyPanel_KeyDown);
             this.contextMenuOperate.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);

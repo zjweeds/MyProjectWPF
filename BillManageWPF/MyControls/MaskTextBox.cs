@@ -17,11 +17,11 @@ namespace BillManageWPF.MyControls
         /// view sort style, desc arrow
         /// </summary>
         public static readonly DependencyProperty MaskTextProperty =
-                   DependencyProperty.Register("MaskText", typeof(string), typeof(MaskTextBox));
+                   DependencyProperty.Register("MaskText", typeof(String), typeof(MaskTextBox));
 
-        public string MaskText
+        public String MaskText
         {
-            get { return (string)GetValue(MaskTextProperty); }
+            get { return (String)GetValue(MaskTextProperty); }
             set { SetValue(MaskTextProperty, value); }
         }
         #endregion
@@ -30,7 +30,7 @@ namespace BillManageWPF.MyControls
         {
             Loaded += (sender, args) =>
             {
-                if (string.IsNullOrEmpty(base.Text))
+                if (String.IsNullOrEmpty(base.Text))
                 {
                     base.Text = MaskText;
                     base.Foreground = Brushes.Gray;
@@ -41,11 +41,11 @@ namespace BillManageWPF.MyControls
             {
                 base.Foreground = Brushes.Black;
                 if (base.Text == MaskText)
-                    base.Text = string.Empty;
+                    base.Text = String.Empty;
             };
             base.LostFocus += (sender, args) =>
             {
-                if (!string.IsNullOrEmpty(base.Text))
+                if (!String.IsNullOrEmpty(base.Text))
                     return;
 
                 base.Text = MaskText;
@@ -53,12 +53,12 @@ namespace BillManageWPF.MyControls
             };
         }
 
-        public new string Text
+        public new String Text
         {
             get
             {
                 if (base.Text == MaskText)
-                    return string.Empty;
+                    return String.Empty;
                 else
                     return base.Text;
             }

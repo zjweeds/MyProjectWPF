@@ -17,6 +17,8 @@ namespace Controllers.Moders.TableModers
        public int TICodeLegth { get; set; }
 
        public byte[] TIIcon { get; set; }
+       public int TIIsPrintBg { get; set; }
+       public int TIIsVoidBg { get; set; }
 
     }
 }

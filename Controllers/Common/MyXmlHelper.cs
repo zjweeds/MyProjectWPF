@@ -27,7 +27,7 @@ namespace Controllers.Common
         {
         }
       
-        public bool SaveToXml(string path, SoftConfigModer softConfig,SoftVerify softVerify)
+        public bool SaveToXml(String path, SoftConfigModer softConfig,SoftVerify softVerify)
         {
             try
             {
@@ -35,26 +35,26 @@ namespace Controllers.Common
                 writer.Formatting = Formatting.Indented;
                 writer.WriteStartDocument();
                 writer.WriteStartElement("config");
-                writer.WriteElementString("softKey", softConfig.softKey.ToString());
-                writer.WriteElementString("ServerIP", softConfig.softServerIP.ToString());
-                writer.WriteElementString("DataBase", softConfig.softDBName.ToString());
-                writer.WriteElementString("User id ", softConfig.softDBUser.ToString());
-                writer.WriteElementString("PWD", softConfig.softDBPwd.ToString());
-                writer.WriteEndElement(); // 关闭元素  
-                writer.WriteStartElement("softVerify");
-                writer.WriteElementString("RegistCompany", softVerify.CompanyName.ToString());
-                writer.WriteElementString("StarTime", softVerify.StarTime.ToString());
-                writer.WriteElementString("EndTime", softVerify.EndTime.ToString());
+                writer.WriteElementString("softKey", softConfig.softKey!=null? softConfig.softKey.ToString():"");
+                writer.WriteElementString("ServerIP", softConfig.softServerIP!=null?softConfig.softServerIP.ToString():"");
+                writer.WriteElementString("DataBase", softConfig.softDBName!=null?softConfig.softDBName.ToString():"");
+                writer.WriteElementString("User id ", softConfig.softDBUser!=null?softConfig.softDBUser.ToString():"");
+                writer.WriteElementString("PWD",softConfig.softDBPwd!=null? softConfig.softDBPwd.ToString():"");
+                //writer.WriteEndElement(); // 关闭元素  
+                //writer.WriteStartElement("softVerify");
+                writer.WriteElementString("RegistCompany",softVerify.CompanyName!=null?softVerify.CompanyName.ToString():"");
+                writer.WriteElementString("StarTime",softVerify.StarTime!=null?softVerify.StarTime.ToString():"");
+                writer.WriteElementString("EndTime", softVerify.EndTime!=null?softVerify.EndTime.ToString():"");
                 writer.WriteEndElement(); // 关闭元素 
                 writer.Close();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
-        private void ChoiceNode(string NodeName, XmlReader xmlread, SoftConfigModer scfm, SoftVerify softVerify)
+        private void ChoiceNode(String NodeName, XmlReader xmlread, SoftConfigModer scfm, SoftVerify softVerify)
         {
             if (scfm != null)
             {
@@ -118,7 +118,7 @@ namespace Controllers.Common
             }
         }
 
-        public SoftConfigModer readXMl(string path)
+        public SoftConfigModer readXMl(String path)
         {
             SoftConfigModer scfm = new SoftConfigModer();
             SoftVerify softVerify = new SoftVerify();
@@ -127,7 +127,7 @@ namespace Controllers.Common
             {
                 this.xmldoc = new XmlDocument();
                 this.xmldoc.Load(path);
-                string s = string.Empty;
+                String s = String.Empty;
                 XmlNode xn = xmldoc.SelectSingleNode("config");
                 xmlread = new XmlNodeReader(xn);
                 while (xmlread.Read())

@@ -30,9 +30,9 @@ namespace Controllers.MyControls
             intWidth = this.Width;//获取控件的初始宽度值
             intHeight = this.Height;
         }
-        //private string m_IsFlag;
+        //private String m_IsFlag;
         ////定义一个属性，用于表示当前控件是否为单据编号控件
-        //public string IsFlag
+        //public String IsFlag
         //{
         //    get
         //    { return m_IsFlag; }
@@ -67,8 +67,8 @@ namespace Controllers.MyControls
             }
         }
 
-        private string m_ControlName;
-        public string ControlName
+        private String m_ControlName;
+        public String ControlName
         {
             get
             {
@@ -80,8 +80,8 @@ namespace Controllers.MyControls
             }
         }
 
-        private string m_TurnControlName;
-        public string TurnControlName
+        private String m_TurnControlName;
+        public String TurnControlName
         {
             get
             {
@@ -93,8 +93,8 @@ namespace Controllers.MyControls
             }
         }
 
-        private string m_DefaultValue;
-        public string DefaultValue
+        private String m_DefaultValue;
+        public String DefaultValue
         {
             get
             {

@@ -33,7 +33,7 @@ namespace Controllers.DataAccess
             sbsql.Append("select top 1  RegistID from RegistInfo  where SoftKey =@SoftKey) ");
             return sbsql;
         }
-        public DataSet  GetSoftVerify(string softKey)
+        public DataSet  GetSoftVerify(String softKey)
         { 
             List<SqlParameter> SqlPars = new List<SqlParameter>();
             SqlPars.Add(new SqlParameter("@SoftKey", SqlDbType.NVarChar, 50));
@@ -41,7 +41,7 @@ namespace Controllers.DataAccess
             return new MySqlHelper().GetDataSet(GetSelectSQL().ToString(),"soft",SqlPars);
         }
 
-        public bool UpdateSoftVerify(DateTime newtime, string softKey)
+        public bool UpdateSoftVerify(DateTime newtime, String softKey)
         {
             List<SqlParameter> SqlPars = new List<SqlParameter>();
             SqlPars.Add(new SqlParameter("@SoftKey", SqlDbType.NVarChar, 50));

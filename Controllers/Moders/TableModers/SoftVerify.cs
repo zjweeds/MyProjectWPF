@@ -15,7 +15,7 @@ namespace Controllers.Moders.TableModers
 {
     public class SoftVerify
     {
-        public string CompanyName
+        public String CompanyName
         {
             get;
             set;

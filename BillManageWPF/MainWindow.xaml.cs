@@ -34,5 +34,10 @@ namespace BillManageWPF
         {
             InitializeComponent();
         }
+
+        private void mainwindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

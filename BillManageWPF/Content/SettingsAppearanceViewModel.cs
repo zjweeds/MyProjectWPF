@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace BillManageMain.Content
+namespace BillManageWPF.Content
 {
     /// <summary>
     /// A simple view model for configuring theme, font and accent colors.
@@ -15,8 +15,8 @@ namespace BillManageMain.Content
     public class SettingsAppearanceViewModel
         : NotifyPropertyChanged
     {
-        private const string FontSmall = "small";
-        private const string FontLarge = "large";
+        private const String FontSmall = "small";
+        private const String FontLarge = "large";
 
         // 9 accent colors from metro design principles
         /*private Color[] accentColors = new Color[]{
@@ -58,7 +58,7 @@ namespace BillManageMain.Content
         private Color selectedAccentColor;
         private LinkCollection themes = new LinkCollection();
         private Link selectedTheme;
-        private string selectedFontSize;
+        private String selectedFontSize;
 
         public SettingsAppearanceViewModel()
         {
@@ -94,9 +94,9 @@ namespace BillManageMain.Content
             get { return this.themes; }
         }
 
-        public string[] FontSizes
+        public String[] FontSizes
         {
-            get { return new string[] { FontSmall, FontLarge }; }
+            get { return new String[] { FontSmall, FontLarge }; }
         }
 
         public Color[] AccentColors
@@ -120,7 +120,7 @@ namespace BillManageMain.Content
             }
         }
 
-        public string SelectedFontSize
+        public String SelectedFontSize
         {
             get { return this.selectedFontSize; }
             set

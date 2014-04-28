@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BillManageMain.Pages.UserControlPages;
+using BillManageWPF.Pages.UserControlPages;
 
-namespace BillManageMain.Pages
+namespace BillManageWPF.Pages
 {
     /// <summary>
     /// Interaction logic for ViewBasicPage.xaml

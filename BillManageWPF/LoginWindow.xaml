@@ -16,7 +16,7 @@
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="29*"/>
         </Grid.ColumnDefinitions>
-        <Label Name="title" Content="票" Margin="156,105,326,200" FontSize="65" FontFamily="Microsoft Sans Serif"  >
+        <Label Name="title" Content="票" Margin="156,105,345,224" FontSize="65" FontFamily="Microsoft Sans Serif"  >
             <Label.Foreground>
                 <LinearGradientBrush>
                     <GradientStop Color="White" Offset="0.25" />
@@ -24,7 +24,7 @@
             </Label.Foreground>
         </Label>
 
-        <Label Name="title1" Content="据" Margin="262,105,220,200" FontSize="65" FontFamily="Microsoft Sans Serif"  >
+        <Label Name="title1" Content="据" Margin="252,105,254,224" FontSize="65" FontFamily="Microsoft Sans Serif"  >
             <Label.Foreground>
                 <LinearGradientBrush>
                     <GradientStop Color="White" Offset="0.25" />
@@ -32,7 +32,7 @@
             </Label.Foreground>
         </Label>
 
-        <Label Name="title2" Content="通" Margin="370,105,112,200" FontSize="65" FontFamily="Mistral"  >
+        <Label Name="title2" Content="通" Margin="350,105,156,226" FontSize="65" FontFamily="Mistral"  >
             <Label.Foreground>
                 <LinearGradientBrush>
                     <GradientStop Color="White" Offset="0.25" />

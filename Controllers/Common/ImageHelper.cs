@@ -27,6 +27,20 @@ namespace Controllers.Common
                throw ex;
            }
        }
+       public byte[] GetBytesByImagepath(String path)
+       {
+           System.Drawing.Image img = System.Drawing.Image.FromFile(path);
+           try
+           {
+               MemoryStream ms = new MemoryStream(); //实例化内存流
+               new BinaryFormatter().Serialize(ms, img); //将对象图形序列化为给定流
+               return ms.GetBuffer();
+           }
+           catch (Exception ex)
+           {
+               throw ex;
+           }
+       }
        public byte[] GetBytesByBitmapImage(String path)
        {
            try
@@ -41,7 +55,7 @@ namespace Controllers.Common
                throw ex;
            }
        }
-
+      
        public BitmapImage GetBitmapImageByByte(byte[] buffer)
        {
            try

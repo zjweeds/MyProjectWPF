@@ -11,21 +11,25 @@ using Controllers.MyControls;
 using Controllers.Business;
 using Controllers.Common;
 using Controllers.Moders.TableModers;
+using Controllers.MyControls.TemplateContorl;
 
-namespace BillManageMain.Forms
+namespace BillManageWPF.Forms
 {
     public partial class PropertyForm : Form
     {
         #region 变量初始化
         public String type = String.Empty;//保存传入的控件类型 
-        public CTextBox ctxt = null;
-        public CCheckBox chb = null;
-        public CComboBox ccb = null;
-        public CLabel clb = null;
-        public CDateTimePicker cdtp = null;
+        public MyTextBox ctxt = null;
+        public MyCheckBox chb = null;
+        public MyComboBox cbb = null;
+        public MyLabel clb = null;
+        public MyDateTimePicker cdtp = null;
+        public MoneyPanel cmp = null;
         public int ControlId;
+        public Control control = null;
         public String Type;
-        ControlModer tm = null;
+        public TemplateMain tm = null;
+        ControlModer cm = null;
         BillTemplateService btmService = new BillTemplateService();
         ControlService ctmService = new ControlService();
         #endregion
@@ -35,44 +39,105 @@ namespace BillManageMain.Forms
         {
             InitializeComponent();
         }
+        public PropertyForm(TemplateMain mtm, Control mtxt)
+        {
+            InitializeComponent();
+            control = mtxt;
+            GetControlsType(mtxt);
+            this.tm = mtm;
+        }
+        #endregion
+        #region
+        public PropertyForm(TemplateMain mtm,MyTextBox mtxt)
+        {
+            InitializeComponent();
+            this.ctxt = mtxt;
+            this.tm = mtm;
+        }
+        public PropertyForm(TemplateMain mtm, MyCheckBox mtxt)
+        {
+            InitializeComponent();
+            this.chb = mtxt;
+            this.tm = mtm;
+        }
+        public PropertyForm(TemplateMain mtm, MyComboBox mtxt)
+        {
+            InitializeComponent();
+            this.cbb = mtxt;
+            this.tm = mtm;
+        }
+        public PropertyForm(TemplateMain mtm, MyLabel mtxt)
+        {
+            InitializeComponent();
+            this.clb = mtxt;
+            this.tm = mtm;
+        }
+        public PropertyForm(TemplateMain mtm, MyDateTimePicker mtxt)
+        {
+            InitializeComponent();
+            this.cdtp = mtxt;
+            this.tm = mtm;
+        }
+        public PropertyForm(TemplateMain mtm, MoneyPanel mtxt)
+        {
+            InitializeComponent();
+            this.cmp = mtxt;
+            this.tm = mtm;
+        }
         public PropertyForm(int code)
         {
             InitializeComponent();
             ControlId = code;
             Type = "ByID";
         }
-        
-        public PropertyForm(CTextBox txt)
+#endregion     
+
+
+        /// <summary>
+        /// 根据传入的控件，获取控件类别
+        /// </summary>
+        /// <param name="sc"></param>
+        public void GetControlsType(Control sc)
         {
-            InitializeComponent();
-            ctxt = txt;
-            Type = "ByControls";
+            if (sc != null)
+            {
+                // MessageBox.Show(contrls.GetType().ToString());
+                switch (sc.GetType().ToString())
+                {
+                    case "Controllers.MyControls.TemplateContorl.MyTextBox":
+                        {
+                            ctxt = sc as MyTextBox;
+                            break;
+                        }
+                    case "Controllers.MyControls.TemplateContorl.MyComboBox":
+                        {
+                            cbb = sc as MyComboBox;
+                            break;
+                        }
+                    case "Controllers.MyControls.TemplateContorl.MyCheckBox":
+                        {
+                            chb = sc as MyCheckBox;
+                            break;
+                        }
+                    case "Controllers.MyControls.TemplateContorl.MyDateTimePicker":
+                        {
+                            cdtp = sc as MyDateTimePicker;
+                            break;
+                        }
+                    case "Controllers.MyControls.TemplateContorl.MyLabel":
+                        {
+                            clb = sc as MyLabel;
+                            break;
+                        }
+                    case "Controllers.MyControls.TemplateContorl.MyMoneyPanel":
+                        {
+                            cmp = sc as MoneyPanel;
+                            break;
+                        }
+                }
+            }
         }
-        public PropertyForm(CCheckBox txt)
-        {
-            InitializeComponent();
-            chb = txt;
-            Type = "ByControls";
-        }
-        public PropertyForm(CLabel txt)
-        {
-            InitializeComponent();
-            clb = txt;
-            Type = "ByControls";
-        }
-        public PropertyForm(CComboBox txt)
-        {
-            InitializeComponent();
-            ccb = txt;
-            Type = "ByControls";
-        }
-        public PropertyForm(CDateTimePicker txt)
-        {
-            InitializeComponent();
-            cdtp = txt;
-            Type = "ByControls";
-        }
-        #endregion
+ 
 
         private void textBox2_MouseHover(object sender, EventArgs e)
         {
@@ -83,17 +148,24 @@ namespace BillManageMain.Forms
         {
             txtMark.Text = "控件默认值";
         }
-
+       public void GetNomulProperyInfo(Control sc)
+       {
+           txttab.Text = sc.TabIndex.ToString();
+           txtfont.Text = sc.Font.ToString();
+           txtForeColor.Text = sc.ForeColor.ToString();
+           txtBackColor.Text = sc.BackColor.ToString();
+           txttop.Text = sc.Top.ToString();
+           txtleft.Text = sc.Left.ToString();
+           txtwidth.Text = sc.Width.ToString();
+           txtheight.Text = sc.Height.ToString();
+       }
         private void PropertyForm_Load(object sender, EventArgs e)
         {
-            if(Type =="ByID")
+            GetNomulProperyInfo(control);
+            if (ctxt != null)
             {
-                //tm = ctmService.GetControlModerByID(ControlId);
-                //txtName.Text = tm.CTIName;
-                //txtDefalutValue.Text = tm.CTIDefault;
-               
-
-             }
+ 
+            }
         }
     }
 }

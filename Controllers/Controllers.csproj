@@ -39,7 +39,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Controls">
+      <HintPath>dll\System.Windows.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,10 +56,13 @@
   <ItemGroup>
     <Compile Include="Business\BillSetService.cs" />
     <Compile Include="Business\BillTemplateService.cs" />
+    <Compile Include="Business\BillTemplateTypeService.cs" />
     <Compile Include="Business\CompanyService.cs" />
     <Compile Include="Business\ConfigService.cs" />
     <Compile Include="Business\ControlService.cs" />
+    <Compile Include="Business\DataSourceService.cs" />
     <Compile Include="Business\SoftVeilyService.cs" />
+    <Compile Include="Business\SystemDBService.cs" />
     <Compile Include="Business\TabManageService.cs" />
     <Compile Include="Business\UserService.cs" />
     <Compile Include="Common\CommonClass.cs" />
@@ -67,12 +74,15 @@
     <Compile Include="DataAccess\DAL\MySqlHelper.cs" />
     <Compile Include="DataAccess\SoftVeilyAccess.cs" />
     <Compile Include="DataAccess\UserAccess.cs" />
-    <Compile Include="Moders\ConfigModer.cs" />
+    <Compile Include="Enum\ComEnum.cs" />
+    <Compile Include="Moders\SoftConfigModer.cs" />
+    <Compile Include="Moders\ControlDataSource.cs" />
     <Compile Include="Moders\SessionStatic.cs" />
     <Compile Include="Moders\TableModers\BillTemplateTypeModer.cs" />
     <Compile Include="Moders\TableModers\BillTemplatModer.cs" />
     <Compile Include="Moders\TableModers\CompanyModer.cs" />
     <Compile Include="Moders\TableModers\ControlModer.cs" />
+    <Compile Include="Moders\TableModers\DataSourceModel.cs" />
     <Compile Include="Moders\TableModers\SoftVerify.cs" />
     <Compile Include="Moders\UserInfo.cs" />
     <Compile Include="Moders\UserModer.cs" />
@@ -100,18 +110,95 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MyControls\CTextBox.designer.cs" />
+    <Compile Include="MyControls\PickBox.cs" />
+    <Compile Include="MyControls\RuleAndGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControls\RuleAndGrid.Designer.cs">
+      <DependentUpon>RuleAndGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\RulePanel\Board.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControls\RulePanel\Board.Designer.cs">
+      <DependentUpon>Board.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\RulePanel\Document.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControls\RulePanel\Document.Designer.cs">
+      <DependentUpon>Document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\RulePanel\LinearScale.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyControls\RulePanel\LinearScale.Designer.cs">
+      <DependentUpon>LinearScale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\RulePanel\Settings.cs" />
+    <Compile Include="MyControls\TemplateContorl\MoneyPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MoneyPanel.Designer.cs">
+      <DependentUpon>MoneyPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyCheckBox.Designer.cs">
+      <DependentUpon>MyCheckBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyComboBox.Designer.cs">
+      <DependentUpon>MyComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyDateTimePicker.Designer.cs">
+      <DependentUpon>MyDateTimePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyLabel.Designer.cs">
+      <DependentUpon>MyLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyControls\TemplateContorl\MyTextBox.Designer.cs">
+      <DependentUpon>MyTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enum\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="MyControls\CCheckBox.resx" />
     <EmbeddedResource Include="MyControls\CComboBox.resx" />
     <EmbeddedResource Include="MyControls\CDateTimePicker.resx" />
     <EmbeddedResource Include="MyControls\CLabel.resx" />
     <EmbeddedResource Include="MyControls\CMoneyPanel.resx" />
-    <EmbeddedResource Include="MyControls\CTextBox.resx" />
+    <EmbeddedResource Include="MyControls\CTextBox.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\RulePanel\Board.resx">
+      <DependentUpon>Board.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\RulePanel\Document.resx">
+      <DependentUpon>Document.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\RulePanel\LinearScale.resx">
+      <DependentUpon>LinearScale.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\TemplateContorl\MoneyPanel.resx">
+      <DependentUpon>MoneyPanel.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

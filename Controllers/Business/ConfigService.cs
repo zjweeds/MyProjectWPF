@@ -20,8 +20,8 @@ namespace Controllers.Business
 {
     public class ConfigService
     {
-        string path = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";
-        string file = @"SoftConfig.xml";
+        String path = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";
+        String file = @"SoftConfig.xml";
         MyXmlHelper myxmlhelper = new MyXmlHelper();
         /// <summary>
         /// 判断配置文件是否存在
@@ -35,18 +35,37 @@ namespace Controllers.Business
             }
             else
             {
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                File.Create(path+"/"+file);
                 return false;
             }        
         }
 
-
+        /// <summary>
+        /// 创建文件
+        /// </summary>
+        /// <returns></returns>
+        public bool CreateXmlFile()
+        {
+            if (!isConfigFilesExist())
+            {                
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                File.Create(path + "/" + file).Close();
+                return true;
+            }
+            else
+            {
+                //文件已存在
+                return false;
+            }
+         }
         public bool softConfigSaveToXml(SoftConfigModer softConfig,SoftVerify softVerify)
         {
+            if (!isConfigFilesExist())
+            {
+                CreateXmlFile();
+            }
             if (myxmlhelper.SaveToXml(path + '/' + file, softConfig,softVerify))
             {
                 return true;
@@ -70,7 +89,7 @@ namespace Controllers.Business
             }
         }
 
-        public string CheckSoft(string softkey)
+        public String CheckSoft(String softkey)
         {
             StringBuilder CheckSoftSQL = new StringBuilder();
            CheckSoftSQL.Append("select top 1 CompanyName,StarTime,EndTime from RegistInfo  where SoftKey =@SoftKey");
