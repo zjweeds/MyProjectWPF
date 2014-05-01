@@ -14,9 +14,29 @@
                 <mui:Link DisplayName="主页" Source="/Pages/BasePages/Home.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="票据管理">
+        <mui:LinkGroup DisplayName="票据管理" >
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="票据管理" Source="/Pages/BasePages/BillManagePage.xaml" />
+                <mui:Link DisplayName="票据管理" Source="/Pages/BasePages/BillManagePage.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="资料表" >
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="资料表"  />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="票据管理" >
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="票据管理" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="出纳管理" >
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="出纳管理" />
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        <mui:LinkGroup DisplayName="系统管理" >
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="系统管理" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup  DisplayName="设置" GroupName="settings">
