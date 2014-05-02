@@ -47,6 +47,12 @@ namespace Controllers.Business
                 throw ex;
             }
          }
+       
+        /// <summary>
+        /// 根据实体更新模板
+        /// </summary>
+        /// <param name="btm"></param>
+        /// <returns></returns>
         public int UpdateByBillTemplatModer(BillTemplatModer btm)
         {
             try
@@ -135,9 +141,22 @@ namespace Controllers.Business
             }
         }
 
-      
-       
+        public DataTable GetDataTableByTypeName(String  sTemplateName)
+        {
+            StringBuilder sbsql = new StringBuilder();
+            sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
+            sbsql.Append(" from TemplateInfo with(nolock) ");
+            sbsql.Append("  join TemplateType with(nolock) ");
+            sbsql.Append("     on TemplateType.TTID = TemplateInfo.TITTID ");
+            sbsql.Append(" where 1=1 ");
+            sbsql.Append("       and TTIsEnable = 1 ");
+            sbsql.Append("       and TIIsEnable = 1 ");
+            sbsql.AppendFormat(" and TTName = '{0}' ", sTemplateName);
+            return sqlhelper.GetDataTable(sbsql.ToString(), "", null);
+        }
 
+
+        #region 废弃
         /// <summary>
         /// 根据页面编号 返回模板datatable
         /// </summary>
@@ -162,5 +181,6 @@ namespace Controllers.Business
                 throw ex;
             }
         }
+        #endregion
     }
 }

@@ -41,12 +41,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\ModernUI.1.0.5\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -57,9 +59,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -91,9 +95,8 @@
     <Compile Include="MyCode\ComHelper.cs" />
     <Compile Include="MyCode\PickBox.cs" />
     <Compile Include="MyControls\MaskTextBox.cs" />
-    <Compile Include="Pages\BasePages\BillManagePage_old.xaml.cs">
-      <DependentUpon>BillManagePage_old.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="MyControls\RelayCommand.cs" />
+    <Compile Include="MyControls\ScrollableTabPanel.cs" />
     <Compile Include="Pages\BasePages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -106,32 +109,11 @@
     <Compile Include="Pages\BasePages\ViewBasicPage.xaml.cs">
       <DependentUpon>ViewBasicPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BillTemplateList\ListViewPage.xaml.cs">
-      <DependentUpon>ListViewPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\BillTemplateList\TemplateProperyEdit.xaml.cs">
       <DependentUpon>TemplateProperyEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BillTemplateList\view_0.xaml.cs">
-      <DependentUpon>view_0.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\BillTemplateList\BillSetEdit.xaml.cs">
       <DependentUpon>BillSetEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BillTemplateList\view_1.xaml.cs">
-      <DependentUpon>view_1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BillTemplateList\view_2.xaml.cs">
-      <DependentUpon>view_2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BillTemplateList\view_3.xaml.cs">
-      <DependentUpon>view_3.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BillTemplateList\view_4.xaml.cs">
-      <DependentUpon>view_4.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BillTemplateList\view_5.xaml.cs">
-      <DependentUpon>view_5.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserControlPages\BillTemplateAdd.xaml.cs">
       <DependentUpon>BillTemplateAdd.xaml</DependentUpon>
@@ -175,10 +157,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\BasePages\BillManagePage_old.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\BasePages\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -195,39 +173,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\BillTemplateList\ListViewPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\BillTemplateList\TemplateProperyEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BillTemplateList\view_0.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\BillTemplateList\BillSetEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\BillTemplateList\view_1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\BillTemplateList\view_2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\BillTemplateList\view_3.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\BillTemplateList\view_4.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\BillTemplateList\view_5.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,6 +243,10 @@
     <ProjectReference Include="..\Controllers\Controllers.csproj">
       <Project>{a541afb5-0eac-48fa-b7a8-1d3a327a95ad}</Project>
       <Name>Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\MyPC\Downloads\51CTO下载-20090825032321\TabControlEx\TabControlEx\TabControlEx.csproj">
+      <Project>{9df2b67b-5453-42b5-8cfc-3ab8c1cf3317}</Project>
+      <Name>TabControlEx</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

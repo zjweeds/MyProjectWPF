@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Drawing;
 
+
 namespace Controllers.Common
 {
    public  class ImageHelper
@@ -35,6 +36,20 @@ namespace Controllers.Common
                MemoryStream ms = new MemoryStream(); //实例化内存流
                new BinaryFormatter().Serialize(ms, img); //将对象图形序列化为给定流
                return ms.GetBuffer();
+           }
+           catch (Exception ex)
+           {
+               throw ex;
+           }
+       }
+       public Stream GetStreamByImagepath(String path)
+       {
+           System.Drawing.Image img = System.Drawing.Image.FromFile(path);
+           try
+           {
+               Stream ms = new MemoryStream(); //实例化内存流
+               new BinaryFormatter().Serialize(ms, img); //将对象图形序列化为给定流
+               return ms;
            }
            catch (Exception ex)
            {
@@ -82,6 +97,23 @@ namespace Controllers.Common
                //ms.Position = 0;
                return new BinaryFormatter().Deserialize(ms) as Image;//通过反序列化技术还原image图像
                 
+           }
+           catch (Exception ex)
+           {
+               throw ex;
+           }
+       }
+
+       /// <summary>
+       /// 根据路径返回图像对象
+       /// </summary>
+       /// <param name="path"></param>
+       /// <returns></returns>
+       public Image GetImageByPath(String path)
+       {
+           try
+           {
+               return  System.Drawing.Image.FromFile(path);
            }
            catch (Exception ex)
            {
