@@ -16,10 +16,10 @@ namespace Controllers.Moders.TableModers
         public String CTIDefault { get; set; }
         public int  CTIIsBorder { get; set; }
         public int CTIIsTransparent { get; set; }
-        public String CTIFont { get; set; }
-        public String CTIFontColor { get; set; }
-        public String CTIBorerColor { get; set; }
-        public String CTIBackColor { get; set; }
+        public byte[] CTIFont { get; set; }
+        public byte[] CTIFontColor { get; set; }
+        public byte[] CTIBorerColor { get; set; }
+        public byte[] CTIBackColor { get; set; }
         public int CTILeft { get; set; }
         public int CTITop { get; set; }
         public int CTIWidth { get; set; }

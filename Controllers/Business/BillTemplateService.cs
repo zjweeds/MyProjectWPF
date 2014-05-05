@@ -89,7 +89,7 @@ namespace Controllers.Business
         /// </summary>
         /// <param name="billTemplateID"></param>
         /// <returns></returns>
-        public DataTable SelectDataTableByID(int billTemplateID)
+        public DataTable GetDataTableByID(int billTemplateID)
         {
             StringBuilder sbsql = new StringBuilder();
             sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
@@ -102,7 +102,7 @@ namespace Controllers.Business
             SqlPars[0].Value = billTemplateID;
             return  sqlhelper.GetDataTable(sbsql.ToString(), "", SqlPars);
         }
-       
+
         /// <summary>
         /// 根据datatable返回模板实体
         /// </summary>

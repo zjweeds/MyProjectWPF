@@ -59,12 +59,12 @@
     <Compile Include="Business\BillTemplateTypeService.cs" />
     <Compile Include="Business\CompanyService.cs" />
     <Compile Include="Business\ConfigService.cs" />
-    <Compile Include="Business\ContorlService.cs" />
     <Compile Include="Business\ControlService.cs" />
     <Compile Include="Business\DataSourceService.cs" />
     <Compile Include="Business\SoftVeilyService.cs" />
     <Compile Include="Business\SystemDBService.cs" />
     <Compile Include="Business\TabManageService.cs" />
+    <Compile Include="Business\TextBoxExtendService.cs" />
     <Compile Include="Business\UserService.cs" />
     <Compile Include="Common\CommonClass.cs" />
     <Compile Include="Common\ImageHelper.cs" />
@@ -85,6 +85,7 @@
     <Compile Include="Moders\TableModers\ControlModer.cs" />
     <Compile Include="Moders\TableModers\DataSourceModel.cs" />
     <Compile Include="Moders\TableModers\SoftVerify.cs" />
+    <Compile Include="Moders\TableModers\TextBoxExtendModel.cs" />
     <Compile Include="Moders\UserInfo.cs" />
     <Compile Include="Moders\UserModer.cs" />
     <Compile Include="MyControls\CCheckBox.cs">
@@ -111,13 +112,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MyControls\CTextBox.designer.cs" />
-    <Compile Include="MyControls\PickBox.cs" />
-    <Compile Include="MyControls\RuleAndGrid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyControls\RuleAndGrid.Designer.cs">
-      <DependentUpon>RuleAndGrid.cs</DependentUpon>
-    </Compile>
     <Compile Include="MyControls\RulePanel\Board.cs">
       <SubType>UserControl</SubType>
     </Compile>

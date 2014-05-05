@@ -171,7 +171,6 @@
             this.Save.Size = new System.Drawing.Size(78, 52);
             this.Save.Text = "保存模板";
             this.Save.ToolTipText = "点击保存模板";
-            this.Save.Click += new System.EventHandler(this.Save_Click_1);
             // 
             // AddMyMoneyPanel
             // 
