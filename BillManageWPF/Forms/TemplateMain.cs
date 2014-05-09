@@ -18,6 +18,7 @@ using Controllers.Business;
 using BillManageWPF.MyCode;
 using BillManageWPF.Pages.BillTemplateList;
 using FirstFloor.ModernUI.Windows.Controls;
+using Controllers.Enum;
 
 namespace BillManageWPF.Forms
 {
@@ -44,15 +45,17 @@ namespace BillManageWPF.Forms
         public PickBox pb = null; 
         float fDpiX;//横向分辨率
         float fDpiY;//纵向分辨率
-        public List<MyLabel> labels = new List<MyLabel>();
-        public List<MyTextBox> txts = new List<MyTextBox>();
-        public List<MyCheckBox> chbs = new List<MyCheckBox>();
-        public List<MyComboBox> cbbs = new List<MyComboBox>();
-        public List<MyDateTimePicker> dtps = new List<MyDateTimePicker>();
-        public List<MoneyPanel> mps = new List<MoneyPanel>();
+        private int labelCount = 0;
+        private int TextConut = 0;
+        private int checkboxCount = 0;
+        private int comboboxCount = 0;
+        private int datetimerConut = 0;
+        private int moneypanelCount=0;
         public BillTemplateService bts = new BillTemplateService();
         public BillTemplatModer btm = new BillTemplatModer();
         public List<ControlModer> cmlist = new List<ControlModer>();
+        public List<TextBoxExtendModel> tbemLsit = new List<TextBoxExtendModel>();
+        public List<MoneyPanelExtendModel> mpemList = new List<MoneyPanelExtendModel>();
         public ControlService cs = new ControlService();
         #endregion
 
@@ -123,11 +126,62 @@ namespace BillManageWPF.Forms
         }
         #endregion
 
-        public bool SaveToDataBase()
+        /// <summary>
+        /// 保存控件到数据库
+        /// </summary>
+        /// <returns></returns>
+        public void SaveToDataBase(Control control)
         {
-
-            return false;
+            String msg=String.Empty;
+            ControlService cs = new ControlService();
+            List<ControlModer> m_cmsUpdate = cmlist.FindAll((delegate(ControlModer p) { return p.CTIID != 0; }));
+            List<ControlModer> textList = new List<ControlModer>();
+            List<ControlModer> moneyList = new List<ControlModer>();
+            List<ControlModer> m_cmsAdd =   cmlist.FindAll((delegate(ControlModer p) { return p.CTIID == 0; }));
+            foreach (ControlModer cm in m_cmsAdd)
+            {
+                if (cm.CTType == "TextBox")
+                {
+                    textList.Add(cm);
+                    m_cmsAdd.Remove(cm);
+                }
+                if (cm.CTType == "MoneyPanel")
+                {
+                    moneyList.Add(cm);
+                    m_cmsAdd.Remove(cm);
+                }
+            }
+            if (m_cmsUpdate != null)
+            {
+                if (cs.UpdateControlsByModels(m_cmsUpdate, tbemLsit, mpemList))
+                {
+                    int num = m_cmsUpdate != null ? textList.Count : 0;
+                    msg += "更新控件信息:" + num + " 条成功！\n";
+                }
+                else
+                {
+                    int num = m_cmsUpdate != null ? textList.Count : 0;
+                    msg += "更新控件信息:" + num + " 条失败！\n";
+                }
+            }
+            if(cs.AddTextBoxByModels(textList, tbemLsit)&&cs.AddMoneyPanelByModels(moneyList, mpemList)&& 
+                cs.AddControlsByModels(m_cmsAdd))
+            {
+                int num = textList != null ? textList.Count : 0;
+                num += textList != null ? moneyList.Count : 0;
+                num += textList != null ? m_cmsAdd.Count : 0; 
+                msg += "新增控件信息:" + num + " 条成功！\n";
+            }
+            else
+            {
+                int num = textList != null ? textList.Count : 0;
+                num += textList != null ? moneyList.Count : 0;
+                num += textList != null ? m_cmsAdd.Count : 0; 
+                msg += "更新控件信息:" + num + " 条失败！\n";
+            }
+            ModernDialog.ShowMessage(msg, "提示", System.Windows.MessageBoxButton.OK);
         }
+
         /// <summary>
         ///跟据模板编号，加载所有控件信息
         /// </summary>
@@ -180,11 +234,12 @@ namespace BillManageWPF.Forms
                         textbox.IsMust = cm.CTIIsMust;
                         if (tem != null)
                         {
+                            tbemLsit.Add(tem);
                             textbox.IsFlage = tem.TCIsFlage;
                             textbox.showType = tem.TCShowType;
                             textbox.markType = tem.TCMarkType;
                         } 
-                        txts.Add(textbox);
+                        //txts.Add(textbox);
                         pb.WireControl(textbox);
                         this.DesignContext.board.Controls.Add(textbox);
                         #endregion
@@ -210,7 +265,7 @@ namespace BillManageWPF.Forms
                         //label.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
                         label.Visible = cm.CTIVisiable != 0 ? true : false;
                         label.IsMust = cm.CTIIsMust;
-                        labels.Add(label);
+                        //labels.Add(label);
                         pb.WireControl(label);
                         this.DesignContext.board.Controls.Add(label);
                         #endregion
@@ -236,7 +291,7 @@ namespace BillManageWPF.Forms
                         //combobox.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
                         combobox.Visible = cm.CTIVisiable != 0 ? true : false;
                         combobox.IsMust = cm.CTIIsMust;
-                        cbbs.Add(combobox);
+                        //cbbs.Add(combobox);
                         pb.WireControl(combobox);
                         this.DesignContext.board.Controls.Add(combobox);
                         #endregion
@@ -262,7 +317,7 @@ namespace BillManageWPF.Forms
                         //checkbox.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
                         checkbox.Visible = cm.CTIVisiable != 0 ? true : false;
                         checkbox.IsMust = cm.CTIIsMust;
-                        chbs.Add(checkbox);
+                        //chbs.Add(checkbox);
                         pb.WireControl(checkbox);
                         this.DesignContext.board.Controls.Add(checkbox);
                         #endregion
@@ -288,7 +343,7 @@ namespace BillManageWPF.Forms
                         //dateTimePicker.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
                         dateTimePicker.Visible = cm.CTIVisiable != 0 ? true : false;
                         dateTimePicker.IsMust = cm.CTIIsMust;
-                        dtps.Add(dateTimePicker);
+                        //dtps.Add(dateTimePicker);
                         pb.WireControl(dateTimePicker);
                         this.DesignContext.board.Controls.Add(dateTimePicker);
                         #endregion 
@@ -298,9 +353,10 @@ namespace BillManageWPF.Forms
                     {
                         #region MoneyPanel
                         MoneyPanel moneyPanel = new MoneyPanel();
+                        MoneyPanelExtendModel mpe = new MoneyPanelExtenService().GetMoneyPanelExtendModelByCIID(moneyPanel.ControlID);
                         moneyPanel.ControlID = cm.CTIID;
                         moneyPanel.ControlName = cm.CTIName;
-                        moneyPanel.DefaultValue = cm.CTIDefault;
+                        //moneyPanel.DefaultValue = cm.CTIDefault;
                         moneyPanel.BorderStyle = cm.CTIIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
                         moneyPanel.BackColor = cm.CTIIsTransparent != 0 ?
                                             Color.Transparent : new CommonClass().GetColorByByte(cm.CTIBackColor);
@@ -314,7 +370,14 @@ namespace BillManageWPF.Forms
                         //moneyPanel.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
                         moneyPanel.Visible = cm.CTIVisiable != 0 ? true : false;
                         moneyPanel.IsMust = cm.CTIIsMust;
-                        mps.Add(moneyPanel);
+                        if(mpe!=null)
+                        {
+                            mpemList.Add(mpe);
+                            moneyPanel.Hight =mpe.MCHighUnit;
+                            moneyPanel.Low = mpe.MCLowUnit;
+                            moneyPanel.IsShowUnit = mpe.MCShowUnit;
+                        }
+                        //mps.Add(moneyPanel);
                         pb.WireControl(moneyPanel);
                         this.DesignContext.board.Controls.Add(moneyPanel);
                         #endregion
@@ -349,7 +412,6 @@ namespace BillManageWPF.Forms
         /// <param name="e"></param>
         private void SetTemplatePropery_Click(object sender, EventArgs e)
         {
-            //String typeName = new BillTemplateTypeService().GetTemplateTypeNameById(btm.TITTID);
             TemplateProperyEdit tpe = new TemplateProperyEdit(btm); 
             tpe.ShowDialog();
         }
@@ -373,9 +435,16 @@ namespace BillManageWPF.Forms
         private void AddLabel_Click(object sender, EventArgs e)
         {
             MyLabel label = new MyLabel();
-            label.ControlID = labels == null ? 0 : labels.Count;
-            label.ControlName = "label" + label.ControlID.ToString();
-            labels.Add(label);
+            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
+            labelCount++;
+            label.ControlID = 0;
+            label.ControlName = "label" + labelCount.ToString();
+            ControlModer cm = new ControlModer();
+            cm.CTIID = label.ControlID;
+            cm.CTIName = label.ControlName;
+            cm.CTType = "label";
+            cm.NewNumber = label.NewNumber;
+            cmlist.Add(cm);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -386,11 +455,23 @@ namespace BillManageWPF.Forms
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddTextBox_Click(object sender, EventArgs e)
-        {
+        { 
             MyTextBox label = new MyTextBox();
-            label.ControlID = txts == null ? 0 : txts.Count;
-            label.ControlName = "TextBox" + label.ControlID.ToString();
-            txts.Add(label);
+            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
+            TextConut++;            
+            label.ControlID = 0;
+            label.ControlName = "TextBox" + TextConut.ToString();
+            ControlModer cm = new ControlModer();
+            cm.CTIID = label.ControlID;
+            cm.CTIName = label.ControlName;
+            cm.CTType = "TextBox";
+            cm.NewNumber = label.NewNumber;
+            TextBoxExtendModel tbem = new TextBoxExtendModel();
+            tbem.TCCIID = cm.CTIID;
+            tbem.TCShowType = 0;
+            tbem.TCMarkType = 0;
+            tbemLsit.Add(tbem);
+            cmlist.Add(cm);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -403,9 +484,16 @@ namespace BillManageWPF.Forms
         private void AddCheckBox_Click(object sender, EventArgs e)
         {
             MyCheckBox label = new MyCheckBox();
-            label.ControlID = chbs == null ? 0 : chbs.Count;
-            label.ControlName = "ChecBox" + label.ControlID.ToString();
-            chbs.Add(label);
+            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
+            checkboxCount++;
+            label.ControlID=0;
+            label.ControlName = "CheckBox" + checkboxCount.ToString();
+            ControlModer cm = new ControlModer();
+            cm.CTIID = label.ControlID;
+            cm.CTIName = label.ControlName;
+            cm.CTType = "CheckBox";
+            cm.NewNumber = label.NewNumber;
+            cmlist.Add(cm);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -418,10 +506,16 @@ namespace BillManageWPF.Forms
         private void AddComboBox_Click(object sender, EventArgs e)
         {
             MyComboBox label = new MyComboBox();
-            label.ControlID = 0;
-            label.ControlID = cbbs == null ? 0 : cbbs.Count;
-            label.ControlName = "ComboBox" + label.ControlID.ToString();
-            cbbs.Add(label);
+            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
+            comboboxCount++;//cbbs.Add(label);
+            label.ControlID = 0;           
+            label.ControlName = "ComboBox" + comboboxCount.ToString();
+            ControlModer cm = new ControlModer();
+            cm.CTIID = label.ControlID;
+            cm.CTIName = label.ControlName;
+            cm.CTType = "ComboBox";
+            cm.NewNumber = label.NewNumber;
+            cmlist.Add(cm);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -434,9 +528,16 @@ namespace BillManageWPF.Forms
         private void AddDateTimePicker_Click(object sender, EventArgs e)
         {
             MyDateTimePicker label = new MyDateTimePicker();
-            label.ControlID = dtps == null ? 0 : dtps.Count;
-            label.ControlName = "ComboBox" + label.ControlID.ToString();
-            dtps.Add(label);
+            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
+            datetimerConut++;//dtps.Add(label);
+            label.ControlID = 0;
+            label.ControlName = "DateTimePicker" + datetimerConut.ToString();
+            ControlModer cm = new ControlModer();
+            cm.CTIID = label.ControlID;
+            cm.CTIName = label.ControlName;
+            cm.CTType = "DateTimePicker";
+            cm.NewNumber = label.NewNumber;
+            cmlist.Add(cm);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -449,14 +550,25 @@ namespace BillManageWPF.Forms
         private void AddMyMoneyPanel_Click(object sender, EventArgs e)
         {
             MoneyPanel mp = new MoneyPanel();
-            mp.ControlID = mps == null ? 0 : mps.Count;
-            mp.ControlName = "ComboBox" + mp.ControlID.ToString();
-            mps.Add(mp);
+            mp.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
+            moneypanelCount++;
+            mp.ControlID = 0;          
+            mp.ControlName = "ComboBox" + moneypanelCount.ToString();
+            ControlModer cm = new ControlModer();
+            cm.CTIID = mp.ControlID;
+            cm.CTIName = mp.ControlName;
+            cm.CTType = "MoneyPanel";
+            cm.NewNumber = mp.NewNumber;
+            MoneyPanelExtendModel mpm = new MoneyPanelExtendModel();
+            mpm.MCCIID = cm.CTIID;
+            mpm.MCHighUnit = mp.Hight;
+            mpm.MCLowUnit = mp.Low;
+            mpemList.Add(mpm);
+            cmlist.Add(cm);
             pb.WireControl(mp);
             this.DesignContext.board.Controls.Add(mp);
         }
         #endregion
-
         /// <summary>
         /// 保存功能
         /// </summary>
@@ -464,9 +576,27 @@ namespace BillManageWPF.Forms
         /// <param name="e"></param>
         private void Save_Click(object sender, EventArgs e)
         {
-
+            SaveToDataBase(this.DesignContext.board);
         }
 
         #endregion
+
+        private void TemplateMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = false;//可以关闭
+            List<ControlModer> con = new List<ControlModer>();
+            if (con.Exists(itm => itm.updateFlage == true))
+            {
+                if (ModernDialog.ShowMessage("模板设置信息已被更新，是否保存？", "软件提示", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
+                {
+                    Save_Click(sender, e);
+                }
+            }
+        }
+
+        private void TemplateMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();//释放资源
+        }
     }
 }

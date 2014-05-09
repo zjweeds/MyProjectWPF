@@ -61,6 +61,7 @@
     <Compile Include="Business\ConfigService.cs" />
     <Compile Include="Business\ControlService.cs" />
     <Compile Include="Business\DataSourceService.cs" />
+    <Compile Include="Business\MoneyPanelExtenService.cs" />
     <Compile Include="Business\SoftVeilyService.cs" />
     <Compile Include="Business\SystemDBService.cs" />
     <Compile Include="Business\TabManageService.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Moders\TableModers\CompanyModer.cs" />
     <Compile Include="Moders\TableModers\ControlModer.cs" />
     <Compile Include="Moders\TableModers\DataSourceModel.cs" />
+    <Compile Include="Moders\TableModers\MoneyPanelExtendModel.cs" />
     <Compile Include="Moders\TableModers\SoftVerify.cs" />
     <Compile Include="Moders\TableModers\TextBoxExtendModel.cs" />
     <Compile Include="Moders\UserInfo.cs" />
@@ -193,6 +195,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyControls\TemplateContorl\MoneyPanel.resx">
       <DependentUpon>MoneyPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\TemplateContorl\MyCheckBox.resx">
+      <DependentUpon>MyCheckBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\TemplateContorl\MyComboBox.resx">
+      <DependentUpon>MyComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\TemplateContorl\MyDateTimePicker.resx">
+      <DependentUpon>MyDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\TemplateContorl\MyLabel.resx">
+      <DependentUpon>MyLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyControls\TemplateContorl\MyTextBox.resx">
+      <DependentUpon>MyTextBox.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

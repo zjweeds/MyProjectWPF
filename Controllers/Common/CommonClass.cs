@@ -80,7 +80,7 @@ namespace Controllers.Common
         /// </summary>
         /// <param name="font"></param>
         /// <returns></returns>
-        public byte[] GetByteByFont(Color color)
+        public byte[] GetByteByColor(Color color)
         {
             try
             {

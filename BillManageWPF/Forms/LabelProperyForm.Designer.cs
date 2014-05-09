@@ -1,6 +1,6 @@
 ﻿namespace BillManageWPF.Forms
 {
-    partial class PropertyForm
+    partial class LabelProperyForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,18 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.txtMark = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chbisborestyle = new System.Windows.Forms.CheckBox();
-            this.txtBackColor = new System.Windows.Forms.TextBox();
-            this.txtForeColor = new System.Windows.Forms.TextBox();
-            this.txtfont = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cbxCoumname = new System.Windows.Forms.ComboBox();
             this.cbxTablename = new System.Windows.Forms.ComboBox();
@@ -59,20 +52,30 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.txtDefalutValue = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.chbIsprint = new System.Windows.Forms.CheckBox();
             this.chbIsvisible = new System.Windows.Forms.CheckBox();
             this.chbIsmust = new System.Windows.Forms.CheckBox();
-            this.chbIsreadonly = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtMark = new System.Windows.Forms.TextBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.cd = new System.Windows.Forms.ColorDialog();
+            this.fd = new System.Windows.Forms.FontDialog();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txtDefalutValue = new System.Windows.Forms.TextBox();
+            this.btnBackColor = new System.Windows.Forms.Button();
+            this.btnForeColor = new System.Windows.Forms.Button();
+            this.btnFont = new System.Windows.Forms.Button();
+            this.chbisborestyle = new System.Windows.Forms.CheckBox();
+            this.txtBackColor = new System.Windows.Forms.TextBox();
+            this.txtForeColor = new System.Windows.Forms.TextBox();
+            this.txtfont = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,6 +87,17 @@
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // txtMark
+            // 
+            this.txtMark.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtMark.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMark.ForeColor = System.Drawing.Color.White;
+            this.txtMark.Location = new System.Drawing.Point(0, 0);
+            this.txtMark.Multiline = true;
+            this.txtMark.Name = "txtMark";
+            this.txtMark.Size = new System.Drawing.Size(197, 39);
+            this.txtMark.TabIndex = 0;
             // 
             // splitContainer1
             // 
@@ -101,9 +115,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.txtMark);
-            this.splitContainer1.Size = new System.Drawing.Size(205, 552);
-            this.splitContainer1.SplitterDistance = 513;
-            this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.Size = new System.Drawing.Size(197, 589);
+            this.splitContainer1.SplitterDistance = 546;
+            this.splitContainer1.TabIndex = 2;
             // 
             // panel1
             // 
@@ -113,7 +127,7 @@
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(205, 513);
+            this.panel1.Size = new System.Drawing.Size(197, 546);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -132,17 +146,20 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.22821F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.77179F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 187F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(205, 513);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.64407F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.35593F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 181F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(197, 546);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.SkyBlue;
+            this.groupBox2.Controls.Add(this.btnBackColor);
+            this.groupBox2.Controls.Add(this.btnForeColor);
+            this.groupBox2.Controls.Add(this.btnFont);
             this.groupBox2.Controls.Add(this.chbisborestyle);
             this.groupBox2.Controls.Add(this.txtBackColor);
             this.groupBox2.Controls.Add(this.txtForeColor);
@@ -153,95 +170,12 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(3, 102);
+            this.groupBox2.Location = new System.Drawing.Point(3, 103);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(199, 114);
+            this.groupBox2.Size = new System.Drawing.Size(191, 124);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "外观";
-            // 
-            // chbisborestyle
-            // 
-            this.chbisborestyle.AutoSize = true;
-            this.chbisborestyle.BackColor = System.Drawing.Color.SkyBlue;
-            this.chbisborestyle.ForeColor = System.Drawing.Color.White;
-            this.chbisborestyle.Location = new System.Drawing.Point(82, 16);
-            this.chbisborestyle.Name = "chbisborestyle";
-            this.chbisborestyle.Size = new System.Drawing.Size(36, 16);
-            this.chbisborestyle.TabIndex = 22;
-            this.chbisborestyle.Text = "是";
-            this.chbisborestyle.UseVisualStyleBackColor = false;
-            // 
-            // txtBackColor
-            // 
-            this.txtBackColor.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtBackColor.ForeColor = System.Drawing.Color.White;
-            this.txtBackColor.Location = new System.Drawing.Point(81, 79);
-            this.txtBackColor.Name = "txtBackColor";
-            this.txtBackColor.Size = new System.Drawing.Size(100, 21);
-            this.txtBackColor.TabIndex = 10;
-            // 
-            // txtForeColor
-            // 
-            this.txtForeColor.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtForeColor.ForeColor = System.Drawing.Color.White;
-            this.txtForeColor.Location = new System.Drawing.Point(81, 57);
-            this.txtForeColor.Name = "txtForeColor";
-            this.txtForeColor.Size = new System.Drawing.Size(100, 21);
-            this.txtForeColor.TabIndex = 9;
-            // 
-            // txtfont
-            // 
-            this.txtfont.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtfont.ForeColor = System.Drawing.Color.White;
-            this.txtfont.Location = new System.Drawing.Point(81, 36);
-            this.txtfont.Name = "txtfont";
-            this.txtfont.Size = new System.Drawing.Size(100, 21);
-            this.txtfont.TabIndex = 8;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.SkyBlue;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(26, 86);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 12);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "背景色:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.SkyBlue;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(26, 62);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 12);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "前景色:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.SkyBlue;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(26, 40);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 12);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "字  体:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.SkyBlue;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(26, 17);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "边  框:";
             // 
             // groupBox3
             // 
@@ -260,9 +194,9 @@
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(3, 222);
+            this.groupBox3.Location = new System.Drawing.Point(3, 233);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(199, 181);
+            this.groupBox3.Size = new System.Drawing.Size(191, 175);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "数据";
@@ -392,17 +326,17 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.SkyBlue;
+            this.groupBox1.Controls.Add(this.txtDefalutValue);
             this.groupBox1.Controls.Add(this.txttab);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtName);
-            this.groupBox1.Controls.Add(this.txtDefalutValue);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(199, 93);
+            this.groupBox1.Size = new System.Drawing.Size(191, 94);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "显示";
@@ -446,17 +380,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 21);
             this.txtName.TabIndex = 0;
-            this.txtName.MouseHover += new System.EventHandler(this.textBox2_MouseHover);
-            // 
-            // txtDefalutValue
-            // 
-            this.txtDefalutValue.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtDefalutValue.ForeColor = System.Drawing.Color.White;
-            this.txtDefalutValue.Location = new System.Drawing.Point(82, 39);
-            this.txtDefalutValue.Name = "txtDefalutValue";
-            this.txtDefalutValue.Size = new System.Drawing.Size(100, 21);
-            this.txtDefalutValue.TabIndex = 3;
-            this.txtDefalutValue.MouseHover += new System.EventHandler(this.txtDefalutValue_MouseHover);
             // 
             // label2
             // 
@@ -475,16 +398,14 @@
             this.groupBox4.Controls.Add(this.chbIsprint);
             this.groupBox4.Controls.Add(this.chbIsvisible);
             this.groupBox4.Controls.Add(this.chbIsmust);
-            this.groupBox4.Controls.Add(this.chbIsreadonly);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(3, 409);
+            this.groupBox4.Location = new System.Drawing.Point(3, 414);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(199, 70);
+            this.groupBox4.Size = new System.Drawing.Size(191, 94);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "其他";
@@ -494,7 +415,7 @@
             this.chbIsprint.AutoSize = true;
             this.chbIsprint.BackColor = System.Drawing.Color.SkyBlue;
             this.chbIsprint.ForeColor = System.Drawing.Color.White;
-            this.chbIsprint.Location = new System.Drawing.Point(151, 44);
+            this.chbIsprint.Location = new System.Drawing.Point(151, 54);
             this.chbIsprint.Name = "chbIsprint";
             this.chbIsprint.Size = new System.Drawing.Size(36, 16);
             this.chbIsprint.TabIndex = 37;
@@ -506,7 +427,7 @@
             this.chbIsvisible.AutoSize = true;
             this.chbIsvisible.BackColor = System.Drawing.Color.SkyBlue;
             this.chbIsvisible.ForeColor = System.Drawing.Color.White;
-            this.chbIsvisible.Location = new System.Drawing.Point(151, 22);
+            this.chbIsvisible.Location = new System.Drawing.Point(53, 26);
             this.chbIsvisible.Name = "chbIsvisible";
             this.chbIsvisible.Size = new System.Drawing.Size(36, 16);
             this.chbIsvisible.TabIndex = 36;
@@ -518,31 +439,19 @@
             this.chbIsmust.AutoSize = true;
             this.chbIsmust.BackColor = System.Drawing.Color.SkyBlue;
             this.chbIsmust.ForeColor = System.Drawing.Color.White;
-            this.chbIsmust.Location = new System.Drawing.Point(45, 45);
+            this.chbIsmust.Location = new System.Drawing.Point(45, 55);
             this.chbIsmust.Name = "chbIsmust";
             this.chbIsmust.Size = new System.Drawing.Size(36, 16);
             this.chbIsmust.TabIndex = 35;
             this.chbIsmust.Text = "是";
             this.chbIsmust.UseVisualStyleBackColor = false;
             // 
-            // chbIsreadonly
-            // 
-            this.chbIsreadonly.AutoSize = true;
-            this.chbIsreadonly.BackColor = System.Drawing.Color.SkyBlue;
-            this.chbIsreadonly.ForeColor = System.Drawing.Color.White;
-            this.chbIsreadonly.Location = new System.Drawing.Point(45, 22);
-            this.chbIsreadonly.Name = "chbIsreadonly";
-            this.chbIsreadonly.Size = new System.Drawing.Size(36, 16);
-            this.chbIsreadonly.TabIndex = 34;
-            this.chbIsreadonly.Text = "是";
-            this.chbIsreadonly.UseVisualStyleBackColor = false;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.SkyBlue;
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(110, 46);
+            this.label11.Location = new System.Drawing.Point(110, 56);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 12);
             this.label11.TabIndex = 33;
@@ -553,7 +462,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.SkyBlue;
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(12, 46);
+            this.label10.Location = new System.Drawing.Point(12, 56);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 12);
             this.label10.TabIndex = 32;
@@ -564,60 +473,161 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.SkyBlue;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(110, 23);
+            this.label9.Location = new System.Drawing.Point(12, 27);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 12);
             this.label9.TabIndex = 31;
             this.label9.Text = "可见:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.SkyBlue;
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(13, 23);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 12);
-            this.label8.TabIndex = 30;
-            this.label8.Text = "只读:";
-            // 
-            // txtMark
-            // 
-            this.txtMark.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtMark.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMark.ForeColor = System.Drawing.Color.White;
-            this.txtMark.Location = new System.Drawing.Point(0, 0);
-            this.txtMark.Multiline = true;
-            this.txtMark.Name = "txtMark";
-            this.txtMark.Size = new System.Drawing.Size(205, 35);
-            this.txtMark.TabIndex = 0;
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.BackColor = System.Drawing.Color.SkyBlue;
-            this.toolTip1.ForeColor = System.Drawing.Color.White;
             // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(3, 485);
+            this.button1.Location = new System.Drawing.Point(3, 514);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(199, 25);
+            this.button1.Size = new System.Drawing.Size(191, 25);
             this.button1.TabIndex = 4;
             this.button1.Text = "点击设定";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // PropertyForm
+            // toolTip1
+            // 
+            this.toolTip1.BackColor = System.Drawing.Color.SkyBlue;
+            this.toolTip1.ForeColor = System.Drawing.Color.White;
+            // 
+            // txtDefalutValue
+            // 
+            this.txtDefalutValue.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtDefalutValue.ForeColor = System.Drawing.Color.White;
+            this.txtDefalutValue.Location = new System.Drawing.Point(81, 39);
+            this.txtDefalutValue.Name = "txtDefalutValue";
+            this.txtDefalutValue.Size = new System.Drawing.Size(100, 21);
+            this.txtDefalutValue.TabIndex = 8;
+            // 
+            // btnBackColor
+            // 
+            this.btnBackColor.Location = new System.Drawing.Point(148, 93);
+            this.btnBackColor.Name = "btnBackColor";
+            this.btnBackColor.Size = new System.Drawing.Size(31, 19);
+            this.btnBackColor.TabIndex = 39;
+            this.btnBackColor.Text = "...";
+            this.btnBackColor.UseVisualStyleBackColor = true;
+            this.btnBackColor.Click += new System.EventHandler(this.btnBackgroud_Click);
+            // 
+            // btnForeColor
+            // 
+            this.btnForeColor.Location = new System.Drawing.Point(148, 71);
+            this.btnForeColor.Name = "btnForeColor";
+            this.btnForeColor.Size = new System.Drawing.Size(31, 19);
+            this.btnForeColor.TabIndex = 38;
+            this.btnForeColor.Text = "...";
+            this.btnForeColor.UseVisualStyleBackColor = true;
+            this.btnForeColor.Click += new System.EventHandler(this.btnForeColor_Click);
+            // 
+            // btnFont
+            // 
+            this.btnFont.Location = new System.Drawing.Point(148, 47);
+            this.btnFont.Name = "btnFont";
+            this.btnFont.Size = new System.Drawing.Size(31, 19);
+            this.btnFont.TabIndex = 37;
+            this.btnFont.Text = "...";
+            this.btnFont.UseVisualStyleBackColor = true;
+            this.btnFont.Click += new System.EventHandler(this.btnSetFont_Click);
+            // 
+            // chbisborestyle
+            // 
+            this.chbisborestyle.AutoSize = true;
+            this.chbisborestyle.BackColor = System.Drawing.Color.SkyBlue;
+            this.chbisborestyle.ForeColor = System.Drawing.Color.White;
+            this.chbisborestyle.Location = new System.Drawing.Point(68, 27);
+            this.chbisborestyle.Name = "chbisborestyle";
+            this.chbisborestyle.Size = new System.Drawing.Size(36, 16);
+            this.chbisborestyle.TabIndex = 36;
+            this.chbisborestyle.Text = "是";
+            this.chbisborestyle.UseVisualStyleBackColor = false;
+            // 
+            // txtBackColor
+            // 
+            this.txtBackColor.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtBackColor.ForeColor = System.Drawing.Color.White;
+            this.txtBackColor.Location = new System.Drawing.Point(67, 90);
+            this.txtBackColor.Name = "txtBackColor";
+            this.txtBackColor.Size = new System.Drawing.Size(81, 21);
+            this.txtBackColor.TabIndex = 35;
+            // 
+            // txtForeColor
+            // 
+            this.txtForeColor.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtForeColor.ForeColor = System.Drawing.Color.White;
+            this.txtForeColor.Location = new System.Drawing.Point(67, 68);
+            this.txtForeColor.Name = "txtForeColor";
+            this.txtForeColor.Size = new System.Drawing.Size(81, 21);
+            this.txtForeColor.TabIndex = 34;
+            // 
+            // txtfont
+            // 
+            this.txtfont.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtfont.ForeColor = System.Drawing.Color.White;
+            this.txtfont.Location = new System.Drawing.Point(67, 47);
+            this.txtfont.Name = "txtfont";
+            this.txtfont.Size = new System.Drawing.Size(81, 21);
+            this.txtfont.TabIndex = 33;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.SkyBlue;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(12, 97);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(47, 12);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "背景色:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.SkyBlue;
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(12, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 12);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "前景色:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.SkyBlue;
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(12, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "字  体:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.SkyBlue;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(12, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 12);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "边  框:";
+            // 
+            // LabelProperyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(205, 552);
+            this.ClientSize = new System.Drawing.Size(197, 589);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "PropertyForm";
-            this.Text = "PropertyForm";
-            this.Load += new System.EventHandler(this.PropertyForm_Load);
+            this.Name = "LabelProperyForm";
+            this.Text = "LabelProperyForm";
+            this.Load += new System.EventHandler(this.LabelProperyForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
@@ -639,18 +649,11 @@
 
         #endregion
 
+        private System.Windows.Forms.TextBox txtMark;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chbisborestyle;
-        private System.Windows.Forms.TextBox txtBackColor;
-        private System.Windows.Forms.TextBox txtForeColor;
-        private System.Windows.Forms.TextBox txtfont;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox cbxCoumname;
         private System.Windows.Forms.ComboBox cbxTablename;
@@ -669,19 +672,29 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtDefalutValue;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox chbIsprint;
         private System.Windows.Forms.CheckBox chbIsvisible;
         private System.Windows.Forms.CheckBox chbIsmust;
-        private System.Windows.Forms.CheckBox chbIsreadonly;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtMark;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ColorDialog cd;
+        private System.Windows.Forms.FontDialog fd;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TextBox txtDefalutValue;
+        private System.Windows.Forms.Button btnBackColor;
+        private System.Windows.Forms.Button btnForeColor;
+        private System.Windows.Forms.Button btnFont;
+        private System.Windows.Forms.CheckBox chbisborestyle;
+        private System.Windows.Forms.TextBox txtBackColor;
+        private System.Windows.Forms.TextBox txtForeColor;
+        private System.Windows.Forms.TextBox txtfont;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }

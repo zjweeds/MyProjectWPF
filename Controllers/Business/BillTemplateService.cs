@@ -141,6 +141,36 @@ namespace Controllers.Business
             }
         }
 
+        /// <summary>
+        /// 根据模板编号返回模板实体
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public BillTemplatModer GetTemplateModeltByID(int code)
+        {
+            DataTable dt = GetDataTableByID(code);
+            BillTemplatModer btm = new BillTemplatModer();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                btm.TIID = Convert.ToInt32(dt.Rows[0]["TIID"]);
+                btm.TIName = Convert.ToString(dt.Rows[0]["TIName"]);
+                btm.TIBackground = dt.Rows[0]["TIBackground"] as byte[];
+                btm.TIWidth = Convert.ToInt32(dt.Rows[0]["TIWidth"]);
+                btm.TIHeight = Convert.ToInt32(dt.Rows[0]["TIHeight"]);
+                btm.TITTID = Convert.ToInt32(dt.Rows[0]["TITTID"]);
+                btm.TICodeLegth = Convert.ToInt32(dt.Rows[0]["TICodeLegth"]);
+
+            }
+            return btm;
+        }
+
+
+        /// <summary>
+        /// 根据类别名称返回模板信息
+        /// </summary>
+        /// <param name="sTemplateName"></param>
+        /// <returns></returns>
         public DataTable GetDataTableByTypeName(String  sTemplateName)
         {
             StringBuilder sbsql = new StringBuilder();

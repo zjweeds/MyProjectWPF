@@ -21,12 +21,7 @@
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="资料表" >
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="资料表"  />
-            </mui:LinkGroup.Links>
-        </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="票据管理" >
-            <mui:LinkGroup.Links>
-                <mui:Link DisplayName="票据管理" />
+                <mui:Link DisplayName="资料表" Source="/Pages/BasePages/DataSourceList.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="出纳管理" >
@@ -36,17 +31,17 @@
         </mui:LinkGroup>
         <mui:LinkGroup DisplayName="系统管理" >
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="系统管理" />
+                <mui:Link DisplayName="系统管理" Source="/Pages/BasePages/SystemSet.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup  DisplayName="设置" GroupName="settings">
+        <mui:LinkGroup  DisplayName="个性化设置" GroupName="settings">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="设置" Source="/Pages/BasePages/Settings.xaml" />
+                <mui:Link DisplayName="个性化设置" Source="/Pages/BasePages/Settings.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
     </mui:ModernWindow.MenuLinkGroups>
 
     <mui:ModernWindow.TitleLinks >
-        <mui:Link DisplayName="设置" Source="/Pages/BasePages/Settings.xaml" />
+        <mui:Link DisplayName="个性化设置" Source="/Pages/BasePages/Settings.xaml" />
     </mui:ModernWindow.TitleLinks>
 </mui:ModernWindow>

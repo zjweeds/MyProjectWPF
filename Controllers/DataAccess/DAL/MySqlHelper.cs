@@ -121,7 +121,34 @@ namespace Controllers.DataAccess.DAL
             }
             return intReturnValue;
         }
-        
+       /// <summary>
+        /// 插入数据，返回自增ID
+       /// </summary>
+       /// <param name="strSql"></param>
+       /// <returns></returns>
+        public int ExecSqlReturnId(String strSql)
+        {
+            int intReturnValue;
+            m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandText = strSql;
+            try
+            {
+                if (m_Conn.State == ConnectionState.Closed)
+                {
+                    m_Conn.Open();
+                }
+                intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+            }
+            return intReturnValue;
+        }
         /// <summary>
         /// 通过Transact-SQL语句提交数据
         /// </summary>

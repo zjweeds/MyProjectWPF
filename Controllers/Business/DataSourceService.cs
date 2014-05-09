@@ -114,5 +114,37 @@ namespace Controllers.Business
             }
         }
 
+
+        /// <summary>
+        /// 根据数据源信息返回数据
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="coumlnName"></param>
+        /// <returns></returns>
+        public DataTable GetBandingsInfoByTableAndCoumln(String tableName, String coumlnName,List<String> whereFeild,List<String> whereValue)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("select {0} from {1} where 1=1 ", coumlnName, tableName);
+                if (whereFeild != null && whereValue !=null)
+                {
+                    //有查询条件
+                    int i = 0;
+                    foreach (String swhere in whereFeild)
+                    {
+                        //循环添加每一个查询条件
+                        sb.AppendFormat(" and {0} = '{1}' ", swhere, whereValue[i]!=null?whereValue[i]:String.Empty);
+                        i++;
+                    }
+                }
+                return sqlhelper.GetDataTable(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

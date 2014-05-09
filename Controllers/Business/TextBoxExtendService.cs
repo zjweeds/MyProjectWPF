@@ -49,5 +49,86 @@ namespace Controllers.Business
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// 根据实体更新文本框拓展表
+        /// </summary>
+        /// <param name="tem"></param>
+        /// <returns></returns>
+        public bool UpdateByTextBoxExtendModel(TextBoxExtendModel tem)
+        {
+            try
+            {
+                int x = 0;
+                if (tem != null)
+                {
+                    if (tem.updateFlage)
+                    {
+                        StringBuilder sbsql = new StringBuilder();
+                        sbsql.Append(" Update TextControl Set ");
+                        sbsql.AppendFormat("                  TCIsFlage = '{0}',", tem.TCIsFlage);
+                        sbsql.AppendFormat("                  TCShowType = '{0}',", tem.TCShowType);
+                        sbsql.AppendFormat("                  TCMarkType= '{0}',", tem.TCMarkType);
+                        sbsql.AppendFormat(" where 1=1 and TCCIID = '{0}' and TCIsEnable = 1 ", tem.TCCIID);
+                        x = sqlhelper.ExecDataBySql(sbsql.ToString());
+                    }
+                    else
+                    {
+                        x = 1;//无需更新
+                    }
+                }
+                if (x > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        /// <summary>
+        /// 跟据实体和控件ID 新增文本框拓展信息
+        /// </summary>
+        /// <param name="tem"></param>
+        /// <param name="CIID"></param>
+        /// <returns></returns>
+        public bool AddByTextBoxExtendModel(TextBoxExtendModel tem,int CIID)
+        {
+            try
+            {
+                int x = 0;
+                if (tem != null)
+                {
+                    StringBuilder sbsql = new StringBuilder();
+                    sbsql.Append(" insert into TextControl (TCCIID,TCIsFlage,TCShowType,TCMarkType,TCIsEnable) ");
+                    sbsql.Append("                     vaules ( ");
+                    sbsql.AppendFormat("                        '{0}'", CIID);
+                    sbsql.AppendFormat("                        '{0}'", tem.TCIsFlage);
+                    sbsql.AppendFormat("                        '{0}'", tem.TCShowType);
+                    sbsql.AppendFormat("                        '{0}'", tem.TCMarkType);
+                    sbsql.Append("                        '1' ) ");
+                    x = sqlhelper.ExecDataBySql(sbsql.ToString());
+                }
+                if (x > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

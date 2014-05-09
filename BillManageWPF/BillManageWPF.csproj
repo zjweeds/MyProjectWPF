@@ -77,23 +77,59 @@
       <DependentUpon>SettingsAppearance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SettingsAppearanceViewModel.cs" />
+    <Compile Include="Content\SystemSet\PrintSet.xaml.cs">
+      <DependentUpon>PrintSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\SystemSet\UserManage.xaml.cs">
+      <DependentUpon>UserManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CheckBoxProperyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CheckBoxProperyForm.Designer.cs">
+      <DependentUpon>CheckBoxProperyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ComboBoxProperyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ComboBoxProperyForm.Designer.cs">
+      <DependentUpon>ComboBoxProperyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DateTimePickerProperyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DateTimePickerProperyForm.Designer.cs">
+      <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LabelProperyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LabelProperyForm.Designer.cs">
+      <DependentUpon>LabelProperyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MonyPanelProperyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MonyPanelProperyForm.Designer.cs">
       <DependentUpon>MonyPanelProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PropertyForm.cs">
+    <Compile Include="Forms\PrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PropertyForm.Designer.cs">
-      <DependentUpon>PropertyForm.cs</DependentUpon>
+    <Compile Include="Forms\PrintForm.Designer.cs">
+      <DependentUpon>PrintForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TemplateMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\TemplateMain.Designer.cs">
       <DependentUpon>TemplateMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TextBoxProperyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextBoxProperyForm.Designer.cs">
+      <DependentUpon>TextBoxProperyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -103,11 +139,17 @@
     <Compile Include="MyControls\MaskTextBox.cs" />
     <Compile Include="MyControls\RelayCommand.cs" />
     <Compile Include="MyControls\ScrollableTabPanel.cs" />
+    <Compile Include="Pages\BasePages\DataSourceList.xaml.cs">
+      <DependentUpon>DataSourceList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BasePages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BasePages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BasePages\SystemSet.xaml.cs">
+      <DependentUpon>SystemSet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BasePages\TemplateListPage.xaml.cs">
       <DependentUpon>TemplateListPage.xaml</DependentUpon>
@@ -147,6 +189,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\SystemSet\PrintSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\SystemSet\UserManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +213,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\BasePages\DataSourceList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\BasePages\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,6 +224,10 @@
     <Page Include="Pages\BasePages\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\BasePages\SystemSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\BasePages\TemplateListPage.xaml">
       <SubType>Designer</SubType>
@@ -226,14 +284,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Forms\CheckBoxProperyForm.resx">
+      <DependentUpon>CheckBoxProperyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ComboBoxProperyForm.resx">
+      <DependentUpon>ComboBoxProperyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DateTimePickerProperyForm.resx">
+      <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LabelProperyForm.resx">
+      <DependentUpon>LabelProperyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MonyPanelProperyForm.resx">
       <DependentUpon>MonyPanelProperyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PropertyForm.resx">
-      <DependentUpon>PropertyForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\PrintForm.resx">
+      <DependentUpon>PrintForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TemplateMain.resx">
       <DependentUpon>TemplateMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextBoxProperyForm.resx">
+      <DependentUpon>TextBoxProperyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -159,6 +159,7 @@
             this.Exit.Size = new System.Drawing.Size(71, 52);
             this.Exit.Text = "  退 出  ";
             this.Exit.ToolTipText = "点击退出";
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // Save
             // 
@@ -171,6 +172,7 @@
             this.Save.Size = new System.Drawing.Size(78, 52);
             this.Save.Text = "保存模板";
             this.Save.ToolTipText = "点击保存模板";
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // AddMyMoneyPanel
             // 
@@ -183,6 +185,7 @@
             this.AddMyMoneyPanel.Size = new System.Drawing.Size(78, 52);
             this.AddMyMoneyPanel.Text = "金额明细";
             this.AddMyMoneyPanel.ToolTipText = "点击添加金额明细";
+            this.AddMyMoneyPanel.Click += new System.EventHandler(this.AddMyMoneyPanel_Click);
             // 
             // AddDateTimePicker
             // 
@@ -195,6 +198,7 @@
             this.AddDateTimePicker.Size = new System.Drawing.Size(62, 52);
             this.AddDateTimePicker.Text = "日历框";
             this.AddDateTimePicker.ToolTipText = "点击添加日历\r\n";
+            this.AddDateTimePicker.Click += new System.EventHandler(this.AddDateTimePicker_Click);
             // 
             // AddComboBox
             // 
@@ -207,6 +211,7 @@
             this.AddComboBox.Size = new System.Drawing.Size(72, 52);
             this.AddComboBox.Text = " 下拉框 ";
             this.AddComboBox.ToolTipText = "点击添加下拉框";
+            this.AddComboBox.Click += new System.EventHandler(this.AddComboBox_Click);
             // 
             // AddCheckBox
             // 
@@ -219,6 +224,7 @@
             this.AddCheckBox.Size = new System.Drawing.Size(72, 52);
             this.AddCheckBox.Text = " 检查框 ";
             this.AddCheckBox.ToolTipText = "点击添加检查框";
+            this.AddCheckBox.Click += new System.EventHandler(this.AddCheckBox_Click);
             // 
             // AddTextBox
             // 
@@ -231,6 +237,7 @@
             this.AddTextBox.Size = new System.Drawing.Size(72, 52);
             this.AddTextBox.Text = " 文本框 ";
             this.AddTextBox.ToolTipText = "点击添加文本框";
+            this.AddTextBox.Click += new System.EventHandler(this.AddTextBox_Click);
             // 
             // AddLabel
             // 
@@ -243,6 +250,7 @@
             this.AddLabel.Size = new System.Drawing.Size(72, 52);
             this.AddLabel.Text = " 标签框 ";
             this.AddLabel.ToolTipText = "点击添加标签框";
+            this.AddLabel.Click += new System.EventHandler(this.AddLabel_Click);
             // 
             // SetTemplatePropery
             // 
@@ -255,6 +263,7 @@
             this.SetTemplatePropery.Size = new System.Drawing.Size(78, 52);
             this.SetTemplatePropery.Text = "模板属性";
             this.SetTemplatePropery.ToolTipText = "点击模板属性";
+            this.SetTemplatePropery.Click += new System.EventHandler(this.SetTemplatePropery_Click);
             // 
             // toolStrip1
             // 
@@ -305,6 +314,8 @@
             this.Name = "TemplateMain";
             this.Text = "模板设计";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TemplateMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TemplateMain_FormClosed);
             this.Load += new System.EventHandler(this.Template_Load);
             this.DesignPanel.ResumeLayout(false);
             this.ProperyPanel.ResumeLayout(false);
