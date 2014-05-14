@@ -70,65 +70,79 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Content\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
+    <Compile Include="AppMainWindow.xaml.cs">
+      <DependentUpon>AppMainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\SettingsAppearance.xaml.cs">
-      <DependentUpon>SettingsAppearance.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Content\SettingsAppearanceViewModel.cs" />
     <Compile Include="Content\SystemSet\PrintSet.xaml.cs">
       <DependentUpon>PrintSet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SystemSet\UserManage.xaml.cs">
       <DependentUpon>UserManage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CheckBoxProperyForm.cs">
+    <Compile Include="Content\Template\TemplateProperyEdit.xaml.cs">
+      <DependentUpon>TemplateProperyEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MertoUIWindow.xaml.cs">
+      <DependentUpon>MertoUIWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\SystemSettingView.xaml.cs">
+      <DependentUpon>SystemSettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\UserInfoView.xaml.cs">
+      <DependentUpon>UserInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="winFormUI\BillForms\BillSerchListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CheckBoxProperyForm.Designer.cs">
+    <Compile Include="winFormUI\BillForms\BillSerchListForm.Designer.cs">
+      <DependentUpon>BillSerchListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="winFormUI\TemplateForms\CheckBoxProperyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="winFormUI\TemplateForms\CheckBoxProperyForm.Designer.cs">
       <DependentUpon>CheckBoxProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ComboBoxProperyForm.cs">
+    <Compile Include="winFormUI\TemplateForms\ComboBoxProperyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ComboBoxProperyForm.Designer.cs">
+    <Compile Include="winFormUI\TemplateForms\ComboBoxProperyForm.Designer.cs">
       <DependentUpon>ComboBoxProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DateTimePickerProperyForm.cs">
+    <Compile Include="winFormUI\TemplateForms\DateTimePickerProperyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DateTimePickerProperyForm.Designer.cs">
+    <Compile Include="winFormUI\TemplateForms\DateTimePickerProperyForm.Designer.cs">
       <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LabelProperyForm.cs">
+    <Compile Include="winFormUI\TemplateForms\LabelProperyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LabelProperyForm.Designer.cs">
+    <Compile Include="winFormUI\TemplateForms\LabelProperyForm.Designer.cs">
       <DependentUpon>LabelProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MonyPanelProperyForm.cs">
+    <Compile Include="winFormUI\TemplateForms\MonyPanelProperyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MonyPanelProperyForm.Designer.cs">
+    <Compile Include="winFormUI\TemplateForms\MonyPanelProperyForm.Designer.cs">
       <DependentUpon>MonyPanelProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PrintForm.cs">
+    <Compile Include="winFormUI\TemplateForms\PrintForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PrintForm.Designer.cs">
+    <Compile Include="winFormUI\TemplateForms\PrintForm.Designer.cs">
       <DependentUpon>PrintForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TemplateMain.cs">
+    <Compile Include="winFormUI\TemplateForms\TemplateMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TemplateMain.Designer.cs">
+    <Compile Include="winFormUI\TemplateForms\TemplateMain.Designer.cs">
       <DependentUpon>TemplateMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TextBoxProperyForm.cs">
+    <Compile Include="winFormUI\TemplateForms\TextBoxProperyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TextBoxProperyForm.Designer.cs">
+    <Compile Include="winFormUI\TemplateForms\TextBoxProperyForm.Designer.cs">
       <DependentUpon>TextBoxProperyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
@@ -137,34 +151,8 @@
     <Compile Include="MyCode\ComHelper.cs" />
     <Compile Include="MyCode\PickBox.cs" />
     <Compile Include="MyControls\MaskTextBox.cs" />
-    <Compile Include="MyControls\RelayCommand.cs" />
-    <Compile Include="MyControls\ScrollableTabPanel.cs" />
-    <Compile Include="Pages\BasePages\DataSourceList.xaml.cs">
-      <DependentUpon>DataSourceList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BasePages\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BasePages\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BasePages\SystemSet.xaml.cs">
-      <DependentUpon>SystemSet.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BasePages\TemplateListPage.xaml.cs">
-      <DependentUpon>TemplateListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BasePages\ViewBasicPage.xaml.cs">
-      <DependentUpon>ViewBasicPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BillTemplateList\TemplateProperyEdit.xaml.cs">
-      <DependentUpon>TemplateProperyEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\BillTemplateList\BillSetEdit.xaml.cs">
-      <DependentUpon>BillSetEdit.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\UserControlPages\BillTemplateAdd.xaml.cs">
-      <DependentUpon>BillTemplateAdd.xaml</DependentUpon>
+    <Compile Include="Page\TemplateViewList.xaml.cs">
+      <DependentUpon>TemplateViewList.xaml</DependentUpon>
     </Compile>
     <Compile Include="softConfig\DataBaseAdd.xaml.cs">
       <DependentUpon>DataBaseAdd.xaml</DependentUpon>
@@ -181,13 +169,9 @@
     <Compile Include="UCProcessBar.xaml.cs">
       <DependentUpon>UCProcessBar.xaml</DependentUpon>
     </Compile>
-    <Page Include="Content\About.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="AppMainWindow.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Content\SettingsAppearance.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Content\SystemSet\PrintSet.xaml">
       <SubType>Designer</SubType>
@@ -197,57 +181,33 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\Template\TemplateProperyEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Pages\BasePages\DataSourceList.xaml">
+    <Page Include="MertoUIWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BasePages\Home.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\BasePages\Settings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\BasePages\SystemSet.xaml">
+    <Page Include="Page\SystemSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BasePages\TemplateListPage.xaml">
+    <Page Include="Page\TemplateViewList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BasePages\ViewBasicPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\BillTemplateList\TemplateProperyEdit.xaml">
+    <Page Include="Page\UserInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\BillTemplateList\BillSetEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\UserControlPages\BillTemplateAdd.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="softConfig\DataBaseAdd.xaml">
       <SubType>Designer</SubType>
@@ -284,28 +244,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Forms\CheckBoxProperyForm.resx">
+    <EmbeddedResource Include="winFormUI\BillForms\BillSerchListForm.resx">
+      <DependentUpon>BillSerchListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="winFormUI\TemplateForms\CheckBoxProperyForm.resx">
       <DependentUpon>CheckBoxProperyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ComboBoxProperyForm.resx">
+    <EmbeddedResource Include="winFormUI\TemplateForms\ComboBoxProperyForm.resx">
       <DependentUpon>ComboBoxProperyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DateTimePickerProperyForm.resx">
+    <EmbeddedResource Include="winFormUI\TemplateForms\DateTimePickerProperyForm.resx">
       <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LabelProperyForm.resx">
+    <EmbeddedResource Include="winFormUI\TemplateForms\LabelProperyForm.resx">
       <DependentUpon>LabelProperyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MonyPanelProperyForm.resx">
+    <EmbeddedResource Include="winFormUI\TemplateForms\MonyPanelProperyForm.resx">
       <DependentUpon>MonyPanelProperyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PrintForm.resx">
+    <EmbeddedResource Include="winFormUI\TemplateForms\PrintForm.resx">
       <DependentUpon>PrintForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TemplateMain.resx">
+    <EmbeddedResource Include="winFormUI\TemplateForms\TemplateMain.resx">
       <DependentUpon>TemplateMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TextBoxProperyForm.resx">
+    <EmbeddedResource Include="winFormUI\TemplateForms\TextBoxProperyForm.resx">
       <DependentUpon>TextBoxProperyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -326,12 +289,90 @@
       <Project>{a541afb5-0eac-48fa-b7a8-1d3a327a95ad}</Project>
       <Name>Controllers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyExtendControls\MyExtendControls.csproj">
+      <Project>{26326d4d-74f9-4a99-872b-093f7fccf494}</Project>
+      <Name>MyExtendControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPF.DazzleUI2\WPF.DazzleUI2.csproj">
+      <Project>{53b936b8-79d9-4043-b8e6-7a9edaaa1bb0}</Project>
+      <Name>WPF.DazzleUI2</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\MyPC\Downloads\51CTO下载-20090825032321\TabControlEx\TabControlEx\TabControlEx.csproj">
       <Project>{9df2b67b-5453-42b5-8cfc-3ab8c1cf3317}</Project>
       <Name>TabControlEx</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\Bd\background_mainwnd.png" />
+    <Resource Include="Skin\Bd\enter.png" />
+    <Resource Include="Skin\Bd\mover.png" />
+    <Resource Include="Skin\Button\mie.png" />
+    <Resource Include="Skin\Button\mim.png" />
+    <Resource Include="Skin\Button\min.png" />
+    <Resource Include="Skin\Button\mme.png" />
+    <Resource Include="Skin\Button\mmm.png" />
+    <Resource Include="Skin\Button\mmn.png" />
+    <Resource Include="Skin\Button\mse.png" />
+    <Resource Include="Skin\Button\msm.png" />
+    <Resource Include="Skin\Button\msn.png" />
+    <Resource Include="Skin\Button\mxe.png" />
+    <Resource Include="Skin\Button\mxm.png" />
+    <Resource Include="Skin\Button\mxn.png" />
+    <Resource Include="Skin\Button\ske.png" />
+    <Resource Include="Skin\Button\skm.png" />
+    <Resource Include="Skin\Button\skn.png" />
+    <Resource Include="Skin\Button\xe.png" />
+    <Resource Include="Skin\Button\xm.png" />
+    <Resource Include="Skin\Button\xn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\ico\toolbar_hover.png" />
+    <Resource Include="Skin\ico\toolbar_pushed.png" />
+  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Skin\Icon\purple\business_pur.png" />
+    <Resource Include="Skin\Icon\purple\delicious_pur.png" />
+    <Resource Include="Skin\Icon\purple\desktop_pur.png" />
+    <Resource Include="Skin\Icon\purple\deviantart_pur.png" />
+    <Resource Include="Skin\Icon\purple\dropbox_pur.png" />
+    <Resource Include="Skin\Icon\purple\gmail_pur.png" />
+    <Resource Include="Skin\Icon\purple\grooveshark_pur.png" />
+    <Resource Include="Skin\Icon\purple\myspace_pur.png" />
+    <Resource Include="Skin\Icon\purple\seznam_pur.png" />
+    <Resource Include="Skin\Icon\purple\template_pur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\Icon\blue\mailkit_blu.png" />
+    <Resource Include="Skin\Icon\blue\stumbleupon_blu.png" />
+    <Resource Include="Skin\Icon\blue\teamviewer_blu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\Icon\dark\business_blk.png" />
+    <Resource Include="Skin\Icon\dark\dropbox_blk.png" />
+    <Resource Include="Skin\Icon\dark\grooveshark_blk.png" />
+    <Resource Include="Skin\Icon\dark\pinterest_blk.png" />
+    <Resource Include="Skin\Icon\dark\skydrive_blk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\mainUIico\BillManage.png" />
+    <Resource Include="Skin\mainUIico\DataSytem.png" />
+    <Resource Include="Skin\mainUIico\HelperCenter.png" />
+    <Resource Include="Skin\mainUIico\TemplateManage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\mainUIico\userinfo.png" />
+    <Resource Include="Skin\mainUIico\setSystem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\Icon\purple\win8_pur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\Icon\purple\Yahoo Messenger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\DefaultUserPhoto\67.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

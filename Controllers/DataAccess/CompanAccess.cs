@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Controllers.Moders.TableModers;
+using Controllers.Models;
 using System.Data;
 using System.Data.SqlClient;
-using Controllers.DataAccess.DAL;
+using Controllers.DataAccess.SQLHELPER;
 
 namespace Controllers.DataAccess
 {    
@@ -52,7 +52,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="comModers">表实体</param>
         /// <returns>参数列表</returns>
-        private List<SqlParameter> GetSqlParameter(CompanyModer comModers)
+        private List<SqlParameter> GetSqlParameter(CompanyModel comModers)
         {
             List<SqlParameter> SqlPars = new List<SqlParameter>();
             SqlPars.Add(new SqlParameter("@CIName", SqlDbType.NVarChar, 30));
@@ -73,12 +73,12 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="reader">查询出来的dataRead</param>
         /// <returns>实体列表</returns>
-        public static List<CompanyModer> GetList( SqlDataReader reader)
+        public static List<CompanyModel> GetList( SqlDataReader reader)
         {
-            List<CompanyModer> list = new List<CompanyModer>();
+            List<CompanyModel> list = new List<CompanyModel>();
             while (reader.Read())
             {
-                CompanyModer company = new CompanyModer();
+                CompanyModel company = new CompanyModel();
                 if (reader["CIID"] != DBNull.Value)
                 {
                     company.CIID = Convert.ToInt32(reader["CIID"]);
@@ -116,15 +116,15 @@ namespace Controllers.DataAccess
         /// <param name="sFields"></param>
         /// <param name="sWhere"></param>
         /// <returns></returns>
-        public List<CompanyModer> GetAllCompanyFields(String sFields,String sWhere)
+        public List<CompanyModel> GetAllCompanyFields(String sFields,String sWhere)
         {
-            SqlDataReader sdr=  m_sqlHelper.GetDataReader(GetSelectString(sFields, sWhere).ToString(), null);
+            SqlDataReader sdr=  m_sqlHelper.GetDataReader(GetSelectString(sFields, sWhere).ToString());
             return GetList(sdr);           
         }
 
         public DataSet GetCompanToDataSet(String sFields, String sWhere)
         {
-            return m_sqlHelper.GetDataSet(GetSelectString(sFields, sWhere).ToString(), "Company",null);
+            return m_sqlHelper.GetDataSet(GetSelectString(sFields, sWhere).ToString());
         }
     }
 }

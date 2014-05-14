@@ -13,8 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
-using Controllers.Moders;
-using Controllers.Moders.TableModers;
+using Controllers.Models;
 
 namespace Controllers.Common
 {
@@ -27,7 +26,7 @@ namespace Controllers.Common
         {
         }
       
-        public bool SaveToXml(String path, SoftConfigModer softConfig,SoftVerify softVerify)
+        public bool SaveToXml(String path, SoftConfigModel softConfig,SoftVerify softVerify)
         {
             try
             {
@@ -54,7 +53,7 @@ namespace Controllers.Common
                 throw ex;
             }
         }
-        private void ChoiceNode(String NodeName, XmlReader xmlread, SoftConfigModer scfm, SoftVerify softVerify)
+        private void ChoiceNode(String NodeName, XmlReader xmlread, SoftConfigModel scfm, SoftVerify softVerify)
         {
             if (scfm != null)
             {
@@ -118,9 +117,9 @@ namespace Controllers.Common
             }
         }
 
-        public SoftConfigModer readXMl(String path)
+        public SoftConfigModel readXMl(String path)
         {
-            SoftConfigModer scfm = new SoftConfigModer();
+            SoftConfigModel scfm = new SoftConfigModel();
             SoftVerify softVerify = new SoftVerify();
             XmlNodeReader xmlread = null;
             try

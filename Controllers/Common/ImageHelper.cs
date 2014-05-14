@@ -35,7 +35,8 @@ namespace Controllers.Common
            {
                MemoryStream ms = new MemoryStream(); //实例化内存流
                new BinaryFormatter().Serialize(ms, img); //将对象图形序列化为给定流
-               return ms.GetBuffer();
+               byte[] buffers= ms.GetBuffer();
+               return buffers;
            }
            catch (Exception ex)
            {
@@ -92,11 +93,19 @@ namespace Controllers.Common
        {
            try
            {
+               MemoryStream memStream = new MemoryStream(buffer);
+               memStream.Position = 0;
+               BinaryFormatter de = new BinaryFormatter();
+               memStream.Seek(0, SeekOrigin.Begin);
+               object newobj = de.Deserialize(memStream);
+               memStream.Close();
+               memStream.Dispose();
+               return newobj as Image; 
                //通过字节数组的到内存流
-               MemoryStream ms = new MemoryStream(buffer);
+               //MemoryStream ms = new MemoryStream(buffer);
+               //ms.Seek(0, SeekOrigin.Begin); 
                //ms.Position = 0;
-               return new BinaryFormatter().Deserialize(ms) as Image;//通过反序列化技术还原image图像
-                
+               //return new BinaryFormatter().Deserialize(ms) as Image;//通过反序列化技术还原image图像    
            }
            catch (Exception ex)
            {

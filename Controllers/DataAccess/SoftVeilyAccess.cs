@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Controllers.Moders.TableModers;
+using Controllers.Models;
 using System.Data;
 using System.Data.SqlClient;
-using Controllers.DataAccess.DAL;
+using Controllers.DataAccess.SQLHELPER;
 
 namespace Controllers.DataAccess
 {    
@@ -34,22 +34,22 @@ namespace Controllers.DataAccess
             return sbsql;
         }
         public DataSet  GetSoftVerify(String softKey)
-        { 
-            List<SqlParameter> SqlPars = new List<SqlParameter>();
-            SqlPars.Add(new SqlParameter("@SoftKey", SqlDbType.NVarChar, 50));
-            SqlPars[0].Value = softKey;
-            return new MySqlHelper().GetDataSet(GetSelectSQL().ToString(),"soft",SqlPars);
+        {
+            SqlParameter[] param = new SqlParameter[1];
+            param[0] = new SqlParameter("@SoftKey", SqlDbType.NVarChar, 50);
+            param[0].Value = softKey;
+            return new MySqlHelper().GetDataSet(GetSelectSQL().ToString(), param,1);
         }
 
         public bool UpdateSoftVerify(DateTime newtime, String softKey)
         {
-            List<SqlParameter> SqlPars = new List<SqlParameter>();
-            SqlPars.Add(new SqlParameter("@SoftKey", SqlDbType.NVarChar, 50));
-            SqlPars[0].Value = softKey;
-            SqlPars.Add(new SqlParameter("@EndTime", SqlDbType.DateTime));
-            SqlPars[1].Value = newtime;
+            SqlParameter[] param = new SqlParameter[2];
+            param[0]=new SqlParameter("@SoftKey", SqlDbType.NVarChar, 50);
+            param[0].Value = softKey;
+            param[1]=new SqlParameter("@EndTime", SqlDbType.DateTime);
+            param[1].Value = newtime;
             StringBuilder sb = GetUpdateSQL();
-            return (new MySqlHelper().ExecDataBySql(sb.ToString(), SqlPars)>0);
+            return (new MySqlHelper().ExecDataBySql(sb.ToString(), param,2) > 0);
         }
 
     }

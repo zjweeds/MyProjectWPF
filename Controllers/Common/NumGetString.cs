@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Controllers.Common
 {
-    class NumGetString
+    public class NumGetString
     {
         private static String[] DaX_ShZ = { "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖", "拾" };
         private static String[] DaX_JiE_DW = { "元", "拾", "佰", "仟", "万", "拾", "佰", "仟", "亿", "拾", "佰", "仟", "万" };

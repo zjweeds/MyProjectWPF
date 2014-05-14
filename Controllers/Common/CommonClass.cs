@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using Controllers.DataAccess.DAL;
+using Controllers.DataAccess.SQLHELPER;
 using System.Data;
 using System.Windows.Forms;
 using System.IO;
@@ -47,6 +47,24 @@ namespace Controllers.Common
                 MemoryStream ms = new MemoryStream(); //实例化内存流
                 new BinaryFormatter().Serialize(ms, font); //将对象图形序列化为给定流
                 return ms.GetBuffer();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// 跟据字符串，获得字体对象
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public Font GetFontByString(string str)
+        {
+            try
+            {
+                FontConverter fc = new FontConverter();
+                return (Font)fc.ConvertFromString(str);
             }
             catch (Exception ex)
             {

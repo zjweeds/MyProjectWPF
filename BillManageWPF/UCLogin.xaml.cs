@@ -20,8 +20,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
-using Controllers.Moders.TableModers;
+using Controllers.Models;
 using Controllers.Common;
+using Controllers.DataAccess;
 using Controllers.Business;
 using System.Windows.Threading;
 using System.Threading;
@@ -34,12 +35,12 @@ namespace BillManageWPF
     public partial class UCLogin : UserControl
     {
         public LoginWindow lw { get; set; }
-        public CompanyService ComSer = null;
+        public CompanyManager ComSer = null;
         DispatcherTimer _timer = new DispatcherTimer();
         int Count = 0;
         public UCLogin()
         {
-            this.ComSer = new CompanyService();
+            this.ComSer = new CompanyManager();
             InitializeComponent();           
         }
         public void LoginAsyc()
@@ -83,10 +84,13 @@ namespace BillManageWPF
                 lw.DoCallBack();
             }
             else
-            {              
-                MainWindow wmv = new MainWindow();
-                wmv.WindowState = WindowState.Maximized;
-                wmv.Show(); 
+            {
+                AppMainWindow amw = new AppMainWindow();
+                amw.WindowState = WindowState.Maximized;
+                amw.Show();
+                //MainWindow wmv = new MainWindow();
+                //wmv.WindowState = WindowState.Maximized;
+                //wmv.Show(); 
                 _timer.Stop();
                 lw.Close(); 
             }

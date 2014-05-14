@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Controllers.Moders;
+using Controllers.Models;
 using Controllers.Common;
-using Controllers.DataAccess.DAL;
+using Controllers.DataAccess.SQLHELPER;
 
 namespace Controllers.DataAccess
 {
     public class UserAccess
     {
-        UserModer userModer = new UserModer();
+        UserModel userModer = new UserModel();
         private StringBuilder GetSelectString(String showFields,String swhere)
         {
             StringBuilder sbSql =new StringBuilder();
@@ -21,7 +21,7 @@ namespace Controllers.DataAccess
             //sbSql.Append()
             return sbSql;
         }
-        public UserModer GetUserInfo(List<String> slists)
+        public UserModel GetUserInfo(List<String> slists)
         {
            //
             return null;

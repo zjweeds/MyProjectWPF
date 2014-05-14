@@ -54,164 +54,67 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\BillSetService.cs" />
-    <Compile Include="Business\BillTemplateService.cs" />
-    <Compile Include="Business\BillTemplateTypeService.cs" />
-    <Compile Include="Business\CompanyService.cs" />
-    <Compile Include="Business\ConfigService.cs" />
-    <Compile Include="Business\ControlService.cs" />
-    <Compile Include="Business\DataSourceService.cs" />
-    <Compile Include="Business\MoneyPanelExtenService.cs" />
-    <Compile Include="Business\SoftVeilyService.cs" />
-    <Compile Include="Business\SystemDBService.cs" />
-    <Compile Include="Business\TabManageService.cs" />
-    <Compile Include="Business\TextBoxExtendService.cs" />
-    <Compile Include="Business\UserService.cs" />
+    <Compile Include="Business\BillSetManager.cs" />
+    <Compile Include="Business\CheckBoxInfoManager.cs" />
+    <Compile Include="Business\ComboBoxInfoManager.cs" />
+    <Compile Include="Business\CompanyManager.cs" />
+    <Compile Include="Business\ControlDetailManager.cs" />
+    <Compile Include="Business\DateTimePickerInfoManager.cs" />
+    <Compile Include="Business\MoneyPanelInfoManager.cs" />
+    <Compile Include="Business\TextControlInfoManager.cs" />
+    <Compile Include="Business\TextControlManager.cs" />
     <Compile Include="Common\CommonClass.cs" />
     <Compile Include="Common\ImageHelper.cs" />
     <Compile Include="Common\MyXmlHelper.cs" />
     <Compile Include="Common\NumGetString.cs" />
     <Compile Include="Common\ReadFiles.cs" />
     <Compile Include="DataAccess\CompanAccess.cs" />
-    <Compile Include="DataAccess\DAL\MySqlHelper.cs" />
+    <Compile Include="DataAccess\SQLHELPER\MySqlHelper.cs" />
     <Compile Include="DataAccess\SoftVeilyAccess.cs" />
+    <Compile Include="DataAccess\TableAccess\BillSetService.cs" />
+    <Compile Include="DataAccess\TableAccess\BillTemplateService.cs" />
+    <Compile Include="DataAccess\TableAccess\BillTemplateTypeService.cs" />
+    <Compile Include="DataAccess\TableAccess\CheckBoxInfoService.cs" />
+    <Compile Include="DataAccess\TableAccess\ComboBoxInfoService.cs" />
+    <Compile Include="DataAccess\TableAccess\ConfigService.cs" />
+    <Compile Include="DataAccess\TableAccess\ControlDetailService.cs" />
+    <Compile Include="DataAccess\TableAccess\ControlService.cs" />
+    <Compile Include="DataAccess\TableAccess\DataSourceService.cs" />
+    <Compile Include="DataAccess\TableAccess\DateTimePickerInfoService.cs" />
+    <Compile Include="DataAccess\TableAccess\DBHelper.cs" />
+    <Compile Include="DataAccess\TableAccess\MoneyPanelExtenService.cs" />
+    <Compile Include="DataAccess\TableAccess\MoneyPanelInfoService.cs" />
+    <Compile Include="DataAccess\TableAccess\SoftVeilyService.cs" />
+    <Compile Include="DataAccess\TableAccess\SystemDBService.cs" />
+    <Compile Include="DataAccess\TableAccess\TextBoxExtendService.cs" />
+    <Compile Include="DataAccess\TableAccess\TextControlInfoService.cs" />
+    <Compile Include="DataAccess\TableAccess\TextControlService.cs" />
+    <Compile Include="DataAccess\TableAccess\UserService.cs" />
     <Compile Include="DataAccess\UserAccess.cs" />
     <Compile Include="Enum\ComEnum.cs" />
-    <Compile Include="Moders\SoftConfigModer.cs" />
-    <Compile Include="Moders\ControlDataSource.cs" />
-    <Compile Include="Moders\SessionStatic.cs" />
-    <Compile Include="Moders\TableModers\BillTemplateTypeModer.cs" />
-    <Compile Include="Moders\TableModers\BillTemplatModer.cs" />
-    <Compile Include="Moders\TableModers\CompanyModer.cs" />
-    <Compile Include="Moders\TableModers\ControlModer.cs" />
-    <Compile Include="Moders\TableModers\DataSourceModel.cs" />
-    <Compile Include="Moders\TableModers\MoneyPanelExtendModel.cs" />
-    <Compile Include="Moders\TableModers\SoftVerify.cs" />
-    <Compile Include="Moders\TableModers\TextBoxExtendModel.cs" />
-    <Compile Include="Moders\UserInfo.cs" />
-    <Compile Include="Moders\UserModer.cs" />
-    <Compile Include="MyControls\CCheckBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\CCheckBox.designer.cs" />
-    <Compile Include="MyControls\CComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\CComboBox.designer.cs" />
-    <Compile Include="MyControls\CDateTimePicker.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\CDateTimePicker.designer.cs" />
-    <Compile Include="MyControls\CLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\CLabel.designer.cs" />
-    <Compile Include="MyControls\CMoneyPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\CMoneyPanel.Designer.cs" />
-    <Compile Include="MyControls\CTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\CTextBox.designer.cs" />
-    <Compile Include="MyControls\RulePanel\Board.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyControls\RulePanel\Board.Designer.cs">
-      <DependentUpon>Board.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\RulePanel\Document.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyControls\RulePanel\Document.Designer.cs">
-      <DependentUpon>Document.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\RulePanel\LinearScale.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyControls\RulePanel\LinearScale.Designer.cs">
-      <DependentUpon>LinearScale.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\RulePanel\Settings.cs" />
-    <Compile Include="MyControls\TemplateContorl\MoneyPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MoneyPanel.Designer.cs">
-      <DependentUpon>MoneyPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyCheckBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyCheckBox.Designer.cs">
-      <DependentUpon>MyCheckBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyComboBox.Designer.cs">
-      <DependentUpon>MyComboBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyDateTimePicker.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyDateTimePicker.Designer.cs">
-      <DependentUpon>MyDateTimePicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyLabel.Designer.cs">
-      <DependentUpon>MyLabel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MyControls\TemplateContorl\MyTextBox.Designer.cs">
-      <DependentUpon>MyTextBox.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Model\SoftConfigModel.cs" />
+    <Compile Include="Model\ControlDataSource.cs" />
+    <Compile Include="Model\SessionStatic.cs" />
+    <Compile Include="Model\TableModers\BillTemplateTypeModel.cs" />
+    <Compile Include="Model\TableModers\BillTemplatModel.cs" />
+    <Compile Include="Model\TableModers\CheckBoxInfo.cs" />
+    <Compile Include="Model\TableModers\ComboBoxInfo.cs" />
+    <Compile Include="Model\TableModers\CompanyModel.cs" />
+    <Compile Include="Model\TableModers\ControlDetail.cs" />
+    <Compile Include="Model\TableModers\ControlModel.cs" />
+    <Compile Include="Model\TableModers\DataSourceModel.cs" />
+    <Compile Include="Model\TableModers\DateTimePickerInfo.cs" />
+    <Compile Include="Model\TableModers\MoneyPanelExtendModel.cs" />
+    <Compile Include="Model\TableModers\MoneyPanelInfo.cs" />
+    <Compile Include="Model\TableModers\SoftVerify.cs" />
+    <Compile Include="Model\TableModers\TextBoxExtendModel.cs" />
+    <Compile Include="Model\TableModers\TextControl.cs" />
+    <Compile Include="Model\TableModers\TextControlInfo.cs" />
+    <Compile Include="Model\UserInfo.cs" />
+    <Compile Include="Model\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <EmbeddedResource Include="MyControls\CCheckBox.resx" />
-    <EmbeddedResource Include="MyControls\CComboBox.resx" />
-    <EmbeddedResource Include="MyControls\CDateTimePicker.resx" />
-    <EmbeddedResource Include="MyControls\CLabel.resx" />
-    <EmbeddedResource Include="MyControls\CMoneyPanel.resx" />
-    <EmbeddedResource Include="MyControls\CTextBox.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\RulePanel\Board.resx">
-      <DependentUpon>Board.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\RulePanel\Document.resx">
-      <DependentUpon>Document.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\RulePanel\LinearScale.resx">
-      <DependentUpon>LinearScale.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\TemplateContorl\MoneyPanel.resx">
-      <DependentUpon>MoneyPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\TemplateContorl\MyCheckBox.resx">
-      <DependentUpon>MyCheckBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\TemplateContorl\MyComboBox.resx">
-      <DependentUpon>MyComboBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\TemplateContorl\MyDateTimePicker.resx">
-      <DependentUpon>MyDateTimePicker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\TemplateContorl\MyLabel.resx">
-      <DependentUpon>MyLabel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyControls\TemplateContorl\MyTextBox.resx">
-      <DependentUpon>MyTextBox.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
