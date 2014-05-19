@@ -26,16 +26,14 @@ namespace BillManageWPF.Forms
         {
             InitializeComponent();
             tmp = tb;
-            tm = fm;
-            font = tb.Font;
-            bgc = tb.BackColor;
-            frc = tb.ForeColor;
+            tm = fm;          
         }
         #endregion 
 
         #region  页面变量
         public MyLabel tmp = null;
         public TemplateMain tm = null;
+        //public LabelInfo label = null;
         public Font font = null;
         public Color bgc;
         public Color frc;
@@ -62,8 +60,8 @@ namespace BillManageWPF.Forms
                     cbxTablename.Text = tmp.txtDatasource.TableName.ToString();
                     cbxCoumname.Text = tmp.txtDatasource.Column.ToString();
                 }
-                chbIsmust.Checked = tmp.IsMust == 0 ? false : true;
-                chbIsprint.Checked = tmp.IsPrint == 0 ? false : true;  
+                chbIsmust.Checked = tmp.IsMust;
+                chbIsprInt.Checked = tmp.IsPrint;
             }
         }
 
@@ -81,124 +79,117 @@ namespace BillManageWPF.Forms
                 tmp.Width = Convert.ToInt32(txtwidth.Text);
                 tmp.Height = Convert.ToInt32(txtheight.Text);
                 tmp.txtDatasource = new ControlDataSource(cbxTablename.Text, cbxCoumname.Text);
-                tmp.IsMust = chbIsmust.Checked ? 1 : 0;
-                tmp.IsPrint = chbIsprint.Checked ? 1 : 0;
+                tmp.IsMust = chbIsmust.Checked;
+                tmp.IsPrint = chbIsprInt.Checked;
             }
         }
-        public void UpdateModel(ControlModel cm)
-        {
-            if (cm != null)
-            {
-                if (cm.CTIName != txtName.Text)
-                {
-                    cm.CTIName = txtName.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIDefault != txtDefalutValue.Text)
-                {
-                    cm.CTIDefault = txtDefalutValue.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTITabKey != Convert.ToInt32(txttab.Text))
-                {
-                    cm.CTITabKey = Convert.ToInt32(txttab.Text);
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsBorder != (chbisborestyle.Checked ? 1 : 0))
-                {
-                    cm.CTIIsBorder = chbisborestyle.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIVisiable != (chbIsvisible.Checked ? 1 : 0))
-                {
-                    cm.CTIVisiable = chbIsvisible.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                String sbuff = tmp.Font.ToString();
-                if (cm.CTIFont != sbuff)
-                {
-                    cm.CTIFont = sbuff;
-                    cm.updateFlage = true;
+        //public void UpdateModel()
+        //{
+        //    if (label != null)
+        //    {
+        //        if (label.LBName != txtName.Text)
+        //        {
+        //            label.LBName = txtName.Text;
+        //            label.UpdateFlage = true;
+        //        }
+        //        if (label.LBDefault != txtDefalutValue.Text)
+        //        {
+        //            label.LBDefault = txtDefalutValue.Text;
+        //            label.UpdateFlage = true;
+        //        }
+        //        if (label.LBTabKey != Convert.ToInt32(txttab.Text))
+        //        {
+        //            label.LBTabKey = Convert.ToInt32(txttab.Text);
+        //            label.UpdateFlage = true;
+        //        }
+        //        if (label.LBIsBorder != (chbisborestyle.Checked ? 1 : 0))
+        //        {
+        //            label.LBIsBorder = chbisborestyle.Checked ? 1 : 0;
+        //            label.UpdateFlage = true;
+        //        }
+        //        if (label.LBVisiable != (chbIsvisible.Checked ? 1 : 0))
+        //        {
+        //            label.LBVisiable = chbIsvisible.Checked ? 1 : 0;
+        //            label.UpdateFlage = true;
+        //        }
+        //        String sbuff = new CommonClass().GetStringByFont(tmp.Font);
+        //        if (label.LBFont != sbuff)
+        //        {
+        //            label.LBFont = sbuff;
+        //            label.UpdateFlage = true;
 
-                }
-                sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
-                if (cm.CTIFontColor != sbuff)
-                {
-                    cm.CTIFontColor = sbuff;
-                    cm.updateFlage = true;
-                }
-                sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
-                if (cm.CTIBackColor != sbuff)
-                {
-                    cm.CTIBackColor = sbuff;
-                    cm.updateFlage = true;
-                }
+        //        }
+        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+        //        if (label.LBFontColor != sbuff)
+        //        {
+        //            label.LBFontColor = sbuff;
+        //            label.UpdateFlage = true;
+        //        }
+        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+        //        if (label.LBBackColor != sbuff)
+        //        {
+        //            label.LBBackColor = sbuff;
+        //            label.UpdateFlage = true;
+        //        }
 
-                int xitem = Convert.ToInt32(txttop.Text);
-                if (cm.CTITop != xitem)
-                {
-                    cm.CTITop = xitem;
-                    cm.updateFlage = true;
-                } 
-                xitem= Convert.ToInt32(txtleft.Text);
-                if (cm.CTILeft != xitem)
-                {
-                    cm.CTILeft = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtwidth.Text);
-                if (cm.CTIWidth != xitem)
-                {
-                    cm.CTIWidth = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtheight.Text);
-                if (cm.CTIHeight != xitem)
-                {
-                    cm.CTIHeight = xitem;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsTabel != cbxTablename.Text)
-                {
-                    cm.CTIBandsTabel = cbxTablename.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsCoumln != cbxCoumname.Text)
-                {
-                    cm.CTIBandsCoumln = cbxCoumname.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsMust != (chbIsmust.Checked ? 1 : 0))
-                {
-                    cm.CTIIsMust = chbIsmust.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsPrint != (chbIsprint.Checked ? 1 : 0))
-                {
-                    cm.CTIIsPrint = chbIsprint.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }               
-            }
-        }
+        //        int xitem = Convert.ToInt32(txttop.Text);
+        //        if (label.LBTop != xitem)
+        //        {
+        //            label.LBTop = xitem;
+        //            label.UpdateFlage = true;
+        //        } 
+        //        xitem= Convert.ToInt32(txtleft.Text);
+        //        if (label.LBLeft != xitem)
+        //        {
+        //            label.LBLeft = xitem;
+        //            label.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtwidth.Text);
+        //        if (label.LBWidth != xitem)
+        //        {
+        //            label.LBWidth = xitem;
+        //            label.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtheight.Text);
+        //        if (label.LBHeight != xitem)
+        //        {
+        //            label.LBHeight = xitem;
+        //            label.UpdateFlage = true;
+        //        }
+        //        if (label.LBBandsTabel != cbxTablename.Text)
+        //        {
+        //            label.LBBandsTabel = cbxTablename.Text;
+        //            label.UpdateFlage = true;
+        //        }
+        //        if (label.LBBandsCoumln != cbxCoumname.Text)
+        //        {
+        //            label.LBBandsCoumln = cbxCoumname.Text;
+        //            label.UpdateFlage = true;
+        //        }
+        //        if (label.LBIsPrint != (chbIsprInt.Checked ? 1 : 0))
+        //        {
+        //            label.LBIsPrint = chbIsprInt.Checked ? 1 : 0;
+        //            label.UpdateFlage = true;
+        //        }               
+        //    }
+        //}
         #endregion
         private void button1_Click(object sender, EventArgs e)
         {
-            SetPropery();
-            ControlModel cm = new ControlModel();
-            if (tmp.ControlID != 0)
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.CTIID == tmp.ControlID; }));//返回符合条件的第一个元素)
-            }
-            else
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.NewNumber == tmp.NewNumber; }));//返回符合条件的第一个元素)
-            }
-            UpdateModel(cm);
+            SetPropery();           
+            //UpdateModel();
         }
 
         private void LabelProperyForm_Load(object sender, EventArgs e)
         {
-            GetPropery();
+            if (tm != null && tmp != null)
+            {
+                GetPropery();
+                font = tmp.Font;
+                bgc = tmp.BackColor;
+                frc = tmp.ForeColor;
+               // label = tm.lbList[tmp.NewNumber] as LabelInfo;
+            }
         }
 
         /// <summary>

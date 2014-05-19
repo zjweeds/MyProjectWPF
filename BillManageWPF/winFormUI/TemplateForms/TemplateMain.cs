@@ -12,12 +12,11 @@ using System.Windows.Forms;
 using Controllers.Common;
 using MyExtendControls.MyControls.RulePanel;
 using MyExtendControls.MyControls.TemplateContorl;
-using System.Runtime.InteropServices;
 using Controllers.Models;
 using Controllers.DataAccess;
+using Controllers.Business;
 using BillManageWPF.MyCode;
 using BillManageWPF.Content.Template;
-using FirstFloor.ModernUI.Windows.Controls;
 using Controllers.Enum;
 
 namespace BillManageWPF.Forms
@@ -28,11 +27,13 @@ namespace BillManageWPF.Forms
         public TemplateMain()
         {
             InitializeComponent();
+            this.DesignContext.board.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignContext_Paint);
         }
         public TemplateMain(int code)
         {
             InitializeComponent();
             this.btm = bts.GetTemplateModeltByID(code);
+            this.DesignContext.board.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignContext_Paint);
         }
         #endregion
 
@@ -42,38 +43,26 @@ namespace BillManageWPF.Forms
         public Image image;//保存图片对象
         public Point offset = new Point(0, 0); //坐标原点
         public int codes; //保存模板编号
-        public PickBox pb = null; 
+        public PickBox pb = null; //响应用户拖拽事件的帮助类
         float fDpiX;//横向分辨率
         float fDpiY;//纵向分辨率
-        private int labelCount = 0;
-        private int TextConut = 0;
-        private int checkboxCount = 0;
-        private int comboboxCount = 0;
-        private int datetimerConut = 0;
-        private int moneypanelCount=0;
+        #region  记录控件个数
+        #endregion 
+
         public BillTemplateService bts = new BillTemplateService();
         public BillTemplatModel btm = new BillTemplatModel();
-        public List<ControlModel> cmlist = new List<ControlModel>();
-        public List<TextBoxExtendModel> tbemLsit = new List<TextBoxExtendModel>();
-        public List<MoneyPanelExtendModel> mpemList = new List<MoneyPanelExtendModel>();
-        public ControlService cs = new ControlService();
+        public List<MyTextBox> mytextList = new List<MyTextBox>();
+        public IList<MoneyPanel> mympList = new List<MoneyPanel>();
+        public IList<MyDateTimePicker> mydtpList = new List<MyDateTimePicker>();
+        public IList<MyCheckBox> mychbList = new List<MyCheckBox>();
+        public IList<MyComboBox> mycbbList = new List<MyComboBox>();
+        public IList<MyLabel> mylbList = new List<MyLabel>();
+        //public ControlService cs = new ControlService();
         #endregion
 
         #region 自定义方法
-        public static double MillimetersToPixelsWidth(double length) //length是毫米，1厘米=10毫米
-        {
-            System.Windows.Forms.Panel p = new System.Windows.Forms.Panel();
-            System.Drawing.Graphics g = System.Drawing.Graphics.FromHwnd(p.Handle);
-            IntPtr hdc = g.GetHdc();
-            int width = GetDeviceCaps(hdc, 4);     // HORZRES 
-            int pixels = GetDeviceCaps(hdc, 8);     // BITSPIXEL
-            g.ReleaseHdc(hdc);
-            return (((double)pixels / (double)width) * (double)length);
-        }
-
+      
         #region 毫米到分辨率的单位转换
-        [DllImport("gdi32.dll")]
-        private static extern int GetDeviceCaps(IntPtr hdc, int Index);
         private float MillimetersToPixel(float fValue, float fDPI)
         {
             return (fValue / 25.4f) * fDPI;
@@ -81,16 +70,17 @@ namespace BillManageWPF.Forms
         #endregion
 
         #region 窗体图片载入
-        private void DesignContext_Paint()
+        /// <summary>
+        /// 画图片
+        /// </summary>
+        private void DesignContext_Paint(object sender, PaintEventArgs e)
         {
             offset = new Point(this.DesignContext.board.Location.X, this.DesignContext.board.Location.Y);
-            // MessageBox.Show("X:"+offset.X.ToString()+"\n Y:"+offset.Y.ToString());
             ////引入图片
-            ////Image img = cc.GetImageByBytes(dt.Rows[0]["背景图片"] as byte[]);
             ////左上角顶点
             Point point = new Point(0, 0);
             ////新的大小
-            SizeF newSize = new SizeF(MillimetersToPixel(width, fDpiX), MillimetersToPixel(height, fDpiY));
+            SizeF newSize = new SizeF(width,height);
             ////新的矩形
             RectangleF NewRect = new RectangleF(point, newSize);
             ////原始图形的参数
@@ -98,399 +88,498 @@ namespace BillManageWPF.Forms
             ////原始图形的大小
             RectangleF OldRect = new RectangleF(point, oldSize);
             ////缩放图形处理
-            //e.Graphics.DrawImage(image, NewRect, OldRect, System.Drawing.GraphicsUnit.Pixel);
-            Image newImg = image.GetThumbnailImage(width, height, new Image.GetThumbnailImageAbort(IsTrue), IntPtr.Zero);
-            this.DesignContext.board.BackgroundImageLayout = ImageLayout.Stretch;
-            this.DesignContext.board.BackgroundImage = image;
-            ////若新图形的宽度或高度大于窗体的宽度或高度，窗体会自行调整
-            if (newSize.Width > this.DesignContext.board.Width || newSize.Height > this.DesignContext.board.Height)
-            {
-                Size size = new System.Drawing.Size(width, height);//new Size(Convert.ToInt32(MillimetersToPixel(width, fDpiX)), Convert.ToInt32(MillimetersToPixel(height, fDpiY)));
-                FormAutoResize(size);
-            }
-        }
-        public void FormAutoResize(Size size)
-        {
-            //获取窗体原始Size
-            int intOldWidth = this.DesignContext.board.Width;
-            int intOldHeight = this.DesignContext.board.Height;
-            //设置窗体新的Size
-            this.DesignContext.board.Width = size.Width + 50;
-            this.DesignContext.board.Height = size.Height + 70;
-            //设置新的位置(Location)居中
-            //this.DesignContext.board.Location = new Point(this.DesignContext.board.Location.X - (this.DesignContext.board.Width - intOldWidth) / 2, this.DesignContext.board.Location.Y - (this.DesignContext.board.Height - intOldHeight) / 2);
-        }
-        private static bool IsTrue() // 在Image类别对图片进行缩放的时候,需要一个返回bool类别的委托
-        {
-            return true;
+            e.Graphics.DrawImage(image, NewRect, OldRect, System.Drawing.GraphicsUnit.Pixel);
         }
         #endregion
+       
+        #region 根据控件对象获取实体
 
-        #region  得到按类别分类的控件集合
-        public List<MyCheckBox> GetMyCheckBoxs(Control control)
+       private ControlInfo GetControlPropery(MyTextBox tmp)
         {
-            List<MyCheckBox> ctxts = new List<MyCheckBox>();
-            foreach (Control con in control.Controls)
+
+            ControlInfo textModel = new ControlInfo();
+            if (tmp != null)
             {
-                if (con.GetType() == typeof(MyCheckBox))
+                textModel.CIID = tmp.ControlID;
+                textModel.CTITIID = btm.TIID;
+                textModel.CTType = "TextBox";
+                textModel.CTName = tmp.Text;
+                textModel.CTDefault = tmp.DefaultValue;
+                textModel.CTTabKey = tmp.TabIndex;
+                textModel.CTShowType = tmp.showType;
+                textModel.CTMarkType = tmp.markType;
+                textModel.CTIsBorder = (tmp.BorderStyle == BorderStyle.None ? false : true);
+                textModel.CTIsTransparent = (tmp.BorderStyle == BorderStyle.None ? true : false);
+                textModel.CTVisiable = tmp.Visible;
+                textModel.CTTop = tmp.Top;
+                textModel.CTLeft = tmp.Left;
+                textModel.CTWidth = tmp.Width;
+                textModel.CTHeight = tmp.Height;
+                if (tmp.txtDatasource != null)
                 {
-                    ctxts.Add((MyCheckBox)con);
+                    textModel.CTBandsTabel = tmp.txtDatasource.TableName;
+                    textModel.CTBandsCoumln = tmp.txtDatasource.Column;
                 }
-                if (con.GetType() == typeof(GroupBox))
-                {
-                    this.GetMyCheckBoxs(con);
-                }
+                textModel.CTIsReadOnly = tmp.ReadOnly; 
+                textModel.CTIsFlage = tmp.IsFlage ;
+                textModel.CTFont = new CommonClass().GetStringByFont(tmp.Font);
+                textModel.CTFontColor = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+                textModel.CTBackColor = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+                textModel.CTIsMust = tmp.IsMust;
+                textModel.CTIsPrint = tmp.IsPrint;
+                textModel.updateFlage = tmp.UpdateFlage;
             }
-            return ctxts;
+            return textModel;
+
         }
-        public List<MyComboBox> GetMyComboBoxs(Control control)
+        private ControlInfo GetControlPropery(MyLabel tmp)
         {
-            List<MyComboBox> ctxts = new List<MyComboBox>();
-            foreach (Control con in control.Controls)
+            ControlInfo textModel = new ControlInfo();
+            if (tmp != null)
             {
-                if (con.GetType() == typeof(MyComboBox))
+                textModel.CIID = tmp.ControlID;
+                textModel.CTITIID = btm.TIID;
+                textModel.CTType = "Label";
+                textModel.CTName = tmp.ControlName;
+                textModel.CTDefault = tmp.DefaultValue;
+                textModel.CTTabKey = tmp.TabIndex;
+                textModel.CTIsBorder = (tmp.BorderStyle == BorderStyle.None ? true :false);
+                textModel.CTIsTransparent = (tmp.BorderStyle == BorderStyle.None ? true : false);
+                textModel.CTVisiable = tmp.Visible;
+                textModel.CTTop = tmp.Top;
+                textModel.CTLeft = tmp.Left;
+                textModel.CTWidth = tmp.Width;
+                textModel.CTHeight = tmp.Height;
+                if (tmp.txtDatasource != null)
                 {
-                    ctxts.Add((MyComboBox)con);
+                    textModel.CTBandsTabel = tmp.txtDatasource.TableName;
+                    textModel.CTBandsCoumln = tmp.txtDatasource.Column;
                 }
-                if (con.GetType() == typeof(GroupBox))
-                {
-                    this.GetMyComboBoxs(con);
-                }
+                textModel.CTFont = new CommonClass().GetStringByFont(tmp.Font);
+                textModel.CTFontColor = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+                textModel.CTBackColor = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+                textModel.CTIsPrint = tmp.IsPrint;
+                textModel.updateFlage = tmp.UpdateFlage;
+
             }
-            return ctxts;
+            return textModel;
         }
-        public List<MyLabel> GetMyLabels(Control control)
+
+        private ControlInfo GetControlPropery(MyCheckBox tmp)
         {
-            List<MyLabel> ctxts = new List<MyLabel>();
-            foreach (Control con in control.Controls)
+            ControlInfo textModel = new ControlInfo();
+            if (tmp != null)
             {
-                if (con.GetType() == typeof(MyLabel))
+                textModel.CIID = tmp.ControlID;
+                textModel.CTITIID = btm.TIID;
+                textModel.CTType = "CheckBox";
+                textModel.CTName = tmp.ControlName;
+                textModel.CTDefault = tmp.DefaultValue;
+                textModel.CTTabKey = tmp.TabIndex;
+                textModel.CTVisiable = tmp.Visible;
+                textModel.CTTop = tmp.Top;
+                textModel.CTLeft = tmp.Left;
+                textModel.CTWidth = tmp.Width;
+                textModel.CTHeight = tmp.Height;
+                if (tmp.txtDatasource != null)
                 {
-                    ctxts.Add((MyLabel)con);
+                    textModel.CTBandsTabel = tmp.txtDatasource.TableName;
+                    textModel.CTBandsCoumln = tmp.txtDatasource.Column;
                 }
-                if (con.GetType() == typeof(GroupBox))
-                {
-                    this.GetMyLabels(con);
-                }
+                textModel.CTFont = new CommonClass().GetStringByFont(tmp.Font);
+                textModel.CTFontColor = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+                textModel.CTBackColor = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+                textModel.CTIsMust = tmp.IsMust;
+                textModel.CTIsPrint = tmp.IsPrint;
+                textModel.updateFlage = tmp.UpdateFlage;
             }
-            return ctxts;
+            return textModel;
         }
-        public List<MyDateTimePicker> GetMyDateTimePickers(Control control)
+
+        private ControlInfo GetControlPropery(MyComboBox tmp)
         {
-            List<MyDateTimePicker> ctxts = new List<MyDateTimePicker>();
-            foreach (Control con in control.Controls)
+            ControlInfo textModel = new ControlInfo();
+            if (tmp != null)
             {
-                if (con.GetType() == typeof(MyDateTimePicker))
+                textModel.CIID = tmp.ControlID;
+                textModel.CTITIID = btm.TIID;
+                textModel.CTType = "ComboBox";
+                textModel.CTName = tmp.ControlName;
+                textModel.CTDefault = tmp.DefaultValue;
+                textModel.CTTabKey = tmp.TabIndex;
+                textModel.CTVisiable = tmp.Visible;
+                textModel.CTTop = tmp.Top;
+                textModel.CTLeft = tmp.Left;
+                textModel.CTWidth = tmp.Width;
+                textModel.CTHeight = tmp.Height;
+                if (tmp.txtDatasource != null)
                 {
-                    ctxts.Add((MyDateTimePicker)con);
+                    textModel.CTBandsTabel = tmp.txtDatasource.TableName;
+                    textModel.CTBandsCoumln = tmp.txtDatasource.Column;
                 }
-                if (con.GetType() == typeof(GroupBox))
-                {
-                    this.GetMyDateTimePickers(con);
-                }
+                textModel.CTFont = new CommonClass().GetStringByFont(tmp.Font);
+                textModel.CTFontColor = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+                textModel.CTBackColor = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+                textModel.CTIsMust = tmp.IsMust;
+                textModel.CTIsPrint = tmp.IsPrint;
+                textModel.CTMarkType = tmp.MarkType;
+                textModel.updateFlage = tmp.UpdateFlage;
             }
-            return ctxts;
+            return textModel;
         }
-        public List<MyTextBox> GetMyTextBoxs(Control control)
+
+        private ControlInfo GetControlPropery(MyDateTimePicker tmp)
         {
-            List<MyTextBox> ctxts = new List<MyTextBox>();
-            foreach (Control con in control.Controls)
+            ControlInfo textModel = new ControlInfo();
+            if (tmp != null)
+            {
+                textModel.CIID = tmp.ControlID;
+                textModel.CTITIID = btm.TIID;
+                textModel.CTType = "DateTimePicker";
+                textModel.CTName = tmp.ControlName;
+                textModel.CTDefault = tmp.DefaultValue;
+                textModel.CTTabKey = tmp.TabIndex;
+                textModel.CTVisiable = tmp.Visible;
+                textModel.CTTop = tmp.Top;
+                textModel.CTLeft = tmp.Left;
+                textModel.CTWidth = tmp.Width;
+                textModel.CTHeight = tmp.Height;
+                if (tmp.txtDatasource != null)
+                {
+                    textModel.CTBandsTabel = tmp.txtDatasource.TableName;
+                    textModel.CTBandsCoumln = tmp.txtDatasource.Column;
+                }
+                textModel.CTFont = new CommonClass().GetStringByFont(tmp.Font);
+                textModel.CTFontColor = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+                textModel.CTBackColor = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+                textModel.CTIsMust = tmp.IsMust;
+                textModel.CTIsPrint = tmp.IsPrint;
+                textModel.updateFlage = tmp.UpdateFlage;
+            }
+            return textModel;
+        }
+        private ControlInfo GetControlPropery(MoneyPanel mp)
+        {
+            ControlInfo moneypanel = new ControlInfo();
+            if (mp != null)
+            {
+                moneypanel.CIID = mp.ControlID;
+                moneypanel.CTITIID = btm.TIID;
+                moneypanel.CTType = "MoneyPanel";
+                moneypanel.CTName = mp.ControlName;
+                moneypanel.CTDefault = mp.DefaultValue;
+                moneypanel.CTFont = new CommonClass().GetStringByFont(mp.Font);
+                moneypanel.CTFontColor = System.Drawing.ColorTranslator.ToHtml(mp.ForeColor);
+                moneypanel.CTBackColor = System.Drawing.ColorTranslator.ToHtml(mp.BackColor);
+                moneypanel.CTVisiable = mp.Visible;
+                moneypanel.CTIsMust = mp.IsMust;
+                moneypanel.CTIsPrint = mp.IsPrint;
+                moneypanel.CTTabKey = mp.TabIndex;
+                moneypanel.CTTop = mp.Top;
+                moneypanel.CTLeft = mp.Left;
+                moneypanel.CTWidth = mp.Width;
+                moneypanel.CTMPShowUnit = mp.IsShowUnit ? 1 : 0;
+                moneypanel.CTHeight = mp.Height;
+                moneypanel.CTMPLowUnit = mp.Low;
+                moneypanel.CTMPHighUnit = mp.Hight;
+                moneypanel.CTMPBindsID = mp.BindsID;
+                moneypanel.updateFlage = mp.UpdateFlage; ;
+            }
+            return moneypanel;
+        }
+
+        private List<ControlInfo> GetControlsList(Control panel)
+        {
+            List<ControlInfo> ctrList = new List<ControlInfo>();
+            foreach (Control con in panel.Controls)
             {
                 if (con.GetType() == typeof(MyTextBox))
                 {
-                    ctxts.Add((MyTextBox)con);
+                    ctrList.Add(GetControlPropery(con as MyTextBox));
                 }
-                if (con.GetType() == typeof(GroupBox))
+                else if (con.GetType() == typeof(MyComboBox))
                 {
-                    this.GetMyTextBoxs(con);
+                    ctrList.Add(GetControlPropery(con as MyComboBox));
+                }
+                else if (con.GetType() == typeof(MyCheckBox))
+                {
+                    ctrList.Add(GetControlPropery(con as MyCheckBox));
+                }
+                else if (con.GetType() == typeof(MyLabel))
+                {
+                    ctrList.Add(GetControlPropery(con as MyLabel));
+                }
+                else if (con.GetType() == typeof(MyDateTimePicker))
+                {
+                    ctrList.Add(GetControlPropery(con as MyDateTimePicker));
+                }
+                else if (con.GetType() == typeof(MoneyPanel))
+                {
+                    ctrList.Add(GetControlPropery(con as MoneyPanel));
                 }
             }
-            return ctxts;
+            return ctrList;
         }
-        public List<MoneyPanel> GetMoneyPanels(Control control)
-        {
-            List<MoneyPanel> ctxts = new List<MoneyPanel>();
-            foreach (Control con in control.Controls)
-            {
-                if (con.GetType() == typeof(MoneyPanel))
-                {
-                    ctxts.Add((MoneyPanel)con);
-                }
-                if (con.GetType() == typeof(GroupBox))
-                {
-                    this.GetMoneyPanels(con);
-                }
-            }
-            return ctxts;
-        }
-
-        #endregion
-
-
+        
         /// <summary>
-        /// 保存控件到数据库
+        /// 控件删除接口
         /// </summary>
-        /// <returns></returns>
-        public void SaveToDataBase(Control control)
+        /// <param name="ControlsID">控件编号</param>
+        /// <param name="type">控件类型</param>
+        public void DeleteControlsByID(int ControlsID)
         {
-            String msg=String.Empty;
-            ControlService cs = new ControlService();
-            List<ControlModel> m_cmsUpdate = cmlist.FindAll((delegate(ControlModel p) { return p.CTIID != 0; }));//所有更新的控件实体集合
-            List<ControlModel> textList = new List<ControlModel>();//文本框集合
-            List<ControlModel> moneyList = new List<ControlModel>();//金额明细集合
-            List<ControlModel> otherList = new List<ControlModel>();//其他控件类型
-            List<ControlModel> m_cmsAdd =   cmlist.FindAll((delegate(ControlModel p) { return p.CTIID == 0; })); //所有新增的控件集合
-            foreach (ControlModel cm in m_cmsAdd)
+            ControlsInfoManager.DeleteControlInfoByCIID(ControlsID);
+        }
+        #endregion
+        
+        /// <summary>
+        /// 根据实体列表，保存控件信息到数据库
+        /// </summary>
+        /// <param name="textList">TextBox实体列表</param>
+        private void SaveToDataBase(List<ControlInfo> textList)
+        {
+            if (textList != null && textList.Count > 0)
             {
-                if (cm.CTType == "TextBox")
+                if (textList.Find((delegate(ControlInfo p) { return p.CTIsFlage ==true; })) != null)
                 {
-                    textList.Add(cm);
-                }
-                else if (cm.CTType == "MoneyPanel")
-                {
-                    moneyList.Add(cm);
+                   int result = ControlsInfoManager.SaveControlsToDataBase(textList);
+                    if (result > 0)
+                    {
+                        MessageBox.Show("保存成功！", "提示");
+                    }
+                    else if (result < 0)
+                    {
+                        MessageBox.Show("保存失败！", "提示");
+                    }
+                    else
+                    {
+                        MessageBox.Show("模板无控件更新！", "提示");
+                    }
                 }
                 else
                 {
-                    otherList.Add(cm);
+                    MessageBox.Show("此模板未添加单据号输入框！无法保存，请先指定单据号输入框？", "提示");
+                    return;                    
                 }
-            }
-            if (m_cmsUpdate != null)
-            {
-                if (cs.UpdateControlsByModels(m_cmsUpdate, tbemLsit, mpemList))
-                {
-                    int num = m_cmsUpdate != null ? textList.Count : 0;
-                    msg += "更新控件信息:" + num + " 条成功！\n";
-                }
-                else
-                {
-                    int num = m_cmsUpdate != null ? textList.Count : 0;
-                    msg += "更新控件信息:" + num + " 条失败！\n";
-                }
-            }
-            if(cs.AddTextBoxByModels(textList, tbemLsit)&&cs.AddMoneyPanelByModels(moneyList, mpemList)&&
-                cs.AddControlsByModels(otherList))
-            {
-                int num = textList != null ? textList.Count : 0;
-                num += textList != null ? moneyList.Count : 0;
-                num += textList != null ? m_cmsAdd.Count : 0; 
-                msg += "新增控件信息:" + num + " 条成功！\n";
             }
             else
             {
-                int num = textList != null ? textList.Count : 0;
-                num += textList != null ? moneyList.Count : 0;
-                num += textList != null ? m_cmsAdd.Count : 0; 
-                msg += "更新控件信息:" + num + " 条失败！\n";
+                MessageBox.Show("此模板没有任何控件！", "提示");
+                return; 
             }
-            ModernDialog.ShowMessage(msg, "提示", System.Windows.MessageBoxButton.OK);
+
         }
 
-
-        public void SaveControlToDataBase(Control panel)
-        {
- 
-        }
         /// <summary>
-        ///跟据模板编号，加载所有控件信息
+        /// 根据模板编号，分类查询控件列表
         /// </summary>
-        /// <param name="templateID"></param>
-        public void LoadAllControls(int templateID)
+        /// <param name="templateID">模板编号</param>
+        private void LoadAllControls(int templateID)
         {
             try
             {
-                cmlist = cs.GetControlModerList(cs.GetDataTableByTemplateID(templateID));
-                if (cmlist != null)
-                {
-                    foreach (ControlModel cm in cmlist)
-                    {
-                        AddControl(cm);
-                    }
-                }
-
+                List<ControlInfo> ctList = ControlsInfoManager.SelectControlInfosByTemplateID(templateID) as List<ControlInfo>;
+                AddControl(ctList);
             }
             catch (Exception ex)
             {
-                ModernDialog.ShowMessage(ex.ToString(), "提示", System.Windows.MessageBoxButton.OK);
+                MessageBox.Show(ex.ToString(), "提示", System.Windows.Forms.MessageBoxButtons.OK);
                 return;
             }
         }
 
-        public void AddControl(ControlModel cm)
+        private void AddControl(List<ControlInfo> ctList)
         {
-            switch (cm.CTType)
+            if (ctList != null && ctList.Count > 0)
             {
-                case "TextBox":
+                foreach (ControlInfo cm in ctList)
+                {
+                    switch (cm.CTType)
                     {
-                        #region TextBox
-                        MyTextBox textbox = new MyTextBox();
-                        TextBoxExtendModel tem=new TextBoxExtendService().GetModelByContorlID(cm.CTIID);
-                        textbox.ControlID = cm.CTIID;
-                        textbox.ControlName =cm.CTIName;
-                        textbox.DefaultValue = cm.CTIDefault;
-                        textbox.BorderStyle = cm.CTIIsBorder==0?BorderStyle.None:BorderStyle.FixedSingle;
-                        textbox.BackColor = cm.CTIIsTransparent!=0?
-                                            Color.Transparent : ColorTranslator.FromHtml(cm.CTIFontColor);
-                        textbox.Font = new CommonClass().GetFontByString(cm.CTIFont);
-                        textbox.ForeColor =  ColorTranslator.FromHtml(cm.CTIFontColor);
-                        textbox.Left = cm.CTILeft;
-                        textbox.Top = cm.CTITop;
-                        textbox.Width = cm.CTIWidth;
-                        textbox.Height = cm.CTIHeight;
-                        textbox.TabIndex = cm.CTITabKey;
-                        textbox.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
-                        textbox.Visible = cm.CTIVisiable != 0 ? true : false;
-                        textbox.IsMust = cm.CTIIsMust;
-                        if (tem != null)
-                        {
-                            tbemLsit.Add(tem);
-                            textbox.IsFlage = tem.TCIsFlage;
-                            textbox.showType = tem.TCShowType;
-                            textbox.markType = tem.TCMarkType;
-                        } 
-                        //txts.Add(textbox);
-                        pb.WireControl(textbox);
-                        this.DesignContext.board.Controls.Add(textbox);
-                        #endregion
-                        break;
+                        case "TextBox":
+                            {
+                                #region TextBox
+                                MyTextBox textbox = new MyTextBox();
+                                textbox.Text = cm.CTName;
+                                textbox.ControlID = cm.CIID;
+                                textbox.ControlName = cm.CTName;
+                                textbox.DefaultValue = cm.CTDefault;
+                                textbox.BorderStyle = cm.CTIsBorder ? BorderStyle.FixedSingle : BorderStyle.None;
+                                //textbox.BackColor = cm.CTIsTransparent != 0 ?
+                                //                    Color.Transparent : ColorTranslator.FromHtml(cm.CTBackColor);
+                                textbox.Left = cm.CTLeft;
+                                textbox.Top = cm.CTTop;
+                                textbox.Width = cm.CTWidth;
+                                textbox.Height = cm.CTHeight;
+                                textbox.TabIndex = cm.CTTabKey;
+                                textbox.ReadOnly = cm.CTIsReadOnly;
+                                textbox.Visible = cm.CTVisiable;
+                                textbox.IsMust = cm.CTIsMust;
+                                textbox.IsPrint = cm.CTIsPrint;
+                                textbox.txtDatasource = new ControlDataSource(cm.CTBandsTabel, cm.CTBandsCoumln);
+                                textbox.Font = new CommonClass().GetFontByString(cm.CTFont);
+                                textbox.ForeColor = ColorTranslator.FromHtml(cm.CTFontColor);
+                                textbox.BackColor = ColorTranslator.FromHtml(cm.CTBackColor);
+                                textbox.IsFlage = cm.CTIsFlage;
+                                textbox.showType = cm.CTShowType;
+                                textbox.markType = cm.CTMarkType;
+                                pb.WireControl(textbox);
+                                this.DesignContext.board.Controls.Add(textbox);
+                                #endregion
+                                break;
+                            }
+                        case "Label":
+                            {
+                                #region Label
+                                MyLabel label = new MyLabel();
+                                label.ControlID = cm.CIID;
+                                label.ControlName = cm.CTName;
+                                label.Text = cm.CTName;
+                                label.DefaultValue = cm.CTDefault;
+                                label.BorderStyle = cm.CTIsBorder ? BorderStyle.FixedSingle : BorderStyle.None;
+                                label.BackColor = cm.CTIsTransparent?
+                                                    Color.Transparent : ColorTranslator.FromHtml(cm.CTFontColor);
+                                label.Font = new CommonClass().GetFontByString(cm.CTFont);
+                                label.ForeColor = ColorTranslator.FromHtml(cm.CTFontColor);
+                                label.BackColor = ColorTranslator.FromHtml(cm.CTBackColor);
+                                label.Left = cm.CTLeft;
+                                label.Top = cm.CTTop;
+                                label.Width = cm.CTWidth;
+                                label.Height = cm.CTHeight;
+                                label.TabIndex = cm.CTTabKey;
+                                //label.ReadOnly = cm.CTIsReadOnly != 0 ? true : false;
+                                label.Visible = cm.CTVisiable;
+                                //cbbs.Add(label);
+                                pb.WireControl(label);
+                                this.DesignContext.board.Controls.Add(label);
+                                #endregion
+                                break;
+                            }
+                        case "ComboBox":
+                            {
+                                #region ComboBox
+                                MyComboBox combobox = new MyComboBox();
+                                combobox.Text = cm.CTName;
+                                combobox.ControlID = cm.CIID;
+                                combobox.ControlName = cm.CTName;
+                                combobox.DefaultValue = cm.CTDefault;
+                                //combobox.BorderStyle = cm.CTIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
+                                combobox.BackColor = cm.CTIsTransparent?
+                                                    Color.Transparent : ColorTranslator.FromHtml(cm.CTFontColor);
+                                combobox.Font = new CommonClass().GetFontByString(cm.CTFont);
+                                combobox.ForeColor = ColorTranslator.FromHtml(cm.CTFontColor);
+                                combobox.BackColor = ColorTranslator.FromHtml(cm.CTBackColor);
+                                combobox.Left = cm.CTLeft;
+                                combobox.Top = cm.CTTop;
+                                combobox.Width = cm.CTWidth;
+                                combobox.Height = cm.CTHeight;
+                                combobox.TabIndex = cm.CTTabKey;
+                                //combobox.ReadOnly = cm.CTIsReadOnly != 0 ? true : false;
+                                combobox.Visible = cm.CTVisiable;
+                                combobox.IsMust = cm.CTIsMust;
+                                combobox.MarkType = cm.CTMarkType;
+                                //cbbs.Add(combobox);
+                                pb.WireControl(combobox);
+                                this.DesignContext.board.Controls.Add(combobox);
+                                #endregion
+                                break;
+                            }
+                        case "CheckBox":
+                            {
+                                #region CheckBox
+                                MyCheckBox checkbox = new MyCheckBox();
+                                checkbox.Text = cm.CTName;
+                                checkbox.ControlID = cm.CIID;
+                                checkbox.ControlName = cm.CTName;
+                                checkbox.DefaultValue = cm.CTDefault;
+                                //checkbox.BorderStyle = cm.CTIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
+                                checkbox.BackColor = cm.CTIsTransparent ?
+                                                    Color.Transparent : ColorTranslator.FromHtml(cm.CTFontColor);
+                                checkbox.Font = new CommonClass().GetFontByString(cm.CTFont);
+                                checkbox.ForeColor = ColorTranslator.FromHtml(cm.CTFontColor);
+                                checkbox.BackColor = ColorTranslator.FromHtml(cm.CTBackColor);
+                                checkbox.Left = cm.CTLeft;
+                                checkbox.Top = cm.CTTop;
+                                checkbox.Width = cm.CTWidth;
+                                checkbox.Height = cm.CTHeight;
+                                checkbox.TabIndex = cm.CTTabKey;
+                                //checkbox.ReadOnly = cm.CTIsReadOnly != 0 ? true : false;
+                                checkbox.Visible = cm.CTVisiable ;
+                                checkbox.IsMust = cm.CTIsMust;
+                                //cbbs.Add(checkbox);
+                                pb.WireControl(checkbox);
+                                this.DesignContext.board.Controls.Add(checkbox);
+                                #endregion
+                                break;
+                            }
+                        case "DateTimePicker":
+                            {
+                                #region DateTimePicker
+                                MyDateTimePicker dateTimePicker = new MyDateTimePicker();
+                                dateTimePicker.ControlID = cm.CIID;
+                                dateTimePicker.ControlName = cm.CTName;
+                                dateTimePicker.DefaultValue = cm.CTDefault;
+                                //dateTimePicker.BorderStyle = cm.CTIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
+                                dateTimePicker.BackColor = cm.CTIsTransparent?
+                                                    Color.Transparent : ColorTranslator.FromHtml(cm.CTFontColor);
+                                dateTimePicker.Font = new CommonClass().GetFontByString(cm.CTFont);
+                                dateTimePicker.ForeColor = ColorTranslator.FromHtml(cm.CTFontColor);
+                                dateTimePicker.Left = cm.CTLeft;
+                                dateTimePicker.Top = cm.CTTop;
+                                dateTimePicker.Width = cm.CTWidth;
+                                dateTimePicker.Height = cm.CTHeight;
+                                dateTimePicker.TabIndex = cm.CTTabKey;
+                                //dateTimePicker.ReadOnly = cm.CTIsReadOnly != 0 ? true : false;
+                                dateTimePicker.Visible = cm.CTVisiable;
+                                //cbbs.Add(dateTimePicker);
+                                pb.WireControl(dateTimePicker);
+                                this.DesignContext.board.Controls.Add(dateTimePicker);
+                                #endregion
+                                break;
+                            }
+                        default:
+                            {
+                                #region 金额明细
+                                MoneyPanel moneyPanel = new MoneyPanel();
+                                moneyPanel.ControlID = cm.CIID;
+                                moneyPanel.ControlName = cm.CTName;
+                                moneyPanel.BorderStyle = cm.CTIsBorder ? BorderStyle.FixedSingle : BorderStyle.None;
+                                moneyPanel.BackColor = cm.CTIsTransparent?
+                                                    Color.Transparent : ColorTranslator.FromHtml(cm.CTFontColor);
+                                moneyPanel.Font = new CommonClass().GetFontByString(cm.CTFont);
+                                moneyPanel.ForeColor = ColorTranslator.FromHtml(cm.CTFontColor);
+                                moneyPanel.BackColor = ColorTranslator.FromHtml(cm.CTBackColor);
+                                moneyPanel.Left = cm.CTLeft;
+                                moneyPanel.Top = cm.CTTop;
+                                moneyPanel.Width = cm.CTWidth;
+                                moneyPanel.Height = cm.CTHeight;
+                                moneyPanel.TabIndex = cm.CTTabKey;
+                                moneyPanel.Visible = cm.CTVisiable ;
+                                moneyPanel.IsMust = cm.CTIsMust;
+                                moneyPanel.Hight = cm.CTMPHighUnit;
+                                moneyPanel.Low = cm.CTMPLowUnit;
+                                moneyPanel.IsShowUnit = cm.CTMPShowUnit != 0 ? true : false;
+                                pb.WireControl(moneyPanel);
+                                this.DesignContext.board.Controls.Add(moneyPanel);
+                                #endregion
+                                break;
+                            }
                     }
-                case "Label":
-                    {
-                        #region Label
-                        MyLabel label = new MyLabel();
-                        label.ControlID = cm.CTIID;
-                        label.ControlName = cm.CTIName;
-                        label.DefaultValue = cm.CTIDefault;
-                        label.BorderStyle = cm.CTIIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
-                        label.BackColor = cm.CTIIsTransparent != 0 ?
-                                            Color.Transparent : ColorTranslator.FromHtml(cm.CTIFontColor);
-                        label.Font = new CommonClass().GetFontByString(cm.CTIFont);
-                        label.ForeColor = ColorTranslator.FromHtml(cm.CTIFontColor);
-                        label.Left = cm.CTILeft;
-                        label.Top = cm.CTITop;
-                        label.Width = cm.CTIWidth;
-                        label.Height = cm.CTIHeight;
-                        label.TabIndex = cm.CTITabKey;
-                        //label.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
-                        label.Visible = cm.CTIVisiable != 0 ? true : false;
-                        label.IsMust = cm.CTIIsMust;
-                        //labels.Add(label);
-                        pb.WireControl(label);
-                        this.DesignContext.board.Controls.Add(label);
-                        #endregion
-                        break;
-                    }
-                case "ComboBox":
-                    {
-                        #region ComboBox
-                        MyComboBox combobox = new MyComboBox();
-                        combobox.ControlID = cm.CTIID;
-                        combobox.ControlName = cm.CTIName;
-                        combobox.DefaultValue = cm.CTIDefault;
-                        //combobox.BorderStyle = cm.CTIIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
-                        combobox.BackColor = cm.CTIIsTransparent != 0 ?
-                                            Color.Transparent : ColorTranslator.FromHtml(cm.CTIFontColor);
-                        combobox.Font = new CommonClass().GetFontByString(cm.CTIFont);
-                        combobox.ForeColor = ColorTranslator.FromHtml(cm.CTIFontColor);
-                        combobox.Left = cm.CTILeft;
-                        combobox.Top = cm.CTITop;
-                        combobox.Width = cm.CTIWidth;
-                        combobox.Height = cm.CTIHeight;
-                        combobox.TabIndex = cm.CTITabKey;
-                        //combobox.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
-                        combobox.Visible = cm.CTIVisiable != 0 ? true : false;
-                        combobox.IsMust = cm.CTIIsMust;
-                        //cbbs.Add(combobox);
-                        pb.WireControl(combobox);
-                        this.DesignContext.board.Controls.Add(combobox);
-                        #endregion
-                        break;
-                    }
-                case "CheckBox":
-                    {
-                        #region CheckBox
-                        MyCheckBox checkbox = new MyCheckBox();
-                        checkbox.ControlID = cm.CTIID;
-                        checkbox.ControlName = cm.CTIName;
-                        checkbox.DefaultValue = cm.CTIDefault;
-                        //checkbox.BorderStyle = cm.CTIIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
-                        checkbox.BackColor = cm.CTIIsTransparent != 0 ?
-                                            Color.Transparent : ColorTranslator.FromHtml(cm.CTIFontColor);
-                        checkbox.Font = new CommonClass().GetFontByString(cm.CTIFont);
-                        checkbox.ForeColor = ColorTranslator.FromHtml(cm.CTIFontColor);
-                        checkbox.Left = cm.CTILeft;
-                        checkbox.Top = cm.CTITop;
-                        checkbox.Width = cm.CTIWidth;
-                        checkbox.Height = cm.CTIHeight;
-                        checkbox.TabIndex = cm.CTITabKey;
-                        //checkbox.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
-                        checkbox.Visible = cm.CTIVisiable != 0 ? true : false;
-                        checkbox.IsMust = cm.CTIIsMust;
-                        //chbs.Add(checkbox);
-                        pb.WireControl(checkbox);
-                        this.DesignContext.board.Controls.Add(checkbox);
-                        #endregion
-                        break;
-                    }
-                case "DateTimePicker":
-                    {
-                        #region DateTimePicker
-                        MyDateTimePicker dateTimePicker = new MyDateTimePicker();
-                        dateTimePicker.ControlID = cm.CTIID;
-                        dateTimePicker.ControlName = cm.CTIName;
-                        dateTimePicker.DefaultValue = cm.CTIDefault;
-                        //dateTimePicker.BorderStyle = cm.CTIIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
-                        dateTimePicker.BackColor = cm.CTIIsTransparent != 0 ?
-                                            Color.Transparent : ColorTranslator.FromHtml(cm.CTIFontColor);
-                        dateTimePicker.Font = new CommonClass().GetFontByString(cm.CTIFont);
-                        dateTimePicker.ForeColor = ColorTranslator.FromHtml(cm.CTIFontColor);
-                        dateTimePicker.Left = cm.CTILeft;
-                        dateTimePicker.Top = cm.CTITop;
-                        dateTimePicker.Width = cm.CTIWidth;
-                        dateTimePicker.Height = cm.CTIHeight;
-                        dateTimePicker.TabIndex = cm.CTITabKey;
-                        //dateTimePicker.ReadOnly = cm.CTIIsReadOnly != 0 ? true : false;
-                        dateTimePicker.Visible = cm.CTIVisiable != 0 ? true : false;
-                        dateTimePicker.IsMust = cm.CTIIsMust;
-                        //dtps.Add(dateTimePicker);
-                        pb.WireControl(dateTimePicker);
-                        this.DesignContext.board.Controls.Add(dateTimePicker);
-                        #endregion 
-                        break;
-                    }
-                case "MoneyPanel":
-                    {
-                        #region MoneyPanel
-                        MoneyPanel moneyPanel = new MoneyPanel();
-                        MoneyPanelExtendModel mpe = new MoneyPanelExtenService().GetMoneyPanelExtendModelByCIID(moneyPanel.ControlID);
-                        moneyPanel.ControlID = cm.CTIID;
-                        moneyPanel.ControlName = cm.CTIName;
-                        moneyPanel.BorderStyle = cm.CTIIsBorder == 0 ? BorderStyle.None : BorderStyle.FixedSingle;
-                        moneyPanel.BackColor = cm.CTIIsTransparent != 0 ?
-                                            Color.Transparent : ColorTranslator.FromHtml(cm.CTIFontColor);
-                        moneyPanel.Font = new CommonClass().GetFontByString(cm.CTIFont);
-                        moneyPanel.ForeColor = ColorTranslator.FromHtml(cm.CTIFontColor);
-                        moneyPanel.Left = cm.CTILeft;
-                        moneyPanel.Top = cm.CTITop;
-                        moneyPanel.Width = cm.CTIWidth;
-                        moneyPanel.Height = cm.CTIHeight;
-                        moneyPanel.TabIndex = cm.CTITabKey;
-                        moneyPanel.Visible = cm.CTIVisiable != 0 ? true : false;
-                        moneyPanel.IsMust = cm.CTIIsMust;
-                        if(mpe!=null)
-                        {
-                            mpemList.Add(mpe);
-                            moneyPanel.Hight =mpe.MCHighUnit;
-                            moneyPanel.Low = mpe.MCLowUnit;
-                            moneyPanel.IsShowUnit = mpe.MCShowUnit;
-                        }
-                        //mps.Add(moneyPanel);
-                        pb.WireControl(moneyPanel);
-                        this.DesignContext.board.Controls.Add(moneyPanel);
-                        #endregion
-                        break;
-                    }
+                }
             }
+ 
+        }
+      
+        public int AddTextControlByNewNumber(int newNumber)
+        {
+            MyTextBox mtb = mytextList.Find((delegate(MyTextBox p) { return p.NewNumber == newNumber; }));
+            if(mtb!=null)
+            {
+                mtb.ControlID = ControlsInfoManager.AddControlInfo(this.GetControlPropery(mtb));
+                mytextList.Find((delegate(MyTextBox p) { return p.NewNumber == newNumber; })).ControlID = mtb.ControlID;
+                return mtb.ControlID;
+            }
+            return 1;
         }
         #endregion
 
@@ -505,9 +594,11 @@ namespace BillManageWPF.Forms
             fDpiX = this.CreateGraphics().DpiX;
             fDpiY = this.CreateGraphics().DpiY;
             image = new ImageHelper().GetImageByByte(btm.TIBackground);
-            width = Convert.ToInt32(MillimetersToPixelsWidth(Convert.ToSingle(btm.TIWidth)));//,fDpiX));
-            height = Convert.ToInt32(MillimetersToPixelsWidth(Convert.ToSingle(btm.TIHeight)));//,fDpiY));
-            DesignContext_Paint();
+            width = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIWidth), fDpiX));
+            height = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIHeight), fDpiY));
+            DesignContext.board.Width = width;
+            DesignContext.board.Height = height;
+           // DesignContext.board.Invalidate();
             pb = new PickBox(this);
             LoadAllControls(btm.TIID);
         }
@@ -542,16 +633,10 @@ namespace BillManageWPF.Forms
         private void AddLabel_Click(object sender, EventArgs e)
         {
             MyLabel label = new MyLabel();
-            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
-            labelCount++;
+            label.NewNumber = mylbList != null ? mylbList.Count : 0;
             label.ControlID = 0;
-            label.ControlName = "label" + labelCount.ToString();
-            ControlModel cm = new ControlModel();
-            cm.CTIID = label.ControlID;
-            cm.CTIName = label.ControlName;
-            cm.CTType = "label";
-            cm.NewNumber = label.NewNumber;
-            cmlist.Add(cm);
+            label.ControlName = "label" + label.NewNumber.ToString();
+            mylbList.Add(label);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -564,21 +649,10 @@ namespace BillManageWPF.Forms
         private void AddTextBox_Click(object sender, EventArgs e)
         { 
             MyTextBox label = new MyTextBox();
-            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
-            TextConut++;            
+            label.NewNumber = mytextList != null ? mytextList.Count : 0;       
             label.ControlID = 0;
-            label.ControlName = "TextBox" + TextConut.ToString();
-            ControlModel cm = new ControlModel();
-            cm.CTIID = label.ControlID;
-            cm.CTIName = label.ControlName;
-            cm.CTType = "TextBox";
-            cm.NewNumber = label.NewNumber;
-            TextBoxExtendModel tbem = new TextBoxExtendModel();
-            tbem.TCCIID = cm.CTIID;
-            tbem.TCShowType = 0;
-            tbem.TCMarkType = 0;
-            tbemLsit.Add(tbem);
-            cmlist.Add(cm);
+            label.ControlName = "TextBox" +label.NewNumber.ToString();
+            mytextList.Add(label);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -591,16 +665,10 @@ namespace BillManageWPF.Forms
         private void AddCheckBox_Click(object sender, EventArgs e)
         {
             MyCheckBox label = new MyCheckBox();
-            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
-            checkboxCount++;
+            label.NewNumber = mychbList != null ? mychbList.Count : 0;
             label.ControlID=0;
-            label.ControlName = "CheckBox" + checkboxCount.ToString();
-            ControlModel cm = new ControlModel();
-            cm.CTIID = label.ControlID;
-            cm.CTIName = label.ControlName;
-            cm.CTType = "CheckBox";
-            cm.NewNumber = label.NewNumber;
-            cmlist.Add(cm);
+            label.ControlName = "CheckBox" + label.NewNumber.ToString();
+            mychbList.Add(label);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -613,16 +681,10 @@ namespace BillManageWPF.Forms
         private void AddComboBox_Click(object sender, EventArgs e)
         {
             MyComboBox label = new MyComboBox();
-            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
-            comboboxCount++;//cbbs.Add(label);
-            label.ControlID = 0;           
-            label.ControlName = "ComboBox" + comboboxCount.ToString();
-            ControlModel cm = new ControlModel();
-            cm.CTIID = label.ControlID;
-            cm.CTIName = label.ControlName;
-            cm.CTType = "ComboBox";
-            cm.NewNumber = label.NewNumber;
-            cmlist.Add(cm);
+            label.NewNumber = mycbbList != null ? mycbbList.Count : 0;
+            label.ControlID = 0;
+            label.ControlName = "ComboBox" + label.NewNumber.ToString();
+            mycbbList.Add(label);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -635,16 +697,10 @@ namespace BillManageWPF.Forms
         private void AddDateTimePicker_Click(object sender, EventArgs e)
         {
             MyDateTimePicker label = new MyDateTimePicker();
-            label.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
-            datetimerConut++;//dtps.Add(label);
+            label.NewNumber = mydtpList != null ? mydtpList.Count : 0;
             label.ControlID = 0;
-            label.ControlName = "DateTimePicker" + datetimerConut.ToString();
-            ControlModel cm = new ControlModel();
-            cm.CTIID = label.ControlID;
-            cm.CTIName = label.ControlName;
-            cm.CTType = "DateTimePicker";
-            cm.NewNumber = label.NewNumber;
-            cmlist.Add(cm);
+            label.ControlName = "DateTimePicker" + label.NewNumber.ToString();
+            mydtpList.Add(label);
             pb.WireControl(label);
             this.DesignContext.board.Controls.Add(label);
         }
@@ -657,21 +713,10 @@ namespace BillManageWPF.Forms
         private void AddMyMoneyPanel_Click(object sender, EventArgs e)
         {
             MoneyPanel mp = new MoneyPanel();
-            mp.NewNumber = TextConut + labelCount + datetimerConut + comboboxCount + checkboxCount + comboboxCount + moneypanelCount;
-            moneypanelCount++;
-            mp.ControlID = 0;          
-            mp.ControlName = "ComboBox" + moneypanelCount.ToString();
-            ControlModel cm = new ControlModel();
-            cm.CTIID = mp.ControlID;
-            cm.CTIName = mp.ControlName;
-            cm.CTType = "MoneyPanel";
-            cm.NewNumber = mp.NewNumber;
-            MoneyPanelExtendModel mpm = new MoneyPanelExtendModel();
-            mpm.MCCIID = cm.CTIID;
-            mpm.MCHighUnit = mp.Hight;
-            mpm.MCLowUnit = mp.Low;
-            mpemList.Add(mpm);
-            cmlist.Add(cm);
+            mp.NewNumber = mympList != null ? mympList.Count : 0;
+            mp.ControlID = 0;
+            mp.ControlName = "MoneyPanel" + mp.NewNumber.ToString();
+            mympList.Add(mp);
             pb.WireControl(mp);
             this.DesignContext.board.Controls.Add(mp);
         }
@@ -683,7 +728,8 @@ namespace BillManageWPF.Forms
         /// <param name="e"></param>
         private void Save_Click(object sender, EventArgs e)
         {
-            SaveToDataBase(this.DesignContext.board);
+            List<ControlInfo> ctlList = GetControlsList(this.DesignContext.board);
+            SaveToDataBase(ctlList);
         }
 
         /// <summary>
@@ -696,7 +742,8 @@ namespace BillManageWPF.Forms
             ToolStripButton tsb = sender as ToolStripButton;
             if (tsb != null)
             {
-                tsb.BackColor = Color.Purple;
+                tsb.BackColor = Color.Orchid;
+                tsb.ForeColor = Color.WhiteSmoke;
             }
         }
 
@@ -711,22 +758,33 @@ namespace BillManageWPF.Forms
             if (tsb != null)
             {
                 tsb.BackColor = Color.SkyBlue;
+                tsb.ForeColor = Color.White;
             }
         }
 
+        /// <summary>
+        /// 窗体关闭时
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TemplateMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = false;//可以关闭
-            List<ControlModel> con = new List<ControlModel>();
+            List<ControlInfo> con = new List<ControlInfo>();
             if (con.Exists(itm => itm.updateFlage == true))
             {
-                if (ModernDialog.ShowMessage("模板设置信息已被更新，是否保存？", "软件提示", System.Windows.MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
+                if (MessageBox.Show("模板设置信息已被更新，是否保存？", "软件提示", System.Windows.Forms.MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     Save_Click(sender, e);
                 }
             }
         }
 
+        /// <summary>
+        /// 窗体关闭后
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TemplateMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Dispose();//释放资源

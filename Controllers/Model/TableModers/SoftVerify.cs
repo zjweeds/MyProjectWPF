@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Controllers.Models
 {
+    /// <summary>
+    /// 软件验证实体
+    /// </summary>
     public class SoftVerify
     {
         public String CompanyName

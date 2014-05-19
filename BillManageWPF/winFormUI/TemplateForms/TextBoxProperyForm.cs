@@ -26,15 +26,13 @@ namespace BillManageWPF.Forms
         {
             InitializeComponent();
             tmp = tb;
-            tm = fm;
-            font = tb.Font;
-            bgc = tb.BackColor;
-            frc = tb.ForeColor;
+            tm = fm;          
         }
         #endregion 
         #region  页面变量
         public MyTextBox tmp = null;
         public TemplateMain tm = null;
+      //  public TextControlInfo textModel=null;
         public Font font = null;
         public Color bgc;
         public Color frc;
@@ -65,8 +63,8 @@ namespace BillManageWPF.Forms
                 }
                 chbIsreadonly.Checked = tmp.ReadOnly;
                 chbIsFalge.Checked = tmp.IsFlage;
-                chbIsmust.Checked = tmp.IsMust == 0 ? false : true;
-                chbIsprint.Checked = tmp.IsPrint == 0 ? false : true;  
+                chbIsmust.Checked = tmp.IsMust  ? false : true;
+                chbIsprInt.Checked = tmp.IsPrint  ? false : true;  
             }
         }
 
@@ -75,8 +73,9 @@ namespace BillManageWPF.Forms
             if (tmp != null)
             {
                 tmp.ControlName = txtName.Text;
+                tmp.Text = txtName.Text;
                 tmp.DefaultValue = txtDefalutValue.Text;
-                tmp.TabIndex = Convert.ToInt32(txttab.Text);
+                tmp.TabIndex = Convert.ToInt32(txttab.Text);              
                 tmp.showType = cbbShowType.SelectedIndex;
                 tmp.markType = cbbMarkType.SelectedIndex;
                 tmp.BorderStyle = chbisborestyle.Checked ? BorderStyle.None : BorderStyle.FixedSingle;
@@ -86,151 +85,149 @@ namespace BillManageWPF.Forms
                 tmp.Width = Convert.ToInt32(txtwidth.Text);
                 tmp.Height = Convert.ToInt32(txtheight.Text);
                 tmp.txtDatasource = new ControlDataSource(cbxTablename.Text, cbxCoumname.Text);
-                tmp.ReadOnly=chbIsreadonly.Checked ;
+                tmp.ReadOnly = chbIsreadonly.Checked;
                 tmp.IsFlage = chbIsFalge.Checked;
-                tmp.IsMust = chbIsmust.Checked ? 1 : 0;
-                tmp.IsPrint = chbIsprint.Checked ? 1 : 0;
+                tmp.IsMust = chbIsmust.Checked ;
+                tmp.IsPrint = chbIsprInt.Checked;
             }
         }
-        public void UpdateModel(ControlModel cm, TextBoxExtendModel tbem)
-        {
-            if (cm != null)
-            {
-                if (cm.CTIName != txtName.Text)
-                {
-                    cm.CTIName = txtName.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIDefault != txtDefalutValue.Text)
-                {
-                    cm.CTIDefault = txtDefalutValue.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTITabKey != Convert.ToInt32(txttab.Text))
-                {
-                    cm.CTITabKey = Convert.ToInt32(txttab.Text);
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsBorder != (chbisborestyle.Checked ? 1 : 0))
-                {
-                    cm.CTIIsBorder = chbisborestyle.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIVisiable != (chbIsvisible.Checked ? 1 : 0))
-                {
-                    cm.CTIVisiable = chbIsvisible.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                String sfont = tmp.Font.ToString();
-                if (cm.CTIFont != sfont)
-                {
-                    cm.CTIFont = sfont;
-                    cm.updateFlage = true;
-                }
-                String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
-                if (cm.CTIFontColor != sbuff)
-                {
-                    cm.CTIFontColor = sbuff;
-                    cm.updateFlage = true;
-                }
-                sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
-                if (cm.CTIBackColor != sbuff)
-                {
-                    cm.CTIBackColor = sbuff;
-                    cm.updateFlage = true;
-                }
+        //public void UpdateModel()
+        //{
+        //    if (textModel != null)
+        //    {
+        //        if (textModel.TCName != txtName.Text)
+        //        {
+        //            textModel.TCName = txtName.Text;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        if (textModel.TCDefault != txtDefalutValue.Text)
+        //        {
+        //            textModel.TCDefault = txtDefalutValue.Text;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        if (textModel.TCTabKey != Convert.ToInt32(txttab.Text))
+        //        {
+        //            textModel.TCTabKey = Convert.ToInt32(txttab.Text);
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        if (textModel.TCShowType != cbbShowType.SelectedIndex)
+        //        {
+        //            textModel.TCShowType = cbbShowType.SelectedIndex;
+        //            textModel.UpdateFlage = true;
+        //        }
 
-                int xitem = Convert.ToInt32(txttop.Text);
-                if (cm.CTITop != xitem)
-                {
-                    cm.CTITop = xitem;
-                    cm.updateFlage = true;
-                } 
-                xitem= Convert.ToInt32(txtleft.Text);
-                if (cm.CTILeft != xitem)
-                {
-                    cm.CTILeft = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtwidth.Text);
-                if (cm.CTIWidth != xitem)
-                {
-                    cm.CTIWidth = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtheight.Text);
-                if (cm.CTIHeight != xitem)
-                {
-                    cm.CTIHeight = xitem;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsTabel != cbxTablename.Text)
-                {
-                    cm.CTIBandsTabel = cbxTablename.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsCoumln != cbxCoumname.Text)
-                {
-                    cm.CTIBandsCoumln = cbxCoumname.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsReadOnly != (chbIsreadonly.Checked ? 1 : 0))
-                {
-                    cm.CTIIsReadOnly = chbIsreadonly.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsMust != (chbIsmust.Checked ? 1 : 0))
-                {
-                    cm.CTIIsMust = chbIsmust.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsPrint != (chbIsprint.Checked ? 1 : 0))
-                {
-                    cm.CTIIsPrint = chbIsprint.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (tbem != null)
-                {
-                    if (tbem.TCIsFlage != chbIsFalge.Checked)
-                    {
-                        tbem.TCIsFlage = chbIsFalge.Checked;
-                        tbem.updateFlage = true;
-                    }
-                    if (tbem.TCShowType != cbbShowType.SelectedIndex)
-                    {
-                        tbem.TCShowType = cbbShowType.SelectedIndex;
-                        tbem.updateFlage = true;
-                    }
-                    if (tbem.TCMarkType != cbbMarkType.SelectedIndex)
-                    {
-                        tbem.TCMarkType = cbbMarkType.SelectedIndex;
-                        tbem.updateFlage = true;
-                    }
-                }
-            }
-        }
+        //        if (textModel.TCMarkType != cbbMarkType.SelectedIndex)
+        //        {
+        //            textModel.TCMarkType = cbbMarkType.SelectedIndex;
+        //            textModel.UpdateFlage = true;
+        //        }
+
+        //        if (textModel.TCIsTransparent != (chbisborestyle.Checked ? 1 : 0))
+        //        {
+        //            textModel.TCIsTransparent = chbisborestyle.Checked ? 1 : 0;
+        //            textModel.UpdateFlage = true;
+        //        }
+
+        //        if (textModel.TCVisiable != (chbIsvisible.Checked ? 1 : 0))
+        //        {
+        //            textModel.TCVisiable = chbIsvisible.Checked ? 1 : 0;
+        //            textModel.UpdateFlage = true;
+        //        }
+
+        //        if (textModel.TCTop != Convert.ToInt32(txttop.Text))
+        //        {
+        //            textModel.TCTop = Convert.ToInt32(txttop.Text);
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        if (textModel.TCLeft != Convert.ToInt32(txtleft.Text))
+        //        {
+        //            textModel.TCLeft = Convert.ToInt32(txtleft.Text);
+        //            textModel.UpdateFlage = true;
+        //        }
+
+        //        if (textModel.TCWidth != Convert.ToInt32(txtwidth.Text))
+        //        {
+        //            textModel.TCWidth = Convert.ToInt32(txtwidth.Text);
+        //            textModel.UpdateFlage = true;
+        //        }
+
+        //        if (textModel.TCHeight != Convert.ToInt32(txtheight.Text))
+        //        {
+        //            textModel.TCHeight = Convert.ToInt32(txtheight.Text);
+        //            textModel.UpdateFlage = true;
+        //        }
+
+        //        if (textModel.TCBandsTabel != cbxTablename.Text)
+        //        {
+        //            textModel.TCBandsTabel = cbxTablename.Text;
+        //            textModel.UpdateFlage = true;
+        //        }
+
+        //        if (textModel.TCBandsCoumln != cbxCoumname.Text)
+        //        {
+        //            textModel.TCBandsCoumln = cbxCoumname.Text;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        if (textModel.TCIsReadOnly != (chbIsreadonly.Checked ? 1 : 0))
+        //        {
+        //            textModel.TCIsReadOnly = (chbIsreadonly.Checked ? 1 : 0);
+        //        }
+        //        if (textModel.TCIsFlage != (chbIsFalge.Checked ? 1 : 0))
+        //        {
+        //            textModel.TCIsFlage = chbIsFalge.Checked? 1 : 0;
+        //        }
+
+        //        String sfont = new CommonClass().GetStringByFont(tmp.Font);
+        //        if (textModel.TCFont != sfont)
+        //        {
+        //            textModel.TCFont = sfont;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+        //        if (textModel.TCFontColor != sbuff)
+        //        {
+        //            textModel.TCFontColor = sbuff;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+        //        if (textModel.TCBackColor != sbuff)
+        //        {
+        //            textModel.TCBackColor = sbuff;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        if (textModel.TCIsMust != (chbIsmust.Checked ? 1 : 0))
+        //        {
+        //            textModel.TCIsMust = chbIsmust.Checked ? 1 : 0;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //        if (textModel.TCIsPrint != (chbIsprInt.Checked ? 1 : 0))
+        //        {
+        //            textModel.TCIsPrint = chbIsprInt.Checked ? 1 : 0;
+        //            textModel.UpdateFlage = true;
+        //        }
+        //    }
+        //}
         #endregion
         private void button1_Click(object sender, EventArgs e)
         {
             SetPropery();
-            ControlModel cm = new ControlModel();
-            TextBoxExtendModel tbem = new TextBoxExtendModel();
-            if (tmp.ControlID != 0)
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.CTIID == tmp.ControlID; }));//返回符合条件的第一个元素)
-                tbem = tm.tbemLsit.Find((delegate(TextBoxExtendModel p) { return p.TCCIID == tmp.ControlID; }));
-            }
-            else
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.NewNumber == tmp.NewNumber; }));//返回符合条件的第一个元素)
-                tbem = tm.tbemLsit.Find((delegate(TextBoxExtendModel p) { return p.TCCIID == cm.CTIID; }));
-            }
-            UpdateModel(cm, tbem);
+           // UpdateModel();
         }
 
+        /// <summary>
+        /// 窗体加载事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxProperyForm_Load(object sender, EventArgs e)
         {
-            GetPropery();
+            if (tm != null && tmp != null)
+            {
+                GetPropery();
+                font = tmp.Font;
+                bgc = tmp.BackColor;
+                frc = tmp.ForeColor;
+            }
         }
 
         /// <summary>
@@ -240,7 +237,6 @@ namespace BillManageWPF.Forms
         /// <param name="e"></param>
         private void btnSetFont_Click(object sender, EventArgs e)
         {
-            //fd.ShowDialog();
             if (fd.ShowDialog() != DialogResult.Cancel)
             {
                 txtfont.Text = fd.Font.ToString();
@@ -274,13 +270,28 @@ namespace BillManageWPF.Forms
         private void btnBackgroud_Click(object sender, EventArgs e)
         {
             cd.Color = bgc;
-            //cd.ShowDialog();
             if (cd.ShowDialog() != DialogResult.Cancel)
             {
                 txtBackColor.Text = cd.Color.ToString();
                 bgc = cd.Color;
                 tmp.BackColor = bgc;
             }
+        }
+
+        private void TextBoxProperyForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SetPropery();
+            //UpdateModel();
+        }
+
+        private void TextBoxProperyForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();//释放资源
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

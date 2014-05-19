@@ -17,7 +17,6 @@ using Controllers.DataAccess;
 using BillManageWPF.Forms;
 using System.Data;
 using BillManageWPF.MyCode;
-using FirstFloor.ModernUI.Windows.Controls;
 using System.Windows.Navigation;
 namespace BillManageWPF.Content.Template
 {
@@ -176,7 +175,7 @@ namespace BillManageWPF.Content.Template
                     btm.TIID = btmserice.AddByBillTemplatModel(btm);
                     if (btm.TIID != 0)
                     {
-                        ModernDialog.ShowMessage("更新成功！", "提示", MessageBoxButton.OK);
+                        MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
                         TemplateMain sss = new TemplateMain(btm.TIID);
                         sss.Show();
                         this.Close();
@@ -187,7 +186,7 @@ namespace BillManageWPF.Content.Template
                     //更新
                     if (btmserice.UpdateByBillTemplatModel(btm) > 0)
                     {
-                        ModernDialog.ShowMessage("更新成功！", "提示", MessageBoxButton.OK);
+                        MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
                         this.Close();
                     }
                 }

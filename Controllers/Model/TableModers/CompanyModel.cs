@@ -13,12 +13,15 @@ using System.Threading.Tasks;
 
 namespace Controllers.Models
 {
+    /// <summary>
+    /// 公司实体
+    /// </summary>
    public  class CompanyModel
     {
         /// <summary>
         /// 公司编号
         /// </summary>
-        public int CIID { get; set; }
+       public Int32 CIID { get; set; }
 
         /// <summary>
         /// 公司名称

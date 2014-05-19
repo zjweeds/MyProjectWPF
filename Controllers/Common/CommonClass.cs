@@ -33,8 +33,8 @@ namespace Controllers.Common
             {
                 throw ex;
             }
-        }  
- 
+        }
+
         /// <summary>
         /// 跟据字体对象返回字节流
         /// </summary>
@@ -59,7 +59,7 @@ namespace Controllers.Common
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public Font GetFontByString(string str)
+        public Font GetFontByString(String str)
         {
             try
             {
@@ -72,6 +72,25 @@ namespace Controllers.Common
             }
         }
 
+
+        /// <summary>
+        /// 通过字体得到字节数组
+        /// </summary>
+        /// <param name="img">字体对象的引用</param>
+        /// <returns>字节数组</returns>
+        public string GetStringByFont(Font font)
+        {
+            try
+            {
+                FontConverter fc = new FontConverter();
+                return fc.ConvertToInvariantString(font);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "软件提示");
+                throw ex;
+            }
+        }
         /// <summary>
         /// 跟据字节流得到颜色对象
         /// </summary>
@@ -110,29 +129,6 @@ namespace Controllers.Common
             {
                 throw ex;
             }
-        }
-    }
-
-    public class ComboxItem
-    {
-        /// <summary>
-        /// 显示文本
-        /// </summary>
-        public String Text = "";
-
-        /// <summary>
-        /// 值
-        /// </summary>
-        public String Value = "";
-        public ComboxItem(String _Text, String _Value)
-        {
-            Text = _Text;
-            Value = _Value;
-        }
-
-        public override String ToString()
-        {
-            return Text;
         }
     }
 }

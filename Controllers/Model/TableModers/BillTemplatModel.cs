@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Controllers.Models
 {
+    /// <summary>
+    /// 模板信息实体
+    /// </summary>
    public class BillTemplatModel
     {
-       public int TIID { get; set; }
+       public Int32 TIID { get; set; }
        public String TIName { get; set; }
        public byte[] TIBackground { get; set; }
        public int TIWidth { get; set; }
        public int TIHeight { get; set; }
-       public int TITTID { get; set; }
+       public Int32 TITTID { get; set; }
        public int TICodeLegth { get; set; }
 
        public byte[] TIIcon { get; set; }

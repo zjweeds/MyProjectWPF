@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Controllers.Business;
+using Controllers.Models;
 
 namespace BillManageWPF.winFormUI.BillForms
 {
     public partial class BillSerchListForm : Form
     {
         public BillSerchListForm()
+        {
+            InitializeComponent();
+        }
+        public BillSerchListForm(int code)
         {
             InitializeComponent();
         }

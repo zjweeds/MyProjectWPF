@@ -83,9 +83,30 @@ namespace Controllers.DataAccess.SQLHELPER
             }
         }
         #endregion
+       
+        #region  私有方法
+        public static void OpenConn(SqlConnection conn)
+        {
+            if (conn != null && conn.State == ConnectionState.Closed)
+                conn.Open();
+        }
+        public static void CloseConn(SqlConnection conn)
+        {
+            if (conn != null && conn.State == ConnectionState.Open)
+                conn.Close();
+        }
+        private static SqlCommand CreateCMD(String cmdText, SqlParameter[] paramers, SqlConnection conn)
+        {
+            SqlCommand cmd = new SqlCommand(cmdText, conn);
+            if (paramers != null)
+                cmd.Parameters.AddRange(paramers);
+            OpenConn(conn);
+            return cmd;
+        }
+        #endregion 
 
         #region 公共方法
-       /// <summary>
+        /// <summary>
         /// 插入数据，返回自增ID
        /// </summary>
        /// <param name="strSql"></param>
@@ -97,10 +118,7 @@ namespace Controllers.DataAccess.SQLHELPER
             m_Cmd.CommandText = strSql;
             try
             {
-                if (m_Conn.State == ConnectionState.Closed)
-                {
-                    m_Conn.Open();
-                }
+                OpenConn(m_Conn);
                 intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
             }
             catch (Exception e)
@@ -109,7 +127,7 @@ namespace Controllers.DataAccess.SQLHELPER
             }
             finally
             {
-                m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+                CloseConn(m_Conn);//连接关闭，但不释放掉该对象所占的内存单元
             }
             return intReturnValue;
         }
@@ -121,35 +139,53 @@ namespace Controllers.DataAccess.SQLHELPER
        /// <param name="param"></param>
        /// <param name="count"></param>
        /// <returns></returns>
-       public int ExecSqlReturnId(string strSql, SqlParameter[] param, int count)
-        {
-            int intReturnValue;
-            m_Cmd.CommandType = CommandType.Text;
-            m_Cmd.CommandText = strSql;
-            m_Cmd.Parameters.Clear();
-            for (int i = 0; i < count; i++)
-            {
-                m_Cmd.Parameters.Add(param[i]);
-            }
-            try
-            {
-                if (m_Conn.State == ConnectionState.Closed)
-                {
-                    m_Conn.Open();
-                }
-                intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
-            }
-            return intReturnValue;
-        }
-      
+       //public int ExecSqlReturnId(String strSql, SqlParameter[] param, int count)
+       // {
+       //     int intReturnValue;
+       //     m_Cmd.CommandType = CommandType.Text;
+       //     m_Cmd.CommandText = strSql;
+       //     m_Cmd.Parameters.Clear();
+       //     for (int i = 0; i < count; i++)
+       //     {
+       //         m_Cmd.Parameters.Add(param[i]);
+       //     }
+       //     try
+       //     {
+       //         if (m_Conn.State == ConnectionState.Closed)
+       //         {
+       //             m_Conn.Open();
+       //         }
+       //         intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
+       //     }
+       //     catch (Exception e)
+       //     {
+       //         throw e;
+       //     }
+       //     finally
+       //     {
+       //         m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+       //     }
+       //     return intReturnValue;
+       // }
+
+       public int ExecSqlReturnId(String cmdText, params SqlParameter[] paramers)
+       {
+           int intReturnValue;
+           try
+           {
+               m_Cmd  = CreateCMD(cmdText, paramers, m_Conn);
+               intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
+           }
+           catch (Exception e)
+           {
+               throw e;
+           }
+           finally
+           {
+               CloseConn(m_Conn);//连接关闭，但不释放掉该对象所占的内存单元
+           }
+           return intReturnValue;
+       }
        /// <summary>
        /// 通过Transact-SQL语句提交数据
        /// </summary>
@@ -157,22 +193,12 @@ namespace Controllers.DataAccess.SQLHELPER
        /// <param name="param"></param>
        /// <param name="count"></param>
        /// <returns></returns>
-       public int ExecDataBySql(String strSql, SqlParameter[] param, int count)
+       public int ExecDataBySql(String cmdText, params SqlParameter[] paramers)
        {
            int intReturnValue;
-           m_Cmd.CommandType = CommandType.Text;
-           m_Cmd.CommandText = strSql;
-           m_Cmd.Parameters.Clear();
-           for (int i = 0; i < count; i++)
-           {
-               m_Cmd.Parameters.Add(param[i]);
-           }
            try
            {
-               if (m_Conn.State == ConnectionState.Closed)
-               {
-                   m_Conn.Open();
-               }
+               m_Cmd = CreateCMD(cmdText, paramers, m_Conn);
                intReturnValue = m_Cmd.ExecuteNonQuery();
            }
            catch (Exception e)
@@ -181,7 +207,7 @@ namespace Controllers.DataAccess.SQLHELPER
            }
            finally
            {
-               m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+               CloseConn(m_Conn);//连接关闭，但不释放掉该对象所占的内存单元
            }
            return intReturnValue;
        }      
@@ -220,15 +246,12 @@ namespace Controllers.DataAccess.SQLHELPER
         /// </summary>
         /// <param name="strSqls">使用List泛型封装多条SQL语句</param>
         /// <returns>bool值(提交是否成功)</returns>
-        public bool ExecDataBySqls(List<String> strSqls)
+        public bool ExecDataBySqls(IList<String> strSqls)
         {
             
                 bool booIsSucceed;
 
-                if (m_Conn.State == ConnectionState.Closed)
-                {
-                    m_Conn.Open();
-                }
+                OpenConn(m_Conn);
                 SqlTransaction sqlTran = m_Conn.BeginTransaction();
                 try
                 {
@@ -242,14 +265,16 @@ namespace Controllers.DataAccess.SQLHELPER
                     sqlTran.Commit();
                     booIsSucceed = true;  //表示提交数据库成功
                 }
-                catch
-                {                    
-                    sqlTran.Rollback();
+                catch(Exception ex)
+                {
+                 
+                    sqlTran.Rollback();   
                     booIsSucceed = false;  //表示提交数据库失败！
+               throw ex; 
                 }
                 finally
                 {
-                    m_Conn.Close();
+                    CloseConn(m_Conn);
                     strSqls.Clear();
                 }
                 return booIsSucceed;          
@@ -285,18 +310,12 @@ namespace Controllers.DataAccess.SQLHELPER
         /// <param name="strSql">Transact-SQL语句</param>
         /// <param name="strTable">相关的数据表</param>
         /// <returns>DataSet实例的引用</returns>
-        public DataSet GetDataSet(String strSql, SqlParameter[] param, int count)
+        public DataSet GetDataSet(String cmdText, params SqlParameter[] paramers)
         {
             DataSet ds = null;
-            m_Cmd.CommandType = CommandType.Text;
-            m_Cmd.CommandText = strSql;
-            m_Cmd.Parameters.Clear();
-            for (int i = 0; i < count; i++)
-            {
-                m_Cmd.Parameters.Add(param[i]);
-            }
             try
             {
+                m_Cmd = CreateCMD(cmdText, paramers, m_Conn);
                 SqlDataAdapter sda = new SqlDataAdapter(m_Cmd);
                 ds = new DataSet();
                 sda.Fill(ds);
@@ -321,10 +340,7 @@ namespace Controllers.DataAccess.SQLHELPER
             m_Cmd.CommandText = strSql;
             try
             {
-                if (m_Conn.State == ConnectionState.Closed)
-                {
-                    m_Conn.Open();
-                }
+                OpenConn(m_Conn);
 
                 sdr = m_Cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
@@ -345,23 +361,12 @@ namespace Controllers.DataAccess.SQLHELPER
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <returns>SqlDataReader实例的引用</returns>
-        public SqlDataReader GetDataReader(String strSql, SqlParameter[] param, int count)
+        public SqlDataReader GetDataReader(String cmdText, params SqlParameter[] paramers)
         {
             SqlDataReader sdr;
-            m_Cmd.CommandType = CommandType.Text;
-            m_Cmd.CommandText = strSql;
-            m_Cmd.Parameters.Clear();
-            for (int i = 0; i < count; i++)
-            {
-                m_Cmd.Parameters.Add(param[i]);
-            }
             try
             {
-                if (m_Conn.State == ConnectionState.Closed)
-                {
-                    m_Conn.Open();
-                }
-
+                m_Cmd = CreateCMD(cmdText, paramers, m_Conn);
                 sdr = m_Cmd.ExecuteReader(CommandBehavior.CloseConnection);
             }
             catch (Exception e)
@@ -380,13 +385,12 @@ namespace Controllers.DataAccess.SQLHELPER
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <returns>该数值</returns>
-        public int GetNumberOf(String strSql, SqlParameter[] param, int count)
+        public int GetNumberOf(String strSql, SqlParameter[] param)
         {
             int item;
-            SqlDataReader Dr = this.GetDataReader(strSql, param, count);
+            SqlDataReader Dr = this.GetDataReader(strSql, param);
             if (Dr.Read())
             {
-
                 item= Convert.ToInt32(Dr[0].ToString());
             }
             else            
@@ -431,22 +435,12 @@ namespace Controllers.DataAccess.SQLHELPER
         /// </summary>
         /// <param name="strSql">Transact-SQL语句</param>
         /// <returns>结果集中的第一行的第一列</returns>
-        public object GetSingleObject(String strSql,SqlParameter[] param, int count)
+        public object GetSingleObject(String cmdText, params SqlParameter[] paramers)
         {
             object obj = null;
-            m_Cmd.CommandType = CommandType.Text;
-            m_Cmd.CommandText = strSql;
-            m_Cmd.Parameters.Clear();
-            for (int i = 0; i < count; i++)
-            {
-                m_Cmd.Parameters.Add(param[i]);
-            }
             try
             {
-                if (m_Conn.State == ConnectionState.Closed)
-                {
-                    m_Conn.Open();
-                }
+                m_Cmd = CreateCMD(cmdText, paramers, m_Conn);                
                 obj = m_Cmd.ExecuteScalar();
             }
             catch (Exception e)
@@ -492,29 +486,23 @@ namespace Controllers.DataAccess.SQLHELPER
         /// <param name="strSqlCode">Transact-SQL语句</param>
         /// <param name="strTableName">数据表的名称</param>
         /// <returns>DataTable实例的引用</returns>
-        public DataTable GetDataTable(String strSql, SqlParameter[] param, int count)
-        {
-            DataTable dt = new DataTable(); ;
-            SqlDataAdapter sda = null;
-            m_Cmd.CommandType = CommandType.Text;
-            m_Cmd.CommandText = strSql;
-            m_Cmd.Parameters.Clear();
-            for (int i = 0; i < count; i++)
-            {
-                m_Cmd.Parameters.Add(param[i]);
-            }
-            try
-            {
-                sda= new SqlDataAdapter(m_Cmd);
-                sda.Fill(dt);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+        //public DataTable GetDataTable(String cmdText, params SqlParameter[] paramers)
+        //{
+        //    DataTable dt = new DataTable(); ;
+        //    SqlDataAdapter sda = null;
+        //    try
+        //    {
+        //        m_Cmd = CreateCMD(cmdText, paramers, m_Conn);
+        //        sda= new SqlDataAdapter(m_Cmd);
+        //        sda.Fill(dt);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
 
-            return dt; //dt.Rows.Count可能等于零
-        }
+        //    return dt; //dt.Rows.Count可能等于零
+        //}
 
         /// <summary>
         /// 通过存储过程，得到DataTable实例

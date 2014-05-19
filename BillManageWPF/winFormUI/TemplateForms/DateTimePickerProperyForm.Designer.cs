@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chbIsprint = new System.Windows.Forms.CheckBox();
+            this.chbIsprInt = new System.Windows.Forms.CheckBox();
             this.chbIsvisible = new System.Windows.Forms.CheckBox();
             this.chbIsmust = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -65,15 +65,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txttab = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.cbxCoumname = new System.Windows.Forms.ComboBox();
             this.cbxTablename = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dtpDefault = new System.Windows.Forms.DateTimePicker();
+            this.txttab = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -111,7 +111,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.SkyBlue;
-            this.groupBox4.Controls.Add(this.chbIsprint);
+            this.groupBox4.Controls.Add(this.chbIsprInt);
             this.groupBox4.Controls.Add(this.chbIsvisible);
             this.groupBox4.Controls.Add(this.chbIsmust);
             this.groupBox4.Controls.Add(this.label11);
@@ -126,17 +126,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "其他";
             // 
-            // chbIsprint
+            // chbIsprInt
             // 
-            this.chbIsprint.AutoSize = true;
-            this.chbIsprint.BackColor = System.Drawing.Color.SkyBlue;
-            this.chbIsprint.ForeColor = System.Drawing.Color.White;
-            this.chbIsprint.Location = new System.Drawing.Point(151, 44);
-            this.chbIsprint.Name = "chbIsprint";
-            this.chbIsprint.Size = new System.Drawing.Size(36, 16);
-            this.chbIsprint.TabIndex = 37;
-            this.chbIsprint.Text = "是";
-            this.chbIsprint.UseVisualStyleBackColor = false;
+            this.chbIsprInt.AutoSize = true;
+            this.chbIsprInt.BackColor = System.Drawing.Color.SkyBlue;
+            this.chbIsprInt.ForeColor = System.Drawing.Color.White;
+            this.chbIsprInt.Location = new System.Drawing.Point(151, 44);
+            this.chbIsprInt.Name = "chbIsprInt";
+            this.chbIsprInt.Size = new System.Drawing.Size(36, 16);
+            this.chbIsprInt.TabIndex = 37;
+            this.chbIsprInt.Text = "是";
+            this.chbIsprInt.UseVisualStyleBackColor = false;
             // 
             // chbIsvisible
             // 
@@ -492,6 +492,48 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "数据";
             // 
+            // cbxCoumname
+            // 
+            this.cbxCoumname.BackColor = System.Drawing.Color.SkyBlue;
+            this.cbxCoumname.ForeColor = System.Drawing.Color.White;
+            this.cbxCoumname.FormattingEnabled = true;
+            this.cbxCoumname.Location = new System.Drawing.Point(82, 142);
+            this.cbxCoumname.Name = "cbxCoumname";
+            this.cbxCoumname.Size = new System.Drawing.Size(100, 20);
+            this.cbxCoumname.TabIndex = 21;
+            // 
+            // cbxTablename
+            // 
+            this.cbxTablename.BackColor = System.Drawing.Color.SkyBlue;
+            this.cbxTablename.ForeColor = System.Drawing.Color.White;
+            this.cbxTablename.FormattingEnabled = true;
+            this.cbxTablename.Location = new System.Drawing.Point(82, 116);
+            this.cbxTablename.Name = "cbxTablename";
+            this.cbxTablename.Size = new System.Drawing.Size(100, 20);
+            this.cbxTablename.TabIndex = 20;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.SkyBlue;
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(20, 145);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(59, 12);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "关联列名:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.SkyBlue;
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(9, 122);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(71, 12);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "关联数据源:";
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -521,6 +563,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "显示";
             // 
+            // dtpDefault
+            // 
+            this.dtpDefault.Location = new System.Drawing.Point(61, 39);
+            this.dtpDefault.Name = "dtpDefault";
+            this.dtpDefault.Size = new System.Drawing.Size(133, 21);
+            this.dtpDefault.TabIndex = 8;
+            // 
             // txttab
             // 
             this.txttab.BackColor = System.Drawing.Color.SkyBlue;
@@ -540,55 +589,6 @@
             this.label7.Size = new System.Drawing.Size(47, 12);
             this.label7.TabIndex = 6;
             this.label7.Text = "Tab 键:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.BackColor = System.Drawing.Color.SkyBlue;
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(20, 145);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(59, 12);
-            this.label17.TabIndex = 16;
-            this.label17.Text = "关联列名:";
-            // 
-            // cbxCoumname
-            // 
-            this.cbxCoumname.BackColor = System.Drawing.Color.SkyBlue;
-            this.cbxCoumname.ForeColor = System.Drawing.Color.White;
-            this.cbxCoumname.FormattingEnabled = true;
-            this.cbxCoumname.Location = new System.Drawing.Point(82, 142);
-            this.cbxCoumname.Name = "cbxCoumname";
-            this.cbxCoumname.Size = new System.Drawing.Size(100, 20);
-            this.cbxCoumname.TabIndex = 21;
-            // 
-            // cbxTablename
-            // 
-            this.cbxTablename.BackColor = System.Drawing.Color.SkyBlue;
-            this.cbxTablename.ForeColor = System.Drawing.Color.White;
-            this.cbxTablename.FormattingEnabled = true;
-            this.cbxTablename.Location = new System.Drawing.Point(82, 116);
-            this.cbxTablename.Name = "cbxTablename";
-            this.cbxTablename.Size = new System.Drawing.Size(100, 20);
-            this.cbxTablename.TabIndex = 20;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.Color.SkyBlue;
-            this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(9, 122);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(71, 12);
-            this.label16.TabIndex = 15;
-            this.label16.Text = "关联数据源:";
-            // 
-            // dtpDefault
-            // 
-            this.dtpDefault.Location = new System.Drawing.Point(61, 39);
-            this.dtpDefault.Name = "dtpDefault";
-            this.dtpDefault.Size = new System.Drawing.Size(133, 21);
-            this.dtpDefault.TabIndex = 8;
             // 
             // DateTimePickerProperyForm
             // 
@@ -623,7 +623,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckBox chbIsprint;
+        private System.Windows.Forms.CheckBox chbIsprInt;
         private System.Windows.Forms.CheckBox chbIsvisible;
         private System.Windows.Forms.CheckBox chbIsmust;
         private System.Windows.Forms.Label label11;

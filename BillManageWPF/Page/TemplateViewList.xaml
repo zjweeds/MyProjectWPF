@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:wfi ="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+            xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
              xmlns:wf ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
              xmlns:tabEx ="clr-namespace:CSharpWin;assembly=TabControlEx"
              mc:Ignorable="d" 
@@ -49,7 +49,7 @@
                         <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="2" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
                     </StackPanel>
                     <StackPanel Margin="0,55,0,0">
-                        <Button Name="btnBillSerch" Content="票据查询" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                        <Button Name="btnBillSerch" Content="票据查询" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnBillSerch_Click" />
                     </StackPanel>
                     <StackPanel Margin="0,85,0,0">
                         <Button Name="btnTemplateDesign" Content="票据设计" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateDesign_Click" />
@@ -58,7 +58,7 @@
                         <Button Name="btnTemplateAdd" Content="新增票据" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateAdd_Click" />
                     </StackPanel>
                     <StackPanel Margin="0,145,0,0">
-                        <Button Name="btnPrints"  Content="批量套打" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                        <Button Name="btnPrints"  Content="批量套打" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnPrints_Click" />
                     </StackPanel>           
                     <StackPanel Margin="10,185,0,0">
                         <TextBlock Text="管理任务" Foreground="White" FontSize="18"/>

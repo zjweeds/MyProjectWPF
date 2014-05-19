@@ -40,7 +40,7 @@ namespace Controllers.DataAccess
                 param[4].Value =btm.TITTID;
                 param[5] = new SqlParameter("@TICodeLegth ", SqlDbType.Int);
                 param[5].Value = btm.TICodeLegth;
-                return sqlhelper.ExecSqlReturnId(sbSql.ToString(), param,6);
+                return sqlhelper.ExecSqlReturnId(sbSql.ToString(), param);
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@ namespace Controllers.DataAccess
                 param[5].Value = btm.TICodeLegth;
                 param[6] = new SqlParameter("@TIID ", SqlDbType.Int);
                 param[6].Value = btm.TIID;
-                return sqlhelper.ExecDataBySql(sbSql.ToString(),param,7);
+                return sqlhelper.ExecDataBySql(sbSql.ToString(),param);
             }
             catch (Exception ex)
             {

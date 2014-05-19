@@ -85,12 +85,9 @@ namespace BillManageWPF
             }
             else
             {
-                AppMainWindow amw = new AppMainWindow();
+                MertoUIWindow amw = new MertoUIWindow();
                 amw.WindowState = WindowState.Maximized;
                 amw.Show();
-                //MainWindow wmv = new MainWindow();
-                //wmv.WindowState = WindowState.Maximized;
-                //wmv.Show(); 
                 _timer.Stop();
                 lw.Close(); 
             }

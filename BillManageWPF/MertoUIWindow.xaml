@@ -46,65 +46,114 @@
         <Grid Grid.Row="4">
             <UniformGrid  Margin="100,10,100,80" Columns="3" Rows="2">
                 <Grid Margin="5">
-                    <Grid  Name="btnTemplateIcon" Margin="2,2,2,2"  Visibility="Visible" MouseEnter="btnTemplateIcon_MouseEnter" Background="#FFE65618"  >
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/TemplateManage.png" Margin="1,9,-1,1" />
-                        <TextBlock   Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="模板中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                    <Grid  Name="btnTemplateIcon" Margin="2,2,2,2"  Visibility="Visible" MouseEnter="btnTemplateIcon_MouseEnter"> <!--Background="#FFE65618"  >-->
+                        <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10"  Name="top">
+                            <Grid Background="#FFE65618">
+                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/TemplateManage.png" Margin="1,9,-1,1" />
+                                <TextBlock   Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="模板中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                            </Grid>
+                        </Border>
                     </Grid>
-                    <Grid Name="btnTemplate" Margin="2,2,2,2" Visibility="Hidden" Background="#FFE65618" MouseLeave="btnTemplate_MouseLeave" MouseDown="btnTemplate_MouseDown"   >
-                        <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入模板中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
-                        <TextBlock  Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以查看所有模板、自定义票据模板，选择模板查询打印票据等" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
-                    </Grid>
-                </Grid>
-                <Grid Margin="5">
-                    <Grid  Name="btnDatasourceIcon" Margin="2,2,2,2"  Visibility="Visible" MouseEnter="btnDatasourceIcon_MouseEnter"  Background="#FFFFB500">
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/DataSytem.png" />
-                        <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="资料中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
-                    </Grid>
-                    <Grid Name="btnDatasource"  Margin="2,2,2,2" Visibility="Hidden" Background="#FFFFB500" MouseLeave="btnDatasource_MouseLeave" MouseDown="btnDatasource_MouseDown">
-                        <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入资料中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
-                        <TextBlock   Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以更新系统中的资料表，以便输入票据时方便的绑定信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                    <Grid Name="btnTemplate" Margin="2,2,2,2" Visibility="Hidden" MouseLeave="btnTemplate_MouseLeave" MouseDown="btnTemplate_MouseDown"   >
+                        <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                            <Grid Background="#FFE65618">
+                                <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入模板中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                <TextBlock  Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以查看所有模板、自定义票据模板，选择模板查询打印票据等" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Grid>
                 <Grid Margin="5">
-                    <Grid  Name="btnBillIcon" Margin="2,2,2,2"  Visibility="Visible"  Background="#FFF87F14" MouseEnter="btnBillIcon_MouseEnter">
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/BillManage.png" />
-                        <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="票据中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/> 
+                    <Grid  Name="btnDatasourceIcon" Margin="2,2,2,2"  Visibility="Visible" MouseEnter="btnDatasourceIcon_MouseEnter" >
+                        <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10" >
+                            <Grid  Background="#FFFFB500">
+                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/DataSytem.png" />
+                                <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="资料中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                            </Grid>
+                        </Border>
                     </Grid>
-                    <Grid Name="btnBill"  Margin="2,2,2,2" Visibility="Hidden"  Background="#FFF87F14"  MouseLeave="btnBill_MouseLeave" MouseDown="btnBill_MouseDown">
-                        <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入票据中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
-                        <TextBlock   Margin="10" TextWrapping="Wrap"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以查询统计选定模板的票据信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
-                    </Grid>
-                </Grid>
-                <Grid Margin="5">
-                    <Grid  Name="btnUsersIcon" Margin="2,2,2,2"  Visibility="Visible"   Background="#FF1A69B3" MouseEnter="btnUsersIcon_MouseEnter" >
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/userinfo.png" />
-                        <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
-                    </Grid>
-                    <Grid Name="btnUsers"  Margin="2,2,2,2" Visibility="Hidden" Background="#FF1A69B3" MouseLeave="btnUsers_MouseLeave" MouseDown="btnUsers_MouseDown">
-                        <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
-                        <TextBlock   Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以维护系统所有用户信息（需要权限）和个人信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                    <Grid Name="btnDatasource"  Margin="2,2,2,2" Visibility="Hidden" MouseLeave="btnDatasource_MouseLeave" MouseDown="btnDatasource_MouseDown">
+                        <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                            <Grid Background="#FFFFB500">
+                                <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入资料中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                <TextBlock   Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以更新系统中的资料表，以便输入票据时方便的绑定信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Grid>
                 <Grid Margin="5">
-                    <Grid  Name="btnSystemsSetIcon" Margin="2,2,2,2"  Visibility="Visible"  Background="#FF6B6B6B" MouseEnter="btnSystemsSetIcon_MouseEnter">
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/setSystem.png" />
-                        <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="设置中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                        <Grid  Name="btnBillIcon" Margin="2,2,2,2"  Visibility="Visible"   MouseEnter="btnBillIcon_MouseEnter">
+                            <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10" >
+                                <Grid  Background="#FFF87F14">
+                                    <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/BillManage.png" />
+                                    <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="票据中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <Grid Name="btnBill"  Margin="2,2,2,2" Visibility="Hidden"   MouseLeave="btnBill_MouseLeave" MouseDown="btnBill_MouseDown">
+                            <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                                <Grid Background="#FFF87F14">
+                                    <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入票据中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                    <TextBlock   Margin="10" TextWrapping="Wrap"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以查询统计选定模板的票据信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
                     </Grid>
-                    <Grid Name="btnSystemsSet"  Margin="2,2,2,2" Visibility="Hidden" Background="#FF6B6B6B" MouseLeave="btnSystemsSet_MouseLeave" MouseDown="btnSystemsSet_MouseDown">
-                        <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入设置中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
-                        <TextBlock  Margin="10"  TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以设置系统属性（包括打印方案、公司信息、账套信息等" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                    <Grid Margin="5">
+                            <Grid  Name="btnUsersIcon" Margin="2,2,2,2"  Visibility="Visible"    MouseEnter="btnUsersIcon_MouseEnter" >
+                                <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10" >
+                                    <Grid  Background="#FF1A69B3">
+                                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/userinfo.png" />
+                                        <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <Grid Name="btnUsers"  Margin="2,2,2,2" Visibility="Hidden" Background="#FF1A69B3" MouseLeave="btnUsers_MouseLeave" MouseDown="btnUsers_MouseDown">
+                                <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                                    <Grid Background="#FFF87F14">
+                                        <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                        <TextBlock   Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以维护系统所有用户信息（需要权限）和个人信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                        <Grid Margin="5">
+                    <Grid  Name="btnSystemsSetIcon" Margin="2,2,2,2"  Visibility="Visible" MouseEnter="btnSystemsSetIcon_MouseEnter">
+                        <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10" >
+                            <Grid  Background="#FF6B6B6B">
+                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/setSystem.png" />
+                                <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="设置中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Name="btnSystemsSet"  Margin="2,2,2,2" Visibility="Hidden" MouseLeave="btnSystemsSet_MouseLeave" MouseDown="btnSystemsSet_MouseDown">
+                        <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                            <Grid Background="#FF6B6B6B">
+                                <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入设置中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                <TextBlock  Margin="10"  TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以设置系统属性（包括打印方案、公司信息、账套信息等" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Grid>
                 <Grid Margin="5">
-                    <Grid  Name="btnHelperIcon" Margin="2,2,2,2"  Visibility="Visible"  Background="#FF3554D3" MouseEnter="btnHelperIcon_MouseEnter">
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/HelperCenter.png" />
-                        <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="帮助中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                    <Grid  Name="btnHelperIcon" Margin="2,2,2,2"  Visibility="Visible"   MouseEnter="btnHelperIcon_MouseEnter">
+                        <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10" >
+                            <Grid  Background="#FF3554D3">
+                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/HelperCenter.png" />
+                                <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="帮助中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                            </Grid>
+                        </Border>
                     </Grid>
-                    <Grid Name="btnHelper"  Margin="2,2,2,2" Visibility="Hidden" Background="#FF3554D3" MouseLeave="btnHelper_MouseLeave" MouseDown="btnHelper_MouseDown">
-                        <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入帮助中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
-                        <TextBlock   Margin="10"  TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以查看系统的帮助信息，包括软件的操作以及开发者信息等" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                    <Grid Name="btnHelper"  Margin="2,2,2,2" Visibility="Hidden" MouseLeave="btnHelper_MouseLeave" MouseDown="btnHelper_MouseDown">
+                        <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                            <Grid Background="#FF3554D3">
+                                <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入帮助中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                                <TextBlock   Margin="10"  TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以查看系统的帮助信息，包括软件的操作以及开发者信息等" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Grid>
+
             </UniformGrid>
         </Grid>
     </Grid>

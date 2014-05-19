@@ -18,6 +18,7 @@ using Controllers.DataAccess;
 using Controllers.Models;
 using Controllers.Common;
 using BillManageWPF.Forms;
+using BillManageWPF.winFormUI.BillForms;
 
 namespace BillManageWPF.Page
 {
@@ -80,7 +81,7 @@ namespace BillManageWPF.Page
             System.Windows.Forms.ListView lsv = new System.Windows.Forms.ListView();
             lsv.DoubleClick += new EventHandler(lsv_DoubleClick);//绑定事件
             lsvs.Add(lsv);
-            lsvs[i].Name = lsv.Name + i.ToString();
+            lsvs[i].Name = i.ToString();
             System.Windows.Forms.ImageList imgl = new System.Windows.Forms.ImageList();
             imgls.Add(imgl);
         }
@@ -183,14 +184,13 @@ namespace BillManageWPF.Page
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void lsv_DoubleClick(object sender, EventArgs e)//
+        private void lsv_DoubleClick(object sender, EventArgs e)
         {
             System.Windows.Forms.ListView lsv = (System.Windows.Forms.ListView)(sender);
             if (lsv.SelectedItems.Count > 0)
             {
-                //转到打印界面
-                //FormBillPrint fbt = new FormBillPrint(lsv.SelectedItems[0].Name.ToString());
-                //fbt.Show();
+                TemplatePrint pf = new TemplatePrint(Convert.ToInt32(lsv.SelectedItems[0].Name.ToString()));
+                pf.Show();
             }
             else
             {
@@ -211,7 +211,7 @@ namespace BillManageWPF.Page
         /// <param name="e"></param>
         private void btnTemplateDesign_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+            System.Windows.Forms.ListView lsvItem = lsvs[tabList.SelectedIndex]; 
             if (lsvItem != null)
             {
                 if (lsvItem.SelectedItems.Count > 0)
@@ -224,6 +224,23 @@ namespace BillManageWPF.Page
                     MessageBox.Show("请先选择票据", "软件提示");
                 }
             }
+        }
+
+        /// <summary>
+        /// 票据查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBillSerch_Click(object sender, RoutedEventArgs e)
+        {
+            BillSerchListForm blf = new BillSerchListForm();
+            blf.Show();
+        }
+
+        private void btnPrints_Click(object sender, RoutedEventArgs e)
+        {
+            BillSerchListForm blf = new BillSerchListForm();
+            blf.Show();
         }
     }
 }

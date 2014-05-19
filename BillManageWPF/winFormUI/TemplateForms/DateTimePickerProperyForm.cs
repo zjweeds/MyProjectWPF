@@ -22,19 +22,17 @@ namespace BillManageWPF.Forms
         {
             InitializeComponent();
         }
-        public DateTimePickerProperyForm(TemplateMain fm, MyDateTimePicker tb)
+        public DateTimePickerProperyForm(TemplateMain fm, MyDateTimePicker tbi)
         {
             InitializeComponent();
-            tmp = tb;
-            tm = fm;
-            font = tb.Font;
-            bgc = tb.BackColor;
-            frc = tb.ForeColor;
+            tmp = tbi;
+            tm = fm;          
         }
         #endregion 
 
         #region  页面变量
         public MyDateTimePicker tmp = null;
+        //private DateTimePickerInfo dateTimePicker = null;
         public TemplateMain tm = null;
         public Font font = null;
         public Color bgc;
@@ -62,8 +60,8 @@ namespace BillManageWPF.Forms
                     cbxTablename.Text = tmp.txtDatasource.TableName.ToString();
                     cbxCoumname.Text = tmp.txtDatasource.Column.ToString();
                 }
-                chbIsmust.Checked = tmp.IsMust == 0 ? false : true;
-                chbIsprint.Checked = tmp.IsPrint == 0 ? false : true;  
+                chbIsmust.Checked = tmp.IsMust;
+                chbIsprInt.Checked = tmp.IsPrint; 
             }
         }
 
@@ -80,118 +78,115 @@ namespace BillManageWPF.Forms
                 tmp.Width = Convert.ToInt32(txtwidth.Text);
                 tmp.Height = Convert.ToInt32(txtheight.Text);
                 tmp.txtDatasource = new ControlDataSource(cbxTablename.Text, cbxCoumname.Text);
-                tmp.IsMust = chbIsmust.Checked ? 1 : 0;
-                tmp.IsPrint = chbIsprint.Checked ? 1 : 0;
+                tmp.IsMust = chbIsmust.Checked;
+                tmp.IsPrint = chbIsprInt.Checked; ;
             }
         }
-        public void UpdateModel(ControlModel cm)
-        {
-            if (cm != null)
-            {
-                if (cm.CTIName != txtName.Text)
-                {
-                    cm.CTIName = txtName.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIDefault != dtpDefault.Text)
-                {
-                    cm.CTIDefault = dtpDefault.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTITabKey != Convert.ToInt32(txttab.Text))
-                {
-                    cm.CTITabKey = Convert.ToInt32(txttab.Text);
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIVisiable != (chbIsvisible.Checked ? 1 : 0))
-                {
-                    cm.CTIVisiable = chbIsvisible.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                String sfont = tmp.Font.ToString();
-                if (cm.CTIFont != sfont)
-                {
-                    cm.CTIFont = sfont;
-                    cm.updateFlage = true;
-                }
-                String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
-                if (cm.CTIFontColor != sbuff)
-                {
-                    cm.CTIFontColor = sbuff;
-                    cm.updateFlage = true;
-                }
-                sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
-                if (cm.CTIBackColor != sbuff)
-                {
-                    cm.CTIBackColor = sbuff;
-                    cm.updateFlage = true;
-                }
+        //public void UpdateModel()
+        //{
+        //    if (dateTimePicker != null)
+        //    {
+        //        if (dateTimePicker.DTPName != txtName.Text)
+        //        {
+        //            dateTimePicker.DTPName = txtName.Text;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        if (dateTimePicker.DTPDefault != dtpDefault.Text)
+        //        {
+        //            dateTimePicker.DTPDefault = dtpDefault.Text;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        if (dateTimePicker.DTPTabKey != Convert.ToInt32(txttab.Text))
+        //        {
+        //            dateTimePicker.DTPTabKey = Convert.ToInt32(txttab.Text);
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        if (dateTimePicker.DTPVisiable != (chbIsvisible.Checked ? 1 : 0))
+        //        {
+        //            dateTimePicker.DTPVisiable = chbIsvisible.Checked ? 1 : 0;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        String sfont = new CommonClass().GetStringByFont(tmp.Font);
+        //        if (dateTimePicker.DTPIFont != sfont)
+        //        {
+        //            dateTimePicker.DTPIFont = sfont;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+        //        if (dateTimePicker.DTPFontColor != sbuff)
+        //        {
+        //            dateTimePicker.DTPFontColor = sbuff;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+        //        if (dateTimePicker.DTPBackColor != sbuff)
+        //        {
+        //            dateTimePicker.DTPBackColor = sbuff;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
 
-                int xitem = Convert.ToInt32(txttop.Text);
-                if (cm.CTITop != xitem)
-                {
-                    cm.CTITop = xitem;
-                    cm.updateFlage = true;
-                } 
-                xitem= Convert.ToInt32(txtleft.Text);
-                if (cm.CTILeft != xitem)
-                {
-                    cm.CTILeft = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtwidth.Text);
-                if (cm.CTIWidth != xitem)
-                {
-                    cm.CTIWidth = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtheight.Text);
-                if (cm.CTIHeight != xitem)
-                {
-                    cm.CTIHeight = xitem;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsTabel != cbxTablename.Text)
-                {
-                    cm.CTIBandsTabel = cbxTablename.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsCoumln != cbxCoumname.Text)
-                {
-                    cm.CTIBandsCoumln = cbxCoumname.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsMust != (chbIsmust.Checked ? 1 : 0))
-                {
-                    cm.CTIIsMust = chbIsmust.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsPrint != (chbIsprint.Checked ? 1 : 0))
-                {
-                    cm.CTIIsPrint = chbIsprint.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }             
-            }
-        }
+        //        int xitem = Convert.ToInt32(txttop.Text);
+        //        if (dateTimePicker.DTPTop != xitem)
+        //        {
+        //            dateTimePicker.DTPTop = xitem;
+        //            dateTimePicker.UpdateFlage = true;
+        //        } 
+        //        xitem= Convert.ToInt32(txtleft.Text);
+        //        if (dateTimePicker.DTPLeft != xitem)
+        //        {
+        //            dateTimePicker.DTPLeft = xitem;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtwidth.Text);
+        //        if (dateTimePicker.DTPWidth != xitem)
+        //        {
+        //            dateTimePicker.DTPWidth = xitem;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtheight.Text);
+        //        if (dateTimePicker.DTPHeight != xitem)
+        //        {
+        //            dateTimePicker.DTPHeight = xitem;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        if (dateTimePicker.DTPBandsTable != cbxTablename.Text)
+        //        {
+        //            dateTimePicker.DTPBandsTable = cbxTablename.Text;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        if (dateTimePicker.DTPBandsCoumln != cbxCoumname.Text)
+        //        {
+        //            dateTimePicker.DTPBandsCoumln = cbxCoumname.Text;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        if (dateTimePicker.DTPIsMust != (chbIsmust.Checked ? 1 : 0))
+        //        {
+        //            dateTimePicker.DTPIsMust = chbIsmust.Checked ? 1 : 0;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }
+        //        if (dateTimePicker.DTPIsPrint != (chbIsprInt.Checked ? 1 : 0))
+        //        {
+        //            dateTimePicker.DTPIsPrint = chbIsprInt.Checked ? 1 : 0;
+        //            dateTimePicker.UpdateFlage = true;
+        //        }             
+        //    }
+        //}
         #endregion
         private void button1_Click(object sender, EventArgs e)
         {
-            SetPropery();
-            ControlModel cm = new ControlModel();
-            if (tmp.ControlID != 0)
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.CTIID == tmp.ControlID; }));//返回符合条件的第一个元素)
-            }
-            else
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.NewNumber == tmp.NewNumber; }));//返回符合条件的第一个元素)
-            }
-            UpdateModel(cm);
+            SetPropery();     
+            //UpdateModel();
         }
 
         private void DateTimePickerProperyForm_Load(object sender, EventArgs e)
         {
-            GetPropery();
+            if (tm != null && tmp != null)
+            {
+                GetPropery();
+                font = tmp.Font;
+                bgc = tmp.BackColor;
+                frc = tmp.ForeColor;
+            }
         }
 
         /// <summary>
@@ -201,7 +196,6 @@ namespace BillManageWPF.Forms
         /// <param name="e"></param>
         private void btnSetFont_Click(object sender, EventArgs e)
         {
-            //fd.ShowDialog();
             if (fd.ShowDialog() != DialogResult.Cancel)
             {
                 txtfont.Text = fd.Font.ToString();
@@ -218,7 +212,6 @@ namespace BillManageWPF.Forms
         private void btnForeColor_Click(object sender, EventArgs e)
         {
             cd.Color = frc;
-            //cd.ShowDialog();
             if (cd.ShowDialog() != DialogResult.Cancel)
             {
                 txtForeColor.Text = cd.Color.ToString();
@@ -235,7 +228,6 @@ namespace BillManageWPF.Forms
         private void btnBackgroud_Click(object sender, EventArgs e)
         {
             cd.Color = bgc;
-            //cd.ShowDialog();
             if (cd.ShowDialog() != DialogResult.Cancel)
             {
                 txtBackColor.Text = cd.Color.ToString();

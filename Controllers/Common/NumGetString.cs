@@ -23,7 +23,7 @@ namespace Controllers.Common
             Boolean iXSh_bool = false;//是否含有小数，默认没有(0则视为没有)
             Boolean iZhSh_bool = true;//是否含有整数,默认有(0则视为没有)
 
-            string NumStr;//整个数字字符串
+            String NumStr;//整个数字字符串
             String NumStr_Zh;//整数部分
             String NumSr_X = "";//小数部分
             String NumStr_DQ;//当前的数字字符

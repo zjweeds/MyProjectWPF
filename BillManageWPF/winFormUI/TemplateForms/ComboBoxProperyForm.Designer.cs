@@ -33,7 +33,7 @@
             this.txtDefalutValue = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chbIsprint = new System.Windows.Forms.CheckBox();
+            this.chbIsprInt = new System.Windows.Forms.CheckBox();
             this.chbIsvisible = new System.Windows.Forms.CheckBox();
             this.chbIsmust = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -55,7 +55,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.txtMark = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.btnFont = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -74,10 +73,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txttab = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbbMarktype = new System.Windows.Forms.ComboBox();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -120,7 +120,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.SkyBlue;
-            this.groupBox4.Controls.Add(this.chbIsprint);
+            this.groupBox4.Controls.Add(this.chbIsprInt);
             this.groupBox4.Controls.Add(this.chbIsvisible);
             this.groupBox4.Controls.Add(this.chbIsmust);
             this.groupBox4.Controls.Add(this.label11);
@@ -128,24 +128,24 @@
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.ForeColor = System.Drawing.Color.White;
-            this.groupBox4.Location = new System.Drawing.Point(3, 395);
+            this.groupBox4.Location = new System.Drawing.Point(3, 404);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(186, 70);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "其他";
             // 
-            // chbIsprint
+            // chbIsprInt
             // 
-            this.chbIsprint.AutoSize = true;
-            this.chbIsprint.BackColor = System.Drawing.Color.SkyBlue;
-            this.chbIsprint.ForeColor = System.Drawing.Color.White;
-            this.chbIsprint.Location = new System.Drawing.Point(151, 44);
-            this.chbIsprint.Name = "chbIsprint";
-            this.chbIsprint.Size = new System.Drawing.Size(36, 16);
-            this.chbIsprint.TabIndex = 37;
-            this.chbIsprint.Text = "是";
-            this.chbIsprint.UseVisualStyleBackColor = false;
+            this.chbIsprInt.AutoSize = true;
+            this.chbIsprInt.BackColor = System.Drawing.Color.SkyBlue;
+            this.chbIsprInt.ForeColor = System.Drawing.Color.White;
+            this.chbIsprInt.Location = new System.Drawing.Point(151, 44);
+            this.chbIsprInt.Name = "chbIsprInt";
+            this.chbIsprInt.Size = new System.Drawing.Size(36, 16);
+            this.chbIsprInt.TabIndex = 37;
+            this.chbIsprInt.Text = "是";
+            this.chbIsprInt.UseVisualStyleBackColor = false;
             // 
             // chbIsvisible
             // 
@@ -333,24 +333,13 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(3, 471);
+            this.button1.Location = new System.Drawing.Point(3, 480);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(186, 25);
             this.button1.TabIndex = 4;
             this.button1.Text = "点击设定";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtMark
-            // 
-            this.txtMark.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtMark.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMark.ForeColor = System.Drawing.Color.White;
-            this.txtMark.Location = new System.Drawing.Point(0, 0);
-            this.txtMark.Multiline = true;
-            this.txtMark.Name = "txtMark";
-            this.txtMark.Size = new System.Drawing.Size(192, 34);
-            this.txtMark.TabIndex = 0;
             // 
             // label13
             // 
@@ -385,12 +374,8 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtMark);
             this.splitContainer1.Size = new System.Drawing.Size(192, 537);
-            this.splitContainer1.SplitterDistance = 499;
+            this.splitContainer1.SplitterDistance = 508;
             this.splitContainer1.TabIndex = 1;
             // 
             // panel1
@@ -401,7 +386,7 @@
             this.panel1.ForeColor = System.Drawing.Color.White;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(192, 499);
+            this.panel1.Size = new System.Drawing.Size(192, 508);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -420,12 +405,12 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.22821F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.77179F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 187F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.80374F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.19626F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(192, 499);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(192, 508);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox2
@@ -442,9 +427,9 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(3, 96);
+            this.groupBox2.Location = new System.Drawing.Point(3, 122);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(186, 106);
+            this.groupBox2.Size = new System.Drawing.Size(186, 101);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "外观";
@@ -536,9 +521,9 @@
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(3, 208);
+            this.groupBox3.Location = new System.Drawing.Point(3, 229);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(186, 181);
+            this.groupBox3.Size = new System.Drawing.Size(186, 169);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "数据";
@@ -557,6 +542,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.SkyBlue;
+            this.groupBox1.Controls.Add(this.cbbMarktype);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txttab);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label1);
@@ -567,7 +554,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(186, 87);
+            this.groupBox1.Size = new System.Drawing.Size(186, 113);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "显示";
@@ -592,6 +579,33 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "Tab 键:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.SkyBlue;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(16, 88);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "标记类型:";
+            // 
+            // cbbMarktype
+            // 
+            this.cbbMarktype.BackColor = System.Drawing.Color.SkyBlue;
+            this.cbbMarktype.ForeColor = System.Drawing.Color.White;
+            this.cbbMarktype.FormattingEnabled = true;
+            this.cbbMarktype.Items.AddRange(new object[] {
+            "0：其他",
+            "1：收款名称",
+            "2：收款账号",
+            "3：付款名称",
+            "4：付款账号"});
+            this.cbbMarktype.Location = new System.Drawing.Point(82, 85);
+            this.cbbMarktype.Name = "cbbMarktype";
+            this.cbbMarktype.Size = new System.Drawing.Size(100, 20);
+            this.cbbMarktype.TabIndex = 21;
+            // 
             // ComboBoxProperyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -604,8 +618,6 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -626,7 +638,7 @@
         private System.Windows.Forms.TextBox txtDefalutValue;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckBox chbIsprint;
+        private System.Windows.Forms.CheckBox chbIsprInt;
         private System.Windows.Forms.CheckBox chbIsvisible;
         private System.Windows.Forms.CheckBox chbIsmust;
         private System.Windows.Forms.Label label11;
@@ -648,7 +660,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtMark;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnFont;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -667,5 +678,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txttab;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbbMarktype;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -43,7 +43,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtDefalutValue = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chbIsprint = new System.Windows.Forms.CheckBox();
+            this.chbIsprInt = new System.Windows.Forms.CheckBox();
             this.chbIsFalge = new System.Windows.Forms.CheckBox();
             this.chbIsmust = new System.Windows.Forms.CheckBox();
             this.chbIsreadonly = new System.Windows.Forms.CheckBox();
@@ -124,6 +124,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(100, 21);
             this.txtName.TabIndex = 0;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // cbxCoumname
             // 
@@ -226,7 +227,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.SkyBlue;
-            this.groupBox4.Controls.Add(this.chbIsprint);
+            this.groupBox4.Controls.Add(this.chbIsprInt);
             this.groupBox4.Controls.Add(this.chbIsFalge);
             this.groupBox4.Controls.Add(this.chbIsmust);
             this.groupBox4.Controls.Add(this.chbIsreadonly);
@@ -243,17 +244,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "其他";
             // 
-            // chbIsprint
+            // chbIsprInt
             // 
-            this.chbIsprint.AutoSize = true;
-            this.chbIsprint.BackColor = System.Drawing.Color.SkyBlue;
-            this.chbIsprint.ForeColor = System.Drawing.Color.White;
-            this.chbIsprint.Location = new System.Drawing.Point(151, 44);
-            this.chbIsprint.Name = "chbIsprint";
-            this.chbIsprint.Size = new System.Drawing.Size(36, 16);
-            this.chbIsprint.TabIndex = 37;
-            this.chbIsprint.Text = "是";
-            this.chbIsprint.UseVisualStyleBackColor = false;
+            this.chbIsprInt.AutoSize = true;
+            this.chbIsprInt.BackColor = System.Drawing.Color.SkyBlue;
+            this.chbIsprInt.ForeColor = System.Drawing.Color.White;
+            this.chbIsprInt.Location = new System.Drawing.Point(151, 44);
+            this.chbIsprInt.Name = "chbIsprInt";
+            this.chbIsprInt.Size = new System.Drawing.Size(36, 16);
+            this.chbIsprInt.TabIndex = 37;
+            this.chbIsprInt.Text = "是";
+            this.chbIsprInt.UseVisualStyleBackColor = false;
             // 
             // chbIsFalge
             // 
@@ -742,6 +743,8 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "TextBoxProperyForm";
             this.Text = "TextBoxProperyForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TextBoxProperyForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TextBoxProperyForm_FormClosed);
             this.Load += new System.EventHandler(this.TextBoxProperyForm_Load);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -778,7 +781,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtDefalutValue;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckBox chbIsprint;
+        private System.Windows.Forms.CheckBox chbIsprInt;
         private System.Windows.Forms.CheckBox chbIsFalge;
         private System.Windows.Forms.CheckBox chbIsmust;
         private System.Windows.Forms.CheckBox chbIsreadonly;

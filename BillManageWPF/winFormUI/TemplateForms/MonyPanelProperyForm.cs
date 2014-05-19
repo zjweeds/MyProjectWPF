@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using MyExtendControls.MyControls.TemplateContorl;
 using Controllers.Enum;
 using Controllers.Models;
-using Controllers.DataAccess;
+using Controllers.Business;
 using Controllers.Common;
 
 namespace BillManageWPF.Forms
@@ -27,13 +27,11 @@ namespace BillManageWPF.Forms
             InitializeComponent();
             tmp = mp;
             tm = fm;
-            font = mp.Font;
-            bgc = mp.BackColor;
-            frc = mp.ForeColor;
         }
         #endregion
         #region  页面变量
         public MoneyPanel tmp = null;
+       // private MoneyPanelInfo moneypanel = null;
         public TemplateMain tm;
         public  Font font=null;
         public Color bgc ;
@@ -51,6 +49,28 @@ namespace BillManageWPF.Forms
                 cb.Items.Add(item.ToString());
             }
         }
+        private void LoadBanding(ComboBox cb)
+        {
+            foreach (Control cn in tm.DesignContext.board.Controls)
+            {
+                if (cn.GetType() == typeof(MyTextBox))
+                {
+                    comboxItem ci = null;
+                    MyTextBox txb = cn as MyTextBox;
+                    if (txb.ControlID == 0)
+                    {
+                        ci = new comboxItem(txb.ControlName, txb.NewNumber, 0);
+                    }
+                    else
+                    {
+                        ci = new comboxItem(txb.ControlName, txb.ControlID, 1);
+                    }
+                    cb.Items.Add(ci);
+                    cb.DisplayMember = ci.name;
+                }                
+            }
+        
+        }
         /// <summary>
         /// 获取控件属性
         /// </summary>
@@ -60,10 +80,10 @@ namespace BillManageWPF.Forms
             {
                 txtName.Text = tmp.ControlName;
                 txtDefalutValue.Text = tmp.DefaultValue;
-                chbisborestyle.Checked = tmp.BorderStyle == BorderStyle.None ? false : true;
+                chbIsShowUnit.Checked = tmp.IsShowUnit;
                 chbIsvisible.Checked = tmp.Visible;
-                chbIsmust.Checked = tmp.IsMust == 0 ? false : true;
-                chbIsprint.Checked = tmp.IsPrint == 0 ? false : true;
+                chbIsmust.Checked = tmp.IsMust ? false : true;
+                chbIsprInt.Checked = tmp.IsPrint  ? false : true;
                 txttab.Text = tmp.TabIndex.ToString();
                 txtfont.Text = tmp.Font.ToString();
                 txtForeColor.Text = tmp.ForeColor.ToString();
@@ -72,8 +92,10 @@ namespace BillManageWPF.Forms
                 txtleft.Text = tmp.Left.ToString();
                 txtwidth.Text = tmp.Width.ToString();
                 txtheight.Text = tmp.Height.ToString();
+                txtRows.Text = tmp.RowCount.ToString();
                 cbbHeight.SelectedIndex = tmp.Hight.GetHashCode();
                 cbbLow.SelectedIndex = tmp.Low.GetHashCode();
+                cbbBandings.SelectedValue = tmp.BindsID;
             }
         }
 
@@ -86,17 +108,26 @@ namespace BillManageWPF.Forms
             {
                 tmp.ControlName = txtName.Text;
                 tmp.DefaultValue = txtDefalutValue.Text;
-                tmp.BorderStyle = chbisborestyle.Checked ? BorderStyle.None : BorderStyle.FixedSingle;
+                tmp.IsShowUnit = chbIsShowUnit.Checked;
                 tmp.Visible = chbIsvisible.Checked;
-                tmp.IsMust = chbIsmust.Checked ? 1 : 0;
-                tmp.IsPrint = chbIsprint.Checked ? 1 : 0;
+                tmp.IsMust = chbIsmust.Checked ;
+                tmp.IsPrint = chbIsprInt.Checked;
                 tmp.TabIndex = Convert.ToInt32(txttab.Text);
                 tmp.Top = Convert.ToInt32(txttop.Text);
                 tmp.Left = Convert.ToInt32(txtleft.Text);
                 tmp.Width = Convert.ToInt32(txtwidth.Text);
                 tmp.Height = Convert.ToInt32(txtheight.Text);
                 tmp.Hight = cbbHeight.SelectedIndex;
+                tmp.RowCount = Convert.ToInt32(txtRows.Text);
                 tmp.Low = cbbLow.SelectedIndex;
+                if ((cbbBandings.SelectedItem as comboxItem).type == 0)
+                {
+                    tmp.BindsID = tm.AddTextControlByNewNumber((cbbBandings.SelectedItem as comboxItem).ID);
+                }
+                else
+                {
+                    tmp.BindsID = (cbbBandings.SelectedItem as comboxItem).ID;
+                }
                 tmp.MoneyPanel_Paint();
             }
         }
@@ -104,110 +135,114 @@ namespace BillManageWPF.Forms
         /// <summary>
         /// 更新对应实体信息
         /// </summary>
-        /// <param name="cm"></param>
-        /// <param name="mpem"></param>
-        public void UpdateModel(ControlModel cm,MoneyPanelExtendModel mpem)
-        {
-            if (cm != null)
-            {
-                if (cm.CTIName != txtName.Text)
-                {
-                    cm.CTIName = txtName.Text;
-                }
-                if (cm.CTIDefault != txtDefalutValue.Text)
-                {
-                    cm.CTIDefault = txtDefalutValue.Text;
-                }
-                String sfont = tmp.Font.ToString();
-                if (cm.CTIFont != sfont)
-                {
-                    cm.CTIFont = sfont;
-                    cm.updateFlage = true;
-                }
-                String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
-                if (cm.CTIFontColor != sbuff)
-                {
-                    cm.CTIFontColor = sbuff;
-                    cm.updateFlage = true;
-                }
-                sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
-                if (cm.CTIBackColor != sbuff)
-                {
-                    cm.CTIBackColor = sbuff;
-                    cm.updateFlage = true;
-                }
-                if( cm.CTIIsBorder != (chbisborestyle.Checked ? 1 : 0))
-                {
-                    cm.CTIIsBorder = chbisborestyle.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if ( cm.CTIVisiable != (chbIsvisible.Checked ? 1 : 0))
-                {
-                    cm.CTIVisiable = chbIsvisible.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsMust != (chbIsmust.Checked ? 1 : 0))
-                {
-                    cm.CTIIsMust = chbIsmust.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsPrint != (chbIsprint.Checked ? 1 : 0))
-                {
-                    cm.CTIIsPrint = chbIsprint.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                cm.CTITabKey = Convert.ToInt32(txttab.Text);
-                int xitem = Convert.ToInt32(txttop.Text);
-                if (cm.CTITop != xitem)
-                {
-                    cm.CTITop = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtleft.Text);
-                if (cm.CTILeft != xitem)
-                {
-                    cm.CTILeft = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtwidth.Text);
-                if (cm.CTIWidth != xitem)
-                {
-                    cm.CTIWidth = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtheight.Text);
-                if (cm.CTIHeight != xitem)
-                {
-                    cm.CTIHeight = xitem;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTITabKey != Convert.ToInt32(txttab.Text))
-                {
-                    cm.CTITabKey = Convert.ToInt32(txttab.Text);
-                    cm.updateFlage = true;
-                }
-                if (mpem != null)
-                {
-                    if (mpem.MCLowUnit != cbbLow.SelectedIndex)
-                    {
-                        mpem.MCLowUnit = cbbLow.SelectedIndex;
-                        mpem.updateFlage = true;
-                    }
-                    if (mpem.MCHighUnit != cbbHeight.SelectedIndex)
-                    {
-                        mpem.MCHighUnit = cbbHeight.SelectedIndex;
-                        mpem.updateFlage = true;
-                    }
-                }
-            }
-        }
+        /// <param name="moneypanel"></param>
+        /// <param name="moneypanel"></param>
+        //public void UpdateModel()
+        //{
+        //    if (moneypanel != null)
+        //    {
+        //        if (moneypanel.MPName != txtName.Text)
+        //        {
+        //            moneypanel.MPName = txtName.Text;
+        //        }
+        //        if (moneypanel.MPDefault != txtDefalutValue.Text)
+        //        {
+        //            moneypanel.MPDefault = txtDefalutValue.Text;
+        //        }
+        //        String sfont = new CommonClass().GetStringByFont(tmp.Font);
+        //        if (moneypanel.MPFont != sfont)
+        //        {
+        //            moneypanel.MPFont = sfont;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+        //        if (moneypanel.MPFontColor != sbuff)
+        //        {
+        //            moneypanel.MPFontColor = sbuff;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+        //        if (moneypanel.MPBackColor != sbuff)
+        //        {
+        //            moneypanel.MPBackColor = sbuff;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        if (moneypanel.MPIsBorder != (chbisborestyle.Checked ? 1 : 0))
+        //        {
+        //            moneypanel.MPIsBorder = chbisborestyle.Checked ? 1 : 0;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        if (moneypanel.MPVisiable != (chbIsvisible.Checked ? 1 : 0))
+        //        {
+        //            moneypanel.MPVisiable = chbIsvisible.Checked ? 1 : 0;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        if (moneypanel.MPIsMust != (chbIsmust.Checked ? 1 : 0))
+        //        {
+        //            moneypanel.MPIsMust = chbIsmust.Checked ? 1 : 0;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        if (moneypanel.MPIsPrint != (chbIsprInt.Checked ? 1 : 0))
+        //        {
+        //            moneypanel.MPIsPrint = chbIsprInt.Checked ? 1 : 0;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        moneypanel.MPTabKey = Convert.ToInt32(txttab.Text);
+        //        int xitem = Convert.ToInt32(txttop.Text);
+        //        if (moneypanel.MPTop != xitem)
+        //        {
+        //            moneypanel.MPTop = xitem;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtleft.Text);
+        //        if (moneypanel.MPLeft != xitem)
+        //        {
+        //            moneypanel.MPLeft = xitem;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtwidth.Text);
+        //        if (moneypanel.MPWidth != xitem)
+        //        {
+        //            moneypanel.MPWidth = xitem;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtheight.Text);
+        //        if (moneypanel.MPHeight != xitem)
+        //        {
+        //            moneypanel.MPHeight = xitem;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        if (moneypanel.MPTabKey != Convert.ToInt32(txttab.Text))
+        //        {
+        //            moneypanel.MPTabKey = Convert.ToInt32(txttab.Text);
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        if (moneypanel.MPLowUnit != cbbLow.SelectedIndex)
+        //        {
+        //            moneypanel.MPLowUnit = cbbLow.SelectedIndex;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //        if (moneypanel.MPHighUnit != cbbHeight.SelectedIndex)
+        //        {
+        //            moneypanel.MPHighUnit = cbbHeight.SelectedIndex;
+        //            moneypanel.UpdateFlage = true;
+        //        }
+        //    }
+        //}
         #endregion 
         #region 窗体事件
         private void MonyPanelProperyForm_Load(object sender, EventArgs e)
         {
             LoadDanWei(cbbHeight);//最高位加载
             LoadDanWei(cbbLow);//最低位加载
-            GetPropery();
+            LoadBanding(cbbBandings);//加载绑定源
+            if (tm != null && tmp != null)
+            {
+                GetPropery();
+                font = tmp.Font;
+                bgc = tmp.BackColor;
+                frc = tmp.ForeColor;
+            }
         }
          /// <summary>
         /// 设置字体
@@ -216,7 +251,6 @@ namespace BillManageWPF.Forms
         /// <param name="e"></param>
         private void btnSetFont_Click(object sender, EventArgs e)
         {
-            //fd.ShowDialog();
             if (fd.ShowDialog() != DialogResult.Cancel)
             {
                 txtfont.Text = fd.Font.ToString();
@@ -233,7 +267,6 @@ namespace BillManageWPF.Forms
         private void btnForeColor_Click(object sender, EventArgs e)
         {
             cd.Color = frc;
-            //cd.ShowDialog();
             if(cd.ShowDialog()!=DialogResult.Cancel)
             {
                 txtForeColor.Text = cd.Color.ToString();
@@ -250,7 +283,6 @@ namespace BillManageWPF.Forms
         private void btnBackgroud_Click(object sender, EventArgs e)
         {
             cd.Color = bgc;
-            //cd.ShowDialog();
             if (cd.ShowDialog() != DialogResult.Cancel)
             {
                 txtBackColor.Text = cd.Color.ToString();
@@ -266,20 +298,8 @@ namespace BillManageWPF.Forms
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            SetPropery();
-            ControlModel cm = new ControlModel();
-            MoneyPanelExtendModel mpem = new MoneyPanelExtendModel();
-            if (tmp.ControlID != 0)
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.CTIID == tmp.ControlID; }));//返回符合条件的第一个元素)
-                mpem = tm.mpemList.Find((delegate(MoneyPanelExtendModel p) { return p.MCCIID == tmp.ControlID; }));
-            }
-            else
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.NewNumber == tmp.NewNumber; }));//返回符合条件的第一个元素)
-                mpem = tm.mpemList.Find((delegate(MoneyPanelExtendModel p) { return p.MCCIID == cm.CTIID; }));
-            }
-            UpdateModel(cm, mpem);
+            SetPropery();            
+
         }
         
         /// <summary>
@@ -296,5 +316,49 @@ namespace BillManageWPF.Forms
             }
         }
         #endregion
+        
+        //只能输入数字
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            } 
+        }
+    }
+    public class comboxItem
+    {
+        /// <summary>
+        /// 显示的名称
+        /// </summary>
+        public String name
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 对应的控件ID
+        /// </summary>
+        public int ID
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public int type//0:新增；1：修改
+        {
+            get;
+            set;
+        }
+        public comboxItem(String s, int n,int t)
+        {
+            name = s;
+            ID = n;
+            type = t;
+        }
     }
 }

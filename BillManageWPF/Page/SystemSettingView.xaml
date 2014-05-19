@@ -23,7 +23,7 @@
             <UniformGrid  Margin="30,20,30,30" Columns="3" Rows="2">
                 <Grid Margin="5">
                     <Grid  Name="PrintSetIco" Margin="0,0,0,0"  Visibility="Visible" MouseEnter="Grid_MouseEnter" Background="#FFE65618"  >
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/Icon/offce/PowerPoint alt 1.png" Margin="1,9,-1,1" />
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/Icon/purple/delicious_pur.png" Margin="1,9,-1,1" />
                         <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="打印方案" Foreground="White"/>
                     </Grid>
                     <Grid Name="PrintSetInfo"  Margin="0,0,0,0" Visibility="Hidden" Background="Purple"  MouseLeave="PrintSetInfo_MouseLeave" MouseDown="PrintSetInfo_MouseDown">
@@ -59,7 +59,7 @@
                 </Grid>
                 <Grid Margin="5">
                     <Grid  Name="BillSetHYico" Margin="0,0,0,0"  Visibility="Visible"  Background="#FFEB3C00">
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/Icon/offce/Office 2013.png" />
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/Icon/purple/desktop_pur.png" />
                         <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="账套还原" Foreground="White"/>
                     </Grid>
                     <Grid Name="BillSetHYinfo"  Margin="0,0,0,0" Visibility="Hidden" Background="Purple"  >
@@ -68,7 +68,7 @@
                 </Grid>
                 <Grid Margin="5">
                     <Grid  Name="CompanyManageIco" Margin="0,0,0,0"  Visibility="Visible"  Background="#FF80AE1A">
-                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/Icon/green/seznam_grn.png" />
+                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/Icon/blue/stumbleupon_blu.png" />
                         <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="公司管理" Foreground="White"/>
                     </Grid>
                     <Grid Name="CompanyManageInfo"  Margin="0,0,0,0" Visibility="Hidden" Background="Purple" >

@@ -34,6 +34,17 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnBackColor = new System.Windows.Forms.Button();
+            this.btnForeColor = new System.Windows.Forms.Button();
+            this.btnFont = new System.Windows.Forms.Button();
+            this.chbisborestyle = new System.Windows.Forms.CheckBox();
+            this.txtBackColor = new System.Windows.Forms.TextBox();
+            this.txtForeColor = new System.Windows.Forms.TextBox();
+            this.txtfont = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cbxCoumname = new System.Windows.Forms.ComboBox();
             this.cbxTablename = new System.Windows.Forms.ComboBox();
@@ -48,13 +59,14 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDefalutValue = new System.Windows.Forms.TextBox();
             this.txttab = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chbIsprint = new System.Windows.Forms.CheckBox();
+            this.chbIsprInt = new System.Windows.Forms.CheckBox();
             this.chbIsvisible = new System.Windows.Forms.CheckBox();
             this.chbIsmust = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -64,18 +76,6 @@
             this.cd = new System.Windows.Forms.ColorDialog();
             this.fd = new System.Windows.Forms.FontDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.txtDefalutValue = new System.Windows.Forms.TextBox();
-            this.btnBackColor = new System.Windows.Forms.Button();
-            this.btnForeColor = new System.Windows.Forms.Button();
-            this.btnFont = new System.Windows.Forms.Button();
-            this.chbisborestyle = new System.Windows.Forms.CheckBox();
-            this.txtBackColor = new System.Windows.Forms.TextBox();
-            this.txtForeColor = new System.Windows.Forms.TextBox();
-            this.txtfont = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -176,6 +176,119 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "外观";
+            // 
+            // btnBackColor
+            // 
+            this.btnBackColor.Location = new System.Drawing.Point(148, 93);
+            this.btnBackColor.Name = "btnBackColor";
+            this.btnBackColor.Size = new System.Drawing.Size(31, 19);
+            this.btnBackColor.TabIndex = 39;
+            this.btnBackColor.Text = "...";
+            this.btnBackColor.UseVisualStyleBackColor = true;
+            this.btnBackColor.Click += new System.EventHandler(this.btnBackgroud_Click);
+            // 
+            // btnForeColor
+            // 
+            this.btnForeColor.Location = new System.Drawing.Point(148, 71);
+            this.btnForeColor.Name = "btnForeColor";
+            this.btnForeColor.Size = new System.Drawing.Size(31, 19);
+            this.btnForeColor.TabIndex = 38;
+            this.btnForeColor.Text = "...";
+            this.btnForeColor.UseVisualStyleBackColor = true;
+            this.btnForeColor.Click += new System.EventHandler(this.btnForeColor_Click);
+            // 
+            // btnFont
+            // 
+            this.btnFont.Location = new System.Drawing.Point(148, 47);
+            this.btnFont.Name = "btnFont";
+            this.btnFont.Size = new System.Drawing.Size(31, 19);
+            this.btnFont.TabIndex = 37;
+            this.btnFont.Text = "...";
+            this.btnFont.UseVisualStyleBackColor = true;
+            this.btnFont.Click += new System.EventHandler(this.btnSetFont_Click);
+            // 
+            // chbisborestyle
+            // 
+            this.chbisborestyle.AutoSize = true;
+            this.chbisborestyle.BackColor = System.Drawing.Color.SkyBlue;
+            this.chbisborestyle.ForeColor = System.Drawing.Color.White;
+            this.chbisborestyle.Location = new System.Drawing.Point(68, 27);
+            this.chbisborestyle.Name = "chbisborestyle";
+            this.chbisborestyle.Size = new System.Drawing.Size(36, 16);
+            this.chbisborestyle.TabIndex = 36;
+            this.chbisborestyle.Text = "是";
+            this.chbisborestyle.UseVisualStyleBackColor = false;
+            // 
+            // txtBackColor
+            // 
+            this.txtBackColor.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtBackColor.ForeColor = System.Drawing.Color.White;
+            this.txtBackColor.Location = new System.Drawing.Point(67, 90);
+            this.txtBackColor.Name = "txtBackColor";
+            this.txtBackColor.Size = new System.Drawing.Size(81, 21);
+            this.txtBackColor.TabIndex = 35;
+            // 
+            // txtForeColor
+            // 
+            this.txtForeColor.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtForeColor.ForeColor = System.Drawing.Color.White;
+            this.txtForeColor.Location = new System.Drawing.Point(67, 68);
+            this.txtForeColor.Name = "txtForeColor";
+            this.txtForeColor.Size = new System.Drawing.Size(81, 21);
+            this.txtForeColor.TabIndex = 34;
+            // 
+            // txtfont
+            // 
+            this.txtfont.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtfont.ForeColor = System.Drawing.Color.White;
+            this.txtfont.Location = new System.Drawing.Point(67, 47);
+            this.txtfont.Name = "txtfont";
+            this.txtfont.Size = new System.Drawing.Size(81, 21);
+            this.txtfont.TabIndex = 33;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.SkyBlue;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(12, 97);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(47, 12);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "背景色:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.SkyBlue;
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(12, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 12);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "前景色:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.SkyBlue;
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(12, 51);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.TabIndex = 30;
+            this.label4.Text = "字  体:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.SkyBlue;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(12, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 12);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "边  框:";
             // 
             // groupBox3
             // 
@@ -341,6 +454,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "显示";
             // 
+            // txtDefalutValue
+            // 
+            this.txtDefalutValue.BackColor = System.Drawing.Color.SkyBlue;
+            this.txtDefalutValue.ForeColor = System.Drawing.Color.White;
+            this.txtDefalutValue.Location = new System.Drawing.Point(81, 39);
+            this.txtDefalutValue.Name = "txtDefalutValue";
+            this.txtDefalutValue.Size = new System.Drawing.Size(100, 21);
+            this.txtDefalutValue.TabIndex = 8;
+            // 
             // txttab
             // 
             this.txttab.BackColor = System.Drawing.Color.SkyBlue;
@@ -395,7 +517,7 @@
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.SkyBlue;
-            this.groupBox4.Controls.Add(this.chbIsprint);
+            this.groupBox4.Controls.Add(this.chbIsprInt);
             this.groupBox4.Controls.Add(this.chbIsvisible);
             this.groupBox4.Controls.Add(this.chbIsmust);
             this.groupBox4.Controls.Add(this.label11);
@@ -410,17 +532,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "其他";
             // 
-            // chbIsprint
+            // chbIsprInt
             // 
-            this.chbIsprint.AutoSize = true;
-            this.chbIsprint.BackColor = System.Drawing.Color.SkyBlue;
-            this.chbIsprint.ForeColor = System.Drawing.Color.White;
-            this.chbIsprint.Location = new System.Drawing.Point(151, 54);
-            this.chbIsprint.Name = "chbIsprint";
-            this.chbIsprint.Size = new System.Drawing.Size(36, 16);
-            this.chbIsprint.TabIndex = 37;
-            this.chbIsprint.Text = "是";
-            this.chbIsprint.UseVisualStyleBackColor = false;
+            this.chbIsprInt.AutoSize = true;
+            this.chbIsprInt.BackColor = System.Drawing.Color.SkyBlue;
+            this.chbIsprInt.ForeColor = System.Drawing.Color.White;
+            this.chbIsprInt.Location = new System.Drawing.Point(151, 54);
+            this.chbIsprInt.Name = "chbIsprInt";
+            this.chbIsprInt.Size = new System.Drawing.Size(36, 16);
+            this.chbIsprInt.TabIndex = 37;
+            this.chbIsprInt.Text = "是";
+            this.chbIsprInt.UseVisualStyleBackColor = false;
             // 
             // chbIsvisible
             // 
@@ -497,128 +619,6 @@
             this.toolTip1.BackColor = System.Drawing.Color.SkyBlue;
             this.toolTip1.ForeColor = System.Drawing.Color.White;
             // 
-            // txtDefalutValue
-            // 
-            this.txtDefalutValue.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtDefalutValue.ForeColor = System.Drawing.Color.White;
-            this.txtDefalutValue.Location = new System.Drawing.Point(81, 39);
-            this.txtDefalutValue.Name = "txtDefalutValue";
-            this.txtDefalutValue.Size = new System.Drawing.Size(100, 21);
-            this.txtDefalutValue.TabIndex = 8;
-            // 
-            // btnBackColor
-            // 
-            this.btnBackColor.Location = new System.Drawing.Point(148, 93);
-            this.btnBackColor.Name = "btnBackColor";
-            this.btnBackColor.Size = new System.Drawing.Size(31, 19);
-            this.btnBackColor.TabIndex = 39;
-            this.btnBackColor.Text = "...";
-            this.btnBackColor.UseVisualStyleBackColor = true;
-            this.btnBackColor.Click += new System.EventHandler(this.btnBackgroud_Click);
-            // 
-            // btnForeColor
-            // 
-            this.btnForeColor.Location = new System.Drawing.Point(148, 71);
-            this.btnForeColor.Name = "btnForeColor";
-            this.btnForeColor.Size = new System.Drawing.Size(31, 19);
-            this.btnForeColor.TabIndex = 38;
-            this.btnForeColor.Text = "...";
-            this.btnForeColor.UseVisualStyleBackColor = true;
-            this.btnForeColor.Click += new System.EventHandler(this.btnForeColor_Click);
-            // 
-            // btnFont
-            // 
-            this.btnFont.Location = new System.Drawing.Point(148, 47);
-            this.btnFont.Name = "btnFont";
-            this.btnFont.Size = new System.Drawing.Size(31, 19);
-            this.btnFont.TabIndex = 37;
-            this.btnFont.Text = "...";
-            this.btnFont.UseVisualStyleBackColor = true;
-            this.btnFont.Click += new System.EventHandler(this.btnSetFont_Click);
-            // 
-            // chbisborestyle
-            // 
-            this.chbisborestyle.AutoSize = true;
-            this.chbisborestyle.BackColor = System.Drawing.Color.SkyBlue;
-            this.chbisborestyle.ForeColor = System.Drawing.Color.White;
-            this.chbisborestyle.Location = new System.Drawing.Point(68, 27);
-            this.chbisborestyle.Name = "chbisborestyle";
-            this.chbisborestyle.Size = new System.Drawing.Size(36, 16);
-            this.chbisborestyle.TabIndex = 36;
-            this.chbisborestyle.Text = "是";
-            this.chbisborestyle.UseVisualStyleBackColor = false;
-            // 
-            // txtBackColor
-            // 
-            this.txtBackColor.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtBackColor.ForeColor = System.Drawing.Color.White;
-            this.txtBackColor.Location = new System.Drawing.Point(67, 90);
-            this.txtBackColor.Name = "txtBackColor";
-            this.txtBackColor.Size = new System.Drawing.Size(81, 21);
-            this.txtBackColor.TabIndex = 35;
-            // 
-            // txtForeColor
-            // 
-            this.txtForeColor.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtForeColor.ForeColor = System.Drawing.Color.White;
-            this.txtForeColor.Location = new System.Drawing.Point(67, 68);
-            this.txtForeColor.Name = "txtForeColor";
-            this.txtForeColor.Size = new System.Drawing.Size(81, 21);
-            this.txtForeColor.TabIndex = 34;
-            // 
-            // txtfont
-            // 
-            this.txtfont.BackColor = System.Drawing.Color.SkyBlue;
-            this.txtfont.ForeColor = System.Drawing.Color.White;
-            this.txtfont.Location = new System.Drawing.Point(67, 47);
-            this.txtfont.Name = "txtfont";
-            this.txtfont.Size = new System.Drawing.Size(81, 21);
-            this.txtfont.TabIndex = 33;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.SkyBlue;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(12, 97);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 12);
-            this.label6.TabIndex = 32;
-            this.label6.Text = "背景色:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.SkyBlue;
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(12, 73);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 12);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "前景色:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.SkyBlue;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(12, 51);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 12);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "字  体:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.SkyBlue;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(12, 28);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 12);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "边  框:";
-            // 
             // LabelProperyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -674,7 +674,7 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckBox chbIsprint;
+        private System.Windows.Forms.CheckBox chbIsprInt;
         private System.Windows.Forms.CheckBox chbIsvisible;
         private System.Windows.Forms.CheckBox chbIsmust;
         private System.Windows.Forms.Label label11;

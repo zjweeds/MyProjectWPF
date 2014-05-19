@@ -37,10 +37,6 @@
     <StartupObject>BillManageWPF.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FirstFloor.ModernUI, Version=1.0.5.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\ModernUI.1.0.5\FirstFloor.ModernUI.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -76,14 +72,14 @@
     <Compile Include="Content\SystemSet\PrintSet.xaml.cs">
       <DependentUpon>PrintSet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\SystemSet\UserManage.xaml.cs">
-      <DependentUpon>UserManage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\Template\TemplateProperyEdit.xaml.cs">
       <DependentUpon>TemplateProperyEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="MertoUIWindow.xaml.cs">
       <DependentUpon>MertoUIWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\DataSourceList.xaml.cs">
+      <DependentUpon>DataSourceList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\SystemSettingView.xaml.cs">
       <DependentUpon>SystemSettingView.xaml</DependentUpon>
@@ -127,11 +123,11 @@
     <Compile Include="winFormUI\TemplateForms\MonyPanelProperyForm.Designer.cs">
       <DependentUpon>MonyPanelProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="winFormUI\TemplateForms\PrintForm.cs">
+    <Compile Include="winFormUI\TemplateForms\TemplatePrint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="winFormUI\TemplateForms\PrintForm.Designer.cs">
-      <DependentUpon>PrintForm.cs</DependentUpon>
+    <Compile Include="winFormUI\TemplateForms\TemplatePrint.Designer.cs">
+      <DependentUpon>TemplatePrint.cs</DependentUpon>
     </Compile>
     <Compile Include="winFormUI\TemplateForms\TemplateMain.cs">
       <SubType>Form</SubType>
@@ -177,10 +173,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\SystemSet\UserManage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Content\Template\TemplateProperyEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -194,6 +186,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MertoUIWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\DataSourceList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -262,11 +258,13 @@
     <EmbeddedResource Include="winFormUI\TemplateForms\MonyPanelProperyForm.resx">
       <DependentUpon>MonyPanelProperyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="winFormUI\TemplateForms\PrintForm.resx">
-      <DependentUpon>PrintForm.cs</DependentUpon>
+    <EmbeddedResource Include="winFormUI\TemplateForms\TemplatePrint.resx">
+      <DependentUpon>TemplatePrint.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\TemplateMain.resx">
       <DependentUpon>TemplateMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\TextBoxProperyForm.resx">
       <DependentUpon>TextBoxProperyForm.cs</DependentUpon>
@@ -293,13 +291,13 @@
       <Project>{26326d4d-74f9-4a99-872b-093f7fccf494}</Project>
       <Name>MyExtendControls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TabControlEx\TabControlEx.csproj">
+      <Project>{9df2b67b-5453-42b5-8cfc-3ab8c1cf3317}</Project>
+      <Name>TabControlEx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WPF.DazzleUI2\WPF.DazzleUI2.csproj">
       <Project>{53b936b8-79d9-4043-b8e6-7a9edaaa1bb0}</Project>
       <Name>WPF.DazzleUI2</Name>
-    </ProjectReference>
-    <ProjectReference Include="C:\Users\MyPC\Downloads\51CTO下载-20090825032321\TabControlEx\TabControlEx\TabControlEx.csproj">
-      <Project>{9df2b67b-5453-42b5-8cfc-3ab8c1cf3317}</Project>
-      <Name>TabControlEx</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Controllers.Models
 {
+    /// <summary>
+    /// 数据源实体
+    /// </summary>
     public class DataSourceModel
     {
         /// <summary>
         /// 数据源ID
         /// </summary>
-        public int DSIID
+        public Int32 DSIID
         {
             get;
             set;

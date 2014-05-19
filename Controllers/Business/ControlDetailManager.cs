@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Controllers.Models;
-using Controllers.DAL;
-namespace Controllers.BLL
+using Controllers.DataAccess;
+namespace Controllers.Business
 {
     /// <summary>
     ///本逻辑层由Hirer自动生成工具生成
@@ -40,6 +40,7 @@ namespace Controllers.BLL
             controlDetailTemp.CDText = controlDetail.CDText;
             controlDetailTemp.CDIsEnable = controlDetail.CDIsEnable;
             controlDetailTemp.CDControlType = controlDetail.CDControlType;
+            controlDetailTemp.CDTIID = controlDetail.CDTIID;
             return ControlDetailService.UpdateControlDetail(controlDetailTemp) > 0 ? true : false;
         }
           
@@ -59,6 +60,16 @@ namespace Controllers.BLL
         public static IList<ControlDetail> SelectAllControlDetail()
         {
             return  ControlDetailService.SelectAllControlDetail();
+        }
+
+        /// <summary>
+        /// 批量插入控件明细
+        /// </summary>
+        /// <param name="cdList"></param>
+        /// <returns>1成功，-1失败，0 无更新</returns>
+        public static int  AddlControlDetailByList(IList<ControlDetail> cdList)
+        {
+            return ControlDetailService.AddControlDetailByList(cdList);
         }
     }
 }

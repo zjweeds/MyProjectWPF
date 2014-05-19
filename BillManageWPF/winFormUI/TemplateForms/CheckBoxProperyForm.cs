@@ -25,15 +25,13 @@ namespace BillManageWPF.Forms
         {
             InitializeComponent();
             tmp = tb;
-            tm = fm;
-            font = tb.Font;
-            bgc = tb.BackColor;
-            frc = tb.ForeColor;
+            tm = fm;          
         }
 
         #region  页面变量
         public MyCheckBox tmp = null;
         public TemplateMain tm = null;
+//public CheckBoxInfo checkbox = null;
         public Font font = null;
         public Color bgc;
         public Color frc;
@@ -59,8 +57,8 @@ namespace BillManageWPF.Forms
                     cbxTablename.Text = tmp.txtDatasource.TableName.ToString();
                     cbxCoumname.Text = tmp.txtDatasource.Column.ToString();
                 }            
-                chbIsmust.Checked = tmp.IsMust == 0 ? false : true;
-                chbIsprint.Checked = tmp.IsPrint == 0 ? false : true;
+                chbIsmust.Checked = tmp.IsMust ? false : true;
+                chbIsprInt.Checked = tmp.IsPrint? false : true;
             }
         }
 
@@ -77,100 +75,100 @@ namespace BillManageWPF.Forms
                 tmp.Width = Convert.ToInt32(txtwidth.Text);
                 tmp.Height = Convert.ToInt32(txtheight.Text);
                 tmp.txtDatasource = new ControlDataSource(cbxTablename.Text, cbxCoumname.Text);
-                tmp.IsMust = chbIsmust.Checked ? 1 : 0;
-                tmp.IsPrint = chbIsprint.Checked ? 1 : 0;
+                tmp.IsMust = chbIsmust.Checked ;
+                tmp.IsPrint = chbIsprInt.Checked ;
             }
         }
 
-        public void UpdateModel(ControlModel cm)
-        {
-            if (cm != null)
-            {
-                if (cm.CTIName != txtName.Text)
-                {
-                    cm.CTIName = txtName.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIDefault != (chbDefault.Checked ? "true" : "false"))
-                {
-                    cm.CTIDefault = chbDefault.Checked ? "true" : "false";
-                    cm.updateFlage = true;
-                }
-                if (cm.CTITabKey != Convert.ToInt32(txttab.Text))
-                {
-                    cm.CTITabKey = Convert.ToInt32(txttab.Text);
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIVisiable != (chbIsvisible.Checked ? 1 : 0))
-                {
-                    cm.CTIVisiable = chbIsvisible.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                String sfont = tmp.Font.ToString();
-                if (cm.CTIFont != sfont)
-                {
-                    cm.CTIFont = sfont;
-                    cm.updateFlage = true;
-                }
-                String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
-                if (cm.CTIFontColor != sbuff)
-                {
-                    cm.CTIFontColor = sbuff;
-                    cm.updateFlage = true;
-                }
-                sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
-                if (cm.CTIBackColor != sbuff)
-                {
-                    cm.CTIBackColor = sbuff;
-                    cm.updateFlage = true;
-                }
+        //public void UpdateModel()
+        //{
+        //    if (checkbox != null)
+        //    {
+        //        if (checkbox.CHBName != txtName.Text)
+        //        {
+        //            checkbox.CHBName = txtName.Text;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        if (checkbox.CHBDefault != (chbDefault.Checked ? "true" : "false"))
+        //        {
+        //            checkbox.CHBDefault = chbDefault.Checked ? "true" : "false";
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        if (checkbox.CHBTabKey != Convert.ToInt32(txttab.Text))
+        //        {
+        //            checkbox.CHBTabKey = Convert.ToInt32(txttab.Text);
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        if (checkbox.CHBVisiable != (chbIsvisible.Checked ? 1 : 0))
+        //        {
+        //            checkbox.CHBVisiable = chbIsvisible.Checked ? 1 : 0;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        String sfont = new CommonClass().GetStringByFont(tmp.Font);
+        //        if (checkbox.CHBFont != sfont)
+        //        {
+        //            checkbox.CHBFont = sfont;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
+        //        if (checkbox.CHBFontColor != sbuff)
+        //        {
+        //            checkbox.CHBFontColor = sbuff;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
+        //        if (checkbox.CHBBackColor != sbuff)
+        //        {
+        //            checkbox.CHBBackColor = sbuff;
+        //            checkbox.UpdateFlage = true;
+        //        }
 
-                int xitem = Convert.ToInt32(txttop.Text);
-                if (cm.CTITop != xitem)
-                {
-                    cm.CTITop = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtleft.Text);
-                if (cm.CTILeft != xitem)
-                {
-                    cm.CTILeft = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtwidth.Text);
-                if (cm.CTIWidth != xitem)
-                {
-                    cm.CTIWidth = xitem;
-                    cm.updateFlage = true;
-                }
-                xitem = Convert.ToInt32(txtheight.Text);
-                if (cm.CTIHeight != xitem)
-                {
-                    cm.CTIHeight = xitem;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsTabel != cbxTablename.Text)
-                {
-                    cm.CTIBandsTabel = cbxTablename.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIBandsCoumln != cbxCoumname.Text)
-                {
-                    cm.CTIBandsCoumln = cbxCoumname.Text;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsMust != (chbIsmust.Checked ? 1 : 0))
-                {
-                    cm.CTIIsMust = chbIsmust.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }
-                if (cm.CTIIsPrint != (chbIsprint.Checked ? 1 : 0))
-                {
-                    cm.CTIIsPrint = chbIsprint.Checked ? 1 : 0;
-                    cm.updateFlage = true;
-                }               
-            }
-        }
+        //        int xitem = Convert.ToInt32(txttop.Text);
+        //        if (checkbox.CHBTop != xitem)
+        //        {
+        //            checkbox.CHBTop = xitem;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtleft.Text);
+        //        if (checkbox.CHBLeft != xitem)
+        //        {
+        //            checkbox.CHBLeft = xitem;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtwidth.Text);
+        //        if (checkbox.CHBWidth != xitem)
+        //        {
+        //            checkbox.CHBWidth = xitem;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        xitem = Convert.ToInt32(txtheight.Text);
+        //        if (checkbox.CHBHeight != xitem)
+        //        {
+        //            checkbox.CHBHeight = xitem;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        if (checkbox.CHBBandsTabel != cbxTablename.Text)
+        //        {
+        //            checkbox.CHBBandsTabel = cbxTablename.Text;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        if (checkbox.CHBBandsCoumln != cbxCoumname.Text)
+        //        {
+        //            checkbox.CHBBandsCoumln = cbxCoumname.Text;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        if (checkbox.CHBIsMust != (chbIsmust.Checked ? 1 : 0))
+        //        {
+        //            checkbox.CHBIsMust = chbIsmust.Checked ? 1 : 0;
+        //            checkbox.UpdateFlage = true;
+        //        }
+        //        if (checkbox.CHBIsPrint != (chbIsprInt.Checked ? 1 : 0))
+        //        {
+        //            checkbox.CHBIsPrint = chbIsprInt.Checked ? 1 : 0;
+        //            checkbox.UpdateFlage = true;
+        //        }               
+        //    }
+        //}
 
         #endregion
         /// <summary>
@@ -225,22 +223,19 @@ namespace BillManageWPF.Forms
 
         private void CheckBoxProperyForm_Load(object sender, EventArgs e)
         {
-            GetPropery();
+            if (tmp != null && tm != null)
+            {
+                GetPropery();
+                //checkbox = tm.chbList[tmp.NewNumber] as CheckBoxInfo;
+                font = tmp.Font;
+                bgc = tmp.BackColor;
+                frc = tmp.ForeColor; ;
+            }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            SetPropery();
-            ControlModel cm = new ControlModel();
-            if (tmp.ControlID != 0)
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.CTIID == tmp.ControlID; }));//返回符合条件的第一个元素)               
-            }
-            else
-            {
-                cm = tm.cmlist.Find((delegate(ControlModel p) { return p.NewNumber == tmp.NewNumber; }));//返回符合条件的第一个元素)                
-            }
-            UpdateModel(cm);
+            SetPropery();           
+           // UpdateModel();
         }
     }
 }

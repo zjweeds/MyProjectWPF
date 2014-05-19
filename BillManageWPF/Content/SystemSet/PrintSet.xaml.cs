@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace BillManageWPF.Content.SystemSet
 {
     /// <summary>
-    /// PrintSet.xaml 的交互逻辑
+    /// PrInt32Set.xaml 的交互逻辑
     /// </summary>
     public partial class PrintSet : UserControl
     {

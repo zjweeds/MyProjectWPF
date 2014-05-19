@@ -12,7 +12,7 @@ namespace Controllers.Models
     public class BillTemplateTypeModel
     {
 
-        public int TTID { get; set; }
+        public Int32 TTID { get; set; }
         public String TTName { get; set; }
         public int TTBillSetID { get; set; }
     }

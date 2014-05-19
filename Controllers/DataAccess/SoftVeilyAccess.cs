@@ -38,7 +38,7 @@ namespace Controllers.DataAccess
             SqlParameter[] param = new SqlParameter[1];
             param[0] = new SqlParameter("@SoftKey", SqlDbType.NVarChar, 50);
             param[0].Value = softKey;
-            return new MySqlHelper().GetDataSet(GetSelectSQL().ToString(), param,1);
+            return new MySqlHelper().GetDataSet(GetSelectSQL().ToString(), param);
         }
 
         public bool UpdateSoftVerify(DateTime newtime, String softKey)
@@ -49,7 +49,7 @@ namespace Controllers.DataAccess
             param[1]=new SqlParameter("@EndTime", SqlDbType.DateTime);
             param[1].Value = newtime;
             StringBuilder sb = GetUpdateSQL();
-            return (new MySqlHelper().ExecDataBySql(sb.ToString(), param,2) > 0);
+            return (new MySqlHelper().ExecDataBySql(sb.ToString(), param) > 0);
         }
 
     }

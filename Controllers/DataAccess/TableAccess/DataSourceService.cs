@@ -145,6 +145,18 @@ namespace Controllers.DataAccess
                 throw ex;
             }
         }
-
+        public DataTable GetAllCoumsBandingsInfoByTableAndCoumln(String tableName, String coumlnName, String values)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("select * from {0} where 1=1 and {1} = '{2}'", tableName,coumlnName,values);
+                return sqlhelper.GetDataTable(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

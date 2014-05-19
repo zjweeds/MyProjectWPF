@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <ScrollViewer>
         <StackPanel MinWidth="200">
-            <TextBlock Text="打印方案设置" Style="{StaticResource Heading1}" FontSize="24" />
+            <TextBlock Text="打印方案设置"  FontSize="24" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*"/>
@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="35*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <TextBlock Text="所有打印方案" Style="{StaticResource Heading2}" Margin="0,0,0,0"/>
+                    <TextBlock Text="所有打印方案"  Margin="0,0,0,0"/>
                     <ListBox Margin="0,34,0,32">
                         <ListBoxItem Content="测试方案1" />
                         <ListBoxItem Content="测试方案2" />
@@ -25,7 +25,7 @@
                 <Grid Grid.Column="1">
                     <ScrollViewer>
                         <StackPanel MinWidth="200">
-                            <TextBlock Text="方案信息" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
+                            <TextBlock Text="方案信息"  Margin="0,0,0,8" />
                             <StackPanel x:Name="Form" Orientation="Vertical">
                                 <StackPanel.Resources>
                                     <Style TargetType="StackPanel">
@@ -85,7 +85,7 @@
                                         <Setter Property="Padding" Value="0,3" />
                                     </Style>
                                 </StackPanel.Resources>
-                                <TextBlock Text="" Style="{StaticResource Heading2}" Margin="0,0,0,28" />
+                                <TextBlock Text=""  Margin="0,0,0,28" />
                                 <StackPanel>
                                     <Label Content="方案简介：" Target="{Binding ElementName=TextFirstName}"/>
                                 </StackPanel>

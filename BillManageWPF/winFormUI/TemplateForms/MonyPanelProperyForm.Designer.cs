@@ -44,7 +44,9 @@
             this.txtleft = new System.Windows.Forms.TextBox();
             this.txttop = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.chbIsprint = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbbBandings = new System.Windows.Forms.ComboBox();
+            this.chbIsprInt = new System.Windows.Forms.CheckBox();
             this.chbIsvisible = new System.Windows.Forms.CheckBox();
             this.chbIsmust = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -61,14 +63,12 @@
             this.btnBackgroud = new System.Windows.Forms.Button();
             this.btnForeColor = new System.Windows.Forms.Button();
             this.btnSetFont = new System.Windows.Forms.Button();
-            this.chbisborestyle = new System.Windows.Forms.CheckBox();
             this.txtBackColor = new System.Windows.Forms.TextBox();
             this.txtForeColor = new System.Windows.Forms.TextBox();
             this.txtfont = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -76,6 +76,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cd = new System.Windows.Forms.ColorDialog();
             this.fd = new System.Windows.Forms.FontDialog();
+            this.chbIsShowUnit = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtRows = new System.Windows.Forms.TextBox();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -256,7 +260,11 @@
             // groupBox5
             // 
             this.groupBox5.BackColor = System.Drawing.Color.DarkGray;
-            this.groupBox5.Controls.Add(this.chbIsprint);
+            this.groupBox5.Controls.Add(this.chbIsShowUnit);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.cbbBandings);
+            this.groupBox5.Controls.Add(this.chbIsprInt);
             this.groupBox5.Controls.Add(this.chbIsvisible);
             this.groupBox5.Controls.Add(this.chbIsmust);
             this.groupBox5.Controls.Add(this.label11);
@@ -266,22 +274,43 @@
             this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(3, 432);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(218, 80);
+            this.groupBox5.Size = new System.Drawing.Size(218, 98);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "其他";
             // 
-            // chbIsprint
+            // label8
             // 
-            this.chbIsprint.AutoSize = true;
-            this.chbIsprint.BackColor = System.Drawing.Color.DarkGray;
-            this.chbIsprint.ForeColor = System.Drawing.Color.White;
-            this.chbIsprint.Location = new System.Drawing.Point(151, 16);
-            this.chbIsprint.Name = "chbIsprint";
-            this.chbIsprint.Size = new System.Drawing.Size(39, 21);
-            this.chbIsprint.TabIndex = 37;
-            this.chbIsprint.Text = "是";
-            this.chbIsprint.UseVisualStyleBackColor = false;
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.DarkGray;
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(12, 70);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(71, 17);
+            this.label8.TabIndex = 39;
+            this.label8.Text = "绑定的控件:";
+            // 
+            // cbbBandings
+            // 
+            this.cbbBandings.BackColor = System.Drawing.Color.MediumPurple;
+            this.cbbBandings.ForeColor = System.Drawing.Color.White;
+            this.cbbBandings.FormattingEnabled = true;
+            this.cbbBandings.Location = new System.Drawing.Point(90, 67);
+            this.cbbBandings.Name = "cbbBandings";
+            this.cbbBandings.Size = new System.Drawing.Size(103, 25);
+            this.cbbBandings.TabIndex = 38;
+            // 
+            // chbIsprInt
+            // 
+            this.chbIsprInt.AutoSize = true;
+            this.chbIsprInt.BackColor = System.Drawing.Color.DarkGray;
+            this.chbIsprInt.ForeColor = System.Drawing.Color.White;
+            this.chbIsprInt.Location = new System.Drawing.Point(151, 16);
+            this.chbIsprInt.Name = "chbIsprInt";
+            this.chbIsprInt.Size = new System.Drawing.Size(39, 21);
+            this.chbIsprInt.TabIndex = 37;
+            this.chbIsprInt.Text = "是";
+            this.chbIsprInt.UseVisualStyleBackColor = false;
             // 
             // chbIsvisible
             // 
@@ -347,9 +376,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.ForeColor = System.Drawing.Color.DimGray;
-            this.button1.Location = new System.Drawing.Point(3, 518);
+            this.button1.Location = new System.Drawing.Point(3, 536);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(218, 46);
+            this.button1.Size = new System.Drawing.Size(218, 28);
             this.button1.TabIndex = 4;
             this.button1.Text = "点击设定";
             this.button1.UseVisualStyleBackColor = false;
@@ -443,25 +472,25 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.94406F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.05594F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 132F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 104F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(224, 567);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.groupBox2.Controls.Add(this.txtRows);
+            this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.btnBackgroud);
             this.groupBox2.Controls.Add(this.btnForeColor);
             this.groupBox2.Controls.Add(this.btnSetFont);
-            this.groupBox2.Controls.Add(this.chbisborestyle);
             this.groupBox2.Controls.Add(this.txtBackColor);
             this.groupBox2.Controls.Add(this.txtForeColor);
             this.groupBox2.Controls.Add(this.txtfont);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.ForeColor = System.Drawing.Color.DimGray;
             this.groupBox2.Location = new System.Drawing.Point(3, 169);
@@ -506,18 +535,6 @@
             this.btnSetFont.Text = "...";
             this.btnSetFont.UseVisualStyleBackColor = false;
             this.btnSetFont.Click += new System.EventHandler(this.btnSetFont_Click);
-            // 
-            // chbisborestyle
-            // 
-            this.chbisborestyle.AutoSize = true;
-            this.chbisborestyle.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.chbisborestyle.ForeColor = System.Drawing.Color.DimGray;
-            this.chbisborestyle.Location = new System.Drawing.Point(82, 21);
-            this.chbisborestyle.Name = "chbisborestyle";
-            this.chbisborestyle.Size = new System.Drawing.Size(39, 21);
-            this.chbisborestyle.TabIndex = 22;
-            this.chbisborestyle.Text = "是";
-            this.chbisborestyle.UseVisualStyleBackColor = false;
             // 
             // txtBackColor
             // 
@@ -578,17 +595,6 @@
             this.label4.Size = new System.Drawing.Size(43, 17);
             this.label4.TabIndex = 3;
             this.label4.Text = "字  体:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(26, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "边  框:";
             // 
             // groupBox3
             // 
@@ -654,6 +660,50 @@
             this.label12.TabIndex = 7;
             this.label12.Text = "上边距:";
             // 
+            // chbIsShowUnit
+            // 
+            this.chbIsShowUnit.AutoSize = true;
+            this.chbIsShowUnit.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.chbIsShowUnit.ForeColor = System.Drawing.Color.DimGray;
+            this.chbIsShowUnit.Location = new System.Drawing.Point(151, 44);
+            this.chbIsShowUnit.Name = "chbIsShowUnit";
+            this.chbIsShowUnit.Size = new System.Drawing.Size(39, 21);
+            this.chbIsShowUnit.TabIndex = 41;
+            this.chbIsShowUnit.Text = "是";
+            this.chbIsShowUnit.UseVisualStyleBackColor = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
+            this.label3.Location = new System.Drawing.Point(91, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 17);
+            this.label3.TabIndex = 40;
+            this.label3.Text = "显示单位:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.label16.ForeColor = System.Drawing.Color.DimGray;
+            this.label16.Location = new System.Drawing.Point(26, 19);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(43, 17);
+            this.label16.TabIndex = 26;
+            this.label16.Text = "行  数:";
+            // 
+            // txtRows
+            // 
+            this.txtRows.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.txtRows.ForeColor = System.Drawing.Color.DimGray;
+            this.txtRows.Location = new System.Drawing.Point(81, 16);
+            this.txtRows.Name = "txtRows";
+            this.txtRows.Size = new System.Drawing.Size(64, 23);
+            this.txtRows.TabIndex = 27;
+            this.txtRows.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
             // MonyPanelProperyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -698,7 +748,7 @@
         private System.Windows.Forms.TextBox txtleft;
         private System.Windows.Forms.TextBox txttop;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.CheckBox chbIsprint;
+        private System.Windows.Forms.CheckBox chbIsprInt;
         private System.Windows.Forms.CheckBox chbIsvisible;
         private System.Windows.Forms.CheckBox chbIsmust;
         private System.Windows.Forms.Label label11;
@@ -715,14 +765,12 @@
         private System.Windows.Forms.Button btnBackgroud;
         private System.Windows.Forms.Button btnForeColor;
         private System.Windows.Forms.Button btnSetFont;
-        private System.Windows.Forms.CheckBox chbisborestyle;
         private System.Windows.Forms.TextBox txtBackColor;
         private System.Windows.Forms.TextBox txtForeColor;
         private System.Windows.Forms.TextBox txtfont;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
@@ -734,5 +782,11 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cbbLow;
         private System.Windows.Forms.ComboBox cbbHeight;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cbbBandings;
+        private System.Windows.Forms.CheckBox chbIsShowUnit;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtRows;
+        private System.Windows.Forms.Label label16;
     }
 }
