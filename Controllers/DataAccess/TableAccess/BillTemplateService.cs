@@ -11,7 +11,6 @@ namespace Controllers.DataAccess
 {   
     public class BillTemplateService
     {
-        public BillTemplatModel btm = new BillTemplatModel();
         public MySqlHelper sqlhelper = new MySqlHelper();
 
         /// <summary>
@@ -19,7 +18,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="btm"></param>
         /// <returns></returns>
-        public int AddByBillTemplatModel(BillTemplatModel btm)
+        public static int AddByBillTemplatModel(BillTemplatModel btm)
         {
             try
             {
@@ -40,7 +39,7 @@ namespace Controllers.DataAccess
                 param[4].Value =btm.TITTID;
                 param[5] = new SqlParameter("@TICodeLegth ", SqlDbType.Int);
                 param[5].Value = btm.TICodeLegth;
-                return sqlhelper.ExecSqlReturnId(sbSql.ToString(), param);
+                return new MySqlHelper().ExecSqlReturnId(sbSql.ToString(), param);
             }
             catch (Exception ex)
             {
@@ -53,7 +52,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="btm"></param>
         /// <returns></returns>
-        public int UpdateByBillTemplatModel(BillTemplatModel btm)
+        public  static int UpdateByBillTemplatModel(BillTemplatModel btm)
         {
             try
             {
@@ -81,7 +80,7 @@ namespace Controllers.DataAccess
                 param[5].Value = btm.TICodeLegth;
                 param[6] = new SqlParameter("@TIID ", SqlDbType.Int);
                 param[6].Value = btm.TIID;
-                return sqlhelper.ExecDataBySql(sbSql.ToString(),param);
+                return new MySqlHelper().ExecDataBySql(sbSql.ToString(), param);
             }
             catch (Exception ex)
             {
@@ -94,7 +93,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="billTemplateID"></param>
         /// <returns></returns>
-        public DataTable GetDataTableByID(int billTemplateID)
+        public static DataTable GetDataTableByID(int billTemplateID)
         {
             StringBuilder sbsql = new StringBuilder();
             sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
@@ -102,7 +101,7 @@ namespace Controllers.DataAccess
             sbsql.Append(" where 1=1 ");
             sbsql.AppendFormat("       and TIID ='{0}' ", billTemplateID);
             sbsql.Append("       and TIIsEnable = 1");
-            return  sqlhelper.GetDataTable(sbsql.ToString());
+            return new MySqlHelper().GetDataTable(sbsql.ToString());
         }
 
         /// <summary>
@@ -110,7 +109,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="billTemplateID"></param>
         /// <returns></returns>
-        public List<BillTemplatModel> GetTemplateModerListByDataTable(DataTable dtitem)
+        public static List<BillTemplatModel> GetTemplateModerListByDataTable(DataTable dtitem)
         {
             try
             {
@@ -148,7 +147,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public BillTemplatModel GetTemplateModeltByID(int code)
+        public static BillTemplatModel GetTemplateModeltByID(int code)
         {
             DataTable dt = GetDataTableByID(code);
             BillTemplatModel btm = new BillTemplatModel();
@@ -173,7 +172,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="sTemplateName"></param>
         /// <returns></returns>
-        public DataTable GetDataTableByTypeName(String  sTemplateName)
+        public static DataTable GetDataTableByTypeName(String sTemplateName)
         {
             StringBuilder sbsql = new StringBuilder();
             sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
@@ -184,7 +183,7 @@ namespace Controllers.DataAccess
             sbsql.Append("       and TTIsEnable = 1 ");
             sbsql.Append("       and TIIsEnable = 1 ");
             sbsql.AppendFormat(" and TTName = '{0}' ", sTemplateName);
-            return sqlhelper.GetDataTable(sbsql.ToString());
+            return new MySqlHelper().GetDataTable(sbsql.ToString());
         }
 
 

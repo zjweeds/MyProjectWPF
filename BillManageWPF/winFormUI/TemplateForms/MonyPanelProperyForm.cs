@@ -13,7 +13,7 @@ using Controllers.Models;
 using Controllers.Business;
 using Controllers.Common;
 
-namespace BillManageWPF.Forms
+namespace BillManageWPF.winFormUI
 {
     public partial class MonyPanelProperyForm : Form
     {

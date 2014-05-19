@@ -1,4 +1,4 @@
-﻿namespace BillManageWPF.Forms
+﻿namespace BillManageWPF.winFormUI
 {
     partial class CheckBoxProperyForm
     {

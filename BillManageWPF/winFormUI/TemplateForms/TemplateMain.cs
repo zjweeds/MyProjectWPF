@@ -19,7 +19,7 @@ using BillManageWPF.MyCode;
 using BillManageWPF.Content.Template;
 using Controllers.Enum;
 
-namespace BillManageWPF.Forms
+namespace BillManageWPF.winFormUI
 {
     public partial class TemplateMain : Form
     {
@@ -32,7 +32,7 @@ namespace BillManageWPF.Forms
         public TemplateMain(int code)
         {
             InitializeComponent();
-            this.btm = bts.GetTemplateModeltByID(code);
+            this.btm = BillTemplateManage.SelectTemplateModeltByID(code);//bts.GetTemplateModeltByID(code);
             this.DesignContext.board.Paint += new System.Windows.Forms.PaintEventHandler(this.DesignContext_Paint);
         }
         #endregion
@@ -48,8 +48,6 @@ namespace BillManageWPF.Forms
         float fDpiY;//纵向分辨率
         #region  记录控件个数
         #endregion 
-
-        public BillTemplateService bts = new BillTemplateService();
         public BillTemplatModel btm = new BillTemplatModel();
         public List<MyTextBox> mytextList = new List<MyTextBox>();
         public IList<MoneyPanel> mympList = new List<MoneyPanel>();

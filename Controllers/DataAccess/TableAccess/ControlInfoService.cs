@@ -13,7 +13,11 @@ namespace Controllers.DataAccess
 {
     public class ControlInfoService
     {
-         
+         /// <summary>
+         /// 根据控件实体得到sql语句
+         /// </summary>
+         /// <param name="ctList"></param>
+         /// <returns></returns>
         public static IList<String> GetSqlStrings(IList<ControlInfo> ctList)
         {
             IList<String> sqlList = new List<String>();
@@ -34,6 +38,12 @@ namespace Controllers.DataAccess
             }
             return sqlList;
         }
+        
+        /// <summary>
+        /// 根据控件实体得到insert语句
+        /// </summary>
+        /// <param name="controlInfo">控件实体</param>
+        /// <returns>insert语句</returns>
         private static  String GetAddString(ControlInfo controlInfo)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -77,6 +87,11 @@ namespace Controllers.DataAccess
             return cmdText.ToString();
         }
 
+        /// <summary>
+        /// 根据控件实体得到update语句
+        /// </summary>
+        /// <param name="controlInfo">控件实体</param>
+        /// <returns>update语句</returns>
         private static String GetUpdateString(ControlInfo controlInfo)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -153,7 +168,6 @@ namespace Controllers.DataAccess
             return new MySqlHelper().ExecDataBySql(cmdText);
         }
 
-
         /// <summary>
         /// 更新ControlInfo
         /// </summary>
@@ -162,7 +176,6 @@ namespace Controllers.DataAccess
         {
             return new MySqlHelper().ExecDataBySql(GetUpdateString(controlInfo));
         }
-
 
         /// <summary>
         /// 查询ControlInfo
@@ -212,7 +225,6 @@ namespace Controllers.DataAccess
             return controlInfos;
         }
 
-
         /// <summary>
         /// 根据CIID查询ControlInfo
         /// </summary>
@@ -230,12 +242,12 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat("CIID = '{0}' " ,_cIID);
             IList<ControlInfo> controlInfos = SelectControlInfoByCmdText(cmdText.ToString());
             return controlInfos.Count > 0 ? controlInfos[0] : null;
-        }
-
-
+        }       
+        
         /// <summary>
-        /// 查询所有ControlInfo
+        /// 查询返回所有控件实体列表
         /// </summary>
+        /// <returns></returns>
         public static IList<ControlInfo> SelectAllControlInfo()
         {
             StringBuilder cmdText = new StringBuilder();
@@ -250,6 +262,11 @@ namespace Controllers.DataAccess
             return SelectControlInfoByCmdText(cmdText.ToString());
         }
 
+        /// <summary>
+        /// 根据模板号查询返回控件实体列表
+        /// </summary>
+        /// <param name="TemplateID"></param>
+        /// <returns></returns>
         public static IList<ControlInfo> SelectControlInfosByTemplateID(int TemplateID)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -263,6 +280,27 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", TemplateID);
             return SelectControlInfoByCmdText(cmdText.ToString());
         }
-      
+
+        public static DataTable SelectContrilInfoIDByTemplateID(int templateID)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT ");
+            cmdText.Append("     CIID ");
+            cmdText.Append("From ControlInfo "); 
+            cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", templateID);
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
+
+        public static DataTable GetContrilPrintInfoByTemplateID(int templateID)
+        {
+
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT ");
+            cmdText.Append("     CIID,CTType,CTLeft,CTTop,CTWidth,CTHeight,CTIsPrint,CTFont, ");
+            cmdText.Append("     CTFontColor,CTIsFlage  ");
+            cmdText.Append("From ControlInfo with(nolock) ");
+            cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", templateID);
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
     }
 }

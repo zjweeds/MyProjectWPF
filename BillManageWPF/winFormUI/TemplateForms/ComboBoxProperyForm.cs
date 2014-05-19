@@ -13,7 +13,7 @@ using Controllers.Models;
 using Controllers.DataAccess;
 using Controllers.Common;
 
-namespace BillManageWPF.Forms
+namespace BillManageWPF.winFormUI
 {
     public partial class ComboBoxProperyForm : Form
     {

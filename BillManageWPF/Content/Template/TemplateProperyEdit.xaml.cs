@@ -13,8 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Controllers.Models;
 using Controllers.Common;
+using Controllers.Business;
 using Controllers.DataAccess;
-using BillManageWPF.Forms;
+using BillManageWPF.winFormUI;
 using System.Data;
 using BillManageWPF.MyCode;
 using System.Windows.Navigation;
@@ -75,7 +76,6 @@ namespace BillManageWPF.Content.Template
         public System.Drawing.Image bgimage = null;//保存图片
         public BillTemplatModel btm = new BillTemplatModel(); //模板实体
         private System.Windows.Forms.OpenFileDialog dlgPicture = new System.Windows.Forms.OpenFileDialog(); //文件选择对话框
-        public BillTemplateService btmserice = new BillTemplateService();//模板业务对象
         public DataTable dttype = new DataTable();
         public BillTemplateTypeService btts = new BillTemplateTypeService();
         #endregion
@@ -172,7 +172,7 @@ namespace BillManageWPF.Content.Template
                 if (Type != "Update")
                 {
                     //新增
-                    btm.TIID = btmserice.AddByBillTemplatModel(btm);
+                    btm.TIID = BillTemplateManage.AddByBillTemplatModel(btm);
                     if (btm.TIID != 0)
                     {
                         MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
@@ -184,7 +184,7 @@ namespace BillManageWPF.Content.Template
                 else
                 {
                     //更新
-                    if (btmserice.UpdateByBillTemplatModel(btm) > 0)
+                    if (BillTemplateManage.UpdateByBillTemplatModel(btm) > 0)
                     {
                         MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
                         this.Close();

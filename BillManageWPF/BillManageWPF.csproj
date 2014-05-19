@@ -93,6 +93,12 @@
     <Compile Include="winFormUI\BillForms\BillSerchListForm.Designer.cs">
       <DependentUpon>BillSerchListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="winFormUI\BillForms\FilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="winFormUI\BillForms\FilterForm.Designer.cs">
+      <DependentUpon>FilterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="winFormUI\TemplateForms\CheckBoxProperyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +248,9 @@
     </Compile>
     <EmbeddedResource Include="winFormUI\BillForms\BillSerchListForm.resx">
       <DependentUpon>BillSerchListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="winFormUI\BillForms\FilterForm.resx">
+      <DependentUpon>FilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\CheckBoxProperyForm.resx">
       <DependentUpon>CheckBoxProperyForm.cs</DependentUpon>

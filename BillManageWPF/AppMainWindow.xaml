@@ -6,7 +6,7 @@
         xmlns:wf ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:tabEx ="clr-namespace:CSharpWin;assembly=TabControlEx"
         xmlns:local="clr-namespace:BillManageWPF.Page"
-        xmlns:forms="clr-namespace:BillManageWPF.Forms"
+        xmlns:forms="clr-namespace:BillManageWPF.winFormUI"
         Title="MainWindow" Height="610" Width="910" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>

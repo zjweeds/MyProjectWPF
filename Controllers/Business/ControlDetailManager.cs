@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 using Controllers.Models;
 using Controllers.DataAccess;
 namespace Controllers.Business
@@ -70,6 +71,27 @@ namespace Controllers.Business
         public static int  AddlControlDetailByList(IList<ControlDetail> cdList)
         {
             return ControlDetailService.AddControlDetailByList(cdList);
+        }
+
+        public static DataTable QueryBillInfoCDByPROCEDURE(int templateID)
+        {
+            return ControlDetailService.QueryBillInfoCDByPROCEDURE(templateID);
+        }
+
+        /// <summary>
+        /// 根据模板编号查询票据信息
+        /// </summary>
+        /// <param name="templateID">模板编号</param>
+        /// <returns>按账单编号分类的账单信息</returns>
+        public static DataTable QueryBillInfoControlsDetailByTemplateID(int templateID)
+        {
+            IList<Int32> cIIDList = ControlsInfoManager.
+                SelectControlsInfoIDByTenplateID(templateID);//查询返回当前模板用到的所有控件ID列表
+            return ControlDetailService.QueryBillInfoControlsDetailByCIIDList(cIIDList, templateID);
+        }
+        public static DataTable SeclectControlsDetailByBIID(int bIID)
+        {
+            return ControlDetailService.SeclectControlsDetailByBIID(bIID);
         }
     }
 }

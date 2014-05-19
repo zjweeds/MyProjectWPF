@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Business\BillInfoManager.cs" />
     <Compile Include="Business\BillSetManager.cs" />
+    <Compile Include="Business\BillTemplateManage.cs" />
     <Compile Include="Business\CompanyManager.cs" />
     <Compile Include="Business\ControlDetailManager.cs" />
     <Compile Include="Business\ControlsInfoManager.cs" />

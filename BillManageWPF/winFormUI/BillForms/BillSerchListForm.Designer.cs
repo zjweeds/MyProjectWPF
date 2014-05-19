@@ -1,4 +1,4 @@
-﻿namespace BillManageWPF.winFormUI.BillForms
+﻿namespace BillManageWPF.winFormUI
 {
     partial class BillSerchListForm
     {
@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BillSerchListForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolSelectAll = new System.Windows.Forms.ToolStripButton();
             this.toolSave = new System.Windows.Forms.ToolStripButton();
             this.toolCancel = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolPrInt32 = new System.Windows.Forms.ToolStripButton();
             this.toolPrInt32View = new System.Windows.Forms.ToolStripButton();
             this.toolPrInt32More = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -43,16 +43,17 @@
             this.toolline = new System.Windows.Forms.ToolStripSeparator();
             this.toolSerch = new System.Windows.Forms.ToolStripButton();
             this.toolOrder = new System.Windows.Forms.ToolStripButton();
-            this.toolCoumlnsPropery = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolExit = new System.Windows.Forms.ToolStripButton();
-            this.dgBillInfo = new System.Windows.Forms.DataGridView();
+            this.dgvBillInfo = new System.Windows.Forms.DataGridView();
+            this.Selected = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pd = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgBillInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBillInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -68,7 +69,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgBillInfo);
+            this.splitContainer1.Panel2.Controls.Add(this.dgvBillInfo);
             this.splitContainer1.Size = new System.Drawing.Size(884, 461);
             this.splitContainer1.SplitterDistance = 44;
             this.splitContainer1.TabIndex = 0;
@@ -79,10 +80,10 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolSelectAll,
             this.toolSave,
             this.toolCancel,
             this.toolStripSeparator1,
-            this.toolPrInt32,
             this.toolPrInt32View,
             this.toolPrInt32More,
             this.toolStripSeparator2,
@@ -91,7 +92,6 @@
             this.toolline,
             this.toolSerch,
             this.toolOrder,
-            this.toolCoumlnsPropery,
             this.toolStripSeparator3,
             this.toolExit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -99,6 +99,17 @@
             this.toolStrip1.Size = new System.Drawing.Size(884, 44);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolSelectAll
+            // 
+            this.toolSelectAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolSelectAll.ForeColor = System.Drawing.Color.White;
+            this.toolSelectAll.Image = ((System.Drawing.Image)(resources.GetObject("toolSelectAll.Image")));
+            this.toolSelectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSelectAll.Name = "toolSelectAll";
+            this.toolSelectAll.Size = new System.Drawing.Size(41, 41);
+            this.toolSelectAll.Text = "全选";
+            this.toolSelectAll.Click += new System.EventHandler(this.toolSelectAll_Click);
             // 
             // toolSave
             // 
@@ -133,18 +144,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 44);
             // 
-            // toolPrInt32
-            // 
-            this.toolPrInt32.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolPrInt32.ForeColor = System.Drawing.Color.White;
-            this.toolPrInt32.Image = ((System.Drawing.Image)(resources.GetObject("toolPrInt32.Image")));
-            this.toolPrInt32.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolPrInt32.Name = "toolPrInt32";
-            this.toolPrInt32.Size = new System.Drawing.Size(49, 41);
-            this.toolPrInt32.Text = "打  印";
-            this.toolPrInt32.MouseEnter += new System.EventHandler(this.toolSave_MouseEnter);
-            this.toolPrInt32.MouseLeave += new System.EventHandler(this.toolSave_MouseLeave);
-            // 
             // toolPrInt32View
             // 
             this.toolPrInt32View.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -154,6 +153,7 @@
             this.toolPrInt32View.Name = "toolPrInt32View";
             this.toolPrInt32View.Size = new System.Drawing.Size(49, 41);
             this.toolPrInt32View.Text = "预  览";
+            this.toolPrInt32View.Click += new System.EventHandler(this.toolPrInt32View_Click);
             this.toolPrInt32View.MouseEnter += new System.EventHandler(this.toolSave_MouseEnter);
             this.toolPrInt32View.MouseLeave += new System.EventHandler(this.toolSave_MouseLeave);
             // 
@@ -166,6 +166,7 @@
             this.toolPrInt32More.Name = "toolPrInt32More";
             this.toolPrInt32More.Size = new System.Drawing.Size(69, 41);
             this.toolPrInt32More.Text = "批量套打";
+            this.toolPrInt32More.Click += new System.EventHandler(this.toolPrInt32More_Click);
             this.toolPrInt32More.MouseEnter += new System.EventHandler(this.toolSave_MouseEnter);
             this.toolPrInt32More.MouseLeave += new System.EventHandler(this.toolSave_MouseLeave);
             // 
@@ -227,18 +228,6 @@
             this.toolOrder.MouseEnter += new System.EventHandler(this.toolSave_MouseEnter);
             this.toolOrder.MouseLeave += new System.EventHandler(this.toolSave_MouseLeave);
             // 
-            // toolCoumlnsPropery
-            // 
-            this.toolCoumlnsPropery.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolCoumlnsPropery.ForeColor = System.Drawing.Color.White;
-            this.toolCoumlnsPropery.Image = ((System.Drawing.Image)(resources.GetObject("toolCoumlnsPropery.Image")));
-            this.toolCoumlnsPropery.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolCoumlnsPropery.Name = "toolCoumlnsPropery";
-            this.toolCoumlnsPropery.Size = new System.Drawing.Size(55, 41);
-            this.toolCoumlnsPropery.Text = "列属性";
-            this.toolCoumlnsPropery.MouseEnter += new System.EventHandler(this.toolSave_MouseEnter);
-            this.toolCoumlnsPropery.MouseLeave += new System.EventHandler(this.toolSave_MouseLeave);
-            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -257,19 +246,34 @@
             this.toolExit.Size = new System.Drawing.Size(61, 41);
             this.toolExit.Text = " 退  出  ";
             this.toolExit.ToolTipText = "点击退出";
+            this.toolExit.Click += new System.EventHandler(this.toolExit_Click);
             this.toolExit.MouseEnter += new System.EventHandler(this.toolSave_MouseEnter);
             this.toolExit.MouseLeave += new System.EventHandler(this.toolSave_MouseLeave);
             // 
-            // dgBillInfo
+            // dgvBillInfo
             // 
-            this.dgBillInfo.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgBillInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBillInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgBillInfo.Location = new System.Drawing.Point(0, 0);
-            this.dgBillInfo.Name = "dgBillInfo";
-            this.dgBillInfo.RowTemplate.Height = 23;
-            this.dgBillInfo.Size = new System.Drawing.Size(884, 413);
-            this.dgBillInfo.TabIndex = 0;
+            this.dgvBillInfo.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvBillInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvBillInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBillInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Selected});
+            this.dgvBillInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBillInfo.Location = new System.Drawing.Point(0, 0);
+            this.dgvBillInfo.Name = "dgvBillInfo";
+            this.dgvBillInfo.RowTemplate.Height = 23;
+            this.dgvBillInfo.Size = new System.Drawing.Size(884, 413);
+            this.dgvBillInfo.TabIndex = 0;
+            // 
+            // Selected
+            // 
+            this.Selected.HeaderText = "选择";
+            this.Selected.Name = "Selected";
+            this.Selected.Width = 40;
+            // 
+            // pd
+            // 
+            this.pd.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.pd_BeginPrint);
+            this.pd.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.pd_PrintPage);
             // 
             // BillSerchListForm
             // 
@@ -279,6 +283,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "BillSerchListForm";
             this.Text = "票据查询";
+            this.Load += new System.EventHandler(this.BillSerchListForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -286,7 +291,7 @@
             this.splitContainer1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgBillInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBillInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -294,12 +299,11 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dgBillInfo;
+        private System.Windows.Forms.DataGridView dgvBillInfo;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolSave;
         private System.Windows.Forms.ToolStripButton toolCancel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolPrInt32;
         private System.Windows.Forms.ToolStripButton toolPrInt32View;
         private System.Windows.Forms.ToolStripButton toolPrInt32More;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -308,8 +312,10 @@
         private System.Windows.Forms.ToolStripSeparator toolline;
         private System.Windows.Forms.ToolStripButton toolSerch;
         private System.Windows.Forms.ToolStripButton toolOrder;
-        private System.Windows.Forms.ToolStripButton toolCoumlnsPropery;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolExit;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Selected;
+        private System.Drawing.Printing.PrintDocument pd;
+        private System.Windows.Forms.ToolStripButton toolSelectAll;
     }
 }

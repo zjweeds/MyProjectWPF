@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Controllers.DataAccess;
 using Controllers.Models;
+using System.Data;
 
 namespace Controllers.Business
 {
@@ -18,8 +19,7 @@ namespace Controllers.Business
         {
             return ControlInfoService.AddControlInfo(controlInfo);
         }
-    
-      
+        
         /// <summary>
         /// 根据CIID删除ControlInfo
         /// <param name="CIID">对象属性</param>
@@ -27,8 +27,7 @@ namespace Controllers.Business
         {
             return ControlInfoService.DeleteControlInfoByCIID( _cIID) > 0 ? true : false;
         }
-          
-           
+                 
         /// <summary>
         /// 更新ControlInfo
         /// <param name="controlInfo">新的对象实例</param>
@@ -67,8 +66,7 @@ namespace Controllers.Business
             controlInfoTemp.CTMPBindsID = controlInfo.CTMPBindsID;
             return ControlInfoService.UpdateControlInfo(controlInfoTemp) > 0 ? true : false;
         }
-          
-           
+                 
         /// <summary>
         /// 根据CIID查询ControlInfo
         /// <param name="controlInfo">对象实例</param>
@@ -76,8 +74,7 @@ namespace Controllers.Business
         {
             return ControlInfoService.SelectControlInfoByCIID( _cIID);
         }
-        
-        
+               
         /// <summary>
         /// 查询所有ControlInfo
         /// </summary>
@@ -104,6 +101,35 @@ namespace Controllers.Business
         public static IList<ControlInfo> SelectControlInfosByTemplateID(int templateID)
         {
             return ControlInfoService.SelectControlInfosByTemplateID(templateID);
+        }
+
+        /// <summary>
+        /// 根据模板编号查询返回所有控件编号
+        /// </summary>
+        /// <param name="templateID">模板编号</param>
+        /// <returns>控件编号列表</returns>
+        public static IList<Int32> SelectControlsInfoIDByTenplateID(int templateID)
+        {
+            IList<Int32> intList=new List<Int32>();
+            DataTable dt = ControlInfoService.SelectContrilInfoIDByTemplateID(templateID);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    intList.Add(Convert.ToInt32(dt.Rows[i][0]));
+                }
+            }
+            return intList;
+        }
+
+        /// <summary>
+        /// 打印时查询控件信息
+        /// </summary>
+        /// <param name="templateID">模板编号</param>
+        /// <returns>信息列表</returns>
+        public static DataTable GetContrilPrintInfoByTemplateID(int templateID)
+        {
+            return ControlInfoService.GetContrilPrintInfoByTemplateID(templateID);
         }
     }
 }

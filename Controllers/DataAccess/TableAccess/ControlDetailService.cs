@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 using Controllers.Models;
 using System.Data.SqlClient;
 using Controllers.DataAccess.SQLHELPER;
@@ -140,6 +141,52 @@ namespace Controllers.DataAccess
             String cmdText = "SELECT * FROM ControlDetails where CDIsEnable = '1'";
             return SelectControlDetailByCmdText(cmdText);
         }
-      
+
+        /// <summary>
+        /// 查询票据信息，将CIID作列名，CText作列值
+        /// </summary>
+        /// <param name="cIIDList">当前模板的控件ID列表</param>
+        /// <param name="templateID">模板ID</param>
+        /// <returns>按账单编号分组的票据信息</returns>
+        public static DataTable QueryBillInfoControlsDetailByCIIDList(IList<Int32> cIIDList,int templateID)
+        {
+            DataTable dt = new DataTable();
+            if (cIIDList != null && cIIDList.Count > 0)
+            {
+                StringBuilder cmdText = new StringBuilder();
+                cmdText.Append("select");
+                foreach (int cIID in cIIDList)
+                {
+                    if (cmdText.ToString() != "select")
+                    {
+                        cmdText.Append(" , ");
+                    }
+                    cmdText.AppendFormat(" ,MAX(CASE CDCTIID WHEN  '{0}' THEN CDText ELSE NULL END) as '{0}' ", Convert.ToString(cIID));
+                }
+                cmdText.AppendFormat(" FROM ControlDetails Where CDTIID ='{0}' GROUP BY CDBIID ", templateID);
+                dt = new MySqlHelper().GetDataTable(cmdText.ToString());
+            }
+            return dt;
+        }
+
+        public static DataTable QueryBillInfoCDByPROCEDURE(int templateID)
+        {
+            DataTable dtView = new DataTable();
+            //创建SqlParameter对象，并赋值
+            SqlParameter param = new SqlParameter("@TIID", SqlDbType.NVarChar);
+            param.Value = templateID;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(param);
+            //把泛型中的元素复制到数组中
+            SqlParameter[] inputParameters = parameters.ToArray();
+            return new MySqlHelper().GetDataTable("P_QueryBill", inputParameters);
+        }
+
+        public static DataTable SeclectControlsDetailByBIID(int bIID)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.AppendFormat("select CDCTIID,CDText from ControlDetails where  CDBIID = '{0}' and CDIsEnable = 1", bIID);
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
     }
 }
