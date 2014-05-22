@@ -13,20 +13,22 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
 using Controllers.Models;
+using System.Drawing;
 using Controllers.Common;
 
 namespace Controllers.DataAccess
 {
     public class ConfigService
     {
-        String path = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";
-        String file = @"SoftConfig.xml";
+       static  String path = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";//配置文件路径
+       static String ImagePath = AppDomain.CurrentDomain.BaseDirectory + @"\\Images\\";//票据图片路径
+       static String file = @"SoftConfig.xml";
         MyXmlHelper myxmlhelper = new MyXmlHelper();
         /// <summary>
         /// 判断配置文件是否存在
         /// </summary>
         /// <returns>true 存在；false 不存在 </returns>
-        public bool  isConfigFilesExist()
+        public static bool  isConfigFilesExist()
         {           
             if (File.Exists((path + "/" + file))) 
             {
@@ -75,25 +77,43 @@ namespace Controllers.DataAccess
             }
         }
 
-        public SoftConfigModel readXML()
+        public static bool IsImageExit(String ipathName, String fileName)
         {
-            SoftConfigModel scmf = myxmlhelper.readXMl(path + '/' + file);
-            if (scmf != null)
+            if (!Directory.Exists(ipathName))//若文件夹不存在则新建文件夹  
             {
-                return scmf;
+                Directory.CreateDirectory(ipathName); //新建文件夹 
+                return false;
             }
             else
             {
-               return  new SoftConfigModel();
+                if (File.Exists((ipathName + "/" + fileName)))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }           
+        }
+
+        public static bool CreateImages(String ipathName, String fileName, byte[] buff)
+        {
+            try
+            {
+                ipathName = ImagePath + ipathName;
+                ImageHelper im = new ImageHelper();
+                if (!IsImageExit(ipathName, fileName))
+                {
+                    im.SaveImage(im.GetImageByByte(buff), ipathName + "/" + fileName+".jpg");
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
-
-        public String CheckSoft(String softkey)
-        {
-            StringBuilder CheckSoftSQL = new StringBuilder();
-           CheckSoftSQL.Append("select top 1 CompanyName,StarTime,EndTime from RegistInfo  where SoftKey =@SoftKey");
-
-            return "";
-        }
+       
     }
 }

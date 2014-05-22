@@ -188,5 +188,11 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat("select CDCTIID,CDText from ControlDetails where  CDBIID = '{0}' and CDIsEnable = 1", bIID);
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
+        public static int SelectCDBIIDByCDText(int BINO,String strVaule)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.AppendFormat("select CDBIID from ControlDetails  with(nolock) where CDCTIID ='{0}' AND CDText ='{1}' ", BINO, strVaule);
+            return (int)new MySqlHelper().GetSingleObject(cmdText.ToString());
+        }
     }
 }

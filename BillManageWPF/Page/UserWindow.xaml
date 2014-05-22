@@ -1,0 +1,78 @@
+﻿<Window  x:Class="BillManageWPF.Page.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="clr-namespace:FirstFloor.ModernUI;assembly=FirstFloor.ModernUI"
+        xmlns:cmui="clr-namespace:FirstFloor.ModernUI.Windows.Controls;assembly=FirstFloor.ModernUI"
+         Title="个人信息修改"  WindowStartupLocation="Manual" x:Name="window"
+       Height="768" Width="550" Left="1366" ResizeMode="NoResize"  Top="0"  Loaded="Window_Loaded"  WindowStyle="None"  MouseLeave="window_MouseLeave">
+    <!--<Grid Margin="20,30,20,30" Loaded="grid_Loaded" >-->
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>-->
+    <Grid Margin="0,30,0,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="个人信息设置" Style="{StaticResource Heading1}" Foreground="Purple" Grid.Row="0" Grid.ColumnSpan="3" Margin="10,0,0,0" />
+        <Button Name="btnZHSZ" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Content="账户设置" FontSize="20"  Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click">
+            <Button.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.Background>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FFCCCCCC" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Button Name="btnGRXX" VerticalAlignment="Center"  Grid.Row="4" Grid.Column="0" Content="个人信息" FontSize="20" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click_1">
+            <Button.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.Background>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FFCCCCCC" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Button Name="btnTX" VerticalAlignment="Center"  Grid.Row="6" Grid.Column="0" Content="头像" FontSize="20" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click_2" >
+            <Button.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.Background>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="#FFCCCCCC" Opacity="0"/>
+            </Button.BorderBrush>
+        </Button>
+        <Grid Grid.Column="1" Grid.Row="2" Grid.RowSpan="8" Name="grid" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+        </Grid>
+        <Button Name="btnZhuxiao"   Grid.Column="0" Grid.Row="8" VerticalAlignment="Center"  HorizontalAlignment="Center"   Content="注销账号" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnZhuxiao_Click">
+            <Button.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.Background>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="SkyBlue" />
+            </Button.BorderBrush>
+        </Button>
+        <Button Name="btnExit"  Grid.Row="9" Grid.Column="0" VerticalAlignment="Center"  HorizontalAlignment="Center"   Content="退出程序" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnExit_Click">
+            <Button.Background>
+                <SolidColorBrush Color="White" Opacity="0"/>
+            </Button.Background>
+            <Button.BorderBrush>
+                <SolidColorBrush Color="SkyBlue"/>
+            </Button.BorderBrush>
+        </Button>
+    </Grid>
+</Window>

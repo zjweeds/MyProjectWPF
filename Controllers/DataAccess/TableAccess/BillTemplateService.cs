@@ -153,7 +153,6 @@ namespace Controllers.DataAccess
             BillTemplatModel btm = new BillTemplatModel();
             if (dt != null && dt.Rows.Count > 0)
             {
-
                 btm.TIID = Convert.ToInt32(dt.Rows[0]["TIID"]);
                 btm.TIName = Convert.ToString(dt.Rows[0]["TIName"]);
                 btm.TIBackground = dt.Rows[0]["TIBackground"] as byte[];
@@ -186,7 +185,21 @@ namespace Controllers.DataAccess
             return new MySqlHelper().GetDataTable(sbsql.ToString());
         }
 
-
+        /// <summary>
+        /// 根据账套ID取模板信息
+        /// </summary>
+        /// <param name="bsName"></param>
+        /// <returns></returns>
+        public static DataTable GetTemplatBagroundByBSName(String bsName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("select TTName,TIID,TIBackground from TemplateInfo with(nolock) ");
+            cmdText.Append(" join TemplateType with(nolock) on TTID = TITTID ");
+            cmdText.Append(" join BillSetInfo  with(nolock) on BSIID = TTBillSetID ");
+            cmdText.Append(" where TIIsEnable =1 and TTIsEnable = 1 and BSIIsEnable = 1");
+            cmdText.AppendFormat(" and BSIName = '{0}'", bsName);
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
         #region 废弃
         /// <summary>
         /// 根据页面编号 返回模板datatable

@@ -93,5 +93,9 @@ namespace Controllers.Business
         {
             return ControlDetailService.SeclectControlsDetailByBIID(bIID);
         }
+        public static int SelectCDBIIDByCDText(int cDcIID, String cdText)
+        {
+            return ControlDetailService.SelectCDBIIDByCDText(cDcIID, cdText);
+        }
     }
 }

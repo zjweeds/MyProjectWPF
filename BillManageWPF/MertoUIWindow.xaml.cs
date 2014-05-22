@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BillManageWPF.Page;
 
 namespace BillManageWPF
 {
@@ -114,6 +115,8 @@ namespace BillManageWPF
             private void btnTemplateIcon_MouseEnter(object sender, MouseEventArgs e)
             {
                 SetGridVisiable(btnTemplate, btnTemplateIcon);
+                btnTemplate.Cursor = Cursors.Hand;
+                btnTemplateIcon.Cursor = Cursors.Hand;
             }
 
             private void btnTemplate_MouseLeave(object sender, MouseEventArgs e)
@@ -124,6 +127,8 @@ namespace BillManageWPF
             private void btnDatasourceIcon_MouseEnter(object sender, MouseEventArgs e)
             {
                 SetGridVisiable(btnDatasource, btnDatasourceIcon);
+                btnDatasource.Cursor = Cursors.Hand;
+                btnDatasourceIcon.Cursor = Cursors.Hand;
             }
 
             private void btnDatasource_MouseLeave(object sender, MouseEventArgs e)
@@ -134,6 +139,8 @@ namespace BillManageWPF
             private void btnBillIcon_MouseEnter(object sender, MouseEventArgs e)
             {
                 SetGridVisiable(btnBill, btnBillIcon);
+                btnBill.Cursor = Cursors.Hand;
+                btnBillIcon.Cursor = Cursors.Hand;
             }
 
             private void btnBill_MouseLeave(object sender, MouseEventArgs e)
@@ -144,6 +151,8 @@ namespace BillManageWPF
             private void btnUsersIcon_MouseEnter(object sender, MouseEventArgs e)
             {
                 SetGridVisiable(btnUsers, btnUsersIcon);
+                btnUsersIcon.Cursor = Cursors.Hand;
+                btnUsers.Cursor = Cursors.Hand;
             }
 
             private void btnUsers_MouseLeave(object sender, MouseEventArgs e)
@@ -154,6 +163,8 @@ namespace BillManageWPF
             private void btnSystemsSetIcon_MouseEnter(object sender, MouseEventArgs e)
             {
                 SetGridVisiable(btnSystemsSet, btnSystemsSetIcon);
+                btnSystemsSet.Cursor = Cursors.Hand;
+                btnSystemsSetIcon.Cursor = Cursors.Hand;
             }
 
             private void btnSystemsSet_MouseLeave(object sender, MouseEventArgs e)
@@ -164,6 +175,8 @@ namespace BillManageWPF
             private void btnHelperIcon_MouseEnter(object sender, MouseEventArgs e)
             {
                 SetGridVisiable(btnHelper, btnHelperIcon);
+                btnHelperIcon.Cursor = Cursors.Hand;
+                btnHelper.Cursor = Cursors.Hand;
             }
 
             private void btnHelper_MouseLeave(object sender, MouseEventArgs e)
@@ -172,7 +185,28 @@ namespace BillManageWPF
             }
 
             #endregion
+
+            private void imUserPhoto_MouseEnter(object sender, MouseEventArgs e)
+            {
+                imUserPhoto.Opacity = 0.5;
+                imUserPhoto.Cursor = Cursors.Hand;
+            }
         #endregion
+
+            private void imUserPhoto_MouseDown(object sender, MouseButtonEventArgs e)
+            {
+                UserWindow yw = new UserWindow();
+                yw.Show();
+                //UserInfoWindow uiw = new UserInfoWindow();
+                //uiw.Show();
+            }
+
+            private void imUserPhoto_MouseLeave(object sender, MouseEventArgs e)
+            {
+                imUserPhoto.Opacity = 1.0;
+                imUserPhoto.Cursor = Cursors.Arrow;
+               
+            }
 
     }
 }

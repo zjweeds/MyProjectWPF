@@ -229,18 +229,20 @@ namespace BillManageWPF.Page
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnTemplateDesign_Click(object sender, RoutedEventArgs e)
-        {
-            int tIID = GetForceTemplateID(sender);//获取当前操作的ID
-            if (tIID > 0)
+        { 
+            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+            if (lsvItem != null)
             {
-                TemplateMain tm = new TemplateMain(tIID);
-                tm.Show();
+                if (lsvItem.SelectedItems.Count > 0)
+                {
+                    TemplateMain tm = new TemplateMain(Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString()));
+                    tm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("请先选择票据", "软件提示");
+                }
             }
-            else
-            {
-                MessageBox.Show("请先选择票据", "软件提示");
-                return;
-            }              
         }
 
         /// <summary>
@@ -249,33 +251,37 @@ namespace BillManageWPF.Page
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnBillSerch_Click(object sender, RoutedEventArgs e)
-        { 
-            int tIID = GetForceTemplateID(sender);//获取当前操作的ID
-            if (tIID > 0)
+        {   
+            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+            if (lsvItem != null)
             {
-                BillSerchListForm blf = new BillSerchListForm(tIID);
-                blf.Show();
+                if (lsvItem.SelectedItems.Count > 0)
+                {
+                    BillSerchListForm blf = new BillSerchListForm(Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString()));
+                    blf.Show();
+                }
+                else
+                {
+                    MessageBox.Show("请先选择票据", "软件提示");
+                }
             }
-            else
-            {
-                MessageBox.Show("请先选择票据", "软件提示");
-                return;
-            }   
         }
 
         private void btnPrints_Click(object sender, RoutedEventArgs e)
         {
-            int tIID = GetForceTemplateID(sender);//获取当前操作的ID
-            if (tIID > 0)
+            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+            if (lsvItem != null)
             {
-                BillSerchListForm blf = new BillSerchListForm(tIID);
-                blf.Show();
-            }
-            else
-            {
-                MessageBox.Show("请先选择票据", "软件提示");
-                return;
-            }  
+                if (lsvItem.SelectedItems.Count > 0)
+                {
+                    BillSerchListForm blf = new BillSerchListForm(Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString()));
+                    blf.Show();
+                }
+                else
+                {
+                    MessageBox.Show("请先选择票据", "软件提示");
+                }
+            } 
         }
     }
 }

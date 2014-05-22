@@ -296,7 +296,7 @@ namespace Controllers.DataAccess
 
             StringBuilder cmdText = new StringBuilder();
             cmdText.Append("SELECT ");
-            cmdText.Append("     CIID,CTType,CTLeft,CTTop,CTWidth,CTHeight,CTIsPrint,CTFont, ");
+            cmdText.Append("     CIID,CTName,CTType,CTLeft,CTTop,CTWidth,CTHeight,CTIsPrint,CTFont, ");
             cmdText.Append("     CTFontColor,CTIsFlage  ");
             cmdText.Append("From ControlInfo with(nolock) ");
             cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", templateID);

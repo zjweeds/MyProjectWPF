@@ -31,7 +31,6 @@ namespace BillManageWPF.winFormUI
         #region  页面变量
         public MyCheckBox tmp = null;
         public TemplateMain tm = null;
-//public CheckBoxInfo checkbox = null;
         public Font font = null;
         public Color bgc;
         public Color frc;
@@ -79,97 +78,6 @@ namespace BillManageWPF.winFormUI
                 tmp.IsPrint = chbIsprInt.Checked ;
             }
         }
-
-        //public void UpdateModel()
-        //{
-        //    if (checkbox != null)
-        //    {
-        //        if (checkbox.CHBName != txtName.Text)
-        //        {
-        //            checkbox.CHBName = txtName.Text;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        if (checkbox.CHBDefault != (chbDefault.Checked ? "true" : "false"))
-        //        {
-        //            checkbox.CHBDefault = chbDefault.Checked ? "true" : "false";
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        if (checkbox.CHBTabKey != Convert.ToInt32(txttab.Text))
-        //        {
-        //            checkbox.CHBTabKey = Convert.ToInt32(txttab.Text);
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        if (checkbox.CHBVisiable != (chbIsvisible.Checked ? 1 : 0))
-        //        {
-        //            checkbox.CHBVisiable = chbIsvisible.Checked ? 1 : 0;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        String sfont = new CommonClass().GetStringByFont(tmp.Font);
-        //        if (checkbox.CHBFont != sfont)
-        //        {
-        //            checkbox.CHBFont = sfont;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
-        //        if (checkbox.CHBFontColor != sbuff)
-        //        {
-        //            checkbox.CHBFontColor = sbuff;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
-        //        if (checkbox.CHBBackColor != sbuff)
-        //        {
-        //            checkbox.CHBBackColor = sbuff;
-        //            checkbox.UpdateFlage = true;
-        //        }
-
-        //        int xitem = Convert.ToInt32(txttop.Text);
-        //        if (checkbox.CHBTop != xitem)
-        //        {
-        //            checkbox.CHBTop = xitem;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        xitem = Convert.ToInt32(txtleft.Text);
-        //        if (checkbox.CHBLeft != xitem)
-        //        {
-        //            checkbox.CHBLeft = xitem;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        xitem = Convert.ToInt32(txtwidth.Text);
-        //        if (checkbox.CHBWidth != xitem)
-        //        {
-        //            checkbox.CHBWidth = xitem;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        xitem = Convert.ToInt32(txtheight.Text);
-        //        if (checkbox.CHBHeight != xitem)
-        //        {
-        //            checkbox.CHBHeight = xitem;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        if (checkbox.CHBBandsTabel != cbxTablename.Text)
-        //        {
-        //            checkbox.CHBBandsTabel = cbxTablename.Text;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        if (checkbox.CHBBandsCoumln != cbxCoumname.Text)
-        //        {
-        //            checkbox.CHBBandsCoumln = cbxCoumname.Text;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        if (checkbox.CHBIsMust != (chbIsmust.Checked ? 1 : 0))
-        //        {
-        //            checkbox.CHBIsMust = chbIsmust.Checked ? 1 : 0;
-        //            checkbox.UpdateFlage = true;
-        //        }
-        //        if (checkbox.CHBIsPrint != (chbIsprInt.Checked ? 1 : 0))
-        //        {
-        //            checkbox.CHBIsPrint = chbIsprInt.Checked ? 1 : 0;
-        //            checkbox.UpdateFlage = true;
-        //        }               
-        //    }
-        //}
-
         #endregion
         /// <summary>
         /// 设置字体

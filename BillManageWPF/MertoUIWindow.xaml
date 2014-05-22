@@ -40,7 +40,7 @@
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"  Name="tbUserName" VerticalAlignment="Center" Text="莠草"  MaxWidth="200"  TextAlignment="Right"  FontFamily="微软雅黑" FontSize="18" Foreground="White"/>
-                <Image  Grid.Column="1" Name="imUserPhoto" Margin="15,0,0,0" HorizontalAlignment="Left" Source="/BillManageWPF;component/Skin/DefaultUserPhoto/67.jpg" />
+                <Image  Grid.Column="1" ToolTip="点击设置个人信息" Name="imUserPhoto" Margin="15,0,0,0" HorizontalAlignment="Left" Source="/BillManageWPF;component/Skin/DefaultUserPhoto/67.jpg" MouseEnter="imUserPhoto_MouseEnter" MouseDown="imUserPhoto_MouseDown" MouseLeave="imUserPhoto_MouseLeave" />
             </Grid>
         </Grid>
         <Grid Grid.Row="4">
@@ -108,9 +108,9 @@
                                     </Grid>
                                 </Border>
                             </Grid>
-                            <Grid Name="btnUsers"  Margin="2,2,2,2" Visibility="Hidden" Background="#FF1A69B3" MouseLeave="btnUsers_MouseLeave" MouseDown="btnUsers_MouseDown">
+                            <Grid Name="btnUsers"  Margin="2,2,2,2" Visibility="Hidden" MouseLeave="btnUsers_MouseLeave" MouseDown="btnUsers_MouseDown">
                                 <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
-                                    <Grid Background="#FFF87F14">
+                                    <Grid Background="#FF1A69B3">
                                         <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                                         <TextBlock   Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以维护系统所有用户信息（需要权限）和个人信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                                     </Grid>

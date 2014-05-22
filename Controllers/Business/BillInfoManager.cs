@@ -65,9 +65,9 @@ namespace Controllers.Business
             return  BillInfoService.SelectAllBillInfo();
         }
 
-        public static String CreatNewID(int intLength)
+        public static String CreatNewID(int intLength,int TIID)
         {
-            return BillInfoService.CreatNewID(intLength);
+            return BillInfoService.CreatNewID(intLength,TIID);
         }
     }
 }

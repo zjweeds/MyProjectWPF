@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="BillManageWPF.Content.UserManage.SetInfo.UserInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400" Background="SkyBlue">
+    <Grid Style="{StaticResource ContentRoot}" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
+        <ScrollViewer>
+            <StackPanel MinWidth="200">
+                <TextBlock Text="个人基本信息" Style="{StaticResource Heading2}" FontSize="20" Foreground="Purple"/>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid Margin="20,0,20,20" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,0,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="工号：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBlock Grid.Column="2" Text="123456" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="姓名：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBox Grid.Column="2" Text="赵建" VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
+            </Grid>
+            <Grid Grid.Row="3" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="性别：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <RadioButton Content="男" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <RadioButton Content="女" Grid.Column="3" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+            </Grid>
+            <Grid Grid.Row="4" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="部门：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <ComboBox Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
+            </Grid>
+            <Grid Grid.Row="5" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="职位：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <ComboBox Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid" FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
+            </Grid>
+            <Grid Grid.Row="6" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="出生日期：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <DatePicker Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑"/>
+            </Grid>
+            <Grid Grid.Row="7" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="入职时间：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <DatePicker Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑"/>
+            </Grid>
+            <Grid Grid.Row="8" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="所属公司：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBlock Text="测试公司" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple"  FontSize="16" FontFamily="微软雅黑"/>
+            </Grid>
+            <Grid Grid.Row="9" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="备注：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBox MinLines="10" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid" Height="60" FontSize="16" FontFamily="微软雅黑"/>
+            </Grid>
+            <Grid Grid.Row="11" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="btnExit"  Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left"   Content="提交" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" >
+                    <Button.Background>
+                        <SolidColorBrush Color="White" Opacity="0"/>
+                    </Button.Background>
+                    <Button.BorderBrush>
+                        <SolidColorBrush Color="SkyBlue" Opacity="0.5"/>
+                    </Button.BorderBrush>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

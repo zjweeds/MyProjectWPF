@@ -15,19 +15,6 @@ namespace Controllers.Common
 {
    public  class ImageHelper
     {
-       public byte[] GetBytesByImage(Image img)
-       {
-           try
-           {
-               MemoryStream ms = new MemoryStream(); //实例化内存流
-               new BinaryFormatter().Serialize(ms, img); //将对象图形序列化为给定流
-               return ms.GetBuffer();
-           }
-           catch (Exception ex)
-           {
-               throw ex;
-           }
-       }
        public byte[] GetBytesByImagepath(String path)
        {
            System.Drawing.Image img = System.Drawing.Image.FromFile(path);
@@ -43,52 +30,6 @@ namespace Controllers.Common
                throw ex;
            }
        }
-       public Stream GetStreamByImagepath(String path)
-       {
-           System.Drawing.Image img = System.Drawing.Image.FromFile(path);
-           try
-           {
-               Stream ms = new MemoryStream(); //实例化内存流
-               new BinaryFormatter().Serialize(ms, img); //将对象图形序列化为给定流
-               return ms;
-           }
-           catch (Exception ex)
-           {
-               throw ex;
-           }
-       }
-       public byte[] GetBytesByBitmapImage(String path)
-       {
-           try
-           {
-               FileStream fs = File.OpenRead(path);
-               byte[] tempBuff = new byte[fs.Length];
-               fs.Read(tempBuff, 0, tempBuff.Length);
-               return tempBuff;
-           }
-           catch (Exception ex)
-           {
-               throw ex;
-           }
-       }
-      
-       public BitmapImage GetBitmapImageByByte(byte[] buffer)
-       {
-           try
-           {
-               MemoryStream ms = new MemoryStream(buffer);
-               ms.Seek(0, SeekOrigin.Begin);
-               BitmapImage BI = new BitmapImage();
-               BI.BeginInit();
-               BI.StreamSource = ms;
-               BI.EndInit();
-               return BI;
-           }
-           catch (Exception ex)
-           {
-              throw ex;
-           }
-       }
        public Image GetImageByByte(byte[] buffer)
        {
            try
@@ -101,11 +42,7 @@ namespace Controllers.Common
                memStream.Close();
                memStream.Dispose();
                return newobj as Image; 
-               //通过字节数组的到内存流
-               //MemoryStream ms = new MemoryStream(buffer);
-               //ms.Seek(0, SeekOrigin.Begin); 
-               //ms.Position = 0;
-               //return new BinaryFormatter().Deserialize(ms) as Image;//通过反序列化技术还原image图像    
+               //通过字节数组的到内存流 
            }
            catch (Exception ex)
            {
@@ -128,6 +65,11 @@ namespace Controllers.Common
            {
                throw ex;
            }
+       }
+
+       public void SaveImage(Image image,String sPath )
+       {
+           image.Save(sPath, System.Drawing.Imaging.ImageFormat.Jpeg);
        }
     }
 }

@@ -22,7 +22,8 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +38,13 @@
     <StartupObject>BillManageWPF.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.5.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net45\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>Dll\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,14 +77,32 @@
     <Compile Include="AppMainWindow.xaml.cs">
       <DependentUpon>AppMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Main\MainMeumList.xaml.cs">
+      <DependentUpon>MainMeumList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\SystemSet\PrintSet.xaml.cs">
       <DependentUpon>PrintSet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Template\TemplateProperyEdit.xaml.cs">
       <DependentUpon>TemplateProperyEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\UserManage\AccountInfo.xaml.cs">
+      <DependentUpon>AccountInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\UserManage\UserInfo.xaml.cs">
+      <DependentUpon>UserInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\UserManage\UserPhoto.xaml.cs">
+      <DependentUpon>UserPhoto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MertoUIWindow.xaml.cs">
       <DependentUpon>MertoUIWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModerUIMain.xaml.cs">
+      <DependentUpon>ModerUIMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\DataSourceList.xaml.cs">
       <DependentUpon>DataSourceList.xaml</DependentUpon>
@@ -84,8 +110,11 @@
     <Compile Include="Page\SystemSettingView.xaml.cs">
       <DependentUpon>SystemSettingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page\UserInfoView.xaml.cs">
-      <DependentUpon>UserInfoView.xaml</DependentUpon>
+    <Compile Include="Page\UserInfoWindow.xaml.cs">
+      <DependentUpon>UserInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="winFormUI\BillForms\BillSerchListForm.cs">
       <SubType>Form</SubType>
@@ -147,9 +176,6 @@
     <Compile Include="winFormUI\TemplateForms\TextBoxProperyForm.Designer.cs">
       <DependentUpon>TextBoxProperyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MyCode\ComHelper.cs" />
     <Compile Include="MyCode\PickBox.cs" />
     <Compile Include="MyControls\MaskTextBox.cs" />
@@ -165,13 +191,11 @@
     <Compile Include="softConfig\WindowSoftConfig.xaml.cs">
       <DependentUpon>WindowSoftConfig.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UCLogin.xaml.cs">
-      <DependentUpon>UCLogin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UCProcessBar.xaml.cs">
-      <DependentUpon>UCProcessBar.xaml</DependentUpon>
-    </Compile>
     <Page Include="AppMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Main\MainMeumList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,7 +207,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="Content\UserManage\AccountInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\UserManage\UserInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\UserManage\UserPhoto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,6 +228,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MertoUIWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModerUIMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,7 +247,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page\UserInfoView.xaml">
+    <Page Include="Page\UserInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,14 +264,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="softConfig\WindowSoftConfig.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UCLogin.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UCProcessBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

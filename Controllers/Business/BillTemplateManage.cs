@@ -33,5 +33,9 @@ namespace Controllers.Business
         {
             return BillTemplateService.UpdateByBillTemplatModel(btm);
         }
+        public static DataTable GetTemplatBagroundByBSName(String Sname)
+        {
+            return BillTemplateService.GetTemplatBagroundByBSName(Sname);
+        }
     }
 }

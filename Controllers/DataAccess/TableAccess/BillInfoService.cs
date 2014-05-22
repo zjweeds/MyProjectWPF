@@ -127,9 +127,9 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="intLength">单据号长度</param>
         /// <returns></returns>
-        public static String CreatNewID(int intLength)
+        public static String CreatNewID(int intLength,int tIID)
         {
-            String cmdText = "Select Max( BINo ) From  BillInfo";
+            String cmdText = "Select Max( BINo ) From  BillInfo where BITIID = '"+tIID+"'";
             try
             {
                 string strMaxCode = new MySqlHelper().GetSingleObject(cmdText) as string;
