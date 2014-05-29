@@ -536,6 +536,31 @@ namespace Controllers.DataAccess.SQLHELPER
             return dt; //dt.Rows.Count可能等于零
         }
 
+
+       /// <summary>
+       /// 根据数据源更新数据库
+       /// </summary>
+       /// <param name="sqlText"></param>
+       /// <param name="dt"></param>
+       /// <returns></returns>
+        public bool updateByDt(String sqlText, DataTable dt)
+        {
+            SqlDataAdapter sda = null;
+            m_Cmd.CommandType = CommandType.Text;
+            m_Cmd.CommandText = sqlText;
+            try
+            {
+                sda = new SqlDataAdapter(m_Cmd);
+                SqlCommandBuilder scb = new SqlCommandBuilder(sda);
+                sda.Update(dt);
+                dt.AcceptChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
    }
 }

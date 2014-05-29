@@ -20,17 +20,15 @@ namespace Controllers.DataAccess
 {
     public class ConfigService
     {
-       static  String path = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";//配置文件路径
        static String ImagePath = AppDomain.CurrentDomain.BaseDirectory + @"\\Images\\";//票据图片路径
-       static String file = @"SoftConfig.xml";
         MyXmlHelper myxmlhelper = new MyXmlHelper();
         /// <summary>
         /// 判断配置文件是否存在
         /// </summary>
         /// <returns>true 存在；false 不存在 </returns>
-        public static bool  isConfigFilesExist()
-        {           
-            if (File.Exists((path + "/" + file))) 
+        public static bool  isConfigFilesExist(String spath, string sfile)
+        {
+            if (File.Exists((spath + "/" + sfile))) 
             {
                 return true;
             }
@@ -44,15 +42,15 @@ namespace Controllers.DataAccess
         /// 创建文件
         /// </summary>
         /// <returns></returns>
-        public bool CreateXmlFile()
+        public bool CreateXmlFile( String spath,String sfile)
         {
-            if (!isConfigFilesExist())
-            {                
-                if (!Directory.Exists(path))
+            if (!isConfigFilesExist(spath,sfile))
+            {
+                if (!Directory.Exists(spath))
                 {
-                    Directory.CreateDirectory(path);
+                    Directory.CreateDirectory(spath);
                 }
-                File.Create(path + "/" + file).Close();
+                File.Create(spath + "/" + sfile).Close();
                 return true;
             }
             else
@@ -63,11 +61,29 @@ namespace Controllers.DataAccess
          }
         public bool softConfigSaveToXml(SoftConfigModel softConfig,SoftVerify softVerify)
         {
-            if (!isConfigFilesExist())
+            string sfile = @"SoftConfig.xml";
+            String spath = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";//配置文件路径
+            if (!isConfigFilesExist(spath, sfile))
             {
-                CreateXmlFile();
+                CreateXmlFile(spath,sfile);
             }
-            if (myxmlhelper.SaveToXml(path + '/' + file, softConfig,softVerify))
+            if (myxmlhelper.SaveToXml(spath + '/' + sfile, softConfig, softVerify))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool SaveLoginToXml(String spath)
+        {
+            string sfile = @"LoginConfig.xml";
+            if (!isConfigFilesExist(spath, sfile))
+            {
+                CreateXmlFile(spath, sfile);
+            }
+            if (myxmlhelper.SaveLoginToXml(spath + '/' + sfile))
             {
                 return true;
             }

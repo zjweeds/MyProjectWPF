@@ -47,7 +47,7 @@
                     </Grid>
     </Grid>
             </dui:DazzleTabItem>
-            <dui:DazzleTabItem Width="105" Height="105" Foreground="White" Header="资料中心">
+            <dui:DazzleTabItem Width="105" Height="107" Foreground="White" Header="资料中心">
                 <dui:DazzleTabItem.Background>
                     <ImageBrush ImageSource="Skin/Icon/purple/gmail_pur.png"/>
                 </dui:DazzleTabItem.Background>
@@ -186,7 +186,7 @@
 
         </dui:DazzleTabControl>
         <Label Content="票据通主界面" HorizontalAlignment="Left" Margin="15,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="11"/>
-        <Image Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Source="Skin/DefaulTUserPhoto/67.jpg" Stretch="Fill" Margin="0,6,16,0" Height="72" Width="72" />
+        <Image Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Source="/BillManageWPF;component/Skin/ico/user.jpg"  Stretch="Fill" Margin="0,6,16,0" Height="72" Width="72" />
 
 
         <dui:DazzleButton HorizontalAlignment="Right" VerticalAlignment="Top" Width="27" Height="22" Margin="0,0,5,0" Click="DazzleButton_Click">

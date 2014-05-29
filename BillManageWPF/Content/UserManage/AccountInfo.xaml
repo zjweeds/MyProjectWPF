@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400" Background="SkyBlue">
+             d:DesignHeight="600" d:DesignWidth="400" Background="SkyBlue" Loaded="UserControl_Loaded">
     <Grid Style="{StaticResource ContentRoot}" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
         <ScrollViewer>
             <StackPanel MinWidth="200">
@@ -38,7 +38,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="当前登录工号：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <TextBlock Grid.Column="2" Text="123456" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBlock  Name="lbUserCode" Grid.Column="2" Text="123456" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
             <Grid Grid.Row="3" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -48,20 +48,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="姓名：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <TextBlock Grid.Column="2" Text="赵  建" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBlock  Name="lbUserName" Grid.Column="2" Text="赵  建" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
-            <!--<Grid Grid.Row="4" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="性别：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <RadioButton Content="男" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <RadioButton Content="女" Grid.Column="3" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-            </Grid>-->
             <Grid Grid.Row="4" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -70,7 +58,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="默认登录账套：" VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <ComboBox Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
+                <ComboBox Name="cbbBillSet" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
             </Grid>
             <Grid Grid.Row="6" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -80,45 +68,27 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="密码操作" VerticalAlignment="Bottom" HorizontalAlignment="Left" Foreground="Purple" FontSize="18"/>
-                <CheckBox Content="更改登录密码" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <CheckBox Name="chbDoPass" Content="更改登录密码" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple" FontSize="16" 
+                          FontFamily="微软雅黑" Click="chbDoPass_Click"/>
             </Grid>
-            <Grid Grid.RowSpan="3" Grid.Row="7">
+            <Grid Grid.RowSpan="3" Grid.Row="7" Name="ChangePwd" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="原密码：" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                    <PasswordBox Grid.Column="2"  VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
-                </Grid>
-
-                <Grid Grid.Row="1" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="新密码：" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                    <PasswordBox Grid.Column="2"  VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
-                </Grid>
-                <Grid Grid.Row="3" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="重复密码：" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                    <PasswordBox Grid.Column="2"  VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
-                </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="原密码：" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <PasswordBox Name="txtOldPwd" Grid.Row="0"  Grid.Column="2"  VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
+                <Label  Content="新密码：" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <PasswordBox  Name="txtNewPwd" Grid.Row="1" Grid.Column="2"  VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
+                <Label Content="重复密码：" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <PasswordBox   Name="txtRepeatPwd" Grid.Row="3" Grid.Column="2"  VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
             </Grid>
             <Grid Grid.Row="11" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -126,7 +96,8 @@
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnSubmet"  Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left"   Content="提交" FontSize="14" Foreground="Purple" >
+                <Button Name="btnSubmet"  Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left"   Content="提交" FontSize="14" Foreground="Purple" 
+                        MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnSubmet_Click">
                     <Button.Background>
                         <SolidColorBrush Color="White" Opacity="0"/>
                     </Button.Background>

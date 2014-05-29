@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400" Background="SkyBlue">
+             d:DesignHeight="600" d:DesignWidth="400" Background="SkyBlue" Loaded="UserControl_Loaded">
     <Grid Style="{StaticResource ContentRoot}" ScrollViewer.HorizontalScrollBarVisibility="Visible" >
         <ScrollViewer>
             <StackPanel MinWidth="200">
@@ -41,21 +41,21 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="工号：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <TextBlock Grid.Column="2" Text="123456" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBlock Name="lbUserCode" Grid.Column="2" Text="123456" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="姓名：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <TextBox Grid.Column="2" Text="赵建" VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
+                <TextBox  Name="txtName" Grid.Column="2" Text="赵建" VerticalAlignment="Center" Foreground="Orchid" FontSize="16"/>
             </Grid>
             <Grid Grid.Row="3" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -65,48 +65,48 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="性别：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <RadioButton Content="男" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <RadioButton Content="女" Grid.Column="3" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <RadioButton Name="raMan" Content="男" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
+                <RadioButton Name="raWeman" Content="女" Grid.Column="3" VerticalAlignment="Center" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
             <Grid Grid.Row="4" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="部门：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <ComboBox Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
+                <ComboBox Name="cbbBuMen" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
             </Grid>
             <Grid Grid.Row="5" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="职位：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <ComboBox Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid" FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
+                <ComboBox Name="cbbPosition" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid" FontSize="16" FontFamily="微软雅黑" Background="WhiteSmoke"/>
             </Grid>
             <Grid Grid.Row="6" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="出生日期：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <DatePicker Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑"/>
+                <DatePicker Name="dtpBrithDate" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
             <Grid Grid.Row="7" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="入职时间：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <DatePicker Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑"/>
+                <DatePicker Name="dtpEnTry" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid"  FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
             <Grid Grid.Row="8" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -116,17 +116,17 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="所属公司：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <TextBlock Text="测试公司" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple"  FontSize="16" FontFamily="微软雅黑"/>
+                <TextBlock Name="lbCompany" Text="测试公司" Grid.Column="2" VerticalAlignment="Center" Foreground="Purple"  FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
             <Grid Grid.Row="9" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50"/>
                     <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Content="备注：" Grid.Column="1" HorizontalAlignment="Right" Foreground="Purple" FontSize="16" FontFamily="微软雅黑"/>
-                <TextBox MinLines="10" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid" Height="60" FontSize="16" FontFamily="微软雅黑"/>
+                <TextBox Name="txtReMark" MinLines="10" Grid.Column="2" VerticalAlignment="Center" Foreground="Orchid" Height="60" FontSize="16" FontFamily="微软雅黑"/>
             </Grid>
             <Grid Grid.Row="11" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -134,7 +134,7 @@
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="btnExit"  Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left"   Content="提交" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" >
+                <Button Name="btnSubmit"  Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left"   Content="提交" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnSubmit_Click" >
                     <Button.Background>
                         <SolidColorBrush Color="White" Opacity="0"/>
                     </Button.Background>

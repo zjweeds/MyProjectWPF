@@ -12,7 +12,9 @@ namespace Controllers.Business
     {
        public static bool isConfigFilesExist()
        {
-           return ConfigService.isConfigFilesExist();
+           string sfile = @"SoftConfig.xml";
+           String spath = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";//配置文件路径
+           return ConfigService.isConfigFilesExist(spath, sfile);
        }
        public static bool LoadImage(DataTable dt,String bsname)
        {
@@ -33,6 +35,11 @@ namespace Controllers.Business
            {
                throw ex;
            }
+       }
+
+       public static bool SaveLoginToXml(string spath)
+       {
+           return new ConfigService().SaveLoginToXml(spath);
        }
     }
 }

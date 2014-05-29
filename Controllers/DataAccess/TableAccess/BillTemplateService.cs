@@ -193,7 +193,7 @@ namespace Controllers.DataAccess
         public static DataTable GetTemplatBagroundByBSName(String bsName)
         {
             StringBuilder cmdText = new StringBuilder();
-            cmdText.Append("select TTName,TIID,TIBackground from TemplateInfo with(nolock) ");
+            cmdText.Append("select TTName,TIID,TIBackground,TIName from TemplateInfo with(nolock) ");
             cmdText.Append(" join TemplateType with(nolock) on TTID = TITTID ");
             cmdText.Append(" join BillSetInfo  with(nolock) on BSIID = TTBillSetID ");
             cmdText.Append(" where TIIsEnable =1 and TTIsEnable = 1 and BSIIsEnable = 1");

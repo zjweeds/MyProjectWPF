@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 using Controllers.Models;
 using Controllers.DataAccess.SQLHELPER;
 using System.Data;
+using System.Collections;
 
 namespace Controllers.DataAccess
 {
     public class BillTemplateTypeService
     {
-        MySqlHelper sqlhelper = new MySqlHelper();
         
         /// <summary>
         /// 根据账套名称获得所有票夹信息
         /// </summary>
         /// <param name="BillSetName"></param>
         /// <returns></returns>
-        public DataTable GetAllTypeByBillsetID(String BillSetName)
+        static public DataTable GetAllTypeByBillsetName(String BillSetName)
         {
             try
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append(" select TTID,TTName,TTIPageID ");
+                sb.Append(" select TTID,TTName ");
                 sb.Append(" from TemplateType ");
                 sb.Append(" join BillSetInfo ");
                 sb.Append("      on BillSetInfo.BSIID = TemplateType.TTBillSetID ");
                 sb.Append("where 1=1 and TemplateType.TTIsEnable=1 ");
                 sb.Append("          and BillSetInfo.BSIIsEnable =1 ");
                 sb.AppendFormat("    and BillSetInfo.BSIName = '{0}' ", BillSetName);
-                return sqlhelper.GetDataTable(sb.ToString());
+                return new MySqlHelper().GetDataTable(sb.ToString());
             }
             catch (Exception ex)
             {
@@ -43,10 +43,10 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="TypeName"></param>
         /// <returns></returns>
-        public int GetTemplateTypeIdByName(String TypeName)
+       static public int GetTemplateTypeIdByName(String TypeName)
         {
             String sql = "select TTID from TemplateType where TTName = '" + TypeName + "' and TTIsEnable = 1 ";
-            object ob = sqlhelper.GetSingleObject(sql);
+            object ob = new MySqlHelper().GetSingleObject(sql);
             if (ob != null)
             {
                 return (int)ob;
@@ -62,12 +62,12 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public String GetTemplateTypeNameById(int code)
+        static public String GetTemplateTypeNameById(int code)
         {
             try
             {
                 String sql = "select TTName from TemplateType where TTID = '" + code + "' and TTIsEnable = 1 ";
-                object ob = sqlhelper.GetSingleObject(sql);
+                object ob = new MySqlHelper().GetSingleObject(sql);
                 if (ob != null)
                 {
                     return (String)ob;
@@ -84,22 +84,56 @@ namespace Controllers.DataAccess
         }
 
         /// <summary>
-        /// 跟据页面ID获取票夹ID
+        /// 添加模板分类
         /// </summary>
-        /// <param name="pageID"></param>
+        /// <param name="typeName">类别名</param>
+        /// <param name="bsID">账套ID</param>
+        /// <param name="userCode">添加人工号</param>
         /// <returns></returns>
-        public String GetTemplateTypeIDByPageID(int pageID)
+        static public int AddTemplateType(String typeName,String bsName,String userCode)
         {
-            String sql = "select TTID from TemplateType where TTIPageID = '" + pageID + "' and TTIsEnable = 1 ";
-            object ob = sqlhelper.GetSingleObject(sql);
-            if (ob != null)
-            {
-                return ob.ToString();
-            }
-            else
-            {
-                return "";
-            }
+            StringBuilder scmd =new StringBuilder();
+            scmd.Append("select BSIID from BillSetInfo  with(nolock) ");
+            scmd.AppendFormat(" where BSIIsEnable = 1 and BSIName = '{0}'", bsName);
+            int bsid = Convert.ToInt32(new MySqlHelper().GetSingleObject(scmd.ToString()));
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("insert into TemplateType (TTName,TTBillSetID,TTCreaterID) ");
+            cmdText.AppendFormat("       values ('{0}','{1}','{2}')  ", typeName, bsid, userCode);
+            cmdText.Append(" Select @@Identity ");
+            return new MySqlHelper().ExecSqlReturnId(cmdText.ToString());
+        }
+
+        static public int UpdateTemplateName(String typeNewName, String oldName, String bsName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.AppendFormat("update TemplateType set TTName = '{0}'  ", typeNewName);
+            cmdText.Append("       where  exists ( ");
+             cmdText.Append("                     select BSIID from BillSetInfo  with(nolock) ");
+             cmdText.AppendFormat("                      where BSIIsEnable = 1 and BSIName = '{0}'",bsName);
+             cmdText.Append("                        )");
+             cmdText.AppendFormat("    and TTName = '{0}')  ", oldName);
+            return new MySqlHelper().ExecDataBySql(cmdText.ToString());
+        }
+        /// <summary>
+        /// 返回类别名称是否存在
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns> false 不存在：true 存在</returns>
+        static public bool IsTypeNameExsit(String typeName,String bsName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("select TTID From TemplateType with(nolock) ");
+            cmdText.Append(" join BillSetInfo  with(nolock)  on BSIID=TTBillSetID ");
+            cmdText.AppendFormat("where TTIsEnable = 1 and TTName='{0}' and  BSIName = '{1}' ", typeName, bsName);
+            return new MySqlHelper().GetSingleObject(cmdText.ToString()) == null ? false : true;         
+        }
+
+        static public bool DeleteTemplateTypeByName()
+        {
+            IList<String> sqlList = new List<String>();
+            StringBuilder cmdText = new StringBuilder();
+            //cmdText.Append("delete from ControlDetails ")
+            return false;
         }
     }
 }

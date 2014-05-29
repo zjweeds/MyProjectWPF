@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Controllers.Models;
 using Controllers.DataAccess;
+using System.Data;
 namespace Controllers.Business
 {
     /// <summary>
@@ -59,5 +60,14 @@ namespace Controllers.Business
         {
             return  UserInfoService.SelectAllUserInfo();
         }
+        public static DataTable SelectUserInfoByPassworld(String uCode, int comID)
+        {
+            return UserInfoService.SelectUserInfoByPassworld(uCode, comID);
+        }
+        public static bool UpdateUserPWDByUIEINO(String uCode, String pwd)
+        {
+            return UserInfoService.UpdateUserPWDByUIEINO(uCode, pwd);
+        }
+        
     }
 }

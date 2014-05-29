@@ -8,7 +8,7 @@
         WindowStyle="None"
         Background="SkyBlue"
          Height="400" Width="525"
-        AllowsTransparency="True" 
+        AllowsTransparency="True"  WindowStartupLocation="CenterScreen"
         Title="编辑票夹页面" Loaded="Window_Loaded">
     <Grid Margin="0,0,1,0">
 

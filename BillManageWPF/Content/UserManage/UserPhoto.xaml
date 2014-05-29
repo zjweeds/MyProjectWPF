@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="300" Background="SkyBlue">
+             d:DesignHeight="600" d:DesignWidth="300" Background="SkyBlue" Loaded="UserControl_Loaded">
     <Grid Style="{StaticResource ContentRoot}">
         <Grid ScrollViewer.HorizontalScrollBarVisibility="Visible" >
             <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Border  Grid.Column="1" Name="imageborder" BorderThickness="1" BorderBrush="DarkCyan"  CornerRadius="10,10,10,10"  >
-                    <Image   Name="UIimage"  ToolTip="点击更换头像" Source="/BillManageWPF;component/Skin/DefaultUserPhoto/67.jpg" MouseEnter="UIimage_MouseEnter" MouseLeave="UIimage_MouseLeave">
+                    <Image   Name="UIimage"  ToolTip="点击更换头像" Source="/BillManageWPF;component/Skin/ico/user.jpg" MouseEnter="UIimage_MouseEnter" MouseLeave="UIimage_MouseLeave" MouseDown="UIimage_MouseDown">
                     </Image>
                 </Border>
             </Grid>
@@ -44,11 +44,11 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="1" Name="imageRE" BorderThickness="1" BorderBrush="DarkCyan"  CornerRadius="10,10,10,10"  >
-                    <Image   Name="UIimageRE"  ToolTip="点击更换头像" Source="/BillManageWPF;component/Skin/DefaultUserPhoto/67.jpg" MouseEnter="UIimage_MouseEnter" MouseLeave="UIimage_MouseLeave">
+                    <Image   Name="UIimageRE"  ToolTip="点击更换头像" Source="/BillManageWPF;component/Skin/ico/user.jpg"  MouseEnter="UIimage_MouseEnter" MouseLeave="UIimage_MouseLeave">
                     </Image>
                 </Border>
             </Grid>
-            <Button Name="btnExit"  Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left"   Content="提交" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" >
+            <Button Name="btnSubmit"  Grid.Row="6" VerticalAlignment="Center"  HorizontalAlignment="Left"   Content="提交" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnSubmit_Click" >
                 <Button.Background>
                     <SolidColorBrush Color="White" Opacity="0"/>
                 </Button.Background>

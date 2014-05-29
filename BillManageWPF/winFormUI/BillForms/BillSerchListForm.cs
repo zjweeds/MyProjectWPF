@@ -141,9 +141,22 @@ namespace BillManageWPF.winFormUI
                             c.Location = new Point(Convert.ToInt32(dtControls.Rows[i]["CTLeft"]), Convert.ToInt32(dtControls.Rows[i]["CTTop"]));
                             c.Size = new Size(Convert.ToInt32(dtControls.Rows[i]["CTWidth"]), Convert.ToInt32(dtControls.Rows[i]["CTHeight"]));
                             c.Font = new CommonClass().GetFontByString(dtControls.Rows[i]["CTFont"].ToString());
-                            e.Graphics.DrawString(c.Text, c.Font, brush,
-                                  c.Location.X,// + Convert.ToInt32(MillimetersToPixel(Convert.ToInt32(UserPrintSet.Left), fDpiX)),
-                                  c.Location.Y);// + Convert.ToInt32(MillimetersToPixel(Convert.ToInt32(UserPrintSet.Top), fDpiY)));
+                            if (dtControls.Rows[i]["CTType"].ToString() == "CheckBox")
+                            {
+                                if (c.Text == "是")
+                                {
+                                    e.Graphics.DrawString("√", c.Font, brush,
+                                         c.Location.X,// + Convert.ToInt32(MillimetersToPixel(Convert.ToInt32(UserPrintSet.Left), fDpiX)),
+                                         c.Location.Y);
+                                }
+                            }
+                            else
+                            {
+                                e.Graphics.DrawString(c.Text, c.Font, brush,
+                                    c.Location.X,// + Convert.ToInt32(MillimetersToPixel(Convert.ToInt32(UserPrintSet.Left), fDpiX)),
+                                    c.Location.Y);// + Convert.ToInt32(MillimetersToPixel(Convert.ToInt32(UserPrintSet.Top), fDpiY)));
+
+                            }
                         }
                     }
                     catch

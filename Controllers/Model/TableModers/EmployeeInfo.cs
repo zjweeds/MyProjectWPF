@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace Controllers.Model
+namespace Controllers.Models
 {
     /// <summary>
     ///本实体类由Hirer实体工具生成

@@ -9,21 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="900" Loaded="UserControl_Loaded">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition />
-            <RowDefinition Height="10"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="   子功能" FontSize="24" Background="White" Foreground="Purple" Margin="0,1,1,1"/>
-        </StackPanel >
-        <Grid Grid.Row="2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
             <Grid Grid.Column="1" >
@@ -31,74 +21,111 @@
                     <tabEx:TabControlEx x:Name="tabList" Alignment="Bottom" ArrowColor="Purple" BackColor="White" BorderColor="SkyBlue"   Font="宋体, 12pt" ForeColor="Purple">
                         <tabEx:TabControlEx.TabPages>
                         </tabEx:TabControlEx.TabPages>
-                </tabEx:TabControlEx>
-            </wfi:WindowsFormsHost>
-        </Grid>
-        <Grid Grid.Column="3" >
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF9139F3" Offset="0"/>
-                    <GradientStop Color="#FFC49FEE" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
-                <Grid>
-                    <StackPanel Margin="10,20,0,0">
-                        <TextBlock Text="常用任务" Foreground="White" FontSize="18"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,48,0,0">
-                        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="2" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,55,0,0">
-                        <Button Name="btnBillSerch" Content="票据查询" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnBillSerch_Click" />
-                    </StackPanel>
-                    <StackPanel Margin="0,85,0,0">
-                        <Button Name="btnTemplateDesign" Content="票据设计" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateDesign_Click" />
-                    </StackPanel>
-                    <StackPanel Margin="0,115,0,0">
-                        <Button Name="btnTemplateAdd" Content="新增票据" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateAdd_Click" />
-                    </StackPanel>
-                    <StackPanel Margin="0,145,0,0">
-                        <Button Name="btnPrints"  Content="批量套打" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnPrints_Click" />
-                    </StackPanel>           
-                    <StackPanel Margin="10,185,0,0">
-                        <TextBlock Text="管理任务" Foreground="White" FontSize="18"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,212,0,0">
-                        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="2" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,220,0,0">
-                        <Button Name="btnBillTypeAdd" Content="新建票夹" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel>
-                    <StackPanel Margin="0,250,0,0">
-                        <Button Name="btnBillTypeDelete" Content="删除票夹" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel>
-                    <StackPanel Margin="0,280,0,0">
-                        <Button  Name="btnBillTypeReName" Content="重命名票夹" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel>
-                    
-                    <StackPanel Margin="10,320,0,0">
-                        <TextBlock Text="模板操作" Foreground="White" FontSize="18"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,347,0,0">
-                        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="2" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,355,0,0">
-                        <Button Name="btnTemplateCopy" Content="复制模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel>
-                    <StackPanel Margin="0,385,0,0">
-                        <Button  Name="btnTemplateDelet" Content="删除模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel>
-                    <StackPanel Margin="0,415,0,0">
-                        <Button Name="btnTemplateCut" Content="剪切模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel>
-                    <StackPanel Margin="0,445,0,0">
-                        <Button  Name="btnTemplateLeading" Content="导入模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel> 
-                    <StackPanel Margin="0,475,0,0">
-                        <Button Name="btnTemplateExport" Content="导出模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
-                    </StackPanel>
-                </Grid>
+                    </tabEx:TabControlEx>
+                </wfi:WindowsFormsHost>
+            </Grid>
+            <Grid Grid.Column="3" >
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF9139F3" Offset="0"/>
+                        <GradientStop Color="#FFC49FEE" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Center" Grid.RowSpan="3">
+                    <TextBlock Text="常用任务" Foreground="White" FontSize="18" Margin="10,0,0,0"/>
+                </StackPanel> 
+                <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
+                    <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="2" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4">
+                    <Button Name="btnBillSerch" Content="票据查询" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnBillSerch_Click" />
+                </StackPanel>
+                <StackPanel Grid.Row="6">
+                    <Button Name="btnTemplateDesign" Content="票据设计" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateDesign_Click" />
+                </StackPanel>
+                <StackPanel Grid.Row="8">
+                    <Button Name="btnTemplateAdd" Content="新增票据" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateAdd_Click" />
+                </StackPanel>
+                <StackPanel Grid.Row="10">
+                    <Button Name="btnPrints"  Content="批量套打" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnPrints_Click" />
+                </StackPanel>
+                <StackPanel Grid.Row="12" Grid.RowSpan="3" VerticalAlignment="Center">
+                <TextBlock Text="管理任务" Foreground="White" FontSize="18" Margin="10,0,0,0"/>
+            </StackPanel>
+                <StackPanel Grid.Row="14" VerticalAlignment="Bottom">
+                    <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="2" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+                </StackPanel>
+                <StackPanel Grid.Row="16" >
+                    <Button Name="btnBillTypeAdd" Content="新建票夹" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnBillTypeAdd_Click" />
+                </StackPanel>
+                <StackPanel Grid.Row="18" >
+                    <Button Name="btnBillTypeDelete" Content="删除票夹" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnBillTypeDelete_Click" />
+                </StackPanel>
+                <StackPanel Grid.Row="20" >
+                    <Button  Name="btnBillTypeReName" Content="重命名票夹" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnBillTypeReName_Click" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="22" Grid.RowSpan="3" VerticalAlignment="Center" >
+                <TextBlock Text="模板操作" Foreground="White" FontSize="18"  Margin="10,0,0,0"/>
+            </StackPanel>
+                <StackPanel Grid.Row="24" VerticalAlignment="Bottom">
+                    <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Left" Height="2" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+                </StackPanel>
+                <StackPanel Grid.Row="26" >
+                    <Button Name="btnTemplateCopy" Content="复制模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateCopy_Click" />
+                </StackPanel>
+                <StackPanel Grid.Row="28" >
+                    <Button  Name="btnTemplateDelet" Content="删除模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                </StackPanel>
+                <StackPanel Grid.Row="30" >
+                    <Button Name="btnTemplateCut" Content="剪切模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateCut_Click" />
+                </StackPanel>
+            <StackPanel Grid.Row="32" >
+                <Button Name="btnTemplateStick" Content="粘贴模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateStick_Click" />
+            </StackPanel>
+            <StackPanel Grid.Row="34" >
+                    <Button  Name="btnTemplateLeading" Content="导入模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                </StackPanel>
+                <StackPanel Grid.Row="36" >
+                    <Button Name="btnTemplateExport" Content="导出模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                </StackPanel>
             </Grid>
     </Grid>
-   </Grid>
 </UserControl>

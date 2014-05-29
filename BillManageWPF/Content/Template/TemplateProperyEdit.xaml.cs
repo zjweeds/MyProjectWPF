@@ -77,7 +77,7 @@ namespace BillManageWPF.Content.Template
         public BillTemplatModel btm = new BillTemplatModel(); //模板实体
         private System.Windows.Forms.OpenFileDialog dlgPicture = new System.Windows.Forms.OpenFileDialog(); //文件选择对话框
         public DataTable dttype = new DataTable();
-        public BillTemplateTypeService btts = new BillTemplateTypeService();
+        //public BillTemplateTypeService btts = new BillTemplateTypeService();
         #endregion
 
         #region 自定义方法
@@ -166,7 +166,7 @@ namespace BillManageWPF.Content.Template
                 {
                     btm.TIIsPrintBg = 0;
                 }
-                btm.TITTID = btts.GetTemplateTypeIdByName(cbbTemplatetype.Text);
+                btm.TITTID = BillTemplateTypeManage.GetTemplateTypeIdByName(cbbTemplatetype.Text);//btts.GetTemplateTypeIdByName(cbbTemplatetype.Text);
                 #endregion
 
                 if (Type != "Update")
@@ -205,13 +205,13 @@ namespace BillManageWPF.Content.Template
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
            
-            dttype = btts.GetAllTypeByBillsetID("测试账套");
+            dttype =BillTemplateTypeManage.GetAllTypeByBillsetName(SoftUser.Op_Bill); 
             new ComHelper().SetComboBoxItemByDataTable(dttype, cbbTemplatetype, "TTName");
             if (Type == "Update")
             {
                 //更新
 
-                cbbTemplatetype.Text = new BillTemplateTypeService().GetTemplateTypeNameById(btm.TITTID);
+                cbbTemplatetype.Text = BillTemplateTypeManage.GetTemplateTypeNameById(btm.TITTID);
                 txtTemplateName.Text = btm.TIName;
                 txtTemplateHeigth.Text = btm.TIHeight.ToString();
                 txtTemplateWidth.Text = btm.TIWidth.ToString();

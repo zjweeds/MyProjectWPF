@@ -4,6 +4,9 @@ using System.Text;
 using Controllers.Models;
 using System.Data.SqlClient;
 using Controllers.DataAccess.SQLHELPER;
+using System.Data;
+using Controllers.DataAccess;
+
 namespace Controllers.DataAccess
 {
     /// <summary>
@@ -107,8 +110,35 @@ namespace Controllers.DataAccess
             IList<UserInfo> userInfos = SelectUserInfoByCmdText(cmdText.ToString());
             return userInfos.Count>0 ? userInfos[0] : null;
         }
-     
-     
+
+        public static DataTable SelectUserInfoByPassworld(String _uCode,int comID)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            PermissionInfo per = PermissionInfoService.GetPermissionInfoByEINo(_uCode,comID);
+            if (per.PIAdmin)
+            {
+                //是管理员，可以管理多个公司
+                cmdText.Append(" select  ");
+                cmdText.Append("     UIEINo,UIPassword,EIPhoto,EIName,EIPosition,EIDepartment ");
+                cmdText.Append(" From  UserInfo with(nolock) ");
+                cmdText.Append(" join EmployeeInfo  with(nolock) on EIID = UIEINo ");
+                cmdText.Append("   where UIIsEnable = 1");
+                cmdText.AppendFormat("  and UIEINo = '{0}' ", _uCode);
+
+            }
+            else
+            {
+               //不是管理员，只能登陆到自己的公司
+                cmdText.Append(" select  ");
+                cmdText.Append("     UIEINo,UIPassword,EIPhoto,EIName,EIPosition,EIDepartment ");
+                cmdText.Append(" From  UserInfo with(nolock) ");
+                cmdText.Append(" join EmployeeInfo  with(nolock) on EIID = UIEINo ");
+                cmdText.Append(" join CompanyInfo  with(nolock) on CIID = EICompanyID ");
+                cmdText.Append("   where UIIsEnable = 1");
+                cmdText.AppendFormat("  and UIEINo = '{0}' and EICompanyID = '{1}' ", _uCode, comID);
+            }
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
         /// <summary>
         /// 查询所有UserInfo
         /// </summary>
@@ -121,6 +151,12 @@ namespace Controllers.DataAccess
             cmdText.Append("   where UIIsEnable = 1");
             return SelectUserInfoByCmdText(cmdText.ToString());
         }
-      
+
+        public static bool UpdateUserPWDByUIEINO(String Uno, String newpwd)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.AppendFormat("update UserInfo set UIPassword = '{0}' where UIEINo = '{1}' ", Uno, newpwd);
+            return new MySqlHelper().ExecDataBySql(cmdText.ToString())>0?true:false;
+        }
     }
 }

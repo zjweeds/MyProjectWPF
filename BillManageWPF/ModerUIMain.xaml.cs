@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FirstFloor.ModernUI.Windows.Controls;
 using BillManageWPF.Page;
+using Controllers.Models;
+using System.IO;
 
 namespace BillManageWPF
 {
@@ -53,6 +55,12 @@ namespace BillManageWPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            tbUserName.Text = SoftUser.UserName;
+            String photoPath = AppDomain.CurrentDomain.BaseDirectory + @"\Configs\" + SoftUser.UserCode + @"\user.jpg"; //用户头像文件
+            if (File.Exists(photoPath))
+            {
+                imUserPhoto.Source = new BitmapImage(new Uri(photoPath, UriKind.Absolute));
+            }
             ModernFrame mf = new ModernFrame();
             //mf.Content = new FunctionListPage();
             mf.Source = new Uri(@"Content\Main\MainMeumList.xaml", UriKind.Relative);

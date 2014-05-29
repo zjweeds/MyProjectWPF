@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="BillManageWPF.Page.BillInfoList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+             xmlns:wf ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             xmlns:tabEx ="clr-namespace:CSharpWin;assembly=TabControlEx"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="900" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5">
+            <wfi:WindowsFormsHost Margin="-6,2,6,-2" >
+                <wf:DataGridView x:Name="dgvView" />
+            </wfi:WindowsFormsHost>
+        </Grid>
+        <StackPanel  Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label   Content="票据类型"/>
+            <ComboBox Name="cbbTemplate" MinWidth="100" />
+        </StackPanel>
+        <StackPanel  Grid.Column="2" >
+            <Label   Content="打印时间段："/>
+            <StackPanel Orientation="Horizontal" Margin="0" >
+                <Label Content="开始:"/>
+                <DatePicker Name="dtptStart"  />
+                <Label Content="结束:"/>
+                <DatePicker Name="dtptEnd"  />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel  Grid.Column="3" >
+            <Label   Content="金额区间 (单位：元)"/>
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="大于:"/>
+                <TextBox Name="txtLow"  MinWidth="50"/>
+                <Label Content="小于:"/>
+                <TextBox Name="txtHigh"   MinWidth="50"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Grid.Column="4" Name="btnSelect" Content="开始检索"  Margin=" 40,10,40,10" Click="btnSelect_Click"/>
+    </Grid>
+</UserControl>

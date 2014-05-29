@@ -11,13 +11,12 @@ namespace Controllers.DataAccess
 {
     public class DataSourceService
     {
-        public MySqlHelper sqlhelper = new MySqlHelper();
         /// <summary>
         /// 根据公司名称，返回公司所有数据源
         /// </summary>
         /// <param name="sCompanyName"></param>
         /// <returns></returns>
-        public DataTable GetDataTableByCompanyName(String sCompanyName)
+        static public DataTable GetDAllinfoByCompanyName(String sCompanyName)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace Controllers.DataAccess
                 sbsql.Append("        and CompanyInfo.CIIsEnable = 1 ");
                 sbsql.Append("        and DataSourceInfo.DSIIsEnable = 1");
                 sbsql.AppendFormat("  and CompanyInfo.CIName ='{0}' ", sCompanyName);
-                return sqlhelper.GetDataTable(sbsql.ToString());
+                return new MySqlHelper().GetDataTable(sbsql.ToString());
             }
             catch(Exception ex)
             {
@@ -38,12 +37,33 @@ namespace Controllers.DataAccess
             }
         }
 
+        static public DataTable GetDataTableByCompanyName(String sCompanyName)
+        {
+            StringBuilder sbsql = new StringBuilder();
+                sbsql.Append( "select distinct(DSITableName) ");
+                sbsql.Append(" from DataSourceInfo with(nolock) ");
+                sbsql.Append("  join CompanyInfo with(nolock)");
+                sbsql.Append("       on CompanyInfo.CIID = DataSourceInfo.DSICIID ");
+                sbsql.Append("  where 1=1 ");
+                sbsql.Append("        and CompanyInfo.CIIsEnable = 1 ");
+                sbsql.Append("        and DataSourceInfo.DSIIsEnable = 1");
+                sbsql.AppendFormat("  and CompanyInfo.CIName ='{0}' ", sCompanyName);
+                return new MySqlHelper().GetDataTable(sbsql.ToString());
+        }
+        static public DataTable GetDataTableByTableName(String tableName)
+        {
+            StringBuilder sbsql = new StringBuilder();
+            sbsql.Append("select DSIID,DSIColums ");
+            sbsql.Append(" from DataSourceInfo with(nolock) ");
+            sbsql.AppendFormat("  where DSITableName ='{0}'  and DSIIsEnable = 1 ", tableName);
+            return new MySqlHelper().GetDataTable(sbsql.ToString());
+        }
         /// <summary>
         /// 根据ID号返回数据源
         /// </summary>
         /// <param name="dsiid"></param>
         /// <returns></returns>
-        public DataTable GetDataTablelByID(int dsiid)
+       static public DataTable GetDataTablelByID(int dsiid)
         {
             try
             {
@@ -52,7 +72,7 @@ namespace Controllers.DataAccess
                 sbsql.Append(" from DataSourceInfo with(nolock) ");
                 sbsql.Append("      where 1=1 ");
                 sbsql.AppendFormat("      and  DSIID= '{0}' ", dsiid);
-                return sqlhelper.GetDataTable(sbsql.ToString());
+                return new MySqlHelper().GetDataTable(sbsql.ToString());
 
             }
             catch(Exception ex)
@@ -66,7 +86,7 @@ namespace Controllers.DataAccess
         /// </summary>
         /// <param name="dsiid"></param>
         /// <returns></returns>
-        public DataSourceModel GetDataSourceModelByID(int dsiid)
+       static public DataSourceModel GetDataSourceModelByID(int dsiid)
         {
             try
             {
@@ -88,7 +108,7 @@ namespace Controllers.DataAccess
             }
         }
 
-        public List<DataSourceModel> GetDataSourceModelListByComanyName(String sCompanyName)
+       static public List<DataSourceModel> GetDataSourceModelListByComanyName(String sCompanyName)
         {
             try
             {
@@ -121,7 +141,7 @@ namespace Controllers.DataAccess
         /// <param name="tableName"></param>
         /// <param name="coumlnName"></param>
         /// <returns></returns>
-        public DataTable GetBandingsInfoByTableAndCoumln(String tableName, String coumlnName,List<String> whereFeild,List<String> whereValue)
+       static public DataTable GetBandingsInfoByTableAndCoumln(String tableName, String coumlnName,List<String> whereFeild,List<String> whereValue)
         {
             try
             {
@@ -138,25 +158,127 @@ namespace Controllers.DataAccess
                         i++;
                     }
                 }
-                return sqlhelper.GetDataTable(sb.ToString());
+                return new MySqlHelper().GetDataTable(sb.ToString());
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public DataTable GetAllCoumsBandingsInfoByTableAndCoumln(String tableName, String coumlnName, String values)
+       static  public DataTable GetAllCoumsBandingsInfoByTableAndCoumln(String tableName, String coumlnName, String values)
         {
             try
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendFormat("select * from {0} where 1=1 and {1} = '{2}'", tableName,coumlnName,values);
-                return sqlhelper.GetDataTable(sb.ToString());
+                return new MySqlHelper().GetDataTable(sb.ToString());
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+       static public DataTable SelectAllInfoByTableName(String TabelName)
+       {
+          return new MySqlHelper().GetDataTable(String.Format("select * from {0} ", TabelName));
+       }
+
+       static public bool UpdateByDt(String TabelName, DataTable dt)
+       {
+          return  new MySqlHelper().updateByDt(String.Format("select * from {0} ", TabelName), dt);
+       }
+        /// <summary>
+        /// 增加资料表
+        /// </summary>
+        /// <param name="tableName"></param>
+       /// <param name="companyID"></param>
+        /// <returns></returns>
+       static public bool AddTableByName(String tableName, int companyID)
+       {
+           StringBuilder cmdText = new StringBuilder();
+           cmdText.AppendFormat(" CREATE TABLE {0} ( ", tableName);
+           cmdText.Append("	                    [ID] [int] IDENTITY(1,1) NOT NULL, ");
+           cmdText.AppendFormat("	                    CONSTRAINT pk_{0} PRIMARY KEY CLUSTERED                 ", tableName);
+           cmdText.Append("		                    ( [ID] ASC )   ");
+           cmdText.Append("		                WITH( ");
+           cmdText.Append("                             PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, ");
+           cmdText.Append("                             IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON,");
+           cmdText.Append("                            ALLOW_PAGE_LOCKS  = ON");
+           cmdText.Append("                         ) ON [PRIMARY]");
+           cmdText.Append("                ) ON [PRIMARY]");
+           new MySqlHelper().ExecDataBySql(cmdText.ToString());
+           StringBuilder sqlText = new StringBuilder();
+           sqlText.AppendFormat
+               ("insert into DataSourceInfo (DSITableName,DSIColums,DSICIID) values ('{0}','ID','{1}')"
+               , tableName, companyID);
+           return new MySqlHelper().ExecDataBySql(sqlText.ToString()) > 0 ? true : false;
+       }
+
+        /// <summary>
+        /// 修改表名
+        /// </summary>
+        /// <param name="OldName"></param>
+        /// <param name="NewName"></param>
+        /// <returns></returns>
+       static public bool ModifyTabelName(String OldName, String NewName, int CompanyID)
+       {
+           StringBuilder cmdText = new StringBuilder();
+           cmdText.AppendFormat("exec sp_rename '{0}','{1}'", OldName, NewName);
+           new MySqlHelper().ExecDataBySql(cmdText.ToString());
+           StringBuilder sqlText = new StringBuilder();
+           sqlText.AppendFormat
+               ("update DataSourceInfo set DSITableName = '{0}'  where  DSIIsEnable = 1 and DSITableName = '{1}' and DSICIID = '{2}'",
+                NewName, OldName, CompanyID);
+           return new MySqlHelper().ExecDataBySql(sqlText.ToString()) > 0 ? true : false;
+       }
+
+        /// <summary>
+        /// 增加列
+        /// </summary>
+        /// <param name="ColumnName">列名</param>
+        /// <param name="Type">列类型</param>
+        /// <param name="TabelName">表名</param>
+        /// <param name="CompanyID">公司ID</param>
+        /// <returns></returns>
+       static public bool AddColumn(String ColumnName, String sType, String TabelName, int CompanyID)
+       {
+           StringBuilder cmdText = new StringBuilder();
+           cmdText.AppendFormat("Alter   Table   {0}   add   {1}   {2} ", TabelName, ColumnName, sType);
+           new MySqlHelper().ExecDataBySql(cmdText.ToString());         
+               StringBuilder sqlText = new StringBuilder();
+               sqlText.AppendFormat
+                  ("insert into DataSourceInfo (DSITableName,DSIColums,DSICIID) values ('{0}','{1}','{2}')"
+                  , TabelName,ColumnName, CompanyID);
+               return new MySqlHelper().ExecDataBySql(sqlText.ToString()) > 0 ? true : false;
+       }
+
+        /// <summary>
+        /// 删除列
+        /// </summary>
+        /// <param name="ColumnName"></param>
+        /// <param name="sType"></param>
+        /// <param name="TabelName"></param>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
+       static public bool DeleteColummn(String ColumnName, String TabelName, int CompanyID)
+       {
+           StringBuilder cmdText = new StringBuilder();
+           cmdText.AppendFormat("Alter   table   {0}   drop   column   {1}   ", TabelName, ColumnName);
+           new MySqlHelper().ExecDataBySql(cmdText.ToString());
+               StringBuilder sqlText = new StringBuilder();
+               sqlText.AppendFormat
+                  ("update  DataSourceInfo set DSIIsEnable = 0 where DSITableName ='{0}' and  DSIColums = '{1}' and DSICIID = '{2}'"
+                  , TabelName, ColumnName, CompanyID);
+               return new MySqlHelper().ExecDataBySql(sqlText.ToString()) > 0 ? true : false;
+       }
+
+       static public bool DeleteTabelByTabelName(String tabelName, int companyID)
+       {
+           StringBuilder cmdText = new StringBuilder();
+           cmdText.AppendFormat("update  DataSourceInfo set DSIIsEnable = 0 where DSITableName ='{0}' and DSICIID = '{1}'"
+               , tabelName, companyID);
+           return new MySqlHelper().ExecDataBySql(cmdText.ToString()) > 0 ? true : false;
+       }
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using MyExtendControls.MyControls.TemplateContorl;
 using Controllers.Enum;
 using Controllers.Models;
-using Controllers.DataAccess;
+using Controllers.Business;
 using Controllers.Common;
 
 namespace BillManageWPF.winFormUI
@@ -227,6 +227,9 @@ namespace BillManageWPF.winFormUI
                 font = tmp.Font;
                 bgc = tmp.BackColor;
                 frc = tmp.ForeColor;
+                cbxTablename.DataSource = DataSourceManager.GetDataTableByCompanyName(SoftUser.UserCompany);
+                cbxTablename.DisplayMember = "DSITableName";
+                cbxTablename.ValueMember = "DSITableName";
             }
         }
 
@@ -292,6 +295,13 @@ namespace BillManageWPF.winFormUI
         private void txtName_TextChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void cbxTablename_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbxCoumname.DataSource = DataSourceManager.GetDataTableByTableName(cbxTablename.Text);
+            cbxCoumname.DisplayMember = "DSIColums";
+            cbxCoumname.ValueMember = "DSIColums";
         }
     }
 }

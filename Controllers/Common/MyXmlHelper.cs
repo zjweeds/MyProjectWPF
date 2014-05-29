@@ -164,6 +164,29 @@ namespace Controllers.Common
             }
             return scfm;
         }
+
+
+        public bool SaveLoginToXml(String path)
+        {
+            try
+            {
+                XmlTextWriter writer = new XmlTextWriter(path, System.Text.Encoding.UTF8);
+                writer.Formatting = Formatting.Indented;
+                writer.WriteStartDocument();
+                writer.WriteStartElement("loginconfig");
+                writer.WriteElementString("ID", SoftUser.UserCode);
+                writer.WriteElementString("PWD", SoftUser.PassWorld);
+                writer.WriteElementString("CompanyName", SoftUser.UserCompany);
+                writer.WriteElementString("BillSet", SoftUser.Op_Bill);
+                writer.WriteEndElement(); // 关闭元素 
+                writer.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 

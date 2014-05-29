@@ -1,0 +1,29 @@
+﻿<Window x:Class="BillManageWPF.Content.UserManage.PermissionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PermissionWindow" Height="300" Width="300" Loaded="Window_Loaded" Background="Purple">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width=" 20*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=" 10*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height=" 10*"/>
+            <RowDefinition Height=" 10*"/>
+            <RowDefinition Height=" 10*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height=" 10*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="已有权限 ："  Foreground="WhiteSmoke"/>
+        <TextBlock Grid.Column="2" Grid.Row="0" Text="未分配权限 ：" Foreground="WhiteSmoke"/>
+        <ListBox Name="listHave" Grid.Column="0" Grid.Row="1" Grid.RowSpan="5" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="200" MinWidth="100" Foreground="WhiteSmoke"/>
+        <ListBox Name="listNo" Grid.Column="2" Grid.Row="1" Grid.RowSpan="5" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="200" MinWidth="100" Foreground="WhiteSmoke"/>
+        <Button Name="btnRemove" Content="→"  Grid.Column="1" Grid.Row="2" Click="btnRemove_Click" />
+        <Button Name="btnAdd" Content="←"  Grid.Column="1" Grid.Row="4"  Click="btnAdd_Click"/>
+        <Button Name="btnSave" Content="确定" Grid.Column="0" Grid.Row="6" Click="btnSave_Click"  />
+        <Button Content="取消" Grid.Column="2" Grid.Row="6"  Click="Button_Click" />
+    </Grid>
+</Window>

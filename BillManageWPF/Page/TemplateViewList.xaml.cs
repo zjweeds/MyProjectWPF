@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+#region 引入命名空间
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +17,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BillManageWPF.Content.Template;
 using System.Data;
-using Controllers.DataAccess;
 using Controllers.Business;
 using Controllers.Models;
 using Controllers.Common;
 using BillManageWPF.winFormUI;
+#endregion
 
 namespace BillManageWPF.Page
 {
@@ -27,19 +30,22 @@ namespace BillManageWPF.Page
     /// </summary>
     public partial class TemplateViewList : UserControl
     {
+        #region 构造函数
         public TemplateViewList()
         {
             InitializeComponent();
         }
-        #region 页面属性
-        public BillTemplateService bts = new BillTemplateService();
-        public BillTemplateTypeService btts = new BillTemplateTypeService();
-        public BillTemplatModel btm = new BillTemplatModel();
-        public ImageHelper imahelper = new ImageHelper();
-        public DataTable dt = new DataTable();
-        public List<System.Windows.Forms.ListView> lsvs = new List<System.Windows.Forms.ListView>();
-        public List<System.Windows.Forms.ImageList> imgls = new List<System.Windows.Forms.ImageList>();
         #endregion
+
+        #region 页面属性
+        private BillTemplatModel btm = new BillTemplatModel();
+        private ImageHelper imahelper = new ImageHelper();
+        private DataTable dt = new DataTable();
+        private List<System.Windows.Forms.ListView> lsvs = new List<System.Windows.Forms.ListView>();
+        private List<System.Windows.Forms.ImageList> imgls = new List<System.Windows.Forms.ImageList>();
+        public String templateName = String.Empty; 
+        #endregion
+
         #region 自定义方法
         /// <summary>
         /// 加载每一页内容
@@ -47,7 +53,7 @@ namespace BillManageWPF.Page
         private void DoLoad()
         {
             tabList.TabPages.Clear();
-            DataTable dt = btts.GetAllTypeByBillsetID("测试账套");
+            DataTable dt = BillTemplateTypeManage.GetAllTypeByBillsetName(SoftUser.Op_Bill);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 tabList.TabPages.Add(dt.Rows[i]["TTName"].ToString());
@@ -165,6 +171,25 @@ namespace BillManageWPF.Page
             }
         }
         #endregion
+
+        #region  页面事件
+
+        /// <summary>
+        /// 载入事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            tabList.ItemSize = new System.Drawing.Size(50, 30);
+            DoLoad();
+        }
+
+        /// <summary>
+        /// 按钮经过事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
             e.Handled = true;
@@ -176,6 +201,11 @@ namespace BillManageWPF.Page
             }
         }
 
+        /// <summary>
+        /// 按钮移开事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
              e.Handled = true;
@@ -187,16 +217,6 @@ namespace BillManageWPF.Page
             }
         }
 
-        /// <summary>
-        /// 新增模板
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnTemplateAdd_Click(object sender, RoutedEventArgs e)
-        {
-            TemplateProperyEdit tpe = new TemplateProperyEdit();
-            tpe.Show();
-        }
         /// <summary>
         /// 双击选择项，跳转到打印界面
         /// </summary>
@@ -213,15 +233,20 @@ namespace BillManageWPF.Page
             else
             {
                 MessageBox.Show("请先选择票据", "软件提示");
-                return; 
-            }           
+                return;
+            }
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 新增模板
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTemplateAdd_Click(object sender, RoutedEventArgs e)
         {
-            tabList.ItemSize = new System.Drawing.Size(50, 30);
-            DoLoad();
-        }
+            TemplateProperyEdit tpe = new TemplateProperyEdit();
+            tpe.Show();
+        }      
 
         /// <summary>
         /// 票据设计
@@ -267,6 +292,11 @@ namespace BillManageWPF.Page
             }
         }
 
+        /// <summary>
+        /// 批量打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPrints_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
@@ -283,5 +313,116 @@ namespace BillManageWPF.Page
                 }
             } 
         }
+
+        /// <summary>
+        /// 新增票夹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBillTypeAdd_Click(object sender, RoutedEventArgs e)
+        {
+            //String typeName =  tabList.SelectedTab.Text.ToString();
+            TemplateTypeEdit tte = new TemplateTypeEdit(this);
+            tte.ShowDialog();
+            if (templateName != string.Empty)//不为空表示有更新
+            {
+                tabList.TabPages.Add(templateName);//添加一页
+                templateName = String.Empty;//还原标记
+                int index = tabList.TabPages.Count - 1;
+                LoadListView(index);//添加页面listview 
+                LoadImage(index, lsvs[index], imgls[index]);//添加image
+            }           
+        }
+
+        /// <summary>
+        /// 重命名票夹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBillTypeReName_Click(object sender, RoutedEventArgs e)
+        {
+            String typeName = tabList.SelectedTab.Text.ToString();
+            TemplateTypeEdit tte = new TemplateTypeEdit(typeName,this);
+            tte.ShowDialog();
+            if (templateName != string.Empty)
+            {
+                tabList.SelectedTab.Text = templateName;
+                templateName = String.Empty;
+            }
+        }
+
+        /// <summary>
+        /// 删除票夹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBillTypeDelete_Click(object sender, RoutedEventArgs e)
+        {
+            String typeName = tabList.SelectedTab.Text.ToString();
+            if (MessageBox.Show("将删除类别：" + typeName 
+                + "下的所有票据和账单，此操作不可恢复，确定要删除吗？", "软件提示", 
+                MessageBoxButton.YesNo,MessageBoxImage.Exclamation)==MessageBoxResult.Yes)
+            {
+                //删除数据
+            }
+        }
+
+        /// <summary>
+        /// 复制模板
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTemplateCopy_Click(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+        /// <summary>
+        /// 剪切模板
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTemplateCut_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+            if (lsvItem != null)
+            {
+                if (lsvItem.SelectedItems.Count > 0)
+                {
+                    //BillSerchListForm blf = new BillSerchListForm(Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString()));
+                    //blf.Show();
+                    
+                }
+                else
+                {
+                    MessageBox.Show("请先选择票据", "软件提示");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 票据粘贴
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTemplateStick_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+            if (lsvItem != null)
+            {
+                if (lsvItem.SelectedItems.Count > 0)
+                {
+                    //BillSerchListForm blf = new BillSerchListForm(Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString()));
+                    //blf.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show("请先选择票据", "软件提示");
+                }
+            }
+        }
+        #endregion
     }
 }

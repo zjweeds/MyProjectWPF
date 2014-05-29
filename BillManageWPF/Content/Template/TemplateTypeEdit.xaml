@@ -1,0 +1,21 @@
+﻿<Window x:Class="BillManageWPF.Content.Template.TemplateTypeEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="票夹编辑页面" Height="100" Width="300" WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanResizeWithGrip" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="35*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Label Content="请输入名称:" VerticalContentAlignment="Center" Margin="3" />
+            <TextBox Name="txtTypeName" Text="" VerticalContentAlignment="Center" Margin="3,3,3,3" MinWidth="150"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+            <Button Name="btnQueDing" Content="确定" Click="btnQueDing_Click" />
+            <Button Name="btnQuXiao" Content="取消" Click="btnQuXiao_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

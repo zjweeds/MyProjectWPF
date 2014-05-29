@@ -4,6 +4,7 @@ using System.Text;
 using Controllers.Models;
 using System.Data.SqlClient;
 using Controllers.DataAccess.SQLHELPER;
+using System.Data;
 
 namespace Controllers.DataAccess
 {
@@ -121,7 +122,37 @@ namespace Controllers.DataAccess
             string cmdText="SELECT * FROM BillInfo where BIIsEnable = 1";
             return SelectBillInfoByCmdText(cmdText);
         }
-
+        /// <summary>
+        /// 根据账套，查询所有账单信息
+        /// </summary>
+        /// <param name="billSetName"></param>
+        /// <returns></returns>
+        public static DataTable GetBillInfoByBillSet(String billSetName,String whereSql)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append(" select BIID as '流水号', BINO as '账单号',BINAME AS '账单名称',");
+            cmdText.Append("        TI.TIName AS '模板名称', BISenderCode as '付款方',");
+            cmdText.Append("        BISender as '付款账号',BIReciver as '收款方',BIReciverCode as '收款账号',");
+            cmdText.Append("        BIAmount as '总金额',BICreatTime as '开票时间' ,BIIsPrinted as '是否已打印'");
+            cmdText.Append(" FROM  ");
+            cmdText.Append("( select * from BillInfo where exists ");
+            cmdText.Append("    ( select TITTID  from TemplateInfo where exists");
+            cmdText.Append("        ( select TTID from TemplateType where  exists ");
+            cmdText.Append("	        ( select TTBillSetID from BillSetInfo ");
+            cmdText.AppendFormat("        where BSIID= TTBillSetID and BSIName = '{0}' ", billSetName);
+            cmdText.Append("		    ) and TemplateType.TTID = TemplateInfo.TITTID");
+            cmdText.Append("	    )and BillInfo.BITIID = TemplateInfo.TIID");
+            cmdText.Append("    ) and  BillInfo.BIIsEnable = 1 ");
+            cmdText.Append(" )Temp ");
+            cmdText.Append(" JOIN TemplateInfo TI ON TI.TIID  = BITIID ");
+            cmdText.Append("where 1=1 ");
+            if (whereSql != String.Empty)
+            {
+                cmdText.Append(whereSql.ToString());
+            }
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
+        
         /// <summary>
         /// 自动生成单据号
         /// </summary>
@@ -132,7 +163,7 @@ namespace Controllers.DataAccess
             String cmdText = "Select Max( BINo ) From  BillInfo where BITIID = '"+tIID+"'";
             try
             {
-                string strMaxCode = new MySqlHelper().GetSingleObject(cmdText) as string;
+                string strMaxCode = new MySqlHelper().GetSingleObject(cmdText) as String;
                 if (String.IsNullOrEmpty(strMaxCode))
                 {
                     strMaxCode = FormatString(intLength);

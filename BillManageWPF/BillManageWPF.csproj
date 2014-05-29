@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>BillManageWPF.App</StartupObject>
@@ -77,6 +79,12 @@
     <Compile Include="AppMainWindow.xaml.cs">
       <DependentUpon>AppMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\DataSourcesEdit\ColumnEditWindow.xaml.cs">
+      <DependentUpon>ColumnEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DataSourcesEdit\TableEditWindow.xaml.cs">
+      <DependentUpon>TableEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Main\MainMeumList.xaml.cs">
       <DependentUpon>MainMeumList.xaml</DependentUpon>
     </Compile>
@@ -86,14 +94,26 @@
     <Compile Include="Content\Template\TemplateProperyEdit.xaml.cs">
       <DependentUpon>TemplateProperyEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Template\TemplateTypeEdit.xaml.cs">
+      <DependentUpon>TemplateTypeEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\UserManage\AccountInfo.xaml.cs">
       <DependentUpon>AccountInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\UserManage\PermissionWindow.xaml.cs">
+      <DependentUpon>PermissionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\UserManage\UserInfo.xaml.cs">
       <DependentUpon>UserInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\UserManage\UserPhoto.xaml.cs">
       <DependentUpon>UserPhoto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\UserManage\UsersEdit.xaml.cs">
+      <DependentUpon>UsersEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FrameWindow.xaml.cs">
+      <DependentUpon>FrameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -104,14 +124,20 @@
     <Compile Include="ModerUIMain.xaml.cs">
       <DependentUpon>ModerUIMain.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page\BillInfoList.xaml.cs">
+      <DependentUpon>BillInfoList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\DataSourceList.xaml.cs">
       <DependentUpon>DataSourceList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page\SystemSettingView.xaml.cs">
-      <DependentUpon>SystemSettingView.xaml</DependentUpon>
+    <Compile Include="Page\SystemSetView.xaml.cs">
+      <DependentUpon>SystemSetView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Page\UserInfoWindow.xaml.cs">
-      <DependentUpon>UserInfoWindow.xaml</DependentUpon>
+    <Compile Include="Page\UserManageList.xaml.cs">
+      <DependentUpon>UserManageList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Skin\mainUIico\SystemSettingView.xaml.cs">
+      <DependentUpon>SystemSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
@@ -127,6 +153,18 @@
     </Compile>
     <Compile Include="winFormUI\BillForms\FilterForm.Designer.cs">
       <DependentUpon>FilterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="winFormUI\CompanyEidt\CompantEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="winFormUI\CompanyEidt\CompantEditForm.Designer.cs">
+      <DependentUpon>CompantEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="winFormUI\CompanyEidt\CompanyAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="winFormUI\CompanyEidt\CompanyAddForm.Designer.cs">
+      <DependentUpon>CompanyAddForm.cs</DependentUpon>
     </Compile>
     <Compile Include="winFormUI\TemplateForms\CheckBoxProperyForm.cs">
       <SubType>Form</SubType>
@@ -145,6 +183,12 @@
     </Compile>
     <Compile Include="winFormUI\TemplateForms\DateTimePickerProperyForm.Designer.cs">
       <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="winFormUI\TemplateForms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="winFormUI\TemplateForms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="winFormUI\TemplateForms\LabelProperyForm.cs">
       <SubType>Form</SubType>
@@ -178,7 +222,6 @@
     </Compile>
     <Compile Include="MyCode\ComHelper.cs" />
     <Compile Include="MyCode\PickBox.cs" />
-    <Compile Include="MyControls\MaskTextBox.cs" />
     <Compile Include="Page\TemplateViewList.xaml.cs">
       <DependentUpon>TemplateViewList.xaml</DependentUpon>
     </Compile>
@@ -195,6 +238,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\DataSourcesEdit\ColumnEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\DataSourcesEdit\TableEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Main\MainMeumList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,7 +258,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Content\Template\TemplateTypeEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\UserManage\AccountInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\UserManage\PermissionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,6 +275,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\UserManage\UserPhoto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\UserManage\UsersEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FrameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,19 +302,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Page\BillInfoList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page\DataSourceList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page\SystemSettingView.xaml">
+    <Page Include="Page\SystemSetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\UserManageList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Skin\mainUIico\SystemSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Page\TemplateViewList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Page\UserInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,6 +363,12 @@
     <EmbeddedResource Include="winFormUI\BillForms\FilterForm.resx">
       <DependentUpon>FilterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="winFormUI\CompanyEidt\CompantEditForm.resx">
+      <DependentUpon>CompantEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="winFormUI\CompanyEidt\CompanyAddForm.resx">
+      <DependentUpon>CompanyAddForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\CheckBoxProperyForm.resx">
       <DependentUpon>CheckBoxProperyForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -296,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\DateTimePickerProperyForm.resx">
       <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="winFormUI\TemplateForms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\LabelProperyForm.resx">
       <DependentUpon>LabelProperyForm.cs</DependentUpon>
@@ -372,7 +456,9 @@
     <Resource Include="Skin\ico\toolbar_hover.png" />
     <Resource Include="Skin\ico\toolbar_pushed.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Skin\ico\user.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Skin\Icon\purple\business_pur.png" />
     <Resource Include="Skin\Icon\purple\delicious_pur.png" />
@@ -414,7 +500,14 @@
     <Resource Include="Skin\Icon\purple\Yahoo Messenger.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Skin\DefaultUserPhoto\67.jpg" />
+    <Resource Include="Skin\Icon\blue\win8_pur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\ico\BILLsET.png" />
+    <Resource Include="Skin\ico\COMPANY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\ico\PRINT.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Controllers.Model;
+using Controllers.Models;
 using System.Data.SqlClient;
 using Controllers.DataAccess.SQLHELPER;
 using System.Data;
-namespace Controllers.DAL
+namespace Controllers.DataAccess
 {
     /// <summary>
     ///本数据访问类由Hirer实体数据访问层工具生成
@@ -44,7 +44,68 @@ namespace Controllers.DAL
             return new MySqlHelper().ExecSqlReturnId(cmdText.ToString(), paras);
         }
 
-
+        public static bool AddEmployeeInfoAndUserInfo(EmployeeInfo employeeInfo)
+        {
+            List<String> cmdList = new List<string>();
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append(" INSERT INTO EmployeeInfo ( ");
+            cmdText.Append("             EINo,EIName,EISex,EIDepartment,EIPosition,EIBirthday, ");
+            cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+            cmdText.Append(" ) VALUES(  ");
+            cmdText.AppendFormat(" '{0}' , ",employeeInfo.EINo);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EIName);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EISex);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EIDepartment);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EIPosition);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EIBirthday);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EIEntryDate);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EIRemark);
+             cmdText.AppendFormat(" '{0}' , ",employeeInfo.EICompanyID);
+             cmdText.Append(" '1' ) ");
+             cmdList.Add(cmdText.ToString());
+             StringBuilder sqlText = new StringBuilder();
+             sqlText.AppendFormat(" INSERT INTO UserInfo (UIEINo,UICompanyID) values ('{0}','{1}') ", employeeInfo.EINo, employeeInfo.EICompanyID);
+             cmdList.Add(sqlText.ToString());
+             StringBuilder perText = new StringBuilder();
+             perText.Append("INSERT INTO PermissionInfo ( PIEINo,PITemplate,PIDataSource,PIBill,PIUser,PISet,PIAdmin ) ");
+             perText.AppendFormat("               values('{0}','1','1','1','0','0','0' ) ", employeeInfo.EINo);
+             cmdList.Add(perText.ToString());//更新用户表
+             return new MySqlHelper().ExecDataBySqls(cmdList);
+        }
+        public static bool AddEmployeeInfoAndUserInfoList(IList<EmployeeInfo> employeeInfoList)
+        {
+            List<String> cmdList = new List<string>();
+            if (employeeInfoList != null && employeeInfoList.Count > 0)
+            {
+                foreach (EmployeeInfo employeeInfo in employeeInfoList)
+                {
+                    StringBuilder cmdText = new StringBuilder();
+                    cmdText.Append(" INSERT INTO EmployeeInfo ( ");
+                    cmdText.Append("             EINo,EIName,EISex,EIDepartment,EIPosition,EIBirthday, ");
+                    cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+                    cmdText.Append(" ) VALUES(  ");
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EINo);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EIName);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EISex);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EIDepartment);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EIPosition);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EIBirthday);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EIEntryDate);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EIRemark);
+                    cmdText.AppendFormat(" '{0}' , ", employeeInfo.EICompanyID);
+                    cmdText.Append(" '1' ) ");
+                    cmdList.Add(cmdText.ToString()); //更新员工表
+                    StringBuilder sqlText = new StringBuilder();
+                    sqlText.AppendFormat(" INSERT INTO UserInfo (UIEINo,UICompanyID) values ('{0}','{1}') ", employeeInfo.EINo, employeeInfo.EICompanyID);
+                    cmdList.Add(sqlText.ToString());//更新用户表
+                    StringBuilder perText = new StringBuilder();
+                    perText.Append("INSERT INTO PermissionInfo ( PIEINo,PITemplate,PIDataSource,PIBill,PIUser,PISet,PIAdmin ) ");
+                    perText.AppendFormat("               values('{0}','1','1','1','0','0','0' ) ", employeeInfo.EINo);
+                    cmdList.Add(perText.ToString());//更新用户表
+                }
+            }
+            return new MySqlHelper().ExecDataBySqls(cmdList);
+        }
         /// <summary>
         /// 根据EIID删除EmployeeInfo
         /// </summary>
@@ -54,7 +115,25 @@ namespace Controllers.DAL
             string cmdText = "Update EmployeeInfo set EIIsEnable = 0  WHERE  EIID = " + _eIID;
             return new MySqlHelper().ExecDataBySql(cmdText);
         }
-
+        public static bool DeleteEmployeeInfoByEINo(String eino,String CampanyName)
+        {
+            List<String> cmdList = new List<string>(); 
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append(" Update EmployeeInfo set EIIsEnable = 0  ");
+            cmdText.Append(" WHERE EXISTS   ( SELECT * FROM companyinfo ");
+            cmdText.Append("                  where companyinfo.CIID = EmployeeInfo.EICompanyID ");
+            cmdText.AppendFormat("                 and companyinfo.CIName = '{0}'",CampanyName);
+            cmdText.AppendFormat("         ) and EINo = '{0}'",eino);
+            cmdList.Add(cmdText.ToString());
+            StringBuilder sqlText = new StringBuilder();
+            sqlText.Append(" Update UserInfo set UIIsEnable = 0  ");
+            sqlText.Append(" WHERE EXISTS   ( SELECT * FROM companyinfo ");
+            sqlText.Append("                  where companyinfo.CIID = UserInfo.UICompanyID ");
+            sqlText.AppendFormat("                 and companyinfo.CIName = '{0}'", CampanyName);
+            sqlText.AppendFormat("         ) and UIEINo = '{0}'", eino);
+            cmdList.Add(sqlText.ToString());
+            return new MySqlHelper().ExecDataBySqls(cmdList);
+        }
 
         /// <summary>
         /// 更新EmployeeInfo
@@ -127,20 +206,196 @@ namespace Controllers.DAL
             cmdText.Append("SELECT ");
             cmdText.Append("             EIID,EINo,EIName,EIPhoto,EISex,EIDepartment,EIPosition,EIBirthday, ");
             cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+            cmdText.Append("From EmployeeInfo with(nolock)  ");
             cmdText.Append("WHERE EIIsEnable = 1 and ");
-            cmdText.AppendFormat("CIID = '{0}' ", _eIID);
+            cmdText.AppendFormat("EIID = '{0}' ", _eIID);
             IList<EmployeeInfo> controlInfos = SelectEmployeeInfoByCmdText(cmdText.ToString());
             return controlInfos.Count > 0 ? controlInfos[0] : null;
         }
-
+        public static EmployeeInfo SelectEmployeeInfoByEINO(String _eINo)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT ");
+            cmdText.Append("             EIID,EINo,EIName,EIPhoto,EISex,EIDepartment,EIPosition,EIBirthday, ");
+            cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+            cmdText.Append("From EmployeeInfo with(nolock)  ");
+            cmdText.Append("WHERE EIIsEnable = 1 and ");
+            cmdText.AppendFormat("EINo = '{0}' ", _eINo);
+            IList<EmployeeInfo> controlInfos = SelectEmployeeInfoByCmdText(cmdText.ToString());
+            return controlInfos.Count > 0 ? controlInfos[0] : null;
+        }
         public static IList<EmployeeInfo> SelectAllEmployeeInfo()
         {
             StringBuilder cmdText = new StringBuilder();
             cmdText.Append("SELECT ");
             cmdText.Append("             EIID,EINo,EIName,EIPhoto,EISex,EIDepartment,EIPosition,EIBirthday, ");
             cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+            cmdText.Append("From EmployeeInfo with(nolock)  ");
             cmdText.Append("WHERE EIIsEnable = 1  ");
             return SelectEmployeeInfoByCmdText(cmdText.ToString());
-        } 
+        }
+
+        /// <summary>
+        /// 根据公司名称返回员工列表
+        /// </summary>
+        /// <param name="CompanyName"></param>
+        /// <returns></returns>
+        public static IList<EmployeeInfo> SelectEmployeeInfoByCompanyName(String CompanyName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT ");
+            cmdText.Append("             EIID,EINo,EIName,EIPhoto,EISex,EIDepartment,EIPosition,EIBirthday, ");
+            cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+            cmdText.Append("From EmployeeInfo with(nolock)  ");
+            cmdText.Append(" left join  CompanyInfo  with(nolock)  on  CIID = EICompanyID ");
+            cmdText.Append("WHERE EIIsEnable = 1  ");
+            cmdText.AppendFormat(" and CIName = '{0}'  ", CompanyName);
+            return SelectEmployeeInfoByCmdText(cmdText.ToString());
+        }
+        public static DataTable GetAllEmployeeInfoByCompanyName(String CompanyName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT ");
+            cmdText.Append("             EIID,EINo,EIName,EIPhoto,(Case EISex when 1 then '男' else '女' end) as EISex,EIDepartment,EIPosition,EIBirthday, ");
+            cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+            cmdText.Append("From EmployeeInfo with(nolock)  ");
+            cmdText.Append(" left join  CompanyInfo  with(nolock)  on  CIID = EICompanyID ");
+            cmdText.Append("WHERE EIIsEnable = 1  ");
+            cmdText.AppendFormat(" and CIName = '{0}'  ", CompanyName);
+            return  new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
+
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="CompanyName"></param>
+        /// <returns></returns>
+        public static DataTable GetPagesEmployeeInfoByCompanyName(int pageSize,int pageIndex,String CompanyName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT ");
+            cmdText.Append("             EIID,EINo,EIName,(Case EISex when 1 then '男' else '女' end) as EISex ,");
+            cmdText.Append("             EIDepartment,EIPosition,substring(CONVERT(nvarchar(20),EIBirthday),0,11)as EIBirthday, ");
+            cmdText.Append("             substring(CONVERT(nvarchar(20),EIEntryDate),0,11)as EIEntryDate,EIRemark  ");
+            cmdText.Append(" From (");
+            if (pageIndex > 1)
+            {
+                //不是第一页，计算显示的项ID
+                cmdText.AppendFormat("select top {0}   ", pageSize);
+                cmdText.Append("             EIID,EINo,EIName,EISex,EIDepartment,EIPosition,EIBirthday, ");
+                cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+                cmdText.Append("    From EmployeeInfo with(nolock)  ");
+                cmdText.Append("    where( EIID>( select max(EIID) From ");
+                cmdText.AppendFormat(" 				(select top {0} EIID From EmployeeInfo order by EIID)as TempTable", pageSize * (pageIndex - 1));
+                cmdText.Append("                ) ");
+                cmdText.Append("         ) and EIIsEnable = 1  order by EIID ");
+            }
+            else
+            {
+                //是第一页直接显示前几条数据
+                cmdText.AppendFormat("select top {0}   ", pageSize);
+                cmdText.Append("             EIID,EINo,EIName,EISex,EIDepartment,EIPosition,EIBirthday, ");
+                cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+                cmdText.Append("    From EmployeeInfo with(nolock)  ");
+                cmdText.Append("     where EIIsEnable = 1  order by EIID ");
+            }
+            cmdText.Append("     ) Temp ");
+            cmdText.Append(" left join  CompanyInfo  with(nolock)  on  CIID =Temp.EICompanyID ");
+            cmdText.AppendFormat("WHERE  CIName = '{0}'  ", CompanyName);
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
+
+        public static int GetRowsCount(String CompanyName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT Count(*) ");
+            cmdText.Append("From EmployeeInfo with(nolock)  ");
+            cmdText.Append(" left join  CompanyInfo  with(nolock)  on  CIID = EICompanyID ");
+            cmdText.Append("WHERE EIIsEnable = 1  ");
+            cmdText.AppendFormat(" and CIName = '{0}'  ", CompanyName);
+            return Convert.ToInt32( new MySqlHelper().GetSingleObject(cmdText.ToString()));
+        }
+        /// <summary>
+        /// 根据公司名称返回员工列表
+        /// </summary>
+        /// <param name="CompanyName"></param>
+        /// <returns></returns>
+        public static DataTable GetEmployeeInfoByCompanyName(String CompanyName)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("SELECT ");
+            cmdText.Append("             EIID,EINo,EIName,EIPhoto,EISex,EIDepartment,EIPosition,EIBirthday, ");
+            cmdText.Append("             EIEntryDate,EIRemark,EICompanyID,EIIsEnable ");
+            cmdText.Append("From EmployeeInfo with(nolock)  ");
+            cmdText.Append(" left join  CompanyInfo  with(nolock)  on  CIID = EICompanyID ");
+            cmdText.Append("WHERE EIIsEnable = 1  ");
+            cmdText.AppendFormat(" and CIName = '{0}'  ", CompanyName);
+            return new MySqlHelper().GetDataTable(cmdText.ToString());
+        }
+
+        public static bool updateUerPhotoByEINO(String eINO, byte[] buff)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.AppendFormat("Update EmployeeInfo set EIPhoto =@EIPhoto  WHERE  EINo = @EINo", eINO, buff);
+            SqlParameter[] paras = new SqlParameter[]
+            {
+                new SqlParameter("@EINo",eINO),
+                new SqlParameter("@EIPhoto",buff),
+            };
+            return new MySqlHelper().ExecDataBySql(cmdText.ToString(),paras)>0?true:false;
+        }
+
+        /// <summary>
+        /// 生成员工号
+        /// </summary>
+        /// <param name="CompanyName"></param>
+        /// <param name="intLength">工号长度</param>
+        /// <returns></returns>
+        public static String CreateNewNo(String CompanyName, int intLength)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append("Select max(EINo) from EmployeeInfo with(nolock)  ");
+            cmdText.Append(" left join  CompanyInfo  with(nolock)  on  CIID = EICompanyID ");
+            cmdText.Append("WHERE EIIsEnable = 1  ");
+            cmdText.AppendFormat(" and CIName = '{0}'  ", CompanyName);
+            try
+            {
+                string strMaxCode = new MySqlHelper().GetSingleObject(cmdText.ToString()) as String;
+                if (String.IsNullOrEmpty(strMaxCode))
+                {
+                    strMaxCode = FormatString(intLength);
+                }
+                return (Convert.ToInt32(strMaxCode) + 1).ToString(FormatString(intLength));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static int ConutEmNumberByCompany(int ciid)
+        {
+            StringBuilder cmdText = new StringBuilder();
+            cmdText.Append(" Select count(EINo) from EmployeeInfo with(nolock)  ");
+            cmdText.AppendFormat("  where EICompanyID = '{0}' ", ciid);
+            return Convert.ToInt32(new MySqlHelper().GetSingleObject(cmdText.ToString()));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="intLength"></param>
+        /// <returns></returns>
+        private static string FormatString(int intLength)
+        {
+            string strFormat = String.Empty;
+            for (int i = 0; i < intLength; i++)
+            {
+                strFormat = strFormat + "0";
+            }
+            return strFormat;
+        }
     }
 }

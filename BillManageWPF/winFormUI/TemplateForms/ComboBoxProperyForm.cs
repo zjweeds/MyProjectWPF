@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using MyExtendControls.MyControls.TemplateContorl;
 using Controllers.Enum;
 using Controllers.Models;
-using Controllers.DataAccess;
 using Controllers.Common;
+using Controllers.Business;
 
 namespace BillManageWPF.winFormUI
 {
@@ -189,6 +189,9 @@ namespace BillManageWPF.winFormUI
                 bgc = tmp.BackColor;
                 frc = tmp.ForeColor;
                 //combobox = tm.cbbList[tmp.NewNumber] as ComboBoxInfo;
+                cbxTablename.DataSource = DataSourceManager.GetDataTableByCompanyName(SoftUser.UserCompany);
+                cbxTablename.DisplayMember = "DSITableName";
+                cbxTablename.ValueMember = "DSITableName";
                 GetPropery();
             }
         }
@@ -238,6 +241,13 @@ namespace BillManageWPF.winFormUI
                 bgc = cd.Color;
                 tmp.BackColor = bgc;
             }
+        }
+
+        private void cbxTablename_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbxCoumname.DataSource = DataSourceManager.GetDataTableByTableName(cbxTablename.Text);
+            cbxCoumname.DisplayMember = "DSIColums";
+            cbxCoumname.ValueMember = "DSIColums";
         }
     }
 }
