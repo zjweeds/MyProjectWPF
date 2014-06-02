@@ -67,6 +67,7 @@
     <Compile Include="Business\EmployeeInfoManager.cs" />
     <Compile Include="Business\PermissionInfoManager.cs" />
     <Compile Include="Business\PositionManage.cs" />
+    <Compile Include="Business\PrintSetManager.cs" />
     <Compile Include="Business\UserInfoManager.cs" />
     <Compile Include="Common\CommonClass.cs" />
     <Compile Include="Common\ExeclHelper.cs" />
@@ -82,11 +83,14 @@
     <Compile Include="DataAccess\TableAccess\EmployeeInfoService.cs" />
     <Compile Include="DataAccess\TableAccess\PermissionInfoService.cs" />
     <Compile Include="DataAccess\TableAccess\PositionService.cs" />
+    <Compile Include="DataAccess\TableAccess\PrintSetService.cs" />
     <Compile Include="DataAccess\TableAccess\UserInfoService.cs" />
     <Compile Include="Model\SoftUser.cs" />
+    <Compile Include="Model\TableModers\BillSetInfo.cs" />
     <Compile Include="Model\TableModers\CompanyInfo.cs" />
     <Compile Include="Model\TableModers\EmployeeInfo.cs" />
     <Compile Include="Model\TableModers\PermissionInfo.cs" />
+    <Compile Include="Model\TableModers\PrintSet.cs" />
     <Compile Include="Model\TableModers\UserInfo.cs" />
     <Compile Include="Model\TableModers\BillInfo.cs" />
     <Compile Include="DataAccess\TableAccess\BillInfoService.cs" />

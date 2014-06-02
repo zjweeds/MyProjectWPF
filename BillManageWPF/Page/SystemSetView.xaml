@@ -33,7 +33,7 @@
                     <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
                         <Grid  Background="#FF83B11F">
                             <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/ico/BILLsET.png" />
-                            <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="账套管理" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                            <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="新建账套" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
                         </Grid>
                     </Border>
                 </Grid>
@@ -46,7 +46,7 @@
                     </Border>
                 </Grid>
             </Grid>
-            <Grid Margin="10">
+            <!--<Grid Margin="10">
                 <Grid  Name="btnBillIcon" Margin="5"  Visibility="Visible"   MouseEnter="btnBillIcon_MouseEnter">
                     <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
                         <Grid  Background="#FF6B6B6B">
@@ -60,6 +60,78 @@
                         <Grid Background="#FF6B6B6B">
                             <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入打印方案设置" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                             <TextBlock   Margin="10" TextWrapping="Wrap"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以灵活的定义你的打印机挡板位置" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>-->
+            <Grid Margin="10">
+                <Grid  Name="btnBillIcon" Margin="5"  Visibility="Visible"   MouseEnter="btnBillIcon_MouseEnter">
+                    <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
+                        <Grid  Background="#FF6B6B6B">
+                            <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/setSystem.png" OpacityMask="#FF6A6A6A" />
+                            <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="修改账套" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid Name="btnBill"  Margin="5" Visibility="Hidden"   MouseLeave="btnBill_MouseLeave" MouseDown="btnBill_MouseDown">
+                    <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                        <Grid Background="#FF6B6B6B">
+                            <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入修改账套" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                            <TextBlock   Margin="10" TextWrapping="Wrap"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以修改当前账套信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+            <Grid Margin="10">
+                <Grid  Name="btnDeleteIcon" Margin="5"  Visibility="Visible"   MouseEnter="btnBillIcon_MouseEnter">
+                    <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
+                        <Grid  Background="#FF6B6B6B">
+                            <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/setSystem.png" OpacityMask="#FF6A6A6A" />
+                            <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="删除账套" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid Name="btnDelete"  Margin="5" Visibility="Hidden"   MouseLeave="btnBill_MouseLeave" MouseDown="btnBill_MouseDown">
+                    <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                        <Grid Background="#FF6B6B6B">
+                            <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入删除账套" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                            <TextBlock   Margin="10" TextWrapping="Wrap"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以删除当前账套" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+            <Grid Margin="10">
+                <Grid  Name="btnOutIcon" Margin="5"  Visibility="Visible"   MouseEnter="btnBillIcon_MouseEnter">
+                    <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
+                        <Grid  Background="#FF6B6B6B">
+                            <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/setSystem.png" OpacityMask="#FF6A6A6A" />
+                            <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="导出账套" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid Name="btnOut"  Margin="5" Visibility="Hidden"   MouseLeave="btnBill_MouseLeave" MouseDown="btnBill_MouseDown">
+                    <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                        <Grid Background="#FF6B6B6B">
+                            <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入导出账套" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                            <TextBlock   Margin="10" TextWrapping="Wrap"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以导出当前账套信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+            <Grid Margin="10">
+                <Grid  Name="btnImportIcon" Margin="5"  Visibility="Visible"   MouseEnter="btnBillIcon_MouseEnter">
+                    <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
+                        <Grid  Background="#FF6B6B6B">
+                            <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/setSystem.png" OpacityMask="#FF6A6A6A" />
+                            <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="导入账套" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid Name="btnImport"  Margin="5" Visibility="Hidden"   MouseLeave="btnBill_MouseLeave" MouseDown="btnBill_MouseDown">
+                    <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
+                        <Grid Background="#FF6B6B6B">
+                            <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入导入账套" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
+                            <TextBlock   Margin="10" TextWrapping="Wrap"  HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以导入新账套" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                         </Grid>
                     </Border>
                 </Grid>

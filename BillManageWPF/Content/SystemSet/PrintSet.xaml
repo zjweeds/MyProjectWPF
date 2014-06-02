@@ -1,116 +1,56 @@
-﻿<UserControl x:Class="BillManageWPF.Content.SystemSet.PrintSet"
+﻿<Window x:Class="BillManageWPF.Content.SystemSet.PrintSet"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <ScrollViewer>
-        <StackPanel MinWidth="200">
-            <TextBlock Text="打印方案设置"  FontSize="24" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="45*"/>
-                    <ColumnDefinition Width="35*"/>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <TextBlock Text="所有打印方案"  Margin="0,0,0,0"/>
-                    <ListBox Margin="0,34,0,32">
-                        <ListBoxItem Content="测试方案1" />
-                        <ListBoxItem Content="测试方案2" />
-                    </ListBox>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <ScrollViewer>
-                        <StackPanel MinWidth="200">
-                            <TextBlock Text="方案信息"  Margin="0,0,0,8" />
-                            <StackPanel x:Name="Form" Orientation="Vertical">
-                                <StackPanel.Resources>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Orientation" Value="Horizontal" />
-                                        <Setter Property="Margin" Value="0,0,0,4" />
-                                    </Style>
-                                    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                                        <Setter Property="Width" Value="100" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                    </Style>
-                                    <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-                                        <Setter Property="Padding" Value="0,3" />
-                                    </Style>
-                                    <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
-                                        <Setter Property="Padding" Value="0,3" />
-                                    </Style>
-                                </StackPanel.Resources>
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="Window_Loaded">
 
-                                <StackPanel>
-                                    <Label Content="方案编号" />
-                                    <Label Name="FA_code" Content="" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="上边距（厘米）" Target="{Binding ElementName=TextFirstName}"/>
-                                    <TextBox x:Name="Top" Width="150" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" IsReadOnly="True" />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="左边距（厘米）" Target="{Binding ElementName=TextLastName}"/>
-                                    <TextBox x:Name="Left" Width="150" Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True}" IsReadOnly="True"/>
-                                </StackPanel>
-                                <StackPanel >
-                                    <Label Content="状态"/>
-                                    <CheckBox Content="启用"  />
-                                </StackPanel>
-                                <StackPanel />
-                            </StackPanel>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-                <Grid Grid.Column="2">
-                    <ScrollViewer>
-                        <StackPanel MinWidth="200">
-                            <StackPanel x:Name="Form2" Orientation="Vertical">
-                                <StackPanel.Resources>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Orientation" Value="Horizontal" />
-                                        <Setter Property="Margin" Value="0,0,0,4" />
-                                    </Style>
-                                    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
-                                        <Setter Property="Width" Value="100" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                    </Style>
-                                    <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
-                                        <Setter Property="Padding" Value="0,3" />
-                                    </Style>
-                                    <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
-                                        <Setter Property="Padding" Value="0,3" />
-                                    </Style>
-                                </StackPanel.Resources>
-                                <TextBlock Text=""  Margin="0,0,0,28" />
-                                <StackPanel>
-                                    <Label Content="方案简介：" Target="{Binding ElementName=TextFirstName}"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="" Target="{Binding ElementName=TextCity}"/>
-                                    <TextBox x:Name="Mark" Margin="0,0,0,0" MinWidth="200" MinLines="5" MaxLines="15"  IsReadOnly="True"/>
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="打印机图片" Target="{Binding ElementName=TextCity}"/>
-                                    <TextBox x:Name="Path" Margin="0,0,0,0" MinWidth="150" IsReadOnly="True"/>
-                                    <Button Name="path" Content="..." />
-                                </StackPanel>
-                                <StackPanel>
-                                    <Label Content="" Target="{Binding ElementName=TextCity}"/>
-                                    <Image MinWidth="180" MinHeight="100" Margin="80,0,0,0" >
-                                    </Image>
-                                </StackPanel>                            
-                                <StackPanel >
-                                    <Button Content="修改" Margin="200,32,0,0" HorizontalAlignment="Left" />
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-            </Grid>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="打印方案设置" Grid.Column="0" Grid.ColumnSpan="3" FontSize="24" />
+        <TextBlock Text="所有打印方案"   Grid.Column="0" Grid.Row="1"/>
+        <ListBox  Name="list" Grid.Column="0" Grid.Row="2" Grid.RowSpan="8" SelectionChanged="list_SelectionChanged" >
+            <ListBoxItem Content="测试方案1" />
+            <ListBoxItem Content="测试方案2" />
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+            <Label Content="当前操作方案：" />
+            <TextBox Name="txtName" Text="测试方案"/>
         </StackPanel>
-    </ScrollViewer>
-</UserControl>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+            <Label Content="左挡板位置：" />
+            <TextBox Name="txtLeft" Text="0"/>
+            <Label Content="mm" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
+            <Label Content="右挡板位置：" />
+            <TextBox Name="txtRight" Text="0"/>
+            <Label Content="mm" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="9">
+            <Button Name="btnNew" Content="新增" Click="btnNew_Click"/>
+            <Button Name="btnSave" Content="保存" />
+            <Button Name="btnDelete" Content="删除" />
+        </StackPanel>
+    </Grid>
+
+
+</Window>

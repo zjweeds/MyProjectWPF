@@ -209,7 +209,7 @@ namespace BillManageWPF.winFormUI
                 db.Name = "Selected";
                 db.HeaderText = "选择";
                 dgvBillInfo.Columns.Add(db);
-                dtControls = ControlsInfoManager.GetContrilPrintInfoByTemplateID(btm.TIID);
+                dtControls = ControlsInfoManager.GetControlInfoByTemplateID(btm.TIID);
                 if (dtControls != null && dtControls.Rows.Count > 0)
                 {                   
                     DataRow[] matches = dtControls.Select(" CTIsFlage='true' ");
@@ -284,7 +284,7 @@ namespace BillManageWPF.winFormUI
                 image = new ImageHelper().GetImageByByte(btm.TIBackground);
                 width = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIWidth), fDpiX));
                 height = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIHeight), fDpiY));
-                dtControls = ControlsInfoManager.GetContrilPrintInfoByTemplateID(btm.TIID);
+                dtControls = ControlsInfoManager.GetControlInfoByTemplateID(btm.TIID);
                 dtBillLists = ControlDetailManager.QueryBillInfoCDByPROCEDURE(btm.TIID);
                 dtBillListItem = dtBillLists;
                 LoadGridViewData(dtBillListItem);
@@ -606,6 +606,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+                dtBillListItem.TableName = "票据信息";
                 ExcelHelper.SaveAsExcel(dtBillListItem);
             }
             catch (Exception ex)
@@ -651,7 +652,7 @@ namespace BillManageWPF.winFormUI
                         if (ControlDetailManager.AddlControlDetailByList(cdlist) > 0)
                         {
                             #region 刷新数据源
-                            dtControls = ControlsInfoManager.GetContrilPrintInfoByTemplateID(btm.TIID);
+                            dtControls = ControlsInfoManager.GetControlInfoByTemplateID(btm.TIID);
                             dtBillLists = ControlDetailManager.QueryBillInfoCDByPROCEDURE(btm.TIID);
                             dtBillListItem = dtBillLists;
                             LoadGridViewData(dtBillListItem);

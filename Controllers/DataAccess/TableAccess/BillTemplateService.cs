@@ -11,8 +11,6 @@ namespace Controllers.DataAccess
 {   
     public class BillTemplateService
     {
-        public MySqlHelper sqlhelper = new MySqlHelper();
-
         /// <summary>
         /// 根据实体添加模板
         /// </summary>
@@ -46,7 +44,36 @@ namespace Controllers.DataAccess
                 throw ex;
             }
          }
-       
+
+        public static int AddByDataTable(DataTable dt,byte[] simagebyte)
+        {
+           // BillTemplatModel btm =new BillTemplatModel()
+            try
+            {
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Append("insert into TemplateInfo (TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth) ");
+                sbSql.Append("                 values (@TIName,@TIBackground,@TIWidth,@TIHeight,@TITTID,@TICodeLegth) ");
+                sbSql.Append(" Select @@Identity ");
+                SqlParameter[] param = new SqlParameter[6];
+                param[0] = new SqlParameter("@TIName", SqlDbType.NVarChar, 30);
+                param[0].Value = dt.Rows[0]["TIName"].ToString();
+                param[1] = new SqlParameter("@TIBackground ", SqlDbType.Image);
+                param[1].Value = simagebyte;
+                param[2] = new SqlParameter("@TIWidth ", SqlDbType.Int);
+                param[2].Value = Convert.ToInt32(dt.Rows[0]["TIWidth"].ToString());
+                param[3] = new SqlParameter("@TIHeight ", SqlDbType.Int);
+                param[3].Value = Convert.ToInt32(dt.Rows[0]["TIHeight"].ToString());
+                param[4] = new SqlParameter("@TITTID ", SqlDbType.Int);
+                param[4].Value = Convert.ToInt32(dt.Rows[0]["TITTID"].ToString());
+                param[5] = new SqlParameter("@TICodeLegth ", SqlDbType.Int);
+                param[5].Value = Convert.ToInt32(dt.Rows[0]["TICodeLegth"].ToString());
+                return new MySqlHelper().ExecSqlReturnId(sbSql.ToString(), param);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         /// <summary>
         /// 根据实体更新模板
         /// </summary>
@@ -165,7 +192,6 @@ namespace Controllers.DataAccess
             return btm;
         }
 
-
         /// <summary>
         /// 根据类别名称返回模板信息
         /// </summary>
@@ -218,7 +244,7 @@ namespace Controllers.DataAccess
                 sbsql.Append(" where 1=1 ");
                 sbsql.AppendFormat(" and TemplateType.TTIPageID ='{0}' ", pageID);
                 sbsql.Append("       and TTIsEnable = 1 and TIIsEnable = 1");
-                return sqlhelper.GetDataTable(sbsql.ToString());
+                return new MySqlHelper().GetDataTable(sbsql.ToString());
             }
             catch(Exception ex)
             {

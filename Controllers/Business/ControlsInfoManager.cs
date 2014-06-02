@@ -19,7 +19,10 @@ namespace Controllers.Business
         {
             return ControlInfoService.AddControlInfo(controlInfo);
         }
-        
+        public static bool AddByDataTable(DataTable controlInfo)
+        {
+            return ControlInfoService.AddByDataTable(controlInfo);
+        }
         /// <summary>
         /// 根据CIID删除ControlInfo
         /// <param name="CIID">对象属性</param>
@@ -66,10 +69,12 @@ namespace Controllers.Business
             controlInfoTemp.CTMPBindsID = controlInfo.CTMPBindsID;
             return ControlInfoService.UpdateControlInfo(controlInfoTemp) > 0 ? true : false;
         }
-                 
+ 
         /// <summary>
-        /// 根据CIID查询ControlInfo
-        /// <param name="controlInfo">对象实例</param>
+        /// 根据ID返回Controlinfo
+        /// </summary>
+        /// <param name="_cIID"></param>
+        /// <returns></returns>
         public static ControlInfo SelectControlInfoByCIID(Int32  _cIID)
         {
             return ControlInfoService.SelectControlInfoByCIID( _cIID);
@@ -123,13 +128,13 @@ namespace Controllers.Business
         }
 
         /// <summary>
-        /// 打印时查询控件信息
+        /// 根据控件编号返回DataTable;
         /// </summary>
         /// <param name="templateID">模板编号</param>
         /// <returns>信息列表</returns>
-        public static DataTable GetContrilPrintInfoByTemplateID(int templateID)
+        public static DataTable GetControlInfoByTemplateID(int templateID)
         {
-            return ControlInfoService.GetContrilPrintInfoByTemplateID(templateID);
+            return ControlInfoService.GetControlInfoByTemplateID(templateID);
         }
     }
 }

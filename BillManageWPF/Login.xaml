@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" BorderThickness="1,0" 
         WindowStyle="None" 
-         Height="400" Width="650"
+        Height="400" Width="650"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True" Background="Purple" Loaded="Window_Loaded" Opacity="0.8" MouseDown="Window_MouseDown">
     <Grid Margin="10,20,10,20"  >

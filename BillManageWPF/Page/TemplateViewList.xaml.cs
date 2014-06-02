@@ -16,11 +16,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BillManageWPF.Content.Template;
+using BillManageWPF.Content.Others;
 using System.Data;
 using Controllers.Business;
 using Controllers.Models;
 using Controllers.Common;
 using BillManageWPF.winFormUI;
+using System.IO;
+
 #endregion
 
 namespace BillManageWPF.Page
@@ -38,6 +41,9 @@ namespace BillManageWPF.Page
         #endregion
 
         #region 页面属性
+        private BillTemplatModel btmItem = new BillTemplatModel();//复制，剪切模板时，临时保存模板信息
+        IList<ControlInfo> conList = new List<ControlInfo>();////复制，剪切模板时，临时保存模板控件信息
+        private int skiType = 0;//粘贴标记：-1：复制，1，剪切
         private BillTemplatModel btm = new BillTemplatModel();
         private ImageHelper imahelper = new ImageHelper();
         private DataTable dt = new DataTable();
@@ -64,6 +70,7 @@ namespace BillManageWPF.Page
                 LoadImage(i, lsvs[i], imgls[i]); //绑定图片和项
             }
         }
+
         /// <summary>
         /// 刷新指定页
         /// </summary>
@@ -100,6 +107,7 @@ namespace BillManageWPF.Page
         /// <param name="imlist"></param>
         public void LoadImage(int PageIndex, System.Windows.Forms.ListView lsvItem, System.Windows.Forms.ImageList imlist)
         {
+            String path = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + SoftUser.Op_Bill;
             lsvItem.Items.Clear();
             lsvItem.Dock = System.Windows.Forms.DockStyle.Fill;
             imlist.Images.Clear();
@@ -110,19 +118,26 @@ namespace BillManageWPF.Page
             lsvItem.SmallImageList = imlist;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                //MessageBox.Show(dt.Rows[i]["TIBackground"].ToString());
-                //String imagepath = new SoftConfigModer().softImagePath + @"\\" + dt.Rows[i]["TITTID"].ToString() + @"\\" + dt.Rows[i]["TIID"].ToString() +".png";
-                //String imagepath = "D:\\2.jpg";
-                //System.Drawing.Image m_image = imahelper.GetImageByPath(imagepath);
+                String imagepath = path + @"\" + tabList.TabPages[PageIndex].Text + @"\" + dt.Rows[i]["TIID"].ToString() + ".jpg";
                 System.Drawing.Image m_image;
-                try
+                if (File.Exists(imagepath))
                 {
-                     m_image = imahelper.GetImageByByte(dt.Rows[i]["TIBackground"] as byte[]);
-                }
-                catch
-                {
-                    String imagepath =@"D:\\Resource\农行.jpg";
+                    //存在背景图缓存
                     m_image = imahelper.GetImageByPath(imagepath);
+                }
+                else
+                {
+                    //不存在，在数据库中读取
+                    try
+                    {
+                        m_image = imahelper.GetImageByByte(dt.Rows[i]["TIBackground"] as byte[]);
+                    }
+                    catch
+                    {
+                        //字节流转换成图片失败
+                        String defaultimP = @"D:\\Resource\农行.jpg";//启用默认的背景图
+                        m_image = imahelper.GetImageByPath(defaultimP);
+                    }
                 }
                 imlist.Images.Add(m_image);
                 lsvItem.Items.Add(dt.Rows[i]["TIName"].ToString());
@@ -130,6 +145,7 @@ namespace BillManageWPF.Page
                 lsvItem.Items[i].ImageIndex = i;
             }
         }
+        
         /// <summary>
         /// 获取当前操作的页面
         /// </summary>
@@ -170,6 +186,24 @@ namespace BillManageWPF.Page
                 return -1;
             }
         }
+
+        //打开文件
+        private string OpenPath()
+        {
+            System.Windows.Forms.OpenFileDialog openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "EXCEL文件|*.xls";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return openFileDialog.FileName;
+            }
+            else
+            {
+                return "";
+            }
+        }
         #endregion
 
         #region  页面事件
@@ -183,6 +217,7 @@ namespace BillManageWPF.Page
         {
             tabList.ItemSize = new System.Drawing.Size(50, 30);
             DoLoad();
+            btnTemplateStick.IsEnabled = false;
         }
 
         /// <summary>
@@ -374,8 +409,54 @@ namespace BillManageWPF.Page
         /// <param name="e"></param>
         private void btnTemplateCopy_Click(object sender, RoutedEventArgs e)
         {
-
-
+            if (btnTemplateCopy.Content.ToString() == "复制模板")
+            {
+                System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+                if (lsvItem != null)
+                {
+                    if (lsvItem.SelectedItems.Count > 0)
+                    {
+                        int TIID = Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString());
+                        btmItem = BillTemplateManage.SelectTemplateModeltByID(TIID);
+                        conList = ControlsInfoManager.SelectControlInfosByTemplateID(TIID);
+                        btnBillSerch.IsEnabled = false;
+                        btnBillTypeAdd.IsEnabled = false;
+                        btnBillTypeDelete.IsEnabled = false;
+                        btnBillTypeReName.IsEnabled = false;
+                        btnPrints.IsEnabled = false;
+                        btnTemplateAdd.IsEnabled = false;
+                        btnTemplateCut.IsEnabled = false;
+                        btnTemplateDelet.IsEnabled = false;
+                        btnTemplateDesign.IsEnabled = false;
+                        btnTemplateExport.IsEnabled = false;
+                        btnTemplateStick.IsEnabled = true;
+                        btnTemplateCopy.Content = "取消";
+                        skiType = -1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("请先选择票据模板", "软件提示");
+                    }
+                }
+            }
+            else 
+            {
+                btmItem = null;
+                conList = null;
+                btnTemplateCopy.Content = "复制模板";
+                btnBillSerch.IsEnabled = true;
+                btnBillTypeAdd.IsEnabled = true;
+                btnBillTypeDelete.IsEnabled = true;
+                btnBillTypeReName.IsEnabled = true;
+                btnPrints.IsEnabled = true;
+                btnTemplateAdd.IsEnabled = true;
+                btnTemplateCut.IsEnabled = true;
+                btnTemplateDelet.IsEnabled = true;
+                btnTemplateDesign.IsEnabled = true;
+                btnTemplateExport.IsEnabled = true;
+                btnTemplateStick.IsEnabled = false;
+                skiType = 0;
+            }  
         }
 
         /// <summary>
@@ -385,44 +466,207 @@ namespace BillManageWPF.Page
         /// <param name="e"></param>
         private void btnTemplateCut_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
-            if (lsvItem != null)
+            if (btnTemplateCut.Content.ToString() == "剪切模板")
             {
-                if (lsvItem.SelectedItems.Count > 0)
+                System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+                if (lsvItem != null)
                 {
-                    //BillSerchListForm blf = new BillSerchListForm(Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString()));
-                    //blf.Show();
-                    
+                    if (lsvItem.SelectedItems.Count > 0)
+                    {
+                        int TIID = Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString());
+                        btmItem = BillTemplateManage.SelectTemplateModeltByID(TIID);
+                        btnBillSerch.IsEnabled = false;
+                        btnBillTypeAdd.IsEnabled = false;
+                        btnBillTypeDelete.IsEnabled = false;
+                        btnBillTypeReName.IsEnabled = false;
+                        btnPrints.IsEnabled = false;
+                        btnTemplateAdd.IsEnabled = false;
+                        btnTemplateCopy.IsEnabled = false;
+                        btnTemplateDelet.IsEnabled = false;
+                        btnTemplateDesign.IsEnabled = false;
+                        btnTemplateExport.IsEnabled = false;
+                        btnTemplateStick.IsEnabled = true;
+                        btnTemplateCut.Content = "取消";
+                        skiType = 1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("请先选择票据模板", "软件提示");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("请先选择票据", "软件提示");
-                }
+            }
+            else
+            {
+                btmItem = null;
+                btnTemplateCut.Content = "剪切模板";
+                btnBillSerch.IsEnabled = true;
+                btnBillTypeAdd.IsEnabled = true;
+                btnBillTypeDelete.IsEnabled = true;
+                btnBillTypeReName.IsEnabled = true;
+                btnPrints.IsEnabled = true;
+                btnTemplateAdd.IsEnabled = true;
+                btnTemplateCopy.IsEnabled = true;
+                btnTemplateDelet.IsEnabled = true;
+                btnTemplateDesign.IsEnabled = true;
+                btnTemplateExport.IsEnabled = true;
+                btnTemplateStick.IsEnabled = false;
+                skiType = 0;
             }
         }
 
         /// <summary>
-        /// 票据粘贴
+        /// 粘贴模板
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnTemplateStick_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
-            if (lsvItem != null)
+            int ttid = BillTemplateTypeManage.GetTemplateTypeIdByName(tabList.SelectedTab.Text);
+            String OldTypeName =BillTemplateTypeManage.GetTemplateTypeNameById(btmItem.TITTID);
+            if (skiType == -1)
             {
-                if (lsvItem.SelectedItems.Count > 0)
+                //复制
+                btmItem.TITTID = ttid;
+                int tiid = BillTemplateManage.AddByBillTemplatModel(btmItem);
+                foreach (ControlInfo ci in conList)
                 {
-                    //BillSerchListForm blf = new BillSerchListForm(Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString()));
-                    //blf.Show();
+                    ci.CTITIID = tiid;
+                    ControlsInfoManager.AddControlInfo(ci);
+                }
+            }
+            else if (skiType ==1)
+            {
+                //粘贴
+                btmItem.TITTID = ttid;
+                BillTemplateManage.UpdateByBillTemplatModel(btmItem);
+            }
+            UpdataView(tabList.SelectedTab.Text);//刷新当前页
+            UpdataView(OldTypeName);//刷新被操作的页
+            btmItem = null;
+            conList = null;
+            btnTemplateCopy.Content = "复制模板";
+            btnTemplateCopy.IsEnabled = true;
+            btnTemplateCut.Content = "剪切模板";
+            btnBillSerch.IsEnabled = true;
+            btnBillTypeAdd.IsEnabled = true;
+            btnBillTypeDelete.IsEnabled = true;
+            btnBillTypeReName.IsEnabled = true;
+            btnPrints.IsEnabled = true;
+            btnTemplateAdd.IsEnabled = true;
+            btnTemplateCut.IsEnabled = true;
+            btnTemplateDelet.IsEnabled = true;
+            btnTemplateDesign.IsEnabled = true;
+            btnTemplateExport.IsEnabled = true;
+            btnTemplateStick.IsEnabled = false;
+            skiType = 0;
+        }
+        #endregion
 
+        /// <summary>
+        /// 导出模板
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTemplateExport_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                String path = String.Empty;//保存选定的文件路径
+                DataSet ds = new DataSet();//保存模板及对应控件的信息
+                System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+                if (lsvItem != null)
+                {
+                    if (lsvItem.SelectedItems.Count > 0)
+                    {
+                        int TIID = Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString());//获取选定的模板编号
+                        DataTable dtTemp = BillTemplateManage.GetDataTableByID(TIID);
+                        dtTemp.TableName = "模板信息";
+                        ds.Tables.Add(dtTemp);
+                        DataTable dtControl = ControlsInfoManager.GetControlInfoByTemplateID(TIID);// .GetDataTableByID(TIID);
+                        dtControl.TableName = "控件信息";
+                        ds.Tables.Add(dtControl);
+                        String mesg = String.Format(
+                            "即将导出模板{0}，会在您选定的保存文件夹下生成模板信息文件和模板背景图（BackImage文件夹下）\n请注意保持信息文件的完整性和一致性\n确定导出么？"
+                            , dtTemp.Rows[0]["TIName"].ToString());
+                        if (MessageBox.Show(mesg, "软件提示", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            //WaitWindow ww = new WaitWindow();
+                            //ww.Show();
+                            ExcelHelper.ExportToExcel(ds, out path);
+                            String imagepath = path.Substring(0, path.LastIndexOf(@"\")) + @"\BackImage\" + dtTemp.Rows[0]["TIID"].ToString() + ".jpg";
+                            imahelper.SaveImage(imahelper.GetImageByByte(dtTemp.Rows[0]["TIBackground"] as byte[]), imagepath);
+                            MessageBox.Show("导出成功！", "软件提示");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("请先选择票据", "软件提示");
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
+        }
+
+        private void btnTemplateLeading_Click(object sender, RoutedEventArgs e)
+        {
+            DataSet dsExcelTemp = new DataSet();
+            DataSet dsExcelControl= new DataSet();
+            ExcelHelper exh = new ExcelHelper();
+            String s_OpenPath = OpenPath();
+            if (s_OpenPath != String.Empty)
+            {
+                //dsExcelTemp = ExcelHelper.ImportExcel(s_OpenPath);
+                dsExcelTemp = exh.GetExcelDs(s_OpenPath, "模板信息");
+                dsExcelControl = exh.GetExcelDs(s_OpenPath, "控件信息");
+                byte[] imageByte = null;
+                String imagepath = s_OpenPath.Substring(0, s_OpenPath.LastIndexOf(@"\"))
+                    + @"\BackImage\" + dsExcelTemp.Tables[0].Rows[0]["TIID"].ToString() + ".jpg";
+                if (File.Exists(imagepath))
+                {
+                    imageByte = new ImageHelper().GetBytesByImagepath(imagepath);
                 }
                 else
                 {
-                    MessageBox.Show("请先选择票据", "软件提示");
+                    if (MessageBox.Show("未找到对应的模板背景图信息，是否手动指定图片？", "软件提示", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+
+                        System.Windows.Forms.OpenFileDialog dlgPicture = new System.Windows.Forms.OpenFileDialog();
+                        if (dlgPicture.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            imageByte = new ImageHelper().GetBytesByImagepath(dlgPicture.FileName);
+                        }
+                        else
+                        {
+                            imageByte = new ImageHelper().GetBytesByImagepath(AppDomain.CurrentDomain.BaseDirectory + "\\Resource\\defaulticon.jpg");
+                        }
+                    }
+                    else
+                    {
+                        imageByte = new ImageHelper().GetBytesByImagepath(AppDomain.CurrentDomain.BaseDirectory + "\\Resource\\defaulticon.jpg");
+                    }
+                }
+                dsExcelTemp.Tables[0].Rows[0]["TITTID"] = BillTemplateTypeManage.GetTemplateTypeIdByName(tabList.SelectedTab.Text);
+                int TIID = BillTemplateManage.AddByDataTable(dsExcelTemp.Tables[0], imageByte);
+                if (TIID > 0)
+                {
+                    for (int j = 0; j < dsExcelControl.Tables[0].Rows.Count; j++)
+                    {
+                        dsExcelControl.Tables[0].Rows[j]["CTITIID"] = TIID;
+                    }
+                    if (ControlsInfoManager.AddByDataTable(dsExcelControl.Tables[0]))
+                    {
+                        MessageBox.Show("导入成功！");
+                        UpdataView(tabList.SelectedTab.Text);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("导入失败！");
                 }
             }
         }
-        #endregion
     }
 }

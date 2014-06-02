@@ -156,7 +156,57 @@ namespace Controllers.DataAccess
         {
             return new MySqlHelper().ExecSqlReturnId(GetAddString(controlInfo));
         }
-
+        
+        public static bool AddByDataTable(DataTable controlInfo)
+        {
+            IList<String> cmdList = new List<String>();
+            if (controlInfo != null && controlInfo.Rows.Count > 0)
+            {
+                for (int i = 0; i < controlInfo.Rows.Count; i++)
+                {
+                    StringBuilder cmdText = new StringBuilder();
+                    cmdText.Append("INSERT INTO ControlInfo ");
+                    cmdText.Append("                     ( CTName,CTITIID,CTType,CTDefault,CTIsBorder,CTIsTransparent,CTLeft,CTTop,");
+                    cmdText.Append("                       CTWidth,CTHeight,CTTabKey,CTIsReadOnly,CTVisiable,CTIsMust,CTIsPrint,");
+                    cmdText.Append("                       CTIsEnable,CTBandsTabel,CTBandsCoumln,CTFont,CTFontColor,CTBorerColor,");
+                    cmdText.Append("                       CTBackColor,CTIsFlage,CTShowType,CTMarkType,CTMPShowUnit,CTMPHighUnit,");
+                    cmdText.Append("                       CTMPLowUnit,CTMPBindsID");
+                    cmdText.Append("                     ) VALUES(");
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTName"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTITIID"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTType"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTDefault"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTIsBorder"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTIsTransparent"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTLeft"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTTop"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTWidth"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTHeight"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTTabKey"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTIsReadOnly"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTVisiable"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTIsMust"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTIsPrint"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTIsEnable"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTBandsTabel"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTBandsCoumln"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTFont"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTFontColor"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTBorerColor"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTBackColor"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTIsFlage"].ToString() == "TRUE" ? 1 : 0);
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTShowType"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTMarkType"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTMPShowUnit"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTMPHighUnit"].ToString());
+                    cmdText.AppendFormat("'{0}',", controlInfo.Rows[i]["CTMPLowUnit"].ToString());
+                    cmdText.AppendFormat("'{0}')", controlInfo.Rows[i]["CTMPBindsID"].ToString());
+                    cmdText.Append(" Select @@Identity ");
+                    cmdList.Add(cmdText.ToString());
+                }
+            }
+            return new MySqlHelper().ExecDataBySqls(cmdList);
+        }
 
         /// <summary>
         /// 根据CIID删除ControlInfo
@@ -238,6 +288,7 @@ namespace Controllers.DataAccess
             cmdText.Append("     CTIsEnable,CTBandsTabel,CTBandsCoumln,CTFont,CTFontColor,CTBorerColor,");
             cmdText.Append("     CTBackColor,CTIsFlage,CTShowType,CTMarkType,CTMPShowUnit,CTMPHighUnit,");
             cmdText.Append("     CTMPLowUnit,CTMPBindsID");
+            cmdText.Append("From ControlInfo  with(nolock) ");
             cmdText.Append("WHERE CTIsEnable = 1 and ");
             cmdText.AppendFormat("CIID = '{0}' " ,_cIID);
             IList<ControlInfo> controlInfos = SelectControlInfoByCmdText(cmdText.ToString());
@@ -257,7 +308,7 @@ namespace Controllers.DataAccess
             cmdText.Append("     CTIsEnable,CTBandsTabel,CTBandsCoumln,CTFont,CTFontColor,CTBorerColor,");
             cmdText.Append("     CTBackColor,CTIsFlage,CTShowType,CTMarkType,CTMPShowUnit,CTMPHighUnit,");
             cmdText.Append("     CTMPLowUnit,CTMPBindsID ");
-            cmdText.Append("From ControlInfo ");
+            cmdText.Append("From ControlInfo  with(nolock) ");
             cmdText.Append(" WHERE CTIsEnable = 1  ");
             return SelectControlInfoByCmdText(cmdText.ToString());
         }
@@ -276,7 +327,7 @@ namespace Controllers.DataAccess
             cmdText.Append("     CTIsEnable,CTBandsTabel,CTBandsCoumln,CTFont,CTFontColor,CTBorerColor,");
             cmdText.Append("     CTBackColor,CTIsFlage,CTShowType,CTMarkType,CTMPShowUnit,CTMPHighUnit,");
             cmdText.Append("     CTMPLowUnit,CTMPBindsID ");
-            cmdText.Append("From ControlInfo ");
+            cmdText.Append("From ControlInfo with(nolock) ");
             cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", TemplateID);
             return SelectControlInfoByCmdText(cmdText.ToString());
         }
@@ -286,18 +337,26 @@ namespace Controllers.DataAccess
             StringBuilder cmdText = new StringBuilder();
             cmdText.Append("SELECT ");
             cmdText.Append("     CIID ");
-            cmdText.Append("From ControlInfo "); 
+            cmdText.Append("From ControlInfo with(nolock) "); 
             cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", templateID);
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
 
-        public static DataTable GetContrilPrintInfoByTemplateID(int templateID)
+        /// <summary>
+        /// 根据模板ID，返回该模板所有控件信息
+        /// </summary>
+        /// <param name="templateID"></param>
+        /// <returns></returns>
+        public static DataTable GetControlInfoByTemplateID(int templateID)
         {
 
             StringBuilder cmdText = new StringBuilder();
             cmdText.Append("SELECT ");
-            cmdText.Append("     CIID,CTName,CTType,CTLeft,CTTop,CTWidth,CTHeight,CTIsPrint,CTFont, ");
-            cmdText.Append("     CTFontColor,CTIsFlage  ");
+            cmdText.Append("     CIID,CTName,CTITIID,CTType,CTDefault,CTIsBorder,CTIsTransparent,CTLeft,CTTop,");
+            cmdText.Append("     CTWidth,CTHeight,CTTabKey,CTIsReadOnly,CTVisiable,CTIsMust,CTIsPrint,");
+            cmdText.Append("     CTIsEnable,CTBandsTabel,CTBandsCoumln,CTFont,CTFontColor,CTBorerColor,");
+            cmdText.Append("     CTBackColor,CTIsFlage,CTShowType,CTMarkType,CTMPShowUnit,CTMPHighUnit,");
+            cmdText.Append("     CTMPLowUnit,CTMPBindsID ");
             cmdText.Append("From ControlInfo with(nolock) ");
             cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", templateID);
             return new MySqlHelper().GetDataTable(cmdText.ToString());

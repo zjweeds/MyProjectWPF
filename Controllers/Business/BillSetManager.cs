@@ -40,6 +40,21 @@ namespace Controllers.Business
         {
             return BillSetService.GetBillSetNameByCompanyID(comID);
         }
+
+        static public String GetBillSetNameByID(int bSID)
+        {
+            return BillSetService.GetBillSetNameByID(bSID);
+        }
+
+        static public int UpdateName(String Name, int BSID)
+        {
+            return BillSetService.UpdateName(Name, BSID);
+        }
+
+         static public int insertBillSetInfo(BillSetInfo bsi)
+        {
+            return BillSetService.insertBillSetInfo(bsi);
+         }     
         #endregion
     }
 }

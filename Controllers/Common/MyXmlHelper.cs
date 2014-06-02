@@ -5,6 +5,7 @@
 //创建时间：2014/3/30   12:55:00                                  //
 //最后修改时间：2014/3/30   12:55:00                              //
 //---------------------------------------------------------------//
+#region 引入的命名空间
 using System;
 using System.Collections;//哈希表
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
 using Controllers.Models;
+#endregion
 
 namespace Controllers.Common
 {
@@ -22,10 +24,21 @@ namespace Controllers.Common
         #region 公共变量
         XmlDocument xmldoc;
         #endregion
+
+        #region 构造函数
         public MyXmlHelper()
         {
         }
-      
+        #endregion
+
+        #region 公共接口
+        /// <summary>
+        /// 保存配置文件
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="softConfig"></param>
+        /// <param name="softVerify"></param>
+        /// <returns></returns>
         public bool SaveToXml(String path, SoftConfigModel softConfig,SoftVerify softVerify)
         {
             try
@@ -53,6 +66,14 @@ namespace Controllers.Common
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// 读取节点信息
+        /// </summary>
+        /// <param name="NodeName"></param>
+        /// <param name="xmlread"></param>
+        /// <param name="scfm"></param>
+        /// <param name="softVerify"></param>
         private void ChoiceNode(String NodeName, XmlReader xmlread, SoftConfigModel scfm, SoftVerify softVerify)
         {
             if (scfm != null)
@@ -117,6 +138,12 @@ namespace Controllers.Common
             }
         }
 
+
+        /// <summary>
+        /// 读取配置信息
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public SoftConfigModel readXMl(String path)
         {
             SoftConfigModel scfm = new SoftConfigModel();
@@ -166,6 +193,11 @@ namespace Controllers.Common
         }
 
 
+        /// <summary>
+        /// 保存登录信息
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public bool SaveLoginToXml(String path)
         {
             try
@@ -187,6 +219,9 @@ namespace Controllers.Common
                 throw ex;
             }
         }
+
+        #endregion
+
     }
 }
 

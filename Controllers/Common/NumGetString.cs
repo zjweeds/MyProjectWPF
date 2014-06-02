@@ -156,8 +156,8 @@ namespace Controllers.Common
             Array.Reverse(LS_Str);
             String ReturnSte = "";
             ReturnSte = new String(LS_Str);//反转字符串
-
             return ReturnSte;
+
         }
     }
 }

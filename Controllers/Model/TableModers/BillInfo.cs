@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 namespace Controllers.Models
 {
-    /// <summary>
-    ///本实体类由Hirer实体工具生成
-    /// </summary>
     public class BillInfo
     {
         private Int32 _bIID;

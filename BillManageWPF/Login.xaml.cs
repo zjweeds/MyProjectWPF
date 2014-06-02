@@ -128,12 +128,6 @@ namespace BillManageWPF
             }
         }
 
-        public void LoadCompanyName()
-        {
-            cbbCompany.ItemsSource= CompanyInfoManager.GetAllCompanyName().DefaultView;
-            cbbCompany.DisplayMemberPath = "CIName";
-            cbbCompany.SelectedValuePath = "CIID"; 
-        }
         ///<summary>
         ///线程完成之后回调的函数
         ///<summary>
@@ -141,7 +135,6 @@ namespace BillManageWPF
         {
             calcMethod.EndInvoke(childThred);
         }
-
         private void doThreadLoading()
         {
             beginInvokeThread = new Thread(StartMethod);//new ThreadStart(StartMethod));
@@ -157,6 +150,15 @@ namespace BillManageWPF
             _timer.Tick += _timer1_Tick;
             _timer.Start();
         }
+
+
+        public void LoadCompanyName()
+        {
+            cbbCompany.ItemsSource = CompanyInfoManager.GetAllCompanyName().DefaultView;
+            cbbCompany.DisplayMemberPath = "CIName";
+            cbbCompany.SelectedValuePath = "CIID";
+        }
+
 
         private void GetUserPhotoFromDisk(String userCode)
         {

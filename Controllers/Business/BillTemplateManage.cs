@@ -31,6 +31,11 @@ namespace Controllers.Business
         {
             return BillTemplateService.AddByBillTemplatModel(btm);
         }
+
+        public static int AddByDataTable(DataTable btm, byte[] simagebyte)
+        {
+            return BillTemplateService.AddByDataTable(btm,simagebyte);
+        }
         #endregion
 
         #region update
@@ -56,6 +61,10 @@ namespace Controllers.Business
             return BillTemplateService.GetTemplateModeltByID(code);
         }
 
+        public static DataTable GetDataTableByID(int billTemplateID)
+        {
+            return BillTemplateService.GetDataTableByID(billTemplateID);
+        }
         /// <summary>
         /// 根据模板名称返回模板信息（DataTable）
         /// </summary>

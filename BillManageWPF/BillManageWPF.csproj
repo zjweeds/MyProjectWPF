@@ -79,6 +79,9 @@
     <Compile Include="AppMainWindow.xaml.cs">
       <DependentUpon>AppMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\BillSetManage\BillSetEditWindow.xaml.cs">
+      <DependentUpon>BillSetEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\DataSourcesEdit\ColumnEditWindow.xaml.cs">
       <DependentUpon>ColumnEditWindow.xaml</DependentUpon>
     </Compile>
@@ -87,6 +90,9 @@
     </Compile>
     <Compile Include="Content\Main\MainMeumList.xaml.cs">
       <DependentUpon>MainMeumList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Others\WaitWindow.xaml.cs">
+      <DependentUpon>WaitWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\SystemSet\PrintSet.xaml.cs">
       <DependentUpon>PrintSet.xaml</DependentUpon>
@@ -238,6 +244,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\BillSetManage\BillSetEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\DataSourcesEdit\ColumnEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Main\MainMeumList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Others\WaitWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

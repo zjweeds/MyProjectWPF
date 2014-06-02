@@ -7,7 +7,7 @@
              xmlns:wf ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
              xmlns:tabEx ="clr-namespace:CSharpWin;assembly=TabControlEx"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="900" Loaded="UserControl_Loaded">
+             d:DesignHeight="500" d:DesignWidth="900" Loaded="UserControl_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
@@ -67,7 +67,9 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="2"/>
                     <RowDefinition Height="5*"/>
-                </Grid.RowDefinitions>
+                <RowDefinition Height="2"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" VerticalAlignment="Center" Grid.RowSpan="3">
                     <TextBlock Text="常用任务" Foreground="White" FontSize="18" Margin="10,0,0,0"/>
                 </StackPanel> 
@@ -118,13 +120,13 @@
                     <Button Name="btnTemplateCut" Content="剪切模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateCut_Click" />
                 </StackPanel>
             <StackPanel Grid.Row="32" >
-                <Button Name="btnTemplateStick" Content="粘贴模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateStick_Click" />
+                <Button Name="btnTemplateStick" Content="粘贴模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateStick_Click"  />
             </StackPanel>
             <StackPanel Grid.Row="34" >
-                    <Button  Name="btnTemplateLeading" Content="导入模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                    <Button  Name="btnTemplateLeading" Content="导入模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateLeading_Click" />
                 </StackPanel>
                 <StackPanel Grid.Row="36" >
-                    <Button Name="btnTemplateExport" Content="导出模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                    <Button Name="btnTemplateExport" Content="导出模板" Background="#FF9687C7" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateExport_Click" />
                 </StackPanel>
             </Grid>
     </Grid>
