@@ -1,4 +1,12 @@
-﻿using System;
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             数据源信息表数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,6 +45,11 @@ namespace Controllers.DataAccess
             }
         }
 
+        /// <summary>
+        /// 根据公司名返回所有数据源
+        /// </summary>
+        /// <param name="sCompanyName"></param>
+        /// <returns></returns>
         static public DataTable GetDataTableByCompanyName(String sCompanyName)
         {
             StringBuilder sbsql = new StringBuilder();
@@ -50,6 +63,12 @@ namespace Controllers.DataAccess
                 sbsql.AppendFormat("  and CompanyInfo.CIName ='{0}' ", sCompanyName);
                 return new MySqlHelper().GetDataTable(sbsql.ToString());
         }
+
+        /// <summary>
+        /// 根据数据源表名返回所有列
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
         static public DataTable GetDataTableByTableName(String tableName)
         {
             StringBuilder sbsql = new StringBuilder();
@@ -58,6 +77,7 @@ namespace Controllers.DataAccess
             sbsql.AppendFormat("  where DSITableName ='{0}'  and DSIIsEnable = 1 ", tableName);
             return new MySqlHelper().GetDataTable(sbsql.ToString());
         }
+
         /// <summary>
         /// 根据ID号返回数据源
         /// </summary>
@@ -108,6 +128,11 @@ namespace Controllers.DataAccess
             }
         }
 
+        /// <summary>
+        /// 根据公司名返回所有数据源实体列表
+        /// </summary>
+        /// <param name="sCompanyName"></param>
+        /// <returns></returns>
        static public List<DataSourceModel> GetDataSourceModelListByComanyName(String sCompanyName)
         {
             try
@@ -133,7 +158,6 @@ namespace Controllers.DataAccess
                 throw ex;
             }
         }
-
 
         /// <summary>
         /// 根据数据源信息返回数据
@@ -165,7 +189,15 @@ namespace Controllers.DataAccess
                 throw ex;
             }
         }
-       static  public DataTable GetAllCoumsBandingsInfoByTableAndCoumln(String tableName, String coumlnName, String values)
+     
+        /// <summary>
+       /// 根据数据源信息返回数据
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="coumlnName"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        static  public DataTable GetAllCoumsBandingsInfoByTableAndCoumln(String tableName, String coumlnName, String values)
         {
             try
             {
@@ -179,6 +211,11 @@ namespace Controllers.DataAccess
             }
         }
 
+        /// <summary>
+        /// 根据数据源表名返回所有信息
+        /// </summary>
+        /// <param name="TabelName"></param>
+        /// <returns></returns>
        static public DataTable SelectAllInfoByTableName(String TabelName)
        {
           return new MySqlHelper().GetDataTable(String.Format("select * from {0} ", TabelName));
@@ -273,6 +310,12 @@ namespace Controllers.DataAccess
                return new MySqlHelper().ExecDataBySql(sqlText.ToString()) > 0 ? true : false;
        }
 
+        /// <summary>
+        /// 删除数据源
+        /// </summary>
+        /// <param name="tabelName"></param>
+        /// <param name="companyID"></param>
+        /// <returns></returns>
        static public bool DeleteTabelByTabelName(String tabelName, int companyID)
        {
            StringBuilder cmdText = new StringBuilder();

@@ -55,18 +55,25 @@ namespace BillManageWPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            tbUserName.Text = SoftUser.UserName;
-            String photoPath = AppDomain.CurrentDomain.BaseDirectory + @"\Configs\" + SoftUser.UserCode + @"\user.jpg"; //用户头像文件
-            if (File.Exists(photoPath))
+            try
             {
-                imUserPhoto.Source = new BitmapImage(new Uri(photoPath, UriKind.Absolute));
+                tbUserName.Text = SoftUser.UserName;
+                String photoPath = AppDomain.CurrentDomain.BaseDirectory + @"\Configs\" + SoftUser.UserCode + @"\user.jpg"; //用户头像文件
+                if (File.Exists(photoPath))
+                {
+                    imUserPhoto.Source = new BitmapImage(new Uri(photoPath, UriKind.Absolute));
+                }
+                ModernFrame mf = new ModernFrame();
+                //mf.Content = new FunctionListPage();
+                mf.Source = new Uri(@"Content\Main\MainMeumList.xaml", UriKind.Relative);
+                grid.Children.Add(mf);
             }
-            ModernFrame mf = new ModernFrame();
-            //mf.Content = new FunctionListPage();
-            mf.Source = new Uri(@"Content\Main\MainMeumList.xaml", UriKind.Relative);
-            grid.Children.Add(mf);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
-                private void imUserPhoto_MouseEnter(object sender, MouseEventArgs e)
+        private void imUserPhoto_MouseEnter(object sender, MouseEventArgs e)
         {
             imUserPhoto.Opacity = 0.5;
             imUserPhoto.Cursor = Cursors.Hand;

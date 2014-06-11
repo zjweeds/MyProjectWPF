@@ -20,8 +20,9 @@ namespace Controllers.DataAccess
 {
     public class ConfigService
     {
-       static String ImagePath = AppDomain.CurrentDomain.BaseDirectory + @"\\Images\\";//票据图片路径
-        MyXmlHelper myxmlhelper = new MyXmlHelper();
+        static String ImagePath = AppDomain.CurrentDomain.BaseDirectory + @"\\Images\\";//票据图片路径
+        MyXmlHelper myxmlhelper = new MyXmlHelper(); //xml帮助类
+
         /// <summary>
         /// 判断配置文件是否存在
         /// </summary>
@@ -59,6 +60,13 @@ namespace Controllers.DataAccess
                 return false;
             }
          }
+
+        /// <summary>
+        /// 配置信息保存到xml文件
+        /// </summary>
+        /// <param name="softConfig"></param>
+        /// <param name="softVerify"></param>
+        /// <returns></returns>
         public bool softConfigSaveToXml(SoftConfigModel softConfig,SoftVerify softVerify)
         {
             string sfile = @"SoftConfig.xml";
@@ -76,6 +84,12 @@ namespace Controllers.DataAccess
                 return false;
             }
         }
+       
+        /// <summary>
+        /// 保存登陆信息到xml
+        /// </summary>
+        /// <param name="spath"></param>
+        /// <returns></returns>
         public bool SaveLoginToXml(String spath)
         {
             string sfile = @"LoginConfig.xml";
@@ -93,6 +107,12 @@ namespace Controllers.DataAccess
             }
         }
 
+        /// <summary>
+        /// 图片是否存在
+        /// </summary>
+        /// <param name="ipathName"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static bool IsImageExit(String ipathName, String fileName)
         {
             if (!Directory.Exists(ipathName))//若文件夹不存在则新建文件夹  
@@ -113,6 +133,13 @@ namespace Controllers.DataAccess
             }           
         }
 
+        /// <summary>
+        /// 创建图片
+        /// </summary>
+        /// <param name="ipathName"></param>
+        /// <param name="fileName"></param>
+        /// <param name="buff"></param>
+        /// <returns></returns>
         public static bool CreateImages(String ipathName, String fileName, byte[] buff)
         {
             try

@@ -1,4 +1,12 @@
-﻿using System;
+﻿//---------------------------------------------------------—-----//
+//功能：ControlsInfo控件信息业务层逻辑                            //
+//作者：赵建                                                      //
+//版本：v1.1                                                      //
+//创建时间：2014/3/30   12:55:00                                  //
+//最后修改时间：2014/5/30   8:55:00                               //
+//---------------------------------------------------------------//
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +27,17 @@ namespace Controllers.Business
         {
             return ControlInfoService.AddControlInfo(controlInfo);
         }
+
+        /// <summary>
+        /// 根据datatable添加控件信息
+        /// </summary>
+        /// <param name="controlInfo"></param>
+        /// <returns></returns>
         public static bool AddByDataTable(DataTable controlInfo)
         {
             return ControlInfoService.AddByDataTable(controlInfo);
         }
+
         /// <summary>
         /// 根据CIID删除ControlInfo
         /// <param name="CIID">对象属性</param>

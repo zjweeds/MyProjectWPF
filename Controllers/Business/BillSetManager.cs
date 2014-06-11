@@ -41,20 +41,57 @@ namespace Controllers.Business
             return BillSetService.GetBillSetNameByCompanyID(comID);
         }
 
+
+        /// <summary>
+        /// 根据ID返回账套名称
+        /// </summary>
+        /// <param name="bSID"></param>
+        /// <returns></returns>
         static public String GetBillSetNameByID(int bSID)
         {
             return BillSetService.GetBillSetNameByID(bSID);
         }
 
+        /// <summary>
+        /// 根据ID更新账套名称
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="BSID"></param>
+        /// <returns></returns>
         static public int UpdateName(String Name, int BSID)
         {
             return BillSetService.UpdateName(Name, BSID);
         }
 
+        /// <summary>
+        /// 根据账套名称删除
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        static public int DeleteByName(String Name)
+        {
+            return BillSetService.DeleteByName(Name);
+        }
+
+        /// <summary>
+        /// 根据实体插入账套信息
+        /// </summary>
+        /// <param name="bsi"></param>
+        /// <returns></returns>
          static public int insertBillSetInfo(BillSetInfo bsi)
         {
             return BillSetService.insertBillSetInfo(bsi);
-         }     
+         }
+
+        /// <summary>
+        /// 根据名称返回ID
+        /// </summary>
+        /// <param name="BsName"></param>
+        /// <returns></returns>
+         static public int GetBillSetID(String BsName)
+         {
+             return BillSetService.GetBillSetID(BsName);
+         }
         #endregion
     }
 }

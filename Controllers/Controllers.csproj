@@ -68,6 +68,7 @@
     <Compile Include="Business\PermissionInfoManager.cs" />
     <Compile Include="Business\PositionManage.cs" />
     <Compile Include="Business\PrintSetManager.cs" />
+    <Compile Include="Business\SystemDBManage.cs" />
     <Compile Include="Business\UserInfoManager.cs" />
     <Compile Include="Common\CommonClass.cs" />
     <Compile Include="Common\ExeclHelper.cs" />
@@ -75,7 +76,6 @@
     <Compile Include="Common\MyXmlHelper.cs" />
     <Compile Include="Common\NumGetString.cs" />
     <Compile Include="Common\ReadFiles.cs" />
-    <Compile Include="DataAccess\CompanAccess.cs" />
     <Compile Include="DataAccess\SQLHELPER\MySqlHelper.cs" />
     <Compile Include="DataAccess\SoftVeilyAccess.cs" />
     <Compile Include="DataAccess\TableAccess\CompanyInfoService.cs" />
@@ -108,7 +108,6 @@
     <Compile Include="Model\ControlDataSource.cs" />
     <Compile Include="Model\TableModers\BillTemplateTypeModel.cs" />
     <Compile Include="Model\TableModers\BillTemplatModel.cs" />
-    <Compile Include="Model\TableModers\CompanyModel.cs" />
     <Compile Include="Model\TableModers\ControlDetail.cs" />
     <Compile Include="Model\TableModers\ControlInfol.cs" />
     <Compile Include="Model\TableModers\DataSourceModel.cs" />

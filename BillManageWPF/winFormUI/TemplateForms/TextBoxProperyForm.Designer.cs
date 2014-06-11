@@ -238,6 +238,7 @@
             this.btnBackColor.TabIndex = 25;
             this.btnBackColor.Text = "...";
             this.btnBackColor.UseVisualStyleBackColor = false;
+            this.btnBackColor.Click += new System.EventHandler(this.btnBackgroud_Click);
             // 
             // btnForeColor
             // 
@@ -249,6 +250,7 @@
             this.btnForeColor.TabIndex = 24;
             this.btnForeColor.Text = "...";
             this.btnForeColor.UseVisualStyleBackColor = false;
+            this.btnForeColor.Click += new System.EventHandler(this.btnForeColor_Click);
             // 
             // btnFont
             // 
@@ -260,6 +262,7 @@
             this.btnFont.TabIndex = 23;
             this.btnFont.Text = "...";
             this.btnFont.UseVisualStyleBackColor = false;
+            this.btnFont.Click += new System.EventHandler(this.btnSetFont_Click);
             // 
             // chbisborestyle
             // 
@@ -389,6 +392,7 @@
             this.cbxTablename.Name = "cbxTablename";
             this.cbxTablename.Size = new System.Drawing.Size(100, 25);
             this.cbxTablename.TabIndex = 20;
+            this.cbxTablename.SelectedIndexChanged += new System.EventHandler(this.cbxTablename_SelectedIndexChanged);
             // 
             // txtheight
             // 
@@ -524,7 +528,8 @@
             "1：收款方名称",
             "2：收款方账号",
             "3：付款方名称",
-            "4：付款方账号"});
+            "4：付款方账号",
+            "5：金额"});
             this.cbbMarkType.Location = new System.Drawing.Point(81, 113);
             this.cbbMarkType.Name = "cbbMarkType";
             this.cbbMarkType.Size = new System.Drawing.Size(100, 25);
@@ -751,6 +756,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "点击设定";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TextBoxProperyForm
             // 

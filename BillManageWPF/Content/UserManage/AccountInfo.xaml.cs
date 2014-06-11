@@ -29,43 +29,71 @@ namespace BillManageWPF.Content.UserManage
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            lbUserCode.Text = SoftUser.UserCode;
-            lbUserName.Text = SoftUser.UserName;    
-            cbbBillSet.ItemsSource = BillSetManager
-              .GetDataTableByCompanyName(SoftUser.UserCompany).DefaultView;
-            cbbBillSet.DisplayMemberPath = "BSIName";
-            cbbBillSet.SelectedValuePath = "BSID";
-            cbbBillSet.SelectedIndex = 0;
+            try
+            {
+                lbUserCode.Text = SoftUser.UserCode;
+                lbUserName.Text = SoftUser.UserName;
+                cbbBillSet.ItemsSource = BillSetManager
+                  .GetDataTableByCompanyName(SoftUser.UserCompany).DefaultView;
+                cbbBillSet.DisplayMemberPath = "BSIName";
+                cbbBillSet.SelectedValuePath = "BSID";
+                cbbBillSet.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         private void Button_MouseEnter(object sender, MouseEventArgs e)
         {
-            Button btn = sender as Button;
-            btn.Background = new SolidColorBrush(Colors.Purple);
-            btn.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
-            btn.Width = btn.Width + 5;
-            btn.Height = btn.Height + 5;
-            btn.FontSize = btn.FontSize + 2;
+            try
+            {
+                Button btn = sender as Button;
+                btn.Background = new SolidColorBrush(Colors.Purple);
+                btn.Foreground = new SolidColorBrush(Colors.WhiteSmoke);
+                btn.Width = btn.Width + 5;
+                btn.Height = btn.Height + 5;
+                btn.FontSize = btn.FontSize + 2;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
-            Button btn = sender as Button;
-            btn.Background.Opacity = 0;
-            btn.Foreground = new SolidColorBrush(Colors.Purple);
-            btn.Width = btn.Width - 5;
-            btn.Height = btn.Height - 5;
-            btn.FontSize = btn.FontSize - 2;
+            try
+            {
+                Button btn = sender as Button;
+                btn.Background.Opacity = 0;
+                btn.Foreground = new SolidColorBrush(Colors.Purple);
+                btn.Width = btn.Width - 5;
+                btn.Height = btn.Height - 5;
+                btn.FontSize = btn.FontSize - 2;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void chbDoPass_Click(object sender, RoutedEventArgs e)
         {
-            if (chbDoPass.IsChecked == true)
+            try
             {
-                ChangePwd.Visibility = Visibility.Visible;
+                if (chbDoPass.IsChecked == true)
+                {
+                    ChangePwd.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ChangePwd.Visibility = Visibility.Hidden;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ChangePwd.Visibility = Visibility.Hidden;
+                MessageBox.Show(ex.ToString());
             }
         }
 

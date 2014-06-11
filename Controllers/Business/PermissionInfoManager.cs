@@ -1,3 +1,10 @@
+//---------------------------------------------------------—-----//
+//功能：PermissionInfo权限信息业务层逻辑                            //
+//作者：赵建                                                      //
+//版本：v1.1                                                      //
+//创建时间：2014/3/30   12:55:00                                  //
+//最后修改时间：2014/5/30   8:55:00                               //
+//---------------------------------------------------------------//
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -5,9 +12,6 @@ using Controllers.Models;
 using Controllers.DataAccess;
 namespace Controllers.Business
 {
-    /// <summary>
-    ///本逻辑层由Hirer自动生成工具生成
-    /// </summary>
     public class PermissionInfoManager
     {
         /// <summary>
@@ -62,6 +66,12 @@ namespace Controllers.Business
             return  PermissionInfoService.SelectAllPermissionInfo();
         }
 
+        /// <summary>
+        /// 根据工号返回权限信息
+        /// </summary>
+        /// <param name="eiNo">工号</param>
+        /// <param name="CompanyName">公司名</param>
+        /// <returns></returns>
         public static PermissionInfo GetPermissionInfoByEINo(String eiNo, String CompanyName)
         {
             return PermissionInfoService.GetPermissionInfoByEINo(eiNo, CompanyName);

@@ -1,4 +1,11 @@
-﻿using System;
+﻿//---------------------------------------------------------—-----//
+//功能：软件配置相关业务层逻辑                                    //
+//作者：赵建                                                      //
+//版本：v1.1                                                      //
+//创建时间：2014/3/30   12:55:00                                  //
+//最后修改时间：2014/5/30   8:55:00                               //
+//---------------------------------------------------------------//
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,6 +47,10 @@ namespace Controllers.Business
        public static bool SaveLoginToXml(string spath)
        {
            return new ConfigService().SaveLoginToXml(spath);
+       }
+       static public bool softConfigSaveToXml(SoftConfigModel softConfig, SoftVerify softVerify)
+       {
+           return new ConfigService().softConfigSaveToXml(softConfig, softVerify);
        }
     }
 }

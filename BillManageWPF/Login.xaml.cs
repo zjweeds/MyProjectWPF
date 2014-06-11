@@ -33,6 +33,7 @@ namespace BillManageWPF
         {
             InitializeComponent();
         }
+
         #region  页面变量
         private DispatcherTimer _timer;//计时器
         private static String BSName = String.Empty; 
@@ -109,8 +110,9 @@ namespace BillManageWPF
         private void StartMethod()
         {
             calcMethod = new LoadImageMethod(LoadImage);
-            calcMethod.BeginInvoke(true, new AsyncCallback(TaskFinished), null);
+            calcMethod.BeginInvoke(true, new AsyncCallback(TaskFinished), null);//主进程不等待子进程
         }
+
         ///<summary>
         ///线程调用的函数
         ///<summary>
@@ -135,10 +137,13 @@ namespace BillManageWPF
         {
             calcMethod.EndInvoke(childThred);
         }
+
         private void doThreadLoading()
         {
-            beginInvokeThread = new Thread(StartMethod);//new ThreadStart(StartMethod));
-            beginInvokeThread.Start();
+            beginInvokeThread = new Thread(StartMethod);
+            beginInvokeThread.Start();//子线程开始执行
+
+            #region 执行登陆动画
             loginPanel.Visibility = Visibility.Hidden;
             DoMove(ju, -300, 0, 0, 0);
             DoMove(tong, -400, 90, 0, 0);
@@ -149,6 +154,7 @@ namespace BillManageWPF
             _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += _timer1_Tick;
             _timer.Start();
+            #endregion
         }
 
 
@@ -196,6 +202,7 @@ namespace BillManageWPF
                
         }
         #endregion
+
         #region 窗体事件
         /// <summary>
         /// 窗体载入事件
@@ -204,28 +211,35 @@ namespace BillManageWPF
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            iCount = 0;
-            if (ConfigeManage.isConfigFilesExist())
+            try
             {
-                LoadingAnime();
-                LoadCompanyName();
-                cbbCompany.SelectedIndex = 0;
-                txtPassWord.Password = "0001";
-            }
-            else
-            {
-                if (MessageBox.Show("您是第一次运行程序！或者是系统配置文件丢失\n转到配置页面么？", "软件提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                iCount = 0;
+                if (ConfigeManage.isConfigFilesExist())
                 {
-                    WindowSoftConfig wsf = new WindowSoftConfig(this);
-                    wsf.Top = this.Top;
-                    wsf.Left = this.Left;
-                    wsf.Show();
-                    this.WindowState = System.Windows.WindowState.Minimized;
+                    LoadingAnime();
+                    LoadCompanyName();
+                    cbbCompany.SelectedIndex = 0;
+                    txtPassWord.Password = "0001";
                 }
                 else
                 {
-                    this.Close();
+                    if (MessageBox.Show("您是第一次运行程序！或者是系统配置文件丢失\n转到配置页面么？", "软件提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        WindowSoftConfig wsf = new WindowSoftConfig(this);
+                        wsf.Top = this.Top;
+                        wsf.Left = this.Left;
+                        wsf.Show();
+                        this.WindowState = System.Windows.WindowState.Minimized;
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -237,65 +251,84 @@ namespace BillManageWPF
         /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-           DataTable dtUser = UserInfoManager.SelectUserInfoByPassworld
-                (txtName.Text, Convert.ToInt32(cbbCompany.SelectedValue));
-            if (dtUser != null && dtUser.Rows.Count != 0)
+            try
             {
-                if (dtUser.Rows[0]["UIPassword"].ToString() == txtPassWord.Password.ToString())
+                DataTable dtUser = UserInfoManager.SelectUserInfoByEINo
+                 (txtName.Text, Convert.ToInt32(cbbCompany.SelectedValue));//根据用户工号获得用户对象
+                if (dtUser != null && dtUser.Rows.Count != 0)
                 {
-                    BSName = cbbBillSet.Text.ToString();
-                    doThreadLoading();//分线程处理加载图片工作，主线程登录
-                    SoftUser.UserCode = dtUser.Rows[0]["UIEINo"].ToString();
-                    SoftUser.UserName = dtUser.Rows[0]["EIName"].ToString();
-                    SoftUser.UserCompany = cbbCompany.Text;
-                    SoftUser.PassWorld = txtPassWord.Password.ToString();
-                    ImageHelper imher= new ImageHelper();
-                    GetUserPhotoFromDisk(txtName.Text);
-                    if (!File.Exists(userPhotoPath))
-                    {//头像文件不存在
-                        try
-                        {
-                            if (dtUser.Rows[0]["EIPhoto"] != null && (dtUser.Rows[0]["EIPhoto"] as byte[]).Length != 0)
-                            {
-                                imher.SaveImage(imher.GetImageByByte(dtUser.Rows[0]["EIPhoto"] as byte[]), userPhotoPath);
-                            }
-                            else
-                            {
-                                if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory
-                            + @"Configs\" + SoftUser.UserCode))//若文件夹不存在则新建文件夹  
-                                {
-                                    Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory
-                            + @"Configs\" + SoftUser.UserCode); //新建文件夹 
-                                }
-                                File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"\Resource\user.jpg",
-                                         userPhotoPath, true);
-                            }
-                        }
-                        catch
-                        {
-                            File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"\Resource\user.jpg",
-                                        userPhotoPath, true);
-                        }
-                    }
-                    SoftUser.Op_Bill = cbbBillSet.Text;
-                    if (chbSavePassword.IsChecked == true)
+                    //存在该用户
+                    if (dtUser.Rows[0]["UIPassword"].ToString() == txtPassWord.Password.ToString())
                     {
-                        SaveLoginInfo();
+                        //密码正确
+                        doThreadLoading();//分线程处理加载图片工作，主线程登录
+
+                        #region 保存当前用户信息到内存
+                        SoftUser.UserCode = dtUser.Rows[0]["UIEINo"].ToString();
+                        SoftUser.UserName = dtUser.Rows[0]["EIName"].ToString();
+                        SoftUser.UserCompany = cbbCompany.Text;
+                        SoftUser.PassWorld = txtPassWord.Password.ToString();
+                        BSName = cbbBillSet.Text.ToString();
+                        #endregion
+
+                        #region 获取用户头像
+                        ImageHelper imher = new ImageHelper();
+                        GetUserPhotoFromDisk(txtName.Text); //获取本地用户头像
+                        if (!File.Exists(userPhotoPath))
+                        {//头像文件不存在
+                            try
+                            {
+                                if (dtUser.Rows[0]["EIPhoto"] != null && (dtUser.Rows[0]["EIPhoto"] as byte[]).Length != 0)
+                                {
+                                    imher.SaveImage(imher.GetImageByByte(dtUser.Rows[0]["EIPhoto"] as byte[]), userPhotoPath);
+                                }
+                                else
+                                {
+                                    if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory
+                                + @"Configs\" + SoftUser.UserCode))//若文件夹不存在则新建文件夹  
+                                    {
+                                        Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory
+                                + @"Configs\" + SoftUser.UserCode); //新建文件夹 
+                                    }
+                                    File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"\Resource\user.jpg",
+                                             userPhotoPath, true);
+                                }
+                            }
+                            catch
+                            {
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory + @"\Resource\user.jpg",
+                                            userPhotoPath, true);
+                            }
+                        }
+                        #endregion
+
+                        #region 如果选择保存密码  则保存登录信息到用户配置文件
+                        SoftUser.Op_Bill = cbbBillSet.Text;
+                        if (chbSavePassword.IsChecked == true)
+                        {
+                            SaveLoginInfo();//保存登录信息
+                        }
+                        #endregion
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("密码错误！请确认后再次输入！");
+                        return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("密码错误！请确认后再次输入！");
+                    //用户不存在
+                    MessageBox.Show(String.Format("所选公司不存在工号:{0}的员工，请确认输入！", txtName.Text), "软件提示");
+                    txtName.Text = String.Empty;
+                    txtPassWord.Password = string.Empty;
                     return;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                //用户不存在
-                MessageBox.Show(String.Format("所选公司不存在工号:{0}的员工，请确认输入！",txtName.Text),"软件提示");
-                txtName.Text=String.Empty;
-                txtPassWord.Password=string.Empty;
-                return;
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -306,15 +339,22 @@ namespace BillManageWPF
         /// <param name="e"></param>
         private void _timer1_Tick(object sender, EventArgs e)
         {
-            waitSecond++;
-            if (waitSecond>2)
+            try
             {
-                waitSecond = 0;
+                waitSecond++;
+                if (waitSecond > 2)
+                {
+                    waitSecond = 0;
 
-                ModerUIMain mum = new ModerUIMain();
-                mum.Show();
-                _timer.Stop();
-                this.Close();
+                    ModerUIMain mum = new ModerUIMain();
+                    mum.Show();
+                    _timer.Stop();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -341,28 +381,47 @@ namespace BillManageWPF
         /// <param name="e"></param>
         private void cbbCompany_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           cbbBillSet.ItemsSource=BillSetManager
-               .GetDataTableByCompanyID(Convert.ToInt32(cbbCompany.SelectedValue)).DefaultView;
-            cbbBillSet.DisplayMemberPath = "BSIName";
-            cbbBillSet.SelectedValuePath = "BSID";
-            cbbBillSet.SelectedIndex = 0;
+            try
+            {
+                cbbBillSet.ItemsSource = BillSetManager
+                .GetDataTableByCompanyID(Convert.ToInt32(cbbCompany.SelectedValue)).DefaultView;
+                cbbBillSet.DisplayMemberPath = "BSIName";
+                cbbBillSet.SelectedValuePath = "BSID";
+                cbbBillSet.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         private void txtName_LostFocus(object sender, RoutedEventArgs e)
         {
-            GetUserPhotoFromDisk(txtName.Text);
+            try
+            {
+                GetUserPhotoFromDisk(txtName.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         #endregion
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            try
             {
-                DragMove();
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    DragMove();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
-
-      
     }
 }

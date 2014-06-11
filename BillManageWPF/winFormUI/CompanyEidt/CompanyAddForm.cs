@@ -31,23 +31,30 @@ namespace BillManageWPF.winFormUI.CompanyEidt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtName.Text != String.Empty)
+            try
             {
-                CompanyInfo ci = new CompanyInfo();
-                ci.CIName = txtName.Text;
-                ci.CIParentID = CompanyInfoManager.GetIDByCompanyName(prientName);
-                ci.CIDescription = txtDesription.Text;
-                ci.CICreaterID = SoftUser.UserCode;
-                ci.CICreateTime = DateTime.Now;
-                if (CompanyInfoManager.AddCompanyInfo(ci))
+                if (txtName.Text != String.Empty)
                 {
-                    MessageBox.Show("添加成功！");
-                    this.Close();
+                    CompanyInfo ci = new CompanyInfo();
+                    ci.CIName = txtName.Text;
+                    ci.CIParentID = CompanyInfoManager.GetIDByCompanyName(prientName);
+                    ci.CIDescription = txtDesription.Text;
+                    ci.CICreaterID = SoftUser.UserCode;
+                    ci.CICreateTime = DateTime.Now;
+                    if (CompanyInfoManager.AddCompanyInfo(ci))
+                    {
+                        MessageBox.Show("添加成功！");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("添加失败！");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("添加失败！");
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 

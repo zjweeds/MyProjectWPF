@@ -1,4 +1,12 @@
-﻿using System;
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2014-3-16 9:59
+ * 描    述：
+ *             图片帮助通用类
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +23,11 @@ namespace Controllers.Common
 {
    public  class ImageHelper
     {
+       /// <summary>
+       /// 根据图片路径得到图片流
+       /// </summary>
+       /// <param name="path"></param>
+       /// <returns></returns>
        public byte[] GetBytesByImagepath(String path)
        {
            System.Drawing.Image img = System.Drawing.Image.FromFile(path);
@@ -30,6 +43,12 @@ namespace Controllers.Common
                throw ex;
            }
        }
+
+       /// <summary>
+       /// 根据图片流得到image对象
+       /// </summary>
+       /// <param name="buffer"></param>
+       /// <returns></returns>
        public Image GetImageByByte(byte[] buffer)
        {
            try
@@ -67,6 +86,12 @@ namespace Controllers.Common
            }
        }
 
+
+       /// <summary>
+       /// 保存图片到本地
+       /// </summary>
+       /// <param name="image"></param>
+       /// <param name="sPath"></param>
        public void SaveImage(Image image,String sPath )
        {
            image.Save(sPath, System.Drawing.Imaging.ImageFormat.Jpeg);

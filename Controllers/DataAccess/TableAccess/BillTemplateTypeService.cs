@@ -1,4 +1,12 @@
-﻿using System;
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             模板类别信息数据访问层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -103,6 +111,13 @@ namespace Controllers.DataAccess
             return new MySqlHelper().ExecSqlReturnId(cmdText.ToString());
         }
 
+        /// <summary>
+        /// 更新类别名称
+        /// </summary>
+        /// <param name="typeNewName"></param>
+        /// <param name="oldName"></param>
+        /// <param name="bsName"></param>
+        /// <returns></returns>
         static public int UpdateTemplateName(String typeNewName, String oldName, String bsName)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -114,6 +129,7 @@ namespace Controllers.DataAccess
              cmdText.AppendFormat("    and TTName = '{0}')  ", oldName);
             return new MySqlHelper().ExecDataBySql(cmdText.ToString());
         }
+
         /// <summary>
         /// 返回类别名称是否存在
         /// </summary>
@@ -128,6 +144,11 @@ namespace Controllers.DataAccess
             return new MySqlHelper().GetSingleObject(cmdText.ToString()) == null ? false : true;         
         }
 
+
+        /// <summary>
+        /// 删除（废弃）
+        /// </summary>
+        /// <returns></returns>
         static public bool DeleteTemplateTypeByName()
         {
             IList<String> sqlList = new List<String>();

@@ -148,6 +148,9 @@
     <Compile Include="Page\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="softConfig\CompanyConfigWindow.xaml.cs">
+      <DependentUpon>CompanyConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="winFormUI\BillForms\BillSerchListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,12 +192,6 @@
     </Compile>
     <Compile Include="winFormUI\TemplateForms\DateTimePickerProperyForm.Designer.cs">
       <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="winFormUI\TemplateForms\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="winFormUI\TemplateForms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="winFormUI\TemplateForms\LabelProperyForm.cs">
       <SubType>Form</SubType>
@@ -344,6 +341,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="softConfig\CompanyConfigWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="softConfig\DataBaseAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -391,9 +392,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\DateTimePickerProperyForm.resx">
       <DependentUpon>DateTimePickerProperyForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="winFormUI\TemplateForms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\LabelProperyForm.resx">
       <DependentUpon>LabelProperyForm.cs</DependentUpon>

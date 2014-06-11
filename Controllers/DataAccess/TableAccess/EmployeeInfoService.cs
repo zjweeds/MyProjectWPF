@@ -1,3 +1,11 @@
+/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             员工信息表数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -5,11 +13,9 @@ using Controllers.Models;
 using System.Data.SqlClient;
 using Controllers.DataAccess.SQLHELPER;
 using System.Data;
+
 namespace Controllers.DataAccess
 {
-    /// <summary>
-    ///本数据访问类由Hirer实体数据访问层工具生成
-    /// </summary>
     public class EmployeeInfoService
     {
         /// <summary>
@@ -44,6 +50,11 @@ namespace Controllers.DataAccess
             return new MySqlHelper().ExecSqlReturnId(cmdText.ToString(), paras);
         }
 
+        /// <summary>
+        /// 根据员工实体添加信息
+        /// </summary>
+        /// <param name="employeeInfo"></param>
+        /// <returns></returns>
         public static bool AddEmployeeInfoAndUserInfo(EmployeeInfo employeeInfo)
         {
             List<String> cmdList = new List<string>();
@@ -72,6 +83,12 @@ namespace Controllers.DataAccess
              cmdList.Add(perText.ToString());//更新用户表
              return new MySqlHelper().ExecDataBySqls(cmdList);
         }
+
+        /// <summary>
+        /// 根据员工实体列表批量添加信息
+        /// </summary>
+        /// <param name="employeeInfoList"></param>
+        /// <returns></returns>
         public static bool AddEmployeeInfoAndUserInfoList(IList<EmployeeInfo> employeeInfoList)
         {
             List<String> cmdList = new List<string>();
@@ -106,15 +123,23 @@ namespace Controllers.DataAccess
             }
             return new MySqlHelper().ExecDataBySqls(cmdList);
         }
+
         /// <summary>
         /// 根据EIID删除EmployeeInfo
         /// </summary>
-        /// <param name="EIID">对象属性</param>
+        /// <param name="EIID">对象ID</param>
         public static int DeleteEmployeeInfoByEIID(Int32 _eIID)
         {
             string cmdText = "Update EmployeeInfo set EIIsEnable = 0  WHERE  EIID = " + _eIID;
             return new MySqlHelper().ExecDataBySql(cmdText);
         }
+
+        /// <summary>
+        /// 根据工号删除
+        /// </summary>
+        /// <param name="eino">工号</param>
+        /// <param name="CampanyName">公司名</param>
+        /// <returns></returns>
         public static bool DeleteEmployeeInfoByEINo(String eino,String CampanyName)
         {
             List<String> cmdList = new List<string>(); 
@@ -164,7 +189,6 @@ namespace Controllers.DataAccess
             return new MySqlHelper().ExecDataBySql(cmdText.ToString(), paras);
         }
 
-
         /// <summary>
         /// 查询EmployeeInfo
         /// </summary>
@@ -212,6 +236,12 @@ namespace Controllers.DataAccess
             IList<EmployeeInfo> controlInfos = SelectEmployeeInfoByCmdText(cmdText.ToString());
             return controlInfos.Count > 0 ? controlInfos[0] : null;
         }
+
+        /// <summary>
+        /// 根据工号查询EmployeeInfo
+        /// </summary>
+        /// <param name="_eINo"></param>
+        /// <returns></returns>
         public static EmployeeInfo SelectEmployeeInfoByEINO(String _eINo)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -224,6 +254,11 @@ namespace Controllers.DataAccess
             IList<EmployeeInfo> controlInfos = SelectEmployeeInfoByCmdText(cmdText.ToString());
             return controlInfos.Count > 0 ? controlInfos[0] : null;
         }
+
+        /// <summary>
+        /// 返回所有员工
+        /// </summary>
+        /// <returns></returns>
         public static IList<EmployeeInfo> SelectAllEmployeeInfo()
         {
             StringBuilder cmdText = new StringBuilder();
@@ -252,6 +287,12 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat(" and CIName = '{0}'  ", CompanyName);
             return SelectEmployeeInfoByCmdText(cmdText.ToString());
         }
+
+        /// <summary>
+        /// 返回某公司所有员工
+        /// </summary>
+        /// <param name="CompanyName"></param>
+        /// <returns></returns>
         public static DataTable GetAllEmployeeInfoByCompanyName(String CompanyName)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -307,6 +348,11 @@ namespace Controllers.DataAccess
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
 
+        /// <summary>
+        /// 跟据公司名返回员工数
+        /// </summary>
+        /// <param name="CompanyName"></param>
+        /// <returns></returns>
         public static int GetRowsCount(String CompanyName)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -317,6 +363,7 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat(" and CIName = '{0}'  ", CompanyName);
             return Convert.ToInt32( new MySqlHelper().GetSingleObject(cmdText.ToString()));
         }
+
         /// <summary>
         /// 根据公司名称返回员工列表
         /// </summary>
@@ -335,6 +382,12 @@ namespace Controllers.DataAccess
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
 
+        /// <summary>
+        /// 更新员工头像
+        /// </summary>
+        /// <param name="eINO"></param>
+        /// <param name="buff"></param>
+        /// <returns></returns>
         public static bool updateUerPhotoByEINO(String eINO, byte[] buff)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -375,6 +428,11 @@ namespace Controllers.DataAccess
             }
         }
 
+        /// <summary>
+        /// 根据公司ID返回员工数
+        /// </summary>
+        /// <param name="ciid"></param>
+        /// <returns></returns>
         public static int ConutEmNumberByCompany(int ciid)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -384,7 +442,7 @@ namespace Controllers.DataAccess
         }
 
         /// <summary>
-        /// 
+        /// 拼接员工工号
         /// </summary>
         /// <param name="intLength"></param>
         /// <returns></returns>
@@ -397,5 +455,6 @@ namespace Controllers.DataAccess
             }
             return strFormat;
         }
+
     }
 }

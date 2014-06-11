@@ -1,4 +1,12 @@
-﻿using System;
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             软件验证信息数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,22 +35,5 @@ namespace Controllers.DataAccess
                 return new SoftVerify();
             }
         }
-        //public bool softVeilySaveToXml(SoftVerify softVerify)
-        //{           
-        //    if (myxmlhelper.SaveToXml(path + '/' + file, softVerify))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}   
-        //    if (GetSoftVeily(key)!=null)
-        //    {
-
-        //        return true;
-        //    }
-
     }
 }

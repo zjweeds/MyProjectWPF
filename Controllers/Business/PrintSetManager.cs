@@ -1,3 +1,11 @@
+//---------------------------------------------------------—-----//
+//功能：PrintSet业务层逻辑                                        //
+//作者：赵建                                                      //
+//版本：v1.1                                                      //
+//创建时间：2014/3/30   12:55:00                                  //
+//最后修改时间：2014/5/30   8:55:00                               //
+//---------------------------------------------------------------//
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -5,9 +13,6 @@ using Controllers.Models;
 using Controllers.DataAccess;
 namespace Controllers.Business
 {
-    /// <summary>
-    ///本逻辑层由Hirer自动生成工具生成
-    /// </summary>
     public class PrintSetManager
     {
         /// <summary>

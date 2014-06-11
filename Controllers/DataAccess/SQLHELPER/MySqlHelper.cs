@@ -62,17 +62,19 @@ namespace Controllers.DataAccess.SQLHELPER
         /// </summary>
         public MySqlHelper()
         {
-            String strServer = ReadFiles.GetIniFileString("DataBase", "Server", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-            String database = ReadFiles.GetIniFileString("DataBase", "Database", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-            //获取登录用户
-            String strUserID = ReadFiles.GetIniFileString("DataBase", "UserID", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-            //获取登录密码
-            String strPwd = ReadFiles.GetIniFileString("DataBase", "Pwd", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-            //数据库连接字符串
-            String strConn = "Server = " + strServer + ";Database = " + database + ";User id=" + strUserID + ";PWD=" + strPwd;
-            strConn = "server=.;database = BillManage;User id =sa ; PWD = zhaojian ";
             try
             {
+                Models.SoftConfigModel scfm = new MyXmlHelper().readXMl(AppDomain.CurrentDomain.BaseDirectory + @"\Configs\SoftConfig.xml");
+                String strServer = scfm.softServerIP;//ReadFiles.GetIniFileString("DataBase", "Server", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+                String database = scfm.softDBName; //ReadFiles.GetIniFileString("DataBase", "Database", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+                //获取登录用户
+                String strUserID = scfm.softDBUser; //ReadFiles.GetIniFileString("DataBase", "UserID", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+                //获取登录密码
+                String strPwd = scfm.softDBPwd; //ReadFiles.GetIniFileString("DataBase", "Pwd", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
+                //数据库连接字符串
+                String strConn = "Server = " + strServer + ";Database = " + database + ";User id=" + strUserID + ";PWD=" + strPwd;
+                //strConn = "server=.;database = BillManage;User id =sa ; PWD = zhaojian ";
+
                 m_Conn = new SqlConnection(strConn);
                 m_Cmd = new SqlCommand();
                 m_Cmd.Connection = m_Conn;
@@ -262,7 +264,7 @@ namespace Controllers.DataAccess.SQLHELPER
                         m_Cmd.CommandText = item;
                         m_Cmd.ExecuteNonQuery();
                     }
-                    sqlTran.Commit();
+                    sqlTran.Commit(); //保存事务的修改
                     booIsSucceed = true;  //表示提交数据库成功
                 }
                 catch(Exception ex)

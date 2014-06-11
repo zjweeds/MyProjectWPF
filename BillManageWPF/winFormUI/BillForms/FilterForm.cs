@@ -12,8 +12,12 @@ namespace BillManageWPF.winFormUI
 {
     public partial class FilterForm : Form
     {
-        public  String sLinqString = String.Empty;
-        public IList<String> sName = new List<String>();
+        #region 窗体变量
+        public  String sLinqString = String.Empty; //linQ条件字符串
+        public IList<String> sName = new List<String>(); //所有列名
+        #endregion 
+
+        #region 构造函数
         public FilterForm()
         {
             InitializeComponent();
@@ -25,7 +29,12 @@ namespace BillManageWPF.winFormUI
             InitializeComponent();
             sName = s;
         }
+        #endregion 
 
+       /// <summary>
+       /// 拼接lingq字符串
+       /// </summary>
+       /// <returns></returns>
         public String GetLinQString()
         {
             String sLinq = cbbLie1.Text.ToString() + cbbBJ1.Text + "'" + cbbVaule1.Text + "'";

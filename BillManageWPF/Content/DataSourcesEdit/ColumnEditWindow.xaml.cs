@@ -37,42 +37,49 @@ namespace BillManageWPF.Content.DataSourcesEdit
 
         private void btnQueDing_Click(object sender, RoutedEventArgs e)
         {
-            if (txtTypeName.Text != String.Empty)
+            try
             {
-                if (tdsl != null)
+                if (txtTypeName.Text != String.Empty)
                 {
-                    bool isRepit = false;
-                    for (int i = 0; i < tdsl.dgvList[pageIndex].ColumnCount; i++)
+                    if (tdsl != null)
                     {
-                        if (tdsl.dgvList[pageIndex].Columns[i].HeaderText == txtTypeName.Text.Trim())
+                        bool isRepit = false;
+                        for (int i = 0; i < tdsl.dgvList[pageIndex].ColumnCount; i++)
                         {
-                            isRepit = true;
-                            break;
+                            if (tdsl.dgvList[pageIndex].Columns[i].HeaderText == txtTypeName.Text.Trim())
+                            {
+                                isRepit = true;
+                                break;
+                            }
+                        }
+                        if (!isRepit)
+                        {
+                            tdsl.columnName = txtTypeName.Text.Trim();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show(String.Format("已存在名为{0}的列", txtTypeName.Text), "软件提示");
+                            txtTypeName.Text = String.Empty;
+                            txtTypeName.Focus();
                         }
                     }
-                    if (!isRepit)
-                    {
-                        tdsl.columnName = txtTypeName.Text.Trim();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show(String.Format("已存在名为{0}的列", txtTypeName.Text), "软件提示");
-                        txtTypeName.Text = String.Empty;
-                        txtTypeName.Focus();
-                    }
+                }
+                else
+                {
+                    MessageBox.Show(String.Format("列名不能为空！", "软件提示"));
+                    txtTypeName.Focus();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(String.Format("列名不能为空！", "软件提示"));
-                txtTypeName.Focus();
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void btnQuXiao_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

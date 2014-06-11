@@ -26,9 +26,9 @@ namespace BillManageWPF.winFormUI
         {
             InitializeComponent();
             tmp = tb;
-            tm = fm;          
+            tm = fm;
         }
-        #endregion 
+        #endregion
 
         #region  页面变量
         public MyComboBox tmp = null;
@@ -38,6 +38,7 @@ namespace BillManageWPF.winFormUI
         public Color bgc;
         public Color frc;
         #endregion
+
         #region 自定义方法
         public void GetPropery()
         {
@@ -56,12 +57,12 @@ namespace BillManageWPF.winFormUI
                 txtheight.Text = tmp.Height.ToString();
                 if (tmp.txtDatasource != null)
                 {
-                    cbxTablename.Text = tmp.txtDatasource.TableName.ToString();
-                    cbxCoumname.Text = tmp.txtDatasource.Column.ToString();
+                    cbxTablename.SelectedText = tmp.txtDatasource.TableName.ToString();
+                    cbxCoumname.SelectedText = tmp.txtDatasource.Column.ToString();
                 }
                 cbbMarktype.SelectedIndex = tmp.MarkType;
-                chbIsmust.Checked = tmp.IsMust ? false : true;
-                chbIsprInt.Checked = tmp.IsPrint  ? false : true;  
+                chbIsmust.Checked = tmp.IsMust ? true : false;
+                chbIsprInt.Checked = tmp.IsPrint ? true : false;
             }
         }
 
@@ -78,8 +79,8 @@ namespace BillManageWPF.winFormUI
                 tmp.Width = Convert.ToInt32(txtwidth.Text);
                 tmp.Height = Convert.ToInt32(txtheight.Text);
                 tmp.txtDatasource = new ControlDataSource(cbxTablename.Text, cbxCoumname.Text);
-                tmp.IsMust = chbIsmust.Checked ;
-                tmp.IsPrint = chbIsprInt.Checked ;
+                tmp.IsMust = chbIsmust.Checked;
+                tmp.IsPrint = chbIsprInt.Checked;
                 tmp.MarkType = cbbMarktype.SelectedIndex;
             }
         }
@@ -177,22 +178,41 @@ namespace BillManageWPF.winFormUI
         #endregion
         private void button1_Click(object sender, EventArgs e)
         {
-            SetPropery();
-            //UpdateModel();
+            try
+            {
+                SetPropery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         private void ComboBoxProperyForm_Load(object sender, EventArgs e)
         {
-            if (tm != null && tmp != null)
+            try
             {
-                font = tmp.Font;
-                bgc = tmp.BackColor;
-                frc = tmp.ForeColor;
-                //combobox = tm.cbbList[tmp.NewNumber] as ComboBoxInfo;
-                cbxTablename.DataSource = DataSourceManager.GetDataTableByCompanyName(SoftUser.UserCompany);
-                cbxTablename.DisplayMember = "DSITableName";
-                cbxTablename.ValueMember = "DSITableName";
-                GetPropery();
+                if (tm != null && tmp != null)
+                {
+                    font = tmp.Font;
+                    bgc = tmp.BackColor;
+                    frc = tmp.ForeColor;
+                    //combobox = tm.cbbList[tmp.NewNumber] as ComboBoxInfo;
+                    DataTable dt= DataSourceManager.GetDataTableByCompanyName(SoftUser.UserCompany);
+                    cbxTablename.Items.Add(String.Empty);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            cbxTablename.Items.Add(dt.Rows[i][0].ToString());
+                        }
+                    }
+                    GetPropery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -203,11 +223,18 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void btnSetFont_Click(object sender, EventArgs e)
         {
-            if (fd.ShowDialog() != DialogResult.Cancel)
+            try
             {
-                txtfont.Text = fd.Font.ToString();
-                font = fd.Font;
-                tmp.Font = font;
+                if (fd.ShowDialog() != DialogResult.Cancel)
+                {
+                    txtfont.Text = fd.Font.ToString();
+                    font = fd.Font;
+                    tmp.Font = font;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -218,12 +245,19 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void btnForeColor_Click(object sender, EventArgs e)
         {
-            cd.Color = frc;
-            if (cd.ShowDialog() != DialogResult.Cancel)
+            try
             {
-                txtForeColor.Text = cd.Color.ToString();
-                frc = cd.Color;
-                tmp.ForeColor = frc;
+                cd.Color = frc;
+                if (cd.ShowDialog() != DialogResult.Cancel)
+                {
+                    txtForeColor.Text = cd.Color.ToString();
+                    frc = cd.Color;
+                    tmp.ForeColor = frc;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -234,20 +268,44 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void btnBackgroud_Click(object sender, EventArgs e)
         {
-            cd.Color = bgc;
-            if (cd.ShowDialog() != DialogResult.Cancel)
+            try
             {
-                txtBackColor.Text = cd.Color.ToString();
-                bgc = cd.Color;
-                tmp.BackColor = bgc;
+                cd.Color = bgc;
+                if (cd.ShowDialog() != DialogResult.Cancel)
+                {
+                    txtBackColor.Text = cd.Color.ToString();
+                    bgc = cd.Color;
+                    tmp.BackColor = bgc;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
         private void cbxTablename_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbxCoumname.DataSource = DataSourceManager.GetDataTableByTableName(cbxTablename.Text);
-            cbxCoumname.DisplayMember = "DSIColums";
-            cbxCoumname.ValueMember = "DSIColums";
+            try
+            {
+                cbxCoumname.Items.Clear();
+                cbxCoumname.Items.Add(String.Empty);
+                if (cbxTablename.Text != String.Empty)
+                {
+                    DataTable dt = DataSourceManager.GetDataTableByTableName(cbxTablename.Text);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            cbxCoumname.Items.Add(dt.Rows[i][1].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
     }
 }

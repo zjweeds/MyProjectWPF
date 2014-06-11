@@ -1,3 +1,10 @@
+//---------------------------------------------------------—-----//
+//功能：数据库操作相关业务层逻辑                                   //
+//作者：赵建                                                      //
+//版本：v1.1                                                      //
+//创建时间：2014/3/30   12:55:00                                  //
+//最后修改时间：2014/5/30   8:55:00                               //
+//---------------------------------------------------------------//
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,9 +13,7 @@ using Controllers.DataAccess;
 using System.Data;
 namespace Controllers.Business
 {
-    /// <summary>
-    ///本逻辑层由Hirer自动生成工具生成
-    /// </summary>
+
     public class UserInfoManager
     {
         /// <summary>
@@ -60,9 +65,9 @@ namespace Controllers.Business
         {
             return  UserInfoService.SelectAllUserInfo();
         }
-        public static DataTable SelectUserInfoByPassworld(String uCode, int comID)
+        public static DataTable SelectUserInfoByEINo(String uCode, int comID)
         {
-            return UserInfoService.SelectUserInfoByPassworld(uCode, comID);
+            return UserInfoService.SelectUserInfoByEINo(uCode, comID);
         }
         public static bool UpdateUserPWDByUIEINO(String uCode, String pwd)
         {

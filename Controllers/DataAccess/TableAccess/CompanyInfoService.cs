@@ -1,3 +1,11 @@
+/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             公司信息数据访问层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +16,6 @@ using System.Data;
 
 namespace Controllers.DataAccess
 {
-    /// <summary>
-    ///本数据访问类由Hirer实体数据访问层工具生成
-    /// </summary>
     public class CompanyInfoService
     {
         /// <summary>
@@ -101,7 +106,6 @@ namespace Controllers.DataAccess
             return companyInfos;
         }
      
-     
         /// <summary>
         /// 根据CIID查询CompanyInfo
         /// </summary>
@@ -116,8 +120,7 @@ namespace Controllers.DataAccess
             IList<CompanyInfo> companyInfos = SelectCompanyInfoByCmdText(cmdText.ToString());
             return companyInfos.Count>0 ? companyInfos[0] : null;
         }
-     
-     
+       
         /// <summary>
         /// 查询所有CompanyInfo
         /// </summary>
@@ -131,6 +134,10 @@ namespace Controllers.DataAccess
             return SelectCompanyInfoByCmdText(cmdText.ToString());
         }
 
+        /// <summary>
+        /// 返回所有公司名
+        /// </summary>
+        /// <returns></returns>
         public static DataTable GetAllCompanyName()
         {
             StringBuilder cmdText = new StringBuilder();
@@ -140,6 +147,12 @@ namespace Controllers.DataAccess
             cmdText.Append(" WHERE CIIsEnable = 1 ");
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
+
+        /// <summary>
+        /// 根据公司名返回公司ID
+        /// </summary>
+        /// <param name="CompanyName"></param>
+        /// <returns></returns>
         public static Int32 GetIDByCompanyName(String CompanyName)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -151,7 +164,7 @@ namespace Controllers.DataAccess
         }
 
         /// <summary>
-        /// 
+        /// 根据公司名称返回所有子公司
         /// </summary>
         /// <param name="CompanyName"></param>
         /// <returns></returns>
@@ -169,6 +182,12 @@ namespace Controllers.DataAccess
             cmdText.Append("        AND CIIsEnable = 1 ");
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
+
+        /// <summary>
+        /// 根据公司id返回所有子公司
+        /// </summary>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
         public static int GetChildrenCountsByCompany(int  CompanyID)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -177,5 +196,6 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat(" where CIIsEnable = 1 and CIParentID = '{0}'", CompanyID);
             return Convert.ToInt32 (new MySqlHelper().GetSingleObject(cmdText.ToString()));
         }
+
     }
 }

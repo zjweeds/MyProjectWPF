@@ -1,3 +1,11 @@
+/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             权限信息数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,9 +15,6 @@ using Controllers.DataAccess.SQLHELPER;
 using System.Data;
 namespace Controllers.DataAccess
 {
-    /// <summary>
-    ///本数据访问类由Hirer实体数据访问层工具生成
-    /// </summary>
     public class PermissionInfoService
     {
         /// <summary>
@@ -32,8 +37,7 @@ namespace Controllers.DataAccess
             };
             return  new MySqlHelper().ExecDataBySql(cmdText, paras);
         }
-     
-     
+         
         /// <summary>
         /// 根据PIID删除PermissionInfo
         /// </summary>
@@ -43,8 +47,7 @@ namespace Controllers.DataAccess
             string cmdText="DELETE PermissionInfo WHERE  PIID = " +  _pIID;
             return new MySqlHelper().ExecDataBySql(cmdText);
         }
-     
-     
+       
         /// <summary>
         /// 更新PermissionInfo
         /// </summary>
@@ -68,7 +71,6 @@ namespace Controllers.DataAccess
             };
             return new MySqlHelper().ExecDataBySql(cmdText.ToString(), paras);
         }
-     
      
         /// <summary>
         /// 查询PermissionInfo
@@ -95,8 +97,7 @@ namespace Controllers.DataAccess
             }
             return permissionInfos;
         }
-     
-     
+       
         /// <summary>
         /// 根据PIID查询PermissionInfo
         /// </summary>
@@ -108,7 +109,6 @@ namespace Controllers.DataAccess
             return permissionInfos.Count>0 ? permissionInfos[0] : null;
         }
      
-     
         /// <summary>
         /// 查询所有PermissionInfo
         /// </summary>
@@ -118,6 +118,12 @@ namespace Controllers.DataAccess
             return SelectPermissionInfoByCmdText(cmdText);
         }
 
+        /// <summary>
+        /// 根据工号返回权限信息
+        /// </summary>
+        /// <param name="eiNo"></param>
+        /// <param name="CompanyName"></param>
+        /// <returns></returns>
         public static PermissionInfo GetPermissionInfoByEINo(String eiNo, String CompanyName)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -129,13 +135,20 @@ namespace Controllers.DataAccess
             IList<PermissionInfo> permissionInfos = SelectPermissionInfoByCmdText(cmdText.ToString());
             return permissionInfos.Count > 0 ? permissionInfos[0] : null;
         }
+        
+        /// <summary>
+        /// 根据工号返回权限信息
+        /// </summary>
+        /// <param name="eiNo"></param>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
         public static PermissionInfo GetPermissionInfoByEINo(String eiNo, int CompanyID)
         {
             StringBuilder cmdText = new StringBuilder();
             cmdText.Append(" select  *  from PermissionInfo with(nolock)  ");
             cmdText.Append(" join EmployeeInfo with(nolock) on EINO = PIEINO ");
             cmdText.Append("  where EIIsEnable = 1 and PIIsEnable=1 ");
-            cmdText.AppendFormat(" and EINO = '{0}' and EICompanyID = '{1}' ", eiNo, CompanyID);
+            cmdText.AppendFormat(" and EINO = '{0}' ", eiNo);
             IList<PermissionInfo> permissionInfos = SelectPermissionInfoByCmdText(cmdText.ToString());
             return permissionInfos.Count > 0 ? permissionInfos[0] : null;
         }

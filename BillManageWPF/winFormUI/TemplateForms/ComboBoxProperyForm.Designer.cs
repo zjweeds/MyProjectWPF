@@ -204,6 +204,7 @@
             this.btnBackColor.TabIndex = 28;
             this.btnBackColor.Text = "...";
             this.btnBackColor.UseVisualStyleBackColor = false;
+            this.btnBackColor.Click += new System.EventHandler(this.btnBackgroud_Click);
             // 
             // btnForeColor
             // 
@@ -214,6 +215,7 @@
             this.btnForeColor.TabIndex = 27;
             this.btnForeColor.Text = "...";
             this.btnForeColor.UseVisualStyleBackColor = true;
+            this.btnForeColor.Click += new System.EventHandler(this.btnForeColor_Click);
             // 
             // btnFont
             // 
@@ -224,6 +226,7 @@
             this.btnFont.TabIndex = 26;
             this.btnFont.Text = "...";
             this.btnFont.UseVisualStyleBackColor = true;
+            this.btnFont.Click += new System.EventHandler(this.btnSetFont_Click);
             // 
             // txtBackColor
             // 
@@ -330,6 +333,7 @@
             this.cbxTablename.Name = "cbxTablename";
             this.cbxTablename.Size = new System.Drawing.Size(100, 25);
             this.cbxTablename.TabIndex = 20;
+            this.cbxTablename.SelectedIndexChanged += new System.EventHandler(this.cbxTablename_SelectedIndexChanged);
             // 
             // txtheight
             // 
@@ -641,6 +645,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "点击设定";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ComboBoxProperyForm
             // 

@@ -21,10 +21,6 @@ namespace Controllers.Common
 {
     public class MyXmlHelper
     {
-        #region 公共变量
-        XmlDocument xmldoc;
-        #endregion
-
         #region 构造函数
         public MyXmlHelper()
         {
@@ -50,7 +46,7 @@ namespace Controllers.Common
                 writer.WriteElementString("softKey", softConfig.softKey!=null? softConfig.softKey.ToString():"");
                 writer.WriteElementString("ServerIP", softConfig.softServerIP!=null?softConfig.softServerIP.ToString():"");
                 writer.WriteElementString("DataBase", softConfig.softDBName!=null?softConfig.softDBName.ToString():"");
-                writer.WriteElementString("User id ", softConfig.softDBUser!=null?softConfig.softDBUser.ToString():"");
+                writer.WriteElementString("Userid", softConfig.softDBUser!=null?softConfig.softDBUser.ToString():"");
                 writer.WriteElementString("PWD",softConfig.softDBPwd!=null? softConfig.softDBPwd.ToString():"");
                 //writer.WriteEndElement(); // 关闭元素  
                 //writer.WriteStartElement("softVerify");
@@ -95,7 +91,7 @@ namespace Controllers.Common
                             scfm.softDBName = xmlread.Value;
                             break;
                         }
-                    case "User id":
+                    case "Userid":
                         {
                             scfm.softDBUser = xmlread.Value;
                             break;
@@ -138,6 +134,48 @@ namespace Controllers.Common
             }
         }
 
+        /// <summary>
+        /// 读取节点信息
+        /// </summary>
+        /// <param name="NodeName"></param>
+        /// <param name="xmlread"></param>
+        /// <param name="scfm"></param>
+        private void ChoiceNode(String NodeName, XmlReader xmlread, SoftConfigModel scfm)
+        {
+            switch (NodeName)
+            {
+                case "softKey":
+                    {
+                        scfm.softKey = xmlread.Value;
+                        break;
+                    }
+                case "ServerIP":
+                    {
+                        scfm.softServerIP = xmlread.Value;
+                        break;
+                    }
+                case "DataBase":
+                    {
+                        scfm.softDBName = xmlread.Value;
+                        break;
+                    }
+                case "Userid":
+                    {
+                        scfm.softDBUser = xmlread.Value;
+                        break;
+                    }
+                case "PWD":
+                    {
+                        scfm.softDBPwd = xmlread.Value;
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+
+        }
 
         /// <summary>
         /// 读取配置信息
@@ -147,51 +185,25 @@ namespace Controllers.Common
         public SoftConfigModel readXMl(String path)
         {
             SoftConfigModel scfm = new SoftConfigModel();
-            SoftVerify softVerify = new SoftVerify();
-            XmlNodeReader xmlread = null;
-            try
-            {
-                this.xmldoc = new XmlDocument();
-                this.xmldoc.Load(path);
-                String s = String.Empty;
-                XmlNode xn = xmldoc.SelectSingleNode("config");
-                xmlread = new XmlNodeReader(xn);
-                while (xmlread.Read())
-                {
-                    if (xmlread.NodeType == XmlNodeType.Element)
-                    {
-                        s = xmlread.Name;
-                    }
-                    else
-                    {
-                        ChoiceNode(s, xmlread, scfm,null);
-                    }
-                }
-                XmlNode xln = xmldoc.SelectSingleNode("softVerify");
-                xmlread = new XmlNodeReader(xln);
-                while (xmlread.Read())
-                {
-                    if (xmlread.NodeType == XmlNodeType.Element)
-                    {
-                        s = xmlread.Name;
-                    }
-                    else
-                    {
-                        ChoiceNode(s, xmlread, null, softVerify);
-                    }
-                }
-            }
-            finally
-            {
-                //清除打开的数据流
-                if (xmlread != null)
-                {
-                    xmlread.Close();
-                }
-            }
-            return scfm;
-        }
-
+          XmlDocument xmlDoc = new XmlDocument();
+          try
+          {
+              xmlDoc.Load(path);
+              XmlNode root = xmlDoc.SelectSingleNode("//config");//当节点Workflow带有属性是，使用SelectSingleNode无法读取          
+              if (root != null)
+              {
+                  scfm.softServerIP = (root.SelectSingleNode("ServerIP")).InnerText;
+                  scfm.softDBName = (root.SelectSingleNode("DataBase")).InnerText;
+                  scfm.softDBUser = (root.SelectSingleNode("Userid")).InnerText;
+                  scfm.softDBPwd = (root.SelectSingleNode("PWD")).InnerText;
+              }
+          }
+          catch (Exception ex)
+          {
+              throw ex;
+          }
+          return scfm;
+      }  
 
         /// <summary>
         /// 保存登录信息

@@ -206,6 +206,7 @@
             this.btnBackColor.TabIndex = 39;
             this.btnBackColor.Text = "...";
             this.btnBackColor.UseVisualStyleBackColor = false;
+            this.btnBackColor.Click += new System.EventHandler(this.btnBackgroud_Click);
             // 
             // btnForeColor
             // 
@@ -217,6 +218,7 @@
             this.btnForeColor.TabIndex = 38;
             this.btnForeColor.Text = "...";
             this.btnForeColor.UseVisualStyleBackColor = false;
+            this.btnForeColor.Click += new System.EventHandler(this.btnForeColor_Click);
             // 
             // btnFont
             // 
@@ -228,6 +230,7 @@
             this.btnFont.TabIndex = 37;
             this.btnFont.Text = "...";
             this.btnFont.UseVisualStyleBackColor = false;
+            this.btnFont.Click += new System.EventHandler(this.btnSetFont_Click);
             // 
             // chbisborestyle
             // 
@@ -638,6 +641,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "点击设定";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // LabelProperyForm
             // 

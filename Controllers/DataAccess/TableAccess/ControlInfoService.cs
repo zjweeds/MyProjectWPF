@@ -1,4 +1,12 @@
-﻿using System;
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             控件信息表数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -157,6 +165,11 @@ namespace Controllers.DataAccess
             return new MySqlHelper().ExecSqlReturnId(GetAddString(controlInfo));
         }
         
+        /// <summary>
+        /// 批量添加控件
+        /// </summary>
+        /// <param name="controlInfo"></param>
+        /// <returns></returns>
         public static bool AddByDataTable(DataTable controlInfo)
         {
             IList<String> cmdList = new List<String>();
@@ -332,6 +345,11 @@ namespace Controllers.DataAccess
             return SelectControlInfoByCmdText(cmdText.ToString());
         }
 
+        /// <summary>
+        /// 根据模板ID返回所有控件ID
+        /// </summary>
+        /// <param name="templateID"></param>
+        /// <returns></returns>
         public static DataTable SelectContrilInfoIDByTemplateID(int templateID)
         {
             StringBuilder cmdText = new StringBuilder();
@@ -361,5 +379,6 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat(" WHERE CTIsEnable = 1 and CTITIID ='{0}' ", templateID);
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
+
     }
 }

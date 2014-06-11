@@ -117,6 +117,7 @@ namespace BillManageWPF.Content.Template
             }
         }
         #endregion
+
         #region  窗体的事件
         /// <summary>
         /// 打开图片选择框
@@ -125,12 +126,19 @@ namespace BillManageWPF.Content.Template
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (dlgPicture.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            try
             {
-                txtBgPath.Text = dlgPicture.FileName;
-                Uri uri = new Uri(dlgPicture.FileName, UriKind.RelativeOrAbsolute);
-                BitmapImage bitmap = new BitmapImage(uri);
-                ImageBG.Source = bitmap;
+                if (dlgPicture.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    txtBgPath.Text = dlgPicture.FileName;
+                    Uri uri = new Uri(dlgPicture.FileName, UriKind.RelativeOrAbsolute);
+                    BitmapImage bitmap = new BitmapImage(uri);
+                    ImageBG.Source = bitmap;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -141,59 +149,66 @@ namespace BillManageWPF.Content.Template
         /// <param name="e"></param>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckIsNull())
-            {               
-                #region 获取实体
-                btm.TIName = txtTemplateName.Text;
-                btm.TICodeLegth = Convert.ToInt32(txtBillCodeLength.Text);
-                btm.TIHeight = Convert.ToInt32(txtTemplateHeigth.Text);
-                btm.TIWidth = Convert.ToInt32(txtTemplateWidth.Text);
-                if (RadioIsBG.IsChecked == false && txtBgPath.Text != String.Empty)
+            try
+            {
+                if (CheckIsNull())
                 {
-                    btm.TIBackground = imaHelper.GetBytesByImagepath(txtBgPath.Text);
-                    btm.TIIsVoidBg = 1;
-                }
-                else
-                {
-                    btm.TIBackground = imaHelper.GetBytesByImagepath(AppDomain.CurrentDomain.BaseDirectory + "\\Resource\\defaulticon.jpg");
-                    btm.TIIsVoidBg = 0;
-                }
-                if (RadioIsPrint.IsChecked == true)
-                {
-                    btm.TIIsPrintBg = 1;
-                }
-                else
-                {
-                    btm.TIIsPrintBg = 0;
-                }
-                btm.TITTID = BillTemplateTypeManage.GetTemplateTypeIdByName(cbbTemplatetype.Text);//btts.GetTemplateTypeIdByName(cbbTemplatetype.Text);
-                #endregion
+                    #region 获取实体
+                    btm.TIName = txtTemplateName.Text;
+                    btm.TICodeLegth = Convert.ToInt32(txtBillCodeLength.Text);
+                    btm.TIHeight = Convert.ToInt32(txtTemplateHeigth.Text);
+                    btm.TIWidth = Convert.ToInt32(txtTemplateWidth.Text);
+                    if (RadioIsBG.IsChecked == false && txtBgPath.Text != String.Empty)
+                    {
+                        btm.TIBackground = imaHelper.GetBytesByImagepath(txtBgPath.Text);
+                        btm.TIIsVoidBg = 1;
+                    }
+                    else
+                    {
+                        btm.TIBackground = imaHelper.GetBytesByImagepath(AppDomain.CurrentDomain.BaseDirectory + "\\Resource\\defaulticon.jpg");
+                        btm.TIIsVoidBg = 0;
+                    }
+                    if (RadioIsPrint.IsChecked == true)
+                    {
+                        btm.TIIsPrintBg = 1;
+                    }
+                    else
+                    {
+                        btm.TIIsPrintBg = 0;
+                    }
+                    btm.TITTID = BillTemplateTypeManage.GetTemplateTypeIdByName(cbbTemplatetype.Text);//btts.GetTemplateTypeIdByName(cbbTemplatetype.Text);
+                    #endregion
 
-                if (Type != "Update")
-                {
-                    //新增
-                    btm.TIID = BillTemplateManage.AddByBillTemplatModel(btm);
-                    if (btm.TIID != 0)
+                    if (Type != "Update")
                     {
-                        MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
-                        TemplateMain sss = new TemplateMain(btm.TIID);
-                        sss.Show();
-                        this.Close();
+                        //新增
+                        btm.TIID = BillTemplateManage.AddByBillTemplatModel(btm);
+                        if (btm.TIID != 0)
+                        {
+                            MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
+                            TemplateMain sss = new TemplateMain(btm.TIID);
+                            sss.Show();
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        //更新
+                        if (BillTemplateManage.UpdateByBillTemplatModel(btm) > 0)
+                        {
+                            MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
+                            this.Close();
+                        }
                     }
                 }
                 else
                 {
-                    //更新
-                    if (BillTemplateManage.UpdateByBillTemplatModel(btm) > 0)
-                    {
-                        MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
-                        this.Close();
-                    }
+                    MessageBox.Show("你有必填项为空，或填写不正确，请检查后在提交！", "提示");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("你有必填项为空，或填写不正确，请检查后在提交！", "提示");
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -204,32 +219,39 @@ namespace BillManageWPF.Content.Template
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           
-            dttype =BillTemplateTypeManage.GetAllTypeByBillsetName(SoftUser.Op_Bill); 
-            new ComHelper().SetComboBoxItemByDataTable(dttype, cbbTemplatetype, "TTName");
-            if (Type == "Update")
-            {
-                //更新
 
-                cbbTemplatetype.Text = BillTemplateTypeManage.GetTemplateTypeNameById(btm.TITTID);
-                txtTemplateName.Text = btm.TIName;
-                txtTemplateHeigth.Text = btm.TIHeight.ToString();
-                txtTemplateWidth.Text = btm.TIWidth.ToString();
-                txtBillCodeLength.Text = btm.TICodeLegth.ToString();
-                //ImageBG.Image = new ImageHelper().GetImageByByte(btm.TIBackground);
-                if (btm.TIIsPrintBg != 0)
+            try
+            {
+                dttype = BillTemplateTypeManage.GetAllTypeByBillsetName(SoftUser.Op_Bill);
+                new ComHelper().SetComboBoxItemByDataTable(dttype, cbbTemplatetype, "TTName");
+                if (Type == "Update")
                 {
-                    RadioIsPrint.IsChecked = true;
+                    //更新
+
+                    cbbTemplatetype.Text = BillTemplateTypeManage.GetTemplateTypeNameById(btm.TITTID);
+                    txtTemplateName.Text = btm.TIName;
+                    txtTemplateHeigth.Text = btm.TIHeight.ToString();
+                    txtTemplateWidth.Text = btm.TIWidth.ToString();
+                    txtBillCodeLength.Text = btm.TICodeLegth.ToString();
+                    //ImageBG.Image = new ImageHelper().GetImageByByte(btm.TIBackground);
+                    if (btm.TIIsPrintBg != 0)
+                    {
+                        RadioIsPrint.IsChecked = true;
+                    }
+                    if (btm.TIIsVoidBg != 0)
+                    {
+                        RadioIsBG.IsChecked = true;
+                    }
                 }
-                if (btm.TIIsVoidBg != 0)
+                else
                 {
-                    RadioIsBG.IsChecked = true;  
+                    //新增
+                    cbbTemplatetype.Text = this.TemplateTypeName;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                //新增
-                cbbTemplatetype.Text = this.TemplateTypeName;
+                MessageBox.Show(ex.ToString());
             }
         }
         

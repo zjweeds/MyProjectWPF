@@ -1,3 +1,11 @@
+/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             控件明细表数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +16,6 @@ using Controllers.DataAccess.SQLHELPER;
 
 namespace Controllers.DataAccess
 {
-    /// <summary>
-    ///控件明细表数据层
-    /// </summary>
     public class ControlDetailService
     {
         /// <summary>
@@ -93,8 +98,7 @@ namespace Controllers.DataAccess
             };
             return new MySqlHelper().ExecDataBySql(cmdText.ToString(), paras);
         }
-     
-     
+        
         /// <summary>
         /// 查询ControlDetail
         /// </summary>
@@ -120,7 +124,6 @@ namespace Controllers.DataAccess
             return controlDetails;
         }
      
-     
         /// <summary>
         /// 根据CDID查询ControlDetail
         /// </summary>
@@ -131,8 +134,7 @@ namespace Controllers.DataAccess
             IList<ControlDetail> controlDetails = SelectControlDetailByCmdText(cmdText);
             return controlDetails.Count>0 ? controlDetails[0] : null;
         }
-     
-     
+       
         /// <summary>
         /// 查询所有ControlDetail
         /// </summary>
@@ -169,6 +171,12 @@ namespace Controllers.DataAccess
             return dt;
         }
 
+
+        /// <summary>
+        /// 根据模板编号使用存储过程查询账单信息
+        /// </summary>
+        /// <param name="templateID"></param>
+        /// <returns></returns>
         public static DataTable QueryBillInfoCDByPROCEDURE(int templateID)
         {
             DataTable dtView = new DataTable();
@@ -182,12 +190,24 @@ namespace Controllers.DataAccess
             return new MySqlHelper().GetDataTable("P_QueryBill", inputParameters);
         }
 
+        /// <summary>
+        /// 根据账单信息返回控件明细信息
+        /// </summary>
+        /// <param name="bIID"></param>
+        /// <returns></returns>
         public static DataTable SeclectControlsDetailByBIID(int bIID)
         {
             StringBuilder cmdText = new StringBuilder();
             cmdText.AppendFormat("select CDCTIID,CDText from ControlDetails where  CDBIID = '{0}' and CDIsEnable = 1", bIID);
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
+
+        /// <summary>
+        /// 根据控件文本返回控件明细ID
+        /// </summary>
+        /// <param name="BINO"></param>
+        /// <param name="strVaule"></param>
+        /// <returns></returns>
         public static int SelectCDBIIDByCDText(int BINO,String strVaule)
         {
             StringBuilder cmdText = new StringBuilder();

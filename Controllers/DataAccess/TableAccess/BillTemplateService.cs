@@ -1,4 +1,12 @@
-﻿using System;
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             模板信息数据访问层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,6 +53,12 @@ namespace Controllers.DataAccess
             }
          }
 
+        /// <summary>
+        /// 根据datatable添加信息
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="simagebyte"></param>
+        /// <returns></returns>
         public static int AddByDataTable(DataTable dt,byte[] simagebyte)
         {
            // BillTemplatModel btm =new BillTemplatModel()
@@ -74,6 +88,7 @@ namespace Controllers.DataAccess
                 throw ex;
             }
         }
+
         /// <summary>
         /// 根据实体更新模板
         /// </summary>
@@ -226,31 +241,6 @@ namespace Controllers.DataAccess
             cmdText.AppendFormat(" and BSIName = '{0}'", bsName);
             return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
-        #region 废弃
-        /// <summary>
-        /// 根据页面编号 返回模板datatable
-        /// </summary>
-        /// <param name="pageID"></param>
-        /// <returns></returns>
-        public DataTable GetTemplateListByTypePageID(int pageID)
-        {
-            try
-            {
-                StringBuilder sbsql = new StringBuilder();
-                sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
-                sbsql.Append(" from TemplateInfo with(nolock) ");
-                sbsql.Append(" join TemplateType with(nolock) ");
-                sbsql.Append("     on TemplateType.TTID = TemplateInfo.TITTID ");
-                sbsql.Append(" where 1=1 ");
-                sbsql.AppendFormat(" and TemplateType.TTIPageID ='{0}' ", pageID);
-                sbsql.Append("       and TTIsEnable = 1 and TIIsEnable = 1");
-                return new MySqlHelper().GetDataTable(sbsql.ToString());
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
+
     }
 }

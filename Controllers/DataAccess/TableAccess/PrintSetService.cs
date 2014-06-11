@@ -1,3 +1,11 @@
+/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             printset信息数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,9 +14,6 @@ using System.Data.SqlClient;
 using Controllers.DataAccess.SQLHELPER; 
 namespace Controllers.DataAccess
 {
-    /// <summary>
-    ///本数据访问类由Hirer实体数据访问层工具生成
-    /// </summary>
     public class PrintSetService
     {
         /// <summary>
@@ -83,7 +88,6 @@ namespace Controllers.DataAccess
             return printSets;
         }
      
-     
         /// <summary>
         /// 根据PSID查询PrintSet
         /// </summary>
@@ -94,7 +98,6 @@ namespace Controllers.DataAccess
             IList<PrintSetInfo> printSets = SelectPrintSetByCmdText(cmdText);
             return printSets.Count>0 ? printSets[0] : null;
         }
-     
      
         /// <summary>
         /// 查询所有PrintSet

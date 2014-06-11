@@ -87,19 +87,33 @@ namespace BillManageWPF.Content.UserManage.SetInfo
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            String newphoto = AppDomain.CurrentDomain.BaseDirectory + @"Configs\" + SoftUser.UserCode 
-            + @"\userNew.jpg"; //用户头像缓存路径
-            byte[] buff=new ImageHelper().GetBytesByImagepath(path);
-            if (EmployeeInfoManager.updateUerPhotoByEINO(SoftUser.UserCode, buff))
+            try
             {
-                UIimage.Source = bitmap;
-                File.Copy(path,newphoto, true); //覆盖原缓存
+                String newphoto = AppDomain.CurrentDomain.BaseDirectory + @"Configs\" + SoftUser.UserCode
+                    + @"\userNew.jpg"; //用户头像缓存路径
+                byte[] buff = new ImageHelper().GetBytesByImagepath(path);
+                if (EmployeeInfoManager.updateUerPhotoByEINO(SoftUser.UserCode, buff))
+                {
+                    UIimage.Source = bitmap;
+                    File.Copy(path, newphoto, true); //覆盖原缓存
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-             UIimage.Source = new BitmapImage(new Uri(photoPath, UriKind.Absolute));
+            try
+            {
+                UIimage.Source = new BitmapImage(new Uri(photoPath, UriKind.Absolute));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
 

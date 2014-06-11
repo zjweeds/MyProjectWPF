@@ -26,16 +26,23 @@ namespace BillManageWPF.Content.SystemSet
         {
             InitializeComponent();
         }
-        private IList<PrintSetInfo> psList = null;
+        private IList<PrintSetInfo> psList = null; //打印方案列表
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            psList = PrintSetManager.SelectAllPrintSet();
-            if (psList != null && psList.Count > 0)
+            try
             {
-                foreach (PrintSetInfo psi in psList)
+                psList = PrintSetManager.SelectAllPrintSet();
+                if (psList != null && psList.Count > 0)
                 {
-                    list.Items.Add(psi.PSName);
+                    foreach (PrintSetInfo psi in psList)
+                    {
+                        list.Items.Add(psi.PSName);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 

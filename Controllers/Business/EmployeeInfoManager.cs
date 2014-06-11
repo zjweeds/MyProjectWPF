@@ -1,14 +1,20 @@
+//---------------------------------------------------------—-----//
+//功能：EmployeeInfo员工信息业务层逻辑                            //
+//作者：赵建                                                      //
+//版本：v1.1                                                      //
+//创建时间：2014/3/30   12:55:00                                  //
+//最后修改时间：2014/5/30   8:55:00                               //
+//---------------------------------------------------------------//
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Controllers.Models;
 using Controllers.DataAccess;
 using System.Data;
+
 namespace Controllers.Business
 {
-    /// <summary>
-    ///本逻辑层由Hirer自动生成工具生成
-    /// </summary>
     public class EmployeeInfoManager
     {
         /// <summary>
@@ -27,6 +33,13 @@ namespace Controllers.Business
         {
             return EmployeeInfoService.DeleteEmployeeInfoByEIID( _eIID) > 0 ? true : false;
         }
+
+        /// <summary>
+        /// 根据工号公司ID删除员工
+        /// </summary>
+        /// <param name="eino"></param>
+        /// <param name="CampanyName"></param>
+        /// <returns></returns>
         public static bool DeleteEmployeeInfoByEINo(String eino, String CampanyName)
         {
             return EmployeeInfoService.DeleteEmployeeInfoByEINo(eino, CampanyName);
@@ -85,20 +98,42 @@ namespace Controllers.Business
             return EmployeeInfoService.GetEmployeeInfoByCompanyName(CompanyName);
         }
 
+        /// <summary>
+        /// 根据员工工号返回员工信息
+        /// </summary>
+        /// <param name="_eINo"></param>
+        /// <returns></returns>
         public static EmployeeInfo SelectEmployeeInfoByEINO(String _eINo)
         {
             return EmployeeInfoService.SelectEmployeeInfoByEINO(_eINo);
         }
+
+        /// <summary>
+        /// 根据员工工号更新头像
+        /// </summary>
+        /// <param name="eINO">工号</param>
+        /// <param name="buff">图片流</param>
+        /// <returns></returns>
         public static bool updateUerPhotoByEINO(String eINO, byte[] buff)
         {
             return EmployeeInfoService.updateUerPhotoByEINO(eINO,buff);
         }
 
+        /// <summary>
+        /// 跟据公司名返回所有员工
+        /// </summary>
+        /// <param name="CompanyName">公司名</param>
+        /// <returns></returns>
         public static DataTable GetAllEmployeeInfoByCompanyName(String CompanyName)
         {
             return EmployeeInfoService.GetAllEmployeeInfoByCompanyName(CompanyName);
         }
 
+        /// <summary>
+        /// 返回公司员工数
+        /// </summary>
+        /// <param name="CompanyName">公司名</param>
+        /// <returns></returns>
         public static int GetRowsCount(String CompanyName)
         {
             return EmployeeInfoService.GetRowsCount(CompanyName);
@@ -108,26 +143,51 @@ namespace Controllers.Business
         /// <summary>
         /// 分页查询员工信息
         /// </summary>
-        /// <param name="pageSize"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="CompanyName"></param>
+        /// <param name="pageSize">页大小</param>
+        /// <param name="pageIndex">页索引</param>
+        /// <param name="CompanyName">公司名称</param>
         /// <returns></returns>
         public static DataTable GetPagesEmployeeInfoByCompanyName(int pageSize, int pageIndex, String CompanyName)
         {
             return EmployeeInfoService.GetPagesEmployeeInfoByCompanyName(pageSize, pageIndex, CompanyName);
         }
+
+        /// <summary>
+        /// 创建一个新工号
+        /// </summary>
+        /// <param name="CompanyName">公司名</param>
+        /// <param name="intLength">工号长度</param>
+        /// <returns></returns>
         public static String CreateNewNo(String CompanyName, int intLength)
         {
             return EmployeeInfoService.CreateNewNo(CompanyName, intLength);
         }
+
+        /// <summary>
+        /// 添加员工
+        /// </summary>
+        /// <param name="employeeInfo">员工实体</param>
+        /// <returns></returns>
         public static bool AddEmployeeInfoAndUserInfo(EmployeeInfo employeeInfo)
         {
              return EmployeeInfoService.AddEmployeeInfoAndUserInfo(employeeInfo);
         }
+
+        /// <summary>
+        /// 批量添加员工
+        /// </summary>
+        /// <param name="employeeInfoList">员工实体列表</param>
+        /// <returns></returns>
         public static bool AddEmployeeInfoAndUserInfoList(IList<EmployeeInfo> employeeInfoList)
         {
             return EmployeeInfoService.AddEmployeeInfoAndUserInfoList(employeeInfoList);
         }
+
+        /// <summary>
+        /// 返回公司所有员工数
+        /// </summary>
+        /// <param name="ciid">公司ID</param>
+        /// <returns></returns>
         public static int ConutEmNumberByCompany(int ciid)
         {
             return EmployeeInfoService.ConutEmNumberByCompany(ciid);

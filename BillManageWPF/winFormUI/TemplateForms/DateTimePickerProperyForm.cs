@@ -172,20 +172,34 @@ namespace BillManageWPF.winFormUI
         //    }
         //}
         #endregion
+
         private void button1_Click(object sender, EventArgs e)
         {
-            SetPropery();     
-            //UpdateModel();
+            try
+            {
+                SetPropery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         private void DateTimePickerProperyForm_Load(object sender, EventArgs e)
         {
-            if (tm != null && tmp != null)
+            try
             {
-                GetPropery();
-                font = tmp.Font;
-                bgc = tmp.BackColor;
-                frc = tmp.ForeColor;
+                if (tm != null && tmp != null)
+                {
+                    GetPropery();
+                    font = tmp.Font;
+                    bgc = tmp.BackColor;
+                    frc = tmp.ForeColor;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -196,11 +210,18 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void btnSetFont_Click(object sender, EventArgs e)
         {
-            if (fd.ShowDialog() != DialogResult.Cancel)
+            try
             {
-                txtfont.Text = fd.Font.ToString();
-                font = fd.Font;
-                tmp.Font = font;
+                if (fd.ShowDialog() != DialogResult.Cancel)
+                {
+                    txtfont.Text = fd.Font.ToString();
+                    font = fd.Font;
+                    tmp.Font = font;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -211,12 +232,19 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void btnForeColor_Click(object sender, EventArgs e)
         {
-            cd.Color = frc;
-            if (cd.ShowDialog() != DialogResult.Cancel)
+            try
             {
-                txtForeColor.Text = cd.Color.ToString();
-                frc = cd.Color;
-                tmp.ForeColor = frc;
+                cd.Color = frc;
+                if (cd.ShowDialog() != DialogResult.Cancel)
+                {
+                    txtForeColor.Text = cd.Color.ToString();
+                    frc = cd.Color;
+                    tmp.ForeColor = frc;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -227,12 +255,19 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void btnBackgroud_Click(object sender, EventArgs e)
         {
-            cd.Color = bgc;
-            if (cd.ShowDialog() != DialogResult.Cancel)
+            try
             {
-                txtBackColor.Text = cd.Color.ToString();
-                bgc = cd.Color;
-                tmp.BackColor = bgc;
+                cd.Color = bgc;
+                if (cd.ShowDialog() != DialogResult.Cancel)
+                {
+                    txtBackColor.Text = cd.Color.ToString();
+                    bgc = cd.Color;
+                    tmp.BackColor = bgc;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
     }

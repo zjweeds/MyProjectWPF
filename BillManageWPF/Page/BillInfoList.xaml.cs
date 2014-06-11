@@ -29,39 +29,53 @@ namespace BillManageWPF.Page
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DataTable dt = BillTemplateManage.GetTemplatBagroundByBSName(SoftUser.Op_Bill);
-            cbbTemplate.ItemsSource = dt.DefaultView;
-            cbbTemplate.DisplayMemberPath = "TIName";
-            cbbTemplate.SelectedValuePath = "TIID";
-            txtLow.Text = String.Empty; ;
-            txtHigh.Text = String.Empty;
-            dgvView.DataSource = BillInfoManager.GetBillInfoByBillSet(SoftUser.Op_Bill,String.Empty);
+            try
+            {
+                DataTable dt = BillTemplateManage.GetTemplatBagroundByBSName(SoftUser.Op_Bill);
+                cbbTemplate.ItemsSource = dt.DefaultView;
+                cbbTemplate.DisplayMemberPath = "TIName";
+                cbbTemplate.SelectedValuePath = "TIID";
+                txtLow.Text = String.Empty; ;
+                txtHigh.Text = String.Empty;
+                dgvView.DataSource = BillInfoManager.GetBillInfoByBillSet(SoftUser.Op_Bill, String.Empty);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder linqStr = new StringBuilder();
-            if (cbbTemplate.Text != String.Empty)            
-            { 
-                linqStr.AppendFormat(" and TIName= '{0}' ",cbbTemplate.Text);
-            }
-            if(dtptStart.Text!=string.Empty)
+            try
             {
-                 linqStr.AppendFormat(" and BICreatTime > '{0}' ",dtptStart.Text);
+                StringBuilder linqStr = new StringBuilder();
+                if (cbbTemplate.Text != String.Empty)
+                {
+                    linqStr.AppendFormat(" and TIName= '{0}' ", cbbTemplate.Text);
+                }
+                if (dtptStart.Text != string.Empty)
+                {
+                    linqStr.AppendFormat(" and BICreatTime > '{0}' ", dtptStart.Text);
+                }
+                if (dtptEnd.Text != string.Empty)
+                {
+                    linqStr.AppendFormat(" and BICreatTime < '{0}' ", dtptEnd.Text);
+                }
+                if (txtLow.Text != string.Empty)
+                {
+                    linqStr.AppendFormat(" and BIAmount >= '{0}' ", txtLow.Text);
+                }
+                if (txtHigh.Text != string.Empty)
+                {
+                    linqStr.AppendFormat(" and BIAmount <= '{0}' ", txtHigh.Text);
+                }
+                dgvView.DataSource = BillInfoManager.GetBillInfoByBillSet(SoftUser.Op_Bill, linqStr.ToString());
             }
-            if(dtptEnd.Text!=string.Empty)
+            catch (Exception ex)
             {
-                 linqStr.AppendFormat(" and BICreatTime < '{0}' ",dtptEnd.Text);
-            }         
-            if(txtLow.Text!=string.Empty)
-            {
-                 linqStr.AppendFormat(" and BIAmount >= '{0}' ",txtLow.Text);
+                MessageBox.Show(ex.ToString());
             }
-             if(txtHigh.Text!=string.Empty)
-            {
-                 linqStr.AppendFormat(" and BIAmount <= '{0}' ",txtHigh.Text);
-            }
-             dgvView.DataSource = BillInfoManager.GetBillInfoByBillSet(SoftUser.Op_Bill, linqStr.ToString());
         }
     }
 }

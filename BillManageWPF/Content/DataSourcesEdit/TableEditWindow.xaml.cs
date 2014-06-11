@@ -83,30 +83,37 @@ namespace BillManageWPF.Content.DataSourcesEdit
         }
         private void btnQueDing_Click(object sender, RoutedEventArgs e)
         {
-            if (txtTypeName.Text != String.Empty)
+            try
             {
-                if (Tdsl != null)
+                if (txtTypeName.Text != String.Empty)
                 {
-                    if (tabpageIndex == 0)
+                    if (Tdsl != null)
                     {
-                        ADD();
-                    }
-                    else
-                    {
-                        Modify();
+                        if (tabpageIndex == 0)
+                        {
+                            ADD();
+                        }
+                        else
+                        {
+                            Modify();
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("表名不能为空！", "软件提示");
+                    txtTypeName.Focus();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("表名不能为空！", "软件提示");
-                txtTypeName.Focus();
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void btnQuXiao_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

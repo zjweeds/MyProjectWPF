@@ -58,13 +58,13 @@ namespace BillManageWPF.winFormUI
                 txtheight.Text = tmp.Height.ToString();
                 if (tmp.txtDatasource != null)
                 {
-                    cbxTablename.Text = tmp.txtDatasource.TableName.ToString();
-                    cbxCoumname.Text = tmp.txtDatasource.Column.ToString();
+                    cbxTablename.SelectedText = tmp.txtDatasource.TableName.ToString();
+                    cbxCoumname.SelectedText = tmp.txtDatasource.Column.ToString();
                 }
                 chbIsreadonly.Checked = tmp.ReadOnly;
                 chbIsFalge.Checked = tmp.IsFlage;
-                chbIsmust.Checked = tmp.IsMust  ? false : true;
-                chbIsprInt.Checked = tmp.IsPrint  ? false : true;  
+                chbIsmust.Checked = tmp.IsMust ? true : false;
+                chbIsprInt.Checked = tmp.IsPrint ? true : false;  
             }
         }
 
@@ -90,123 +90,7 @@ namespace BillManageWPF.winFormUI
                 tmp.IsMust = chbIsmust.Checked ;
                 tmp.IsPrint = chbIsprInt.Checked;
             }
-        }
-        //public void UpdateModel()
-        //{
-        //    if (textModel != null)
-        //    {
-        //        if (textModel.TCName != txtName.Text)
-        //        {
-        //            textModel.TCName = txtName.Text;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        if (textModel.TCDefault != txtDefalutValue.Text)
-        //        {
-        //            textModel.TCDefault = txtDefalutValue.Text;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        if (textModel.TCTabKey != Convert.ToInt32(txttab.Text))
-        //        {
-        //            textModel.TCTabKey = Convert.ToInt32(txttab.Text);
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        if (textModel.TCShowType != cbbShowType.SelectedIndex)
-        //        {
-        //            textModel.TCShowType = cbbShowType.SelectedIndex;
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCMarkType != cbbMarkType.SelectedIndex)
-        //        {
-        //            textModel.TCMarkType = cbbMarkType.SelectedIndex;
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCIsTransparent != (chbisborestyle.Checked ? 1 : 0))
-        //        {
-        //            textModel.TCIsTransparent = chbisborestyle.Checked ? 1 : 0;
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCVisiable != (chbIsvisible.Checked ? 1 : 0))
-        //        {
-        //            textModel.TCVisiable = chbIsvisible.Checked ? 1 : 0;
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCTop != Convert.ToInt32(txttop.Text))
-        //        {
-        //            textModel.TCTop = Convert.ToInt32(txttop.Text);
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        if (textModel.TCLeft != Convert.ToInt32(txtleft.Text))
-        //        {
-        //            textModel.TCLeft = Convert.ToInt32(txtleft.Text);
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCWidth != Convert.ToInt32(txtwidth.Text))
-        //        {
-        //            textModel.TCWidth = Convert.ToInt32(txtwidth.Text);
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCHeight != Convert.ToInt32(txtheight.Text))
-        //        {
-        //            textModel.TCHeight = Convert.ToInt32(txtheight.Text);
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCBandsTabel != cbxTablename.Text)
-        //        {
-        //            textModel.TCBandsTabel = cbxTablename.Text;
-        //            textModel.UpdateFlage = true;
-        //        }
-
-        //        if (textModel.TCBandsCoumln != cbxCoumname.Text)
-        //        {
-        //            textModel.TCBandsCoumln = cbxCoumname.Text;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        if (textModel.TCIsReadOnly != (chbIsreadonly.Checked ? 1 : 0))
-        //        {
-        //            textModel.TCIsReadOnly = (chbIsreadonly.Checked ? 1 : 0);
-        //        }
-        //        if (textModel.TCIsFlage != (chbIsFalge.Checked ? 1 : 0))
-        //        {
-        //            textModel.TCIsFlage = chbIsFalge.Checked? 1 : 0;
-        //        }
-
-        //        String sfont = new CommonClass().GetStringByFont(tmp.Font);
-        //        if (textModel.TCFont != sfont)
-        //        {
-        //            textModel.TCFont = sfont;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        String sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.ForeColor);
-        //        if (textModel.TCFontColor != sbuff)
-        //        {
-        //            textModel.TCFontColor = sbuff;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        sbuff = System.Drawing.ColorTranslator.ToHtml(tmp.BackColor);
-        //        if (textModel.TCBackColor != sbuff)
-        //        {
-        //            textModel.TCBackColor = sbuff;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        if (textModel.TCIsMust != (chbIsmust.Checked ? 1 : 0))
-        //        {
-        //            textModel.TCIsMust = chbIsmust.Checked ? 1 : 0;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //        if (textModel.TCIsPrint != (chbIsprInt.Checked ? 1 : 0))
-        //        {
-        //            textModel.TCIsPrint = chbIsprInt.Checked ? 1 : 0;
-        //            textModel.UpdateFlage = true;
-        //        }
-        //    }
-        //}
+        }       
         #endregion
         private void button1_Click(object sender, EventArgs e)
         {
@@ -227,9 +111,15 @@ namespace BillManageWPF.winFormUI
                 font = tmp.Font;
                 bgc = tmp.BackColor;
                 frc = tmp.ForeColor;
-                cbxTablename.DataSource = DataSourceManager.GetDataTableByCompanyName(SoftUser.UserCompany);
-                cbxTablename.DisplayMember = "DSITableName";
-                cbxTablename.ValueMember = "DSITableName";
+                DataTable dt = DataSourceManager.GetDataTableByCompanyName(SoftUser.UserCompany);
+                cbxTablename.Items.Add(String.Empty);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        cbxTablename.Items.Add(dt.Rows[i][0].ToString());
+                    }
+                }
             }
         }
 
@@ -256,7 +146,6 @@ namespace BillManageWPF.winFormUI
         private void btnForeColor_Click(object sender, EventArgs e)
         {
             cd.Color = frc;
-            //cd.ShowDialog();
             if (cd.ShowDialog() != DialogResult.Cancel)
             {
                 txtForeColor.Text = cd.Color.ToString();
@@ -292,16 +181,28 @@ namespace BillManageWPF.winFormUI
             this.Dispose();//释放资源
         }
 
-        private void txtName_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
         private void cbxTablename_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbxCoumname.DataSource = DataSourceManager.GetDataTableByTableName(cbxTablename.Text);
-            cbxCoumname.DisplayMember = "DSIColums";
-            cbxCoumname.ValueMember = "DSIColums";
+            try
+            {
+                cbxCoumname.Items.Clear();
+                cbxCoumname.Items.Add(String.Empty);
+                if (cbxTablename.Text != String.Empty)
+                {
+                    DataTable dt = DataSourceManager.GetDataTableByTableName(cbxTablename.Text);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            cbxCoumname.Items.Add(dt.Rows[i][1].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
     }
 }

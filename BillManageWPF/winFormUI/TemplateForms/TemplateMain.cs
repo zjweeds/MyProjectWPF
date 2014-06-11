@@ -588,17 +588,24 @@ namespace BillManageWPF.winFormUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Template_Load(object sender, EventArgs e)
-        {            
-            fDpiX = this.CreateGraphics().DpiX;
-            fDpiY = this.CreateGraphics().DpiY;
-            image = new ImageHelper().GetImageByByte(btm.TIBackground);
-            width = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIWidth), fDpiX));
-            height = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIHeight), fDpiY));
-            DesignContext.board.Width = width;
-            DesignContext.board.Height = height;
-           // DesignContext.board.Invalidate();
-            pb = new PickBox(this);
-            LoadAllControls(btm.TIID);
+        {
+            try
+            {
+                fDpiX = this.CreateGraphics().DpiX;
+                fDpiY = this.CreateGraphics().DpiY;
+                image = new ImageHelper().GetImageByByte(btm.TIBackground);
+                width = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIWidth), fDpiX));
+                height = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIHeight), fDpiY));
+                DesignContext.board.Width = width;
+                DesignContext.board.Height = height;
+                // DesignContext.board.Invalidate();
+                pb = new PickBox(this);
+                LoadAllControls(btm.TIID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -608,8 +615,15 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void SetTemplatePropery_Click(object sender, EventArgs e)
         {
-            TemplateProperyEdit tpe = new TemplateProperyEdit(btm); 
-            tpe.ShowDialog();
+            try
+            {
+                TemplateProperyEdit tpe = new TemplateProperyEdit(btm);
+                tpe.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -630,13 +644,20 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void AddLabel_Click(object sender, EventArgs e)
         {
-            MyLabel label = new MyLabel();
-            label.NewNumber = mylbList != null ? mylbList.Count : 0;
-            label.ControlID = 0;
-            label.ControlName = "label" + label.NewNumber.ToString();
-            mylbList.Add(label);
-            pb.WireControl(label);
-            this.DesignContext.board.Controls.Add(label);
+            try
+            {
+                MyLabel label = new MyLabel();
+                label.NewNumber = mylbList != null ? mylbList.Count : 0;
+                label.ControlID = 0;
+                label.ControlName = "label" + label.NewNumber.ToString();
+                mylbList.Add(label);
+                pb.WireControl(label);
+                this.DesignContext.board.Controls.Add(label);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -645,14 +666,21 @@ namespace BillManageWPF.winFormUI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddTextBox_Click(object sender, EventArgs e)
-        { 
-            MyTextBox label = new MyTextBox();
-            label.NewNumber = mytextList != null ? mytextList.Count : 0;       
-            label.ControlID = 0;
-            label.ControlName = "TextBox" +label.NewNumber.ToString();
-            mytextList.Add(label);
-            pb.WireControl(label);
-            this.DesignContext.board.Controls.Add(label);
+        {
+            try
+            {
+                MyTextBox label = new MyTextBox();
+                label.NewNumber = mytextList != null ? mytextList.Count : 0;
+                label.ControlID = 0;
+                label.ControlName = "TextBox" + label.NewNumber.ToString();
+                mytextList.Add(label);
+                pb.WireControl(label);
+                this.DesignContext.board.Controls.Add(label);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -662,13 +690,20 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void AddCheckBox_Click(object sender, EventArgs e)
         {
-            MyCheckBox label = new MyCheckBox();
-            label.NewNumber = mychbList != null ? mychbList.Count : 0;
-            label.ControlID=0;
-            label.ControlName = "CheckBox" + label.NewNumber.ToString();
-            mychbList.Add(label);
-            pb.WireControl(label);
-            this.DesignContext.board.Controls.Add(label);
+            try
+            {
+                MyCheckBox label = new MyCheckBox();
+                label.NewNumber = mychbList != null ? mychbList.Count : 0;
+                label.ControlID = 0;
+                label.ControlName = "CheckBox" + label.NewNumber.ToString();
+                mychbList.Add(label);
+                pb.WireControl(label);
+                this.DesignContext.board.Controls.Add(label);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -678,13 +713,20 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void AddComboBox_Click(object sender, EventArgs e)
         {
-            MyComboBox label = new MyComboBox();
-            label.NewNumber = mycbbList != null ? mycbbList.Count : 0;
-            label.ControlID = 0;
-            label.ControlName = "ComboBox" + label.NewNumber.ToString();
-            mycbbList.Add(label);
-            pb.WireControl(label);
-            this.DesignContext.board.Controls.Add(label);
+            try
+            {
+                MyComboBox label = new MyComboBox();
+                label.NewNumber = mycbbList != null ? mycbbList.Count : 0;
+                label.ControlID = 0;
+                label.ControlName = "ComboBox" + label.NewNumber.ToString();
+                mycbbList.Add(label);
+                pb.WireControl(label);
+                this.DesignContext.board.Controls.Add(label);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -694,13 +736,20 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void AddDateTimePicker_Click(object sender, EventArgs e)
         {
-            MyDateTimePicker label = new MyDateTimePicker();
-            label.NewNumber = mydtpList != null ? mydtpList.Count : 0;
-            label.ControlID = 0;
-            label.ControlName = "DateTimePicker" + label.NewNumber.ToString();
-            mydtpList.Add(label);
-            pb.WireControl(label);
-            this.DesignContext.board.Controls.Add(label);
+            try
+            {
+                MyDateTimePicker label = new MyDateTimePicker();
+                label.NewNumber = mydtpList != null ? mydtpList.Count : 0;
+                label.ControlID = 0;
+                label.ControlName = "DateTimePicker" + label.NewNumber.ToString();
+                mydtpList.Add(label);
+                pb.WireControl(label);
+                this.DesignContext.board.Controls.Add(label);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -710,13 +759,20 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void AddMyMoneyPanel_Click(object sender, EventArgs e)
         {
-            MoneyPanel mp = new MoneyPanel();
-            mp.NewNumber = mympList != null ? mympList.Count : 0;
-            mp.ControlID = 0;
-            mp.ControlName = "MoneyPanel" + mp.NewNumber.ToString();
-            mympList.Add(mp);
-            pb.WireControl(mp);
-            this.DesignContext.board.Controls.Add(mp);
+            try
+            {
+                MoneyPanel mp = new MoneyPanel();
+                mp.NewNumber = mympList != null ? mympList.Count : 0;
+                mp.ControlID = 0;
+                mp.ControlName = "MoneyPanel" + mp.NewNumber.ToString();
+                mympList.Add(mp);
+                pb.WireControl(mp);
+                this.DesignContext.board.Controls.Add(mp);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
         #endregion
         /// <summary>
@@ -726,8 +782,15 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void Save_Click(object sender, EventArgs e)
         {
-            List<ControlInfo> ctlList = GetControlsList(this.DesignContext.board);
-            SaveToDataBase(ctlList);
+            try
+            {
+                List<ControlInfo> ctlList = GetControlsList(this.DesignContext.board);
+                SaveToDataBase(ctlList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
+            }
         }
 
         /// <summary>
@@ -737,11 +800,18 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void toolSave_MouseEnter(object sender, EventArgs e)
         {
-            ToolStripButton tsb = sender as ToolStripButton;
-            if (tsb != null)
+            try
             {
-                tsb.BackColor = Color.Orchid;
-                tsb.ForeColor = Color.WhiteSmoke;
+                ToolStripButton tsb = sender as ToolStripButton;
+                if (tsb != null)
+                {
+                    tsb.BackColor = Color.Orchid;
+                    tsb.ForeColor = Color.WhiteSmoke;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -752,11 +822,18 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void toolSave_MouseLeave(object sender, EventArgs e)
         {
-            ToolStripButton tsb = sender as ToolStripButton;
-            if (tsb != null)
+            try
             {
-                tsb.BackColor = Color.SkyBlue;
-                tsb.ForeColor = Color.White;
+                ToolStripButton tsb = sender as ToolStripButton;
+                if (tsb != null)
+                {
+                    tsb.BackColor = Color.SkyBlue;
+                    tsb.ForeColor = Color.White;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -767,14 +844,21 @@ namespace BillManageWPF.winFormUI
         /// <param name="e"></param>
         private void TemplateMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = false;//可以关闭
-            List<ControlInfo> con = new List<ControlInfo>();
-            if (con.Exists(itm => itm.updateFlage == true))
+            try
             {
-                if (MessageBox.Show("模板设置信息已被更新，是否保存？", "软件提示", System.Windows.Forms.MessageBoxButtons.YesNo) == DialogResult.Yes)
+                e.Cancel = false;//可以关闭
+                List<ControlInfo> con = new List<ControlInfo>();
+                if (con.Exists(itm => itm.updateFlage == true))
                 {
-                    Save_Click(sender, e);
+                    if (MessageBox.Show("模板设置信息已被更新，是否保存？", "软件提示", System.Windows.Forms.MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        Save_Click(sender, e);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 

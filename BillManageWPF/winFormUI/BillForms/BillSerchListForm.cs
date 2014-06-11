@@ -252,10 +252,17 @@ namespace BillManageWPF.winFormUI
         #region  窗体事件
         private void toolSave_MouseEnter(object sender, EventArgs e)
         {
-            ToolStripButton tsb = sender as ToolStripButton;
-            if (tsb != null)
+            try
             {
-                tsb.BackColor = Color.Purple;
+                ToolStripButton tsb = sender as ToolStripButton;
+                if (tsb != null)
+                {
+                    tsb.BackColor = Color.Purple;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 

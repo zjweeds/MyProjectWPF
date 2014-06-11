@@ -1,9 +1,18 @@
+//---------------------------------------------------------—-----//
+//功能：ControlDetail控件明细信息业务层逻辑                        //
+//作者：赵建                                                      //
+//版本：v1.1                                                      //
+//创建时间：2014/3/30   12:55:00                                  //
+//最后修改时间：2014/5/30   8:55:00                               //
+//---------------------------------------------------------------//
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using Controllers.Models;
 using Controllers.DataAccess;
+
 namespace Controllers.Business
 {
     /// <summary>
@@ -73,6 +82,11 @@ namespace Controllers.Business
             return ControlDetailService.AddControlDetailByList(cdList);
         }
 
+        /// <summary>
+        /// 存储过程查询账单信息
+        /// </summary>
+        /// <param name="templateID"></param>
+        /// <returns></returns>
         public static DataTable QueryBillInfoCDByPROCEDURE(int templateID)
         {
             return ControlDetailService.QueryBillInfoCDByPROCEDURE(templateID);
@@ -89,10 +103,23 @@ namespace Controllers.Business
                 SelectControlsInfoIDByTenplateID(templateID);//查询返回当前模板用到的所有控件ID列表
             return ControlDetailService.QueryBillInfoControlsDetailByCIIDList(cIIDList, templateID);
         }
+
+        /// <summary>
+        /// 根据账单信息返回控件明细
+        /// </summary>
+        /// <param name="bIID"></param>
+        /// <returns></returns>
         public static DataTable SeclectControlsDetailByBIID(int bIID)
         {
             return ControlDetailService.SeclectControlsDetailByBIID(bIID);
         }
+
+        /// <summary>
+        /// 根据控件文本返回控件明细ID
+        /// </summary>
+        /// <param name="cDcIID"></param>
+        /// <param name="cdText"></param>
+        /// <returns></returns>
         public static int SelectCDBIIDByCDText(int cDcIID, String cdText)
         {
             return ControlDetailService.SelectCDBIIDByCDText(cDcIID, cdText);

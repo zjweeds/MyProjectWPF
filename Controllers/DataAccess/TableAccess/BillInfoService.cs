@@ -1,3 +1,12 @@
+/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2014-3-16 9:59
+ * 描    述：
+ *             BillInfo账单信息数据访问层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +17,6 @@ using System.Data;
 
 namespace Controllers.DataAccess
 {
-    /// <summary>
-    ///本数据访问类由Hirer实体数据访问层工具生成
-    /// </summary>
     public class BillInfoService
     {
         /// <summary>
@@ -122,6 +128,7 @@ namespace Controllers.DataAccess
             string cmdText="SELECT * FROM BillInfo where BIIsEnable = 1";
             return SelectBillInfoByCmdText(cmdText);
         }
+
         /// <summary>
         /// 根据账套，查询所有账单信息
         /// </summary>

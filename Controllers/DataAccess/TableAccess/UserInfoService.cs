@@ -1,3 +1,11 @@
+/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-11-16 9:59
+ * 描    述：
+ *             用户信息数据层
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +17,6 @@ using Controllers.DataAccess;
 
 namespace Controllers.DataAccess
 {
-    /// <summary>
-    ///本数据访问类由Hirer实体数据访问层工具生成
-    /// </summary>
     public class UserInfoService
     {
         /// <summary>
@@ -36,8 +41,7 @@ namespace Controllers.DataAccess
             };
             return new MySqlHelper().ExecSqlReturnId(cmdText.ToString(),paras);
         }
-     
-     
+      
         /// <summary>
         /// 根据UIID删除UserInfo
         /// </summary>
@@ -47,8 +51,7 @@ namespace Controllers.DataAccess
             String cmdText = "UPDATE UserInfo SET UIIsEnable = 0 WHERE  UIID = " + _uIID;
             return new MySqlHelper().ExecDataBySql(cmdText);
         }
-     
-     
+         
         /// <summary>
         /// 更新UserInfo
         /// </summary>
@@ -70,31 +73,36 @@ namespace Controllers.DataAccess
             return new MySqlHelper().ExecDataBySql(cmdText.ToString(), paras);
         }
      
-     
         /// <summary>
         /// 查询UserInfo
         /// </summary>
         /// <param name="cmdText">sql命令</param>
         public static IList<UserInfo> SelectUserInfoByCmdText(String cmdText)
         {
-            IList<UserInfo> userInfos = new List<UserInfo>();
-            using (SqlDataReader sdr = new MySqlHelper().GetDataReader(cmdText))
+            try
             {
-                while (sdr.Read())
+                IList<UserInfo> userInfos = new List<UserInfo>();
+                using (SqlDataReader sdr = new MySqlHelper().GetDataReader(cmdText))
                 {
-                    UserInfo userInfo = new UserInfo();
-                    userInfo.UIID = (Convert.ToInt32(sdr[0]));
-                    userInfo.UIEINo = (Convert.ToString(sdr[1]));
-                    userInfo.UIPassword = (Convert.ToString(sdr[2]));
-                    userInfo.UICreateTime = (Convert.ToDateTime(sdr[3]));
-                    userInfo.UIIsEnable = (Convert.ToBoolean(sdr[4]));
-                userInfos.Add(userInfo);
+                    while (sdr.Read())
+                    {
+                        UserInfo userInfo = new UserInfo();
+                        userInfo.UIID = (Convert.ToInt32(sdr[0]));
+                        userInfo.UIEINo = (Convert.ToString(sdr[1]));
+                        userInfo.UIPassword = (Convert.ToString(sdr[2]));
+                        userInfo.UICreateTime = (Convert.ToDateTime(sdr[3]));
+                        userInfo.UIIsEnable = (Convert.ToBoolean(sdr[4]));
+                        userInfos.Add(userInfo);
+                    }
                 }
+                return userInfos;
             }
-            return userInfos;
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
-     
-     
+      
         /// <summary>
         /// 根据UIID查询UserInfo
         /// </summary>
@@ -111,34 +119,47 @@ namespace Controllers.DataAccess
             return userInfos.Count>0 ? userInfos[0] : null;
         }
 
-        public static DataTable SelectUserInfoByPassworld(String _uCode,int comID)
+        /// <summary>
+        /// 根据工号返回权限
+        /// </summary>
+        /// <param name="_uCode"></param>
+        /// <param name="comID"></param>
+        /// <returns></returns>
+        public static DataTable SelectUserInfoByEINo(String _uCode, int comID)
         {
-            StringBuilder cmdText = new StringBuilder();
-            PermissionInfo per = PermissionInfoService.GetPermissionInfoByEINo(_uCode,comID);
-            if (per.PIAdmin)
+            try
             {
-                //是管理员，可以管理多个公司
-                cmdText.Append(" select  ");
-                cmdText.Append("     UIEINo,UIPassword,EIPhoto,EIName,EIPosition,EIDepartment ");
-                cmdText.Append(" From  UserInfo with(nolock) ");
-                cmdText.Append(" join EmployeeInfo  with(nolock) on EIID = UIEINo ");
-                cmdText.Append("   where UIIsEnable = 1");
-                cmdText.AppendFormat("  and UIEINo = '{0}' ", _uCode);
-
+                StringBuilder cmdText = new StringBuilder();
+                PermissionInfo per = PermissionInfoService.GetPermissionInfoByEINo(_uCode, comID);
+                if (per.PIAdmin)
+                {
+                    //是管理员，可以管理多个公司
+                    cmdText.Append(" select  ");
+                    cmdText.Append("     UIEINo,UIPassword,EIPhoto,EIName,EIPosition,EIDepartment ");
+                    cmdText.Append(" From  UserInfo with(nolock) ");
+                    cmdText.Append(" join EmployeeInfo  with(nolock) on EINo = UIEINo ");
+                    cmdText.Append("   where UIIsEnable = 1");
+                    cmdText.AppendFormat("  and UIEINo = '{0}' ", _uCode);
+                }
+                else
+                {
+                    //不是管理员，只能登陆到自己的公司
+                    cmdText.Append(" select  ");
+                    cmdText.Append("     UIEINo,UIPassword,EIPhoto,EIName,EIPosition,EIDepartment ");
+                    cmdText.Append(" From  UserInfo with(nolock) ");
+                    cmdText.Append(" join EmployeeInfo  with(nolock) on EINo = UIEINo ");
+                    cmdText.Append(" join CompanyInfo  with(nolock) on CIID = EICompanyID ");
+                    cmdText.Append("   where UIIsEnable = 1");
+                    cmdText.AppendFormat("  and UIEINo = '{0}' and EICompanyID = '{1}' ", _uCode, comID);
+                }
+                return new MySqlHelper().GetDataTable(cmdText.ToString());
             }
-            else
+            catch (Exception ex)
             {
-               //不是管理员，只能登陆到自己的公司
-                cmdText.Append(" select  ");
-                cmdText.Append("     UIEINo,UIPassword,EIPhoto,EIName,EIPosition,EIDepartment ");
-                cmdText.Append(" From  UserInfo with(nolock) ");
-                cmdText.Append(" join EmployeeInfo  with(nolock) on EIID = UIEINo ");
-                cmdText.Append(" join CompanyInfo  with(nolock) on CIID = EICompanyID ");
-                cmdText.Append("   where UIIsEnable = 1");
-                cmdText.AppendFormat("  and UIEINo = '{0}' and EICompanyID = '{1}' ", _uCode, comID);
+                throw ex;
             }
-            return new MySqlHelper().GetDataTable(cmdText.ToString());
         }
+        
         /// <summary>
         /// 查询所有UserInfo
         /// </summary>
@@ -146,12 +167,18 @@ namespace Controllers.DataAccess
         {
             StringBuilder cmdText = new StringBuilder();
             cmdText.Append(" select  ");
-            cmdText.Append("                       UIID,UIEINo,UIPassword,UICreateTime,UIIsEnable ");
+            cmdText.Append("     UIID,UIEINo,UIPassword,UICreateTime,UIIsEnable ");
             cmdText.Append(" From  UserInfo with(nolock) ");
             cmdText.Append("   where UIIsEnable = 1");
             return SelectUserInfoByCmdText(cmdText.ToString());
         }
 
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="Uno"></param>
+        /// <param name="newpwd"></param>
+        /// <returns></returns>
         public static bool UpdateUserPWDByUIEINO(String Uno, String newpwd)
         {
             StringBuilder cmdText = new StringBuilder();
