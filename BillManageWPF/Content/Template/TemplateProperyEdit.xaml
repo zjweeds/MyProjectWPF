@@ -11,15 +11,21 @@
         AllowsTransparency="True"  WindowStartupLocation="CenterScreen"
         Title="编辑票夹页面" Loaded="Window_Loaded">
     <Grid Margin="0,0,1,0">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF038D8D" Offset="0"/>
+                <GradientStop Color="#FFB5F0F0" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-        <ScrollViewer Margin="20,5,0,0"  VerticalAlignment="Top" >
-            <StackPanel MinWidth="200">
+        <ScrollViewer Margin="8,8,12,0"  VerticalAlignment="Top" >
+            <StackPanel MinWidth="100">
                 <Button HorizontalAlignment="Right" Name="exit"  Click="exit_Click">
                     <Button.Background>
                         <ImageBrush ImageSource="/BillManageWPF;component/Skin/Button/xn.png"></ImageBrush>
                     </Button.Background>
                 </Button>
-                <TextBlock Text="票据模板属性"  Margin="0,0,0,8" Foreground="White"/>
+                <TextBlock Text="票据模板属性"  Margin="0,0,0,8" Foreground="White" FontSize="18"/>
                 <TextBlock Text="您可以再此页面配置所选模板的属性" Foreground="White" Margin="0,0,0,16"/>
                 <StackPanel x:Name="Form" Orientation="Vertical" Width="454">
 
@@ -46,40 +52,40 @@
                     </StackPanel.DataContext>
 
                     <StackPanel Margin="2,0,-2,4" >
-                        <Label Foreground="White" Content="模板名称：" Target="{Binding ElementName=TextFirstName}" Width="54"/>
-                        <TextBox x:Name="txtTemplateName" Foreground="White" Background="SkyBlue" Width="131" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
-                        <Label Foreground="White" Content="            单据号长度：" Target="{Binding ElementName=TextFirstName}" Width="115"/>
-                        <TextBox x:Name="txtBillCodeLength" Foreground="White" Background="SkyBlue" Width="126" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
+                        <Label Foreground="White" Content="模板名称： "  Width="54"/>
+                        <TextBox x:Name="txtTemplateName" Foreground="Black" Background="WhiteSmoke" Width="131"  />
+                        <Label Foreground="White" Content="            单据号长度："  Width="115"/>
+                        <TextBox x:Name="txtBillCodeLength" Foreground="Black" Background="WhiteSmoke" Width="126" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
                     </StackPanel>
                     <StackPanel >
                         <Label Foreground="White" Content="模板宽度：" Target="{Binding ElementName=TextFirstName}" Width="60"/>
-                        <TextBox x:Name="txtTemplateWidth" Foreground="White" Background="SkyBlue" Width="126" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
-                        <Label Foreground="White" Content="cm" Target="{Binding ElementName=TextFirstName}" Width="19"/>
+                        <TextBox x:Name="txtTemplateWidth" Foreground="White" Background="WhiteSmoke" Width="126" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
+                        <Label Foreground="White" Content="mm" Target="{Binding ElementName=TextFirstName}" Width="19"/>
                         <Label Foreground="White" Content="       单据号高度：" Target="{Binding ElementName=TextFirstName}" Width="97"/>
-                        <TextBox x:Name="txtTemplateHeigth" Foreground="White" Background="SkyBlue" Width="126" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
-                        <Label Foreground="White" Content="cm" Target="{Binding ElementName=TextFirstName}" Width="19"/>
+                        <TextBox x:Name="txtTemplateHeigth" Foreground="White" Background="WhiteSmoke" Width="126" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
+                        <Label Foreground="White" Content="mm" Target="{Binding ElementName=TextFirstName}" Width="19"/>
                     </StackPanel>
                     <StackPanel>
-                        <Label Foreground="White" Background="SkyBlue" Content="图片路径：" Target="{Binding ElementName=TextLastName}" Width="58"/>
-                        <TextBox x:Name="txtBgPath" IsReadOnly="True" Foreground="White" Background="SkyBlue" Width="327" Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
+                        <Label Foreground="White"  Content="图片路径：" Target="{Binding ElementName=TextLastName}" Width="58"/>
+                        <TextBox x:Name="txtBgPath" IsReadOnly="True"  Width="327" Text="{Binding LastName, Mode=TwoWay, ValidatesOnDataErrors=True}"/>
                         <Button Content="..." Click="Button_Click"/>
                     </StackPanel>
                     <StackPanel>
-                        <Label Foreground="White" Background="SkyBlue" Content="空白背景：" Target="{Binding ElementName=RadioGendeMale}" Width="71"/>
+                        <Label Foreground="White"  Content="空白背景：" Target="{Binding ElementName=RadioGendeMale}" Width="71"/>
                         <!--<RadioButton x:Name="RadioIsBG" Content="是" Foreground="White" Background="SkyBlue" Width="38" />-->
-                        <CheckBox x:Name="RadioIsBG" Content="是" Background="SkyBlue" Width="72" />
-                        <Label Foreground="White" Background="SkyBlue" Content="打印背景：" Target="{Binding ElementName=RadioGendeMale}" Width="64"/>
-                        <CheckBox  x:Name="RadioIsPrint" Content="是" Background="SkyBlue" Width="72" />
+                        <CheckBox x:Name="RadioIsBG" Content="是"  Width="72" />
+                        <Label Foreground="White"  Content="打印背景：" Target="{Binding ElementName=RadioGendeMale}" Width="64"/>
+                        <CheckBox  x:Name="RadioIsPrint" Content="是" Width="72" />
                         <!--<RadioButton x:Name="RadioIsPrint" Content="是"  />-->
                     </StackPanel>
                     <StackPanel  >
-                        <Label Foreground="White" Background="SkyBlue" Content="所属票夹：" Target="{Binding ElementName=RadioGendeMale}" Width="71"/>
+                        <Label Foreground="White"  Content="所属票夹：" Target="{Binding ElementName=RadioGendeMale}" Width="71"/>
                         <ComboBox Name="cbbTemplatetype" Width="127">
                             
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Height="142" >
-                        <GroupBox Header="预览" Foreground="White" MinWidth="400" >
+                        <GroupBox Header="预览" Foreground="White" MinWidth="400" Width="448" >
                             <Image Name="ImageBG"  Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </GroupBox> 
                     </StackPanel>

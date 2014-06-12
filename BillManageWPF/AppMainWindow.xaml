@@ -150,7 +150,7 @@
                         </Border.Background>
                     </Border>
                     <Grid Grid.Row="1">
-                        <local:SystemSettingView />
+                        <!--<local:SystemSettingView />-->
                     </Grid>                   
                 </Grid>
             </dui:DazzleTabItem>

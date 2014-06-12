@@ -56,7 +56,7 @@ namespace BillManageWPF
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Application.Current.Shutdown(-1);
         }
 
         /// <summary>

@@ -4,7 +4,7 @@
         xmlns:mui="clr-namespace:FirstFloor.ModernUI;assembly=FirstFloor.ModernUI"
         xmlns:cmui="clr-namespace:FirstFloor.ModernUI.Windows.Controls;assembly=FirstFloor.ModernUI"
         Title="ModerUIMain" WindowState="Maximized" WindowStyle="None" AllowsTransparency="True" Loaded="Window_Loaded">
-    <Grid Margin="0,0,10,0" Background="Purple" >
+    <Grid Margin="0,0,10,0" Background="#FF1A69B3" >
        <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="5*"/>

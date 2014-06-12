@@ -257,7 +257,7 @@ namespace BillManageWPF.winFormUI
                 ToolStripButton tsb = sender as ToolStripButton;
                 if (tsb != null)
                 {
-                    tsb.BackColor = Color.Purple;
+                    tsb.BackColor = Color.Blue;
                 }
             }
             catch (Exception ex)
@@ -284,6 +284,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+                this.Text = "票据查询"+btm.TIName;
                 fDpiX = this.CreateGraphics().DpiX;
                 fDpiY = this.CreateGraphics().DpiY;
                 dtColumns.Columns.Add("CIID", typeof(Int32));

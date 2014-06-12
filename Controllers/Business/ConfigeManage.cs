@@ -19,10 +19,16 @@ namespace Controllers.Business
     {
        public static bool isConfigFilesExist()
        {
-           string sfile = @"SoftConfig.xml";
+           String sfile = @"SoftConfig.xml";
            String spath = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";//配置文件路径
-           return ConfigService.isConfigFilesExist(spath, sfile);
+           return ConfigService.isFilesExist(spath, sfile);
        }
+
+       public static bool isFilesExist(String spath, String sfile)
+       {
+          return ConfigService.isFilesExist(spath, sfile);
+       }
+
        public static bool LoadImage(DataTable dt,String bsname)
        {
            try

@@ -5,7 +5,7 @@
           WindowStyle="None" 
         WindowState="Maximized"
         AllowsTransparency="True">
-    <Grid Background="Purple">
+    <Grid Background="#FF1A69B3">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="80"/>
@@ -103,7 +103,7 @@
                             <Grid  Name="btnUsersIcon" Margin="2,2,2,2"  Visibility="Visible"    MouseEnter="btnUsersIcon_MouseEnter" >
                                 <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10" >
                                     <Grid  Background="#FF1A69B3">
-                                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/userinfo.png" />
+                                        <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/userinfo1.png" />
                                         <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
                                     </Grid>
                                 </Border>

@@ -16,7 +16,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BillManageWPF.Content.Template;
-using BillManageWPF.Content.Others;
 using System.Data;
 using Controllers.Business;
 using Controllers.Models;
@@ -60,14 +59,17 @@ namespace BillManageWPF.Page
         {
             tabList.TabPages.Clear();
             DataTable dt = BillTemplateTypeManage.GetAllTypeByBillsetName(SoftUser.Op_Bill);
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (dt != null && dt.Rows.Count > 0)
             {
-                tabList.TabPages.Add(dt.Rows[i]["TTName"].ToString()); //添加票夹名称
-            }
-            for (int i = 0; i < tabList.TabCount; i++)
-            {
-                LoadListView(i);  //生成内容 
-                LoadImage(i, lsvs[i], imgls[i]); //绑定图片和项
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    tabList.TabPages.Add(dt.Rows[i]["TTName"].ToString()); //添加票夹名称
+                }
+                for (int i = 0; i < tabList.TabCount; i++)
+                {
+                    LoadListView(i);  //生成内容 
+                    LoadImage(i, lsvs[i], imgls[i]); //绑定图片和项
+                }
             }
         }
 
@@ -215,16 +217,9 @@ namespace BillManageWPF.Page
         /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
                 tabList.ItemSize = new System.Drawing.Size(50, 30);
                 DoLoad();
                 btnTemplateStick.IsEnabled = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
         }
 
         /// <summary>
@@ -309,8 +304,9 @@ namespace BillManageWPF.Page
         {
             try
             {
-                TemplateProperyEdit tpe = new TemplateProperyEdit();
-                tpe.Show();
+                TemplateProperyEdit tpe = new TemplateProperyEdit(tabList.SelectedTab.Text);
+                tpe.ShowDialog();
+                UpdataView(tabList.SelectedTab.Text);
             }
             catch (Exception ex)
             {

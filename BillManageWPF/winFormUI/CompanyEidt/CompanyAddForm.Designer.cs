@@ -115,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Fuchsia;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(320, 262);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -127,7 +127,7 @@
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "CompanyAddForm";
-            this.Text = "CompanyAddForm";
+            this.Text = "公司属性";
             this.Load += new System.EventHandler(this.CompanyAddForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

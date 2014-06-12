@@ -125,7 +125,6 @@ namespace BillManageWPF
             }
             else
             {
-                MessageBox.Show(BSName);
                 return false;
             }
         }
@@ -201,6 +200,20 @@ namespace BillManageWPF
             ConfigeManage.SaveLoginToXml(loginPath);
                
         }
+
+        public void LoadLoginInfo()
+        {
+            String loginPath = AppDomain.CurrentDomain.BaseDirectory
+                        + @"Configs\" + txtName.Text.Trim();
+            string sfile = @"LoginConfig.xml";
+            if(ConfigeManage.isFilesExist(loginPath,sfile))
+            {
+                UserItem uis= new MyXmlHelper().ReadLoginInfo(loginPath+@"\"+sfile);
+                txtPassWord.Password = uis.PassWorld;
+                cbbCompany.Text = uis.UserCompany;
+                cbbBillSet.Text = uis.Op_Bill;
+            }
+        }
         #endregion
 
         #region 窗体事件
@@ -218,8 +231,7 @@ namespace BillManageWPF
                 {
                     LoadingAnime();
                     LoadCompanyName();
-                    cbbCompany.SelectedIndex = 0;
-                    txtPassWord.Password = "0001";
+                    cbbCompany.SelectedIndex = 0;                   
                 }
                 else
                 {
@@ -260,6 +272,7 @@ namespace BillManageWPF
                     //存在该用户
                     if (dtUser.Rows[0]["UIPassword"].ToString() == txtPassWord.Password.ToString())
                     {
+                        BSName = cbbBillSet.Text.ToString();
                         //密码正确
                         doThreadLoading();//分线程处理加载图片工作，主线程登录
 
@@ -268,7 +281,6 @@ namespace BillManageWPF
                         SoftUser.UserName = dtUser.Rows[0]["EIName"].ToString();
                         SoftUser.UserCompany = cbbCompany.Text;
                         SoftUser.PassWorld = txtPassWord.Password.ToString();
-                        BSName = cbbBillSet.Text.ToString();
                         #endregion
 
                         #region 获取用户头像
@@ -399,6 +411,7 @@ namespace BillManageWPF
         {
             try
             {
+                LoadLoginInfo();
                 GetUserPhotoFromDisk(txtName.Text);
             }
             catch (Exception ex)

@@ -219,7 +219,7 @@ namespace Controllers.Common
                 writer.WriteStartDocument();
                 writer.WriteStartElement("loginconfig");
                 writer.WriteElementString("ID", SoftUser.UserCode);
-                writer.WriteElementString("PWD", SoftUser.PassWorld);
+                writer.WriteElementString("PWD", EnCryption.MiYao(SoftUser.PassWorld));
                 writer.WriteElementString("CompanyName", SoftUser.UserCompany);
                 writer.WriteElementString("BillSet", SoftUser.Op_Bill);
                 writer.WriteEndElement(); // 关闭元素 
@@ -230,6 +230,29 @@ namespace Controllers.Common
             {
                 throw ex;
             }
+        }
+
+        public  UserItem ReadLoginInfo(String path)
+        { 
+          XmlDocument xmlDoc = new XmlDocument();
+          UserItem usei =new UserItem();
+          try
+          {
+              xmlDoc.Load(path);
+              XmlNode root = xmlDoc.SelectSingleNode("//loginconfig");//当节点Workflow带有属性是，使用SelectSingleNode无法读取          
+              if (root != null)
+              {
+                  usei.UserCode = (root.SelectSingleNode("ID")).InnerText;
+                  usei.PassWorld = EnCryption.JieMi((root.SelectSingleNode("PWD")).InnerText);
+                  usei.UserCompany = (root.SelectSingleNode("CompanyName")).InnerText;
+                  usei.Op_Bill = (root.SelectSingleNode("BillSet")).InnerText;
+              }
+          }
+          catch (Exception ex)
+          {
+              throw ex;
+          }
+          return usei;
         }
 
         #endregion

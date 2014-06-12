@@ -4,24 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" Width="400" Height="250">
-    <Grid Background="Purple"  VerticalAlignment="Top" Margin="0,0,-10,0" Height="250">
+    <Grid Background="#FF1A69B3"  VerticalAlignment="Top" Margin="0,0,-10,0" Height="250">
 
         <Label Content="软件激活账号：" Margin="0,21,274,208" Foreground="White" HorizontalAlignment="Right" FontSize="16" Width="120"/>
-        <TextBox Name="txtKEY"    Text=" "  HorizontalAlignment="Left" Height="31" Margin="138,22,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="242" Foreground="White" BorderBrush="White"  Background="Purple" FontSize="16"  />
+        <TextBox Name="txtKEY"    Text=" "  HorizontalAlignment="Left" Height="31" Margin="138,22,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="242" Foreground="White" BorderBrush="White"  Background="#FF1A69B3" FontSize="16"  />
 
         <Label Content="数据库服务器IP：" Margin="0,60,274,165" Foreground="White" HorizontalAlignment="Right" FontSize="16" Width="132"/>
-        <TextBox Name="txtServers" Text=" (local)"  HorizontalAlignment="Left" Height="31" Margin="138,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="242" Foreground="White" BorderBrush="White"  Background="Purple" FontSize="16"  />
+        <TextBox Name="txtServers" Text=" (local)"  HorizontalAlignment="Left" Height="31" Margin="138,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="242" Foreground="White" BorderBrush="White"  Background="#FF1A69B3" FontSize="16"  />
 
         <Label Content="选择数据库：" Margin="0,181,274,40" Foreground="White" HorizontalAlignment="Right" FontSize="16" Width="100"/>
-        <TextBox x:Name="txtUser"  Text="sa"  HorizontalAlignment="Left" Height="31" Margin="138,95,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="242" Foreground="White" BorderBrush="White"  Background="Purple" FontSize="16"  />
+        <TextBox x:Name="txtUser"  Text="sa"  HorizontalAlignment="Left" Height="31" Margin="138,95,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="242" Foreground="White" BorderBrush="White"  Background="#FF1A69B3" FontSize="16"  />
 
         <Label Content="数据库登录名：" Margin="0,96,274,121" Foreground="White" HorizontalAlignment="Right" FontSize="16" Width="115"/>
-        <PasswordBox x:Name="txtPWD"  HorizontalAlignment="Left" Height="31" Margin="138,136,0,0"   VerticalAlignment="Top" Width="147" Foreground="White" BorderBrush="White"  Background="Purple" FontSize="16"  />
+        <PasswordBox x:Name="txtPWD"  HorizontalAlignment="Left" Height="31" Margin="138,136,0,0"   VerticalAlignment="Top" Width="147" Foreground="White" BorderBrush="White"  Background="#FF1A69B3" FontSize="16"  />
 
         <Label Content="数据库登录密码：" Margin="0,140,274,69" Foreground="White" HorizontalAlignment="Right" FontSize="16" Width="132"/>
 
-        <Button x:Name="btnTestConnect" Content="连接"  HorizontalAlignment="Left" Margin="293,136,0,0" VerticalAlignment="Top" Width="87" Height="32"  Foreground="Purple" Background="White" FontSize="16" Click="btnTestConnect_Click"/>
-        <ComboBox x:Name="cbbDBName" HorizontalAlignment="Left" Margin="140,176,0,0" VerticalAlignment="Top" Width="149" Height="27" IsEditable="True"  Foreground="Purple"/>
-        <CheckBox x:Name="chkAdd" Content="新增库" HorizontalAlignment="Left" Margin="298,178,0,0" VerticalAlignment="Top" Foreground="White" Background="Purple" FontSize="16" Width="100" Height="30" />
+        <Button x:Name="btnTestConnect" Content="连接"  HorizontalAlignment="Left" Margin="293,136,0,0" VerticalAlignment="Top" Width="87" Height="32"  Foreground="#FF1A69B3" Background="White" FontSize="16" Click="btnTestConnect_Click"/>
+        <ComboBox x:Name="cbbDBName" HorizontalAlignment="Left" Margin="140,176,0,0" VerticalAlignment="Top" Width="149" Height="27" IsEditable="True"  Foreground="#FF1A69B3"/>
+        <CheckBox x:Name="chkAdd" Content="新增库" HorizontalAlignment="Left" Margin="298,178,0,0" VerticalAlignment="Top" Foreground="White" Background="#FF1A69B3" FontSize="16" Width="100" Height="30" />
     </Grid>
 </UserControl>

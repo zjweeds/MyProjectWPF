@@ -329,7 +329,24 @@ namespace BillManageWPF.winFormUI
             ControlsInfoManager.DeleteControlInfoByCIID(ControlsID);
         }
         #endregion
-        
+
+       /// <summary>
+       /// 删除边框点
+       /// </summary>
+        private void DeletePixBoxLabels()
+        {
+            if( this.DesignContext.board.Controls!=null&& this.DesignContext.board.Controls.Count>0)
+            {
+            foreach (Control clabel in this.DesignContext.board.Controls)
+            {
+                if(clabel.GetType()==typeof(Label)&&clabel.BackColor==Color.SkyBlue)
+                {
+                    clabel.Dispose();
+                }
+            }
+            }
+        }
+
         /// <summary>
         /// 根据实体列表，保存控件信息到数据库
         /// </summary>
@@ -386,6 +403,10 @@ namespace BillManageWPF.winFormUI
             }
         }
 
+        /// <summary>
+        /// 添加控件
+        /// </summary>
+        /// <param name="ctList"></param>
         private void AddControl(List<ControlInfo> ctList)
         {
             if (ctList != null && ctList.Count > 0)
@@ -421,6 +442,7 @@ namespace BillManageWPF.winFormUI
                                 textbox.IsFlage = cm.CTIsFlage;
                                 textbox.showType = cm.CTShowType;
                                 textbox.markType = cm.CTMarkType;
+                                textbox.Multiline = true; 
                                 pb.WireControl(textbox);
                                 this.DesignContext.board.Controls.Add(textbox);
                                 #endregion
@@ -568,6 +590,11 @@ namespace BillManageWPF.winFormUI
  
         }
       
+        /// <summary>
+        /// 根据个数添加TextControl
+        /// </summary>
+        /// <param name="newNumber"></param>
+        /// <returns></returns>
         public int AddTextControlByNewNumber(int newNumber)
         {
             MyTextBox mtb = mytextList.Find((delegate(MyTextBox p) { return p.NewNumber == newNumber; }));
@@ -591,6 +618,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+                pb = new PickBox(this);
                 fDpiX = this.CreateGraphics().DpiX;
                 fDpiY = this.CreateGraphics().DpiY;
                 image = new ImageHelper().GetImageByByte(btm.TIBackground);
@@ -598,8 +626,6 @@ namespace BillManageWPF.winFormUI
                 height = Convert.ToInt32(MillimetersToPixel(Convert.ToSingle(btm.TIHeight), fDpiY));
                 DesignContext.board.Width = width;
                 DesignContext.board.Height = height;
-                // DesignContext.board.Invalidate();
-                pb = new PickBox(this);
                 LoadAllControls(btm.TIID);
             }
             catch (Exception ex)
@@ -646,6 +672,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+                //DeletePixBoxLabels();
                 MyLabel label = new MyLabel();
                 label.NewNumber = mylbList != null ? mylbList.Count : 0;
                 label.ControlID = 0;
@@ -669,7 +696,9 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+                //DeletePixBoxLabels();
                 MyTextBox label = new MyTextBox();
+                label.Multiline = true; 
                 label.NewNumber = mytextList != null ? mytextList.Count : 0;
                 label.ControlID = 0;
                 label.ControlName = "TextBox" + label.NewNumber.ToString();
@@ -692,6 +721,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+               // DeletePixBoxLabels(); 
                 MyCheckBox label = new MyCheckBox();
                 label.NewNumber = mychbList != null ? mychbList.Count : 0;
                 label.ControlID = 0;
@@ -715,6 +745,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+               // DeletePixBoxLabels();
                 MyComboBox label = new MyComboBox();
                 label.NewNumber = mycbbList != null ? mycbbList.Count : 0;
                 label.ControlID = 0;
@@ -738,6 +769,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+                //DeletePixBoxLabels();
                 MyDateTimePicker label = new MyDateTimePicker();
                 label.NewNumber = mydtpList != null ? mydtpList.Count : 0;
                 label.ControlID = 0;
@@ -761,6 +793,7 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
+                //DeletePixBoxLabels();
                 MoneyPanel mp = new MoneyPanel();
                 mp.NewNumber = mympList != null ? mympList.Count : 0;
                 mp.ControlID = 0;

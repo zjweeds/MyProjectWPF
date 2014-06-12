@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BillManageWPF.Content.UserManage.PermissionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="PermissionWindow" Height="300" Width="300" Loaded="Window_Loaded" Background="Purple">
+        Title="PermissionWindow" Height="300" Width="300" Loaded="Window_Loaded" Background="#FF1A69B3">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30*"/>

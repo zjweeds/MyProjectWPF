@@ -27,9 +27,10 @@ namespace Controllers.DataAccess
         /// 判断配置文件是否存在
         /// </summary>
         /// <returns>true 存在；false 不存在 </returns>
-        public static bool  isConfigFilesExist(String spath, string sfile)
+        public static bool  isFilesExist(String spath, string sfile)
         {
-            if (File.Exists((spath + "/" + sfile))) 
+            String truePath = spath + "/" + sfile;
+            if (File.Exists(truePath))
             {
                 return true;
             }
@@ -45,7 +46,7 @@ namespace Controllers.DataAccess
         /// <returns></returns>
         public bool CreateXmlFile( String spath,String sfile)
         {
-            if (!isConfigFilesExist(spath,sfile))
+            if (!isFilesExist(spath,sfile))
             {
                 if (!Directory.Exists(spath))
                 {
@@ -71,7 +72,7 @@ namespace Controllers.DataAccess
         {
             string sfile = @"SoftConfig.xml";
             String spath = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs";//配置文件路径
-            if (!isConfigFilesExist(spath, sfile))
+            if (!isFilesExist(spath, sfile))
             {
                 CreateXmlFile(spath,sfile);
             }
@@ -93,7 +94,7 @@ namespace Controllers.DataAccess
         public bool SaveLoginToXml(String spath)
         {
             string sfile = @"LoginConfig.xml";
-            if (!isConfigFilesExist(spath, sfile))
+            if (!isFilesExist(spath, sfile))
             {
                 CreateXmlFile(spath, sfile);
             }

@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" Width="380" Height="320"         WindowStyle="None" 
         WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True" Background="Purple" >
+        AllowsTransparency="True" Background="SkyBlue" >
     <Grid  Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
@@ -27,23 +27,23 @@
         <TextBlock Grid.Row="0" Text="公司信息及账套信息配置" FontSize="22" Foreground="WhiteSmoke"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Label Content="公司名称：" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Foreground="WhiteSmoke"/>
-            <TextBox Name="txtCompany" Width="180" Foreground="Purple"/>
+            <TextBox Name="txtCompany" Width="180" Foreground="SkyBlue"/>
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <Label Content="账套名称：" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Foreground="WhiteSmoke"/>
-            <TextBox Name="txtBillSet" Width="180" Foreground="Purple"/>
+            <TextBox Name="txtBillSet" Width="180" Foreground="#FF1A69B3"/>
         </StackPanel>
         <StackPanel Grid.Row="6" Orientation="Horizontal">
             <Label Content="管理员账号：" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Foreground="WhiteSmoke"/>
-            <TextBox Name="txtAdmin" Width="180" Foreground="Purple"/>
+            <TextBox Name="txtAdmin" Width="180" Foreground="#FF1A69B3"/>
         </StackPanel>
         <StackPanel Grid.Row="8" Orientation="Horizontal">
             <Label Content="管理员密码：" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Foreground="WhiteSmoke"/>
-            <PasswordBox Name="pass" Width="180" Foreground="Purple"/>
+            <PasswordBox Name="pass" Width="180" Foreground="#FF1A69B3"/>
         </StackPanel>
         <StackPanel Grid.Row="10" Orientation="Horizontal">
             <Label Content="重复密码：" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Foreground="WhiteSmoke"/>
-            <PasswordBox Name="passCopy" Width="180" Foreground="Purple"/>
+            <PasswordBox Name="passCopy" Width="180" Foreground="#FF1A69B3"/>
         </StackPanel>
         <StackPanel Grid.Row="12" Orientation="Horizontal"  HorizontalAlignment="Center" Margin="178,1,82,9" Grid.RowSpan="2">
             <Button Content="确定" Width="100" HorizontalAlignment="Center" Click="Button_Click" />

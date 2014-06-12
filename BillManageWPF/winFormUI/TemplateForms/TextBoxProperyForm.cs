@@ -95,7 +95,6 @@ namespace BillManageWPF.winFormUI
         private void button1_Click(object sender, EventArgs e)
         {
             SetPropery();
-           // UpdateModel();
         }
 
         /// <summary>

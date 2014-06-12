@@ -513,10 +513,10 @@ namespace Controllers.DataAccess
         {
             String sqlConString = "Server = " + serverIP + ";Database = " + dbName + ";User id=" + user + ";PWD=" + pwd;
             StringBuilder cmdTextCI = new StringBuilder();
-            cmdTextCI.AppendFormat(" insert into CompanyInfo (CIName) values('{0}') ", comName);
+            cmdTextCI.AppendFormat(" insert into CompanyInfo (CIName,CIParentID) values('{0}','0') ", comName);
             int cid = new MySqlHelper(sqlConString).ExecSqlReturnId(cmdTextCI.ToString());
             StringBuilder cmdTextBS = new StringBuilder();
-            cmdTextBS.AppendFormat(" insert into BillSetInfo (BSIName,BSICompanyID) values('{0}','1') ", comName);
+            cmdTextBS.AppendFormat(" insert into BillSetInfo (BSIName,BSICompanyID) values('{0}','1') ", bsName);
             return new MySqlHelper(sqlConString).ExecDataBySql(cmdTextBS.ToString()) > 0 ? true : false;
         }
         

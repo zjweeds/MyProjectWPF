@@ -266,8 +266,16 @@ namespace Controllers.DataAccess
            StringBuilder sqlText = new StringBuilder();
            sqlText.AppendFormat
                ("update DataSourceInfo set DSITableName = '{0}'  where  DSIIsEnable = 1 and DSITableName = '{1}' and DSICIID = '{2}'",
-                NewName, OldName, CompanyID);
-           return new MySqlHelper().ExecDataBySql(sqlText.ToString()) > 0 ? true : false;
+                NewName, OldName, CompanyID);          
+           StringBuilder sqlText2 = new StringBuilder();
+           sqlText2.AppendFormat
+                  ("update ControlInfo set CTBandsTabel = '{0}'  where  CTBandsTabel = '{1}'",
+                   NewName, OldName);
+           List<String> cmdTextList = new List<string>();
+           cmdTextList.Add(sqlText.ToString());
+           cmdTextList.Add(sqlText2.ToString());
+           return new MySqlHelper().ExecDataBySqls(cmdTextList);
+     
        }
 
         /// <summary>

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="750">
     <Grid Style="{StaticResource ContentRoot}">
-        <Grid Background="Purple">
+        <Grid Background="#FF1A69B3">
             <UniformGrid  Margin="0,0,0,30" Columns="3" Rows="2">
                 <Grid Margin="5">
                     <Grid  Name="btnTemplateIcon" Margin="2,2,2,2"  Visibility="Visible" MouseEnter="btnTemplateIcon_MouseEnter">
@@ -67,15 +67,15 @@
                 <Grid Margin="5">
                     <Grid  Name="btnUsersIcon" Margin="2,2,2,2"  Visibility="Visible"    MouseEnter="btnUsersIcon_MouseEnter" >
                         <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
-                            <Grid  Background="#FF1A69B3">
-                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/userinfo.png" />
+                            <Grid  Background="#FF83B810">
+                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/userinfo1.png" />
                                 <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
                             </Grid>
                         </Border>
                     </Grid>
                     <Grid Name="btnUsers"  Margin="2,2,2,2" Visibility="Hidden" MouseLeave="btnUsers_MouseLeave" MouseDown="btnUsers_MouseDown">
                         <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
-                            <Grid Background="#FF1A69B3">
+                            <Grid Background="#FF80AE1A">
                                 <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入用户中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                                 <TextBlock   Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以维护系统所有用户信息（需要权限）和个人信息" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                             </Grid>
@@ -103,15 +103,15 @@
                 <Grid Margin="5">
                     <Grid  Name="btnHelperIcon" Margin="2,2,2,2"  Visibility="Visible"   MouseEnter="btnHelperIcon_MouseEnter">
                         <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
-                            <Grid  Background="#FF3554D3">
-                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/HelperCenter.png" />
+                            <Grid  Background="#FF9A19B8">
+                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/HelperCenter1.png" OpacityMask="#FF82B21A" />
                                 <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="帮助中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
                             </Grid>
                         </Border>
                     </Grid>
                     <Grid Name="btnHelper"  Margin="2,2,2,2" Visibility="Hidden" MouseLeave="btnHelper_MouseLeave" MouseDown="btnHelper_MouseDown">
                         <Border BorderThickness="5" BorderBrush="AliceBlue"  CornerRadius="10,10,10,10" >
-                            <Grid Background="#FF3554D3">
+                            <Grid Background="#FF971AB3">
                                 <TextBlock   Margin="20"  HorizontalAlignment="Center" VerticalAlignment="Top"  Text="点击进入帮助中心" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                                 <TextBlock   Margin="10"  TextWrapping="Wrap" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="在这一部分，您可以查看系统的帮助信息，包括软件的操作以及开发者信息等" Foreground="White" FontFamily="微软雅黑" FontSize="22"/>
                             </Grid>

@@ -71,11 +71,11 @@
     <Compile Include="Business\SystemDBManage.cs" />
     <Compile Include="Business\UserInfoManager.cs" />
     <Compile Include="Common\CommonClass.cs" />
+    <Compile Include="Common\EnCryption.cs" />
     <Compile Include="Common\ExeclHelper.cs" />
     <Compile Include="Common\ImageHelper.cs" />
     <Compile Include="Common\MyXmlHelper.cs" />
     <Compile Include="Common\NumGetString.cs" />
-    <Compile Include="Common\ReadFiles.cs" />
     <Compile Include="DataAccess\SQLHELPER\MySqlHelper.cs" />
     <Compile Include="DataAccess\SoftVeilyAccess.cs" />
     <Compile Include="DataAccess\TableAccess\CompanyInfoService.cs" />
@@ -112,6 +112,7 @@
     <Compile Include="Model\TableModers\ControlInfol.cs" />
     <Compile Include="Model\TableModers\DataSourceModel.cs" />
     <Compile Include="Model\TableModers\SoftVerify.cs" />
+    <Compile Include="Model\UserItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

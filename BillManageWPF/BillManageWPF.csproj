@@ -91,9 +91,6 @@
     <Compile Include="Content\Main\MainMeumList.xaml.cs">
       <DependentUpon>MainMeumList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Content\Others\WaitWindow.xaml.cs">
-      <DependentUpon>WaitWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Content\SystemSet\PrintSet.xaml.cs">
       <DependentUpon>PrintSet.xaml</DependentUpon>
     </Compile>
@@ -141,9 +138,6 @@
     </Compile>
     <Compile Include="Page\UserManageList.xaml.cs">
       <DependentUpon>UserManageList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Skin\mainUIico\SystemSettingView.xaml.cs">
-      <DependentUpon>SystemSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
@@ -257,10 +251,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Content\Others\WaitWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Content\SystemSet\PrintSet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,10 +316,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Page\UserManageList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Skin\mainUIico\SystemSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -498,11 +484,9 @@
   <ItemGroup>
     <Resource Include="Skin\mainUIico\BillManage.png" />
     <Resource Include="Skin\mainUIico\DataSytem.png" />
-    <Resource Include="Skin\mainUIico\HelperCenter.png" />
     <Resource Include="Skin\mainUIico\TemplateManage.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Skin\mainUIico\userinfo.png" />
     <Resource Include="Skin\mainUIico\setSystem.png" />
   </ItemGroup>
   <ItemGroup>
@@ -520,6 +504,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Skin\ico\PRINT.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\mainUIico\HelperCenter1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skin\mainUIico\userinfo1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

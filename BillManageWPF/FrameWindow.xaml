@@ -7,8 +7,8 @@
         ResizeMode ="NoResize" Loaded="Window_Loaded">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF941AB0"/>
-            <GradientStop Color="#FFD364EE" Offset="1"/>
+            <GradientStop Color="#FF0B96D3"/>
+            <GradientStop Color="#FFDDE6EA" Offset="1"/>
         </LinearGradientBrush>
     </Window.Background>
     <Grid Margin="20">
@@ -27,6 +27,12 @@
             <ColumnDefinition Width="80"/>
 
         </Grid.ColumnDefinitions>
+        <Button  Name="btnEXIT" Grid.Column="5"  Grid.Row="0"  MaxHeight="45" Height="45" MinHeight="45" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,3,3,0" BorderThickness="0" Click="Button_Click" MouseEnter="Button_MouseEnter" Width="45" MinWidth="45" MaxWidth="45" MouseLeave="btnEXIT_MouseLeave" >
+            <Button.Background>
+                <ImageBrush ImageSource="Skin/Button/xn.png"/>
+            </Button.Background>
+        </Button>
+
         <cmui:ModernButton Name="btnBack" VerticalAlignment="Top" ToolTip="点击返回主菜单界面" 
                            Grid.Row="0" IconData="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z " 
                            HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" 
@@ -47,9 +53,9 @@
         <TextBlock Name="lbCompany" Grid.Row="0" Grid.Column="3" Text="公司" HorizontalAlignment="Center" Foreground="WhiteSmoke"/>
         <TextBlock Name="lbFunctionName" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Text="功能名称" FontSize="50" FontFamily="微软雅黑" Foreground="WhiteSmoke" HorizontalAlignment="Center"/>
         <Image  Margin="10" Grid.Row="1" Grid.Column="0" Name="imUserPhoto"/>
-        <Image Margin="10" Grid.Row="1" Grid.Column="5" Name="imbtnBack" Source="Skin/Icon/purple/win8_pur.png" MouseDown="imbtnBack_MouseDown"  MouseEnter="imbtnOver_MouseEnter">
+        <Image Margin="10" Grid.Row="1" Grid.Column="5" Name="imbtnBack" Source="Skin/Icon/blue/win8_pur.png" MouseDown="imbtnBack_MouseDown"  MouseEnter="imbtnOver_MouseEnter">
         </Image>
-        <Image ToolTip="点击返回主菜单" Visibility="Hidden" Margin="10" Grid.Row="1" Grid.Column="5" Name="imbtnOver" Source="Skin/Icon/blue/win8_pur.png" MouseDown="imbtnBack_MouseDown"  MouseLeave="imbtnOver_MouseLeave">
+        <Image ToolTip="点击返回主菜单" Visibility="Hidden" Margin="10" Grid.Row="1" Grid.Column="5" Name="imbtnOver" Source="Skin/Icon/purple/win8_pur.png" MouseDown="imbtnBack_MouseDown"  MouseLeave="imbtnOver_MouseLeave">
         </Image>
         <TextBlock Name="lbdatetime" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="WhiteSmoke"/>
         <Grid Name="context" Grid.Row="3" Grid.ColumnSpan="7"/>

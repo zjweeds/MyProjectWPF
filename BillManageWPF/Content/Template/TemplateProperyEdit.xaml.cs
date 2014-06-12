@@ -42,19 +42,6 @@ namespace BillManageWPF.Content.Template
             this.TemplateTypeName = templateType;
         }
 
-        ///// <summary>
-        ///// 修改模板属性
-        ///// </summary>
-        ///// <param name="t"></param>
-        ///// <param name="code"></param>
-        //public TemplateProperyEdit(String templateType, int code)
-        //{
-        //    InitializeComponent();
-        //    this.Type ="Update";
-        //    btm.TIID = code;
-        //    this.TemplateTypeName = templateType;
-        //}
-
         /// <summary>
         /// 修改模板属性
         /// </summary>
@@ -185,7 +172,6 @@ namespace BillManageWPF.Content.Template
                         btm.TIID = BillTemplateManage.AddByBillTemplatModel(btm);
                         if (btm.TIID != 0)
                         {
-                            MessageBox.Show("更新成功！", "提示", MessageBoxButton.OK);
                             TemplateMain sss = new TemplateMain(btm.TIID);
                             sss.Show();
                             this.Close();
@@ -255,7 +241,11 @@ namespace BillManageWPF.Content.Template
             }
         }
         
-
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

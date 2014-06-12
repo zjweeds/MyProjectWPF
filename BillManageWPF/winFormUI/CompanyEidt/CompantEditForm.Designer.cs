@@ -83,7 +83,7 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolbtnExit});
@@ -124,10 +124,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.groupBox2.Controls.Add(this.tvCompanyInfo);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.ForeColor = System.Drawing.Color.Black;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(270, 436);
@@ -151,17 +152,18 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.添加子公司ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 26);
             // 
             // 添加子公司ToolStripMenuItem
             // 
             this.添加子公司ToolStripMenuItem.Name = "添加子公司ToolStripMenuItem";
-            this.添加子公司ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.添加子公司ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.添加子公司ToolStripMenuItem.Text = "添加子公司";
             this.添加子公司ToolStripMenuItem.Click += new System.EventHandler(this.添加子公司ToolStripMenuItem_Click);
             // 
             // txtCompanyName
             // 
+            this.txtCompanyName.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.txtCompanyName.Controls.Add(this.lbEMCount);
             this.txtCompanyName.Controls.Add(this.label7);
             this.txtCompanyName.Controls.Add(this.lsvBillset);
@@ -174,7 +176,7 @@
             this.txtCompanyName.Controls.Add(this.label1);
             this.txtCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCompanyName.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCompanyName.ForeColor = System.Drawing.Color.White;
+            this.txtCompanyName.ForeColor = System.Drawing.Color.Black;
             this.txtCompanyName.Location = new System.Drawing.Point(0, 0);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.Size = new System.Drawing.Size(322, 436);
@@ -272,11 +274,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Violet;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(596, 477);
             this.Controls.Add(this.splitContainer1);
             this.Name = "CompantEditForm";
-            this.Text = "CompantEditForm";
+            this.Text = "公司管理";
             this.Load += new System.EventHandler(this.CompantEditForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

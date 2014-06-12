@@ -35,8 +35,8 @@
                 </TransformGroup>
             </cmui:ModernButton.RenderTransform>
         </cmui:ModernButton>
-        <TextBlock Grid.Row="1" Text="个人信息设置" Style="{StaticResource Heading1}" Foreground="Purple"  Grid.ColumnSpan="3" Margin="10,0,0,0" />
-        <Button Name="btnZHSZ" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Content="账户设置" FontSize="20"  Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click">
+        <TextBlock Grid.Row="1" Text="个人信息设置" Style="{StaticResource Heading1}" Foreground="#FF1A69B3"  Grid.ColumnSpan="3" Margin="10,0,0,0" />
+        <Button Name="btnZHSZ" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" Content="账户设置" FontSize="20"  Foreground="#FF1A69B3" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click">
             <Button.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.Background>
@@ -44,7 +44,7 @@
                 <SolidColorBrush Color="#FFCCCCCC" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button Name="btnGRXX" VerticalAlignment="Center"  Grid.Row="5" Grid.Column="0" Content="个人信息" FontSize="20" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click_1">
+        <Button Name="btnGRXX" VerticalAlignment="Center"  Grid.Row="5" Grid.Column="0" Content="个人信息" FontSize="20" Foreground="#FF1A69B3" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click_1">
             <Button.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.Background>
@@ -52,7 +52,7 @@
                 <SolidColorBrush Color="#FFCCCCCC" Opacity="0"/>
             </Button.BorderBrush>
         </Button>
-        <Button Name="btnTX" VerticalAlignment="Center"  Grid.Row="7" Grid.Column="0" Content="头像" FontSize="20" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click_2" >
+        <Button Name="btnTX" VerticalAlignment="Center"  Grid.Row="7" Grid.Column="0" Content="头像" FontSize="20" Foreground="#FF1A69B3" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="Button_Click_2" >
             <Button.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.Background>
@@ -63,7 +63,7 @@
         <Grid   Grid.Column="1" Grid.Row="3" Grid.RowSpan="8" Name="grid" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
         </Grid>
-        <Button Name="btnZhuxiao"   Grid.Column="0" Grid.Row="9" VerticalAlignment="Center"  HorizontalAlignment="Center"   Content="注销账号" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnZhuxiao_Click">
+        <Button Name="btnZhuxiao"   Grid.Column="0" Grid.Row="9" VerticalAlignment="Center"  HorizontalAlignment="Center"   Content="注销账号" FontSize="14" Foreground="#FF1A69B3" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnZhuxiao_Click">
             <Button.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.Background>
@@ -71,7 +71,7 @@
                 <SolidColorBrush Color="SkyBlue" />
             </Button.BorderBrush>
         </Button>
-        <Button Name="btnExit"  Grid.Row="10" Grid.Column="0" VerticalAlignment="Center"  HorizontalAlignment="Center"   Content="退出程序" FontSize="14" Foreground="Purple" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnExit_Click">
+        <Button Name="btnExit"  Grid.Row="10" Grid.Column="0" VerticalAlignment="Center"  HorizontalAlignment="Center"   Content="退出程序" FontSize="14" Foreground="#FF1A69B3" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnExit_Click">
             <Button.Background>
                 <SolidColorBrush Color="White" Opacity="0"/>
             </Button.Background>

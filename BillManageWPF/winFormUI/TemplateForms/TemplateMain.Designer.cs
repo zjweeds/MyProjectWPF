@@ -94,14 +94,14 @@
             this.DesignContext.RowRepeats = 1;
             this.DesignContext.Scaling = 1F;
             this.DesignContext.Size = new System.Drawing.Size(1005, 666);
-            this.DesignContext.TabIndex = 0;            
+            this.DesignContext.TabIndex = 0;
             // 
             // panelPropery
             // 
             this.panelPropery.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPropery.Location = new System.Drawing.Point(0, 0);
             this.panelPropery.Name = "panelPropery";
-            this.panelPropery.Size = new System.Drawing.Size(198, 616);
+            this.panelPropery.Size = new System.Drawing.Size(198, 650);
             this.panelPropery.TabIndex = 0;
             // 
             // ProperyPanel
@@ -109,9 +109,9 @@
             this.ProperyPanel.BackColor = System.Drawing.Color.SkyBlue;
             this.ProperyPanel.Controls.Add(this.panelPropery);
             this.ProperyPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProperyPanel.Location = new System.Drawing.Point(4, 46);
+            this.ProperyPanel.Location = new System.Drawing.Point(4, 12);
             this.ProperyPanel.Name = "ProperyPanel";
-            this.ProperyPanel.Size = new System.Drawing.Size(198, 616);
+            this.ProperyPanel.Size = new System.Drawing.Size(198, 650);
             this.ProperyPanel.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -125,8 +125,8 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(1016, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.312293F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.68771F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 1.203007F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 98.79699F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(206, 666);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
