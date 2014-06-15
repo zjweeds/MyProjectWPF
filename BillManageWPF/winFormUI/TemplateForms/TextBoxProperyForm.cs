@@ -200,7 +200,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
     }

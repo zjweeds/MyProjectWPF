@@ -232,7 +232,7 @@ namespace Controllers.DataAccess
                 StringBuilder cmdTextPI = new StringBuilder();
                 cmdTextPI.Append(" CREATE TABLE [dbo].[PermissionInfo]( ");
                 cmdTextPI.Append(" [PIID] [int] IDENTITY(1,1) NOT NULL, ");
-                cmdTextPI.Append(" [PIEINo] [int] NOT NULL, ");
+                cmdTextPI.Append(" [PIEINo] [nvarchar](10) NOT NULL, ");
                 cmdTextPI.Append(" [PITemplate] [bit] NOT NULL, ");
                 cmdTextPI.Append(" [PIDataSource] [bit] NOT NULL, ");
                 cmdTextPI.Append(" [PIBill] [bit] NOT NULL, ");
@@ -286,6 +286,7 @@ namespace Controllers.DataAccess
                 cmdTextTI.Append(" [TICreaterID] [nvarchar](20) NOT NULL,  ");
                 cmdTextTI.Append(" [TICreateTime] [datetime] NOT NULL,  ");
                 cmdTextTI.Append(" [TIIsEnable] [tinyint] NOT NULL,  ");
+                cmdTextTI.Append(" [TIIsPrintBg] [tinyint] NOT NULL,  ");
                 cmdTextTI.Append(" CONSTRAINT [PK_TemplateInfo] PRIMARY KEY CLUSTERED   ");
                 cmdTextTI.Append(" (  ");
                 cmdTextTI.Append(" [TIID] ASC  ");
@@ -451,6 +452,7 @@ namespace Controllers.DataAccess
                 cmdTextList.Add(" ALTER TABLE [dbo].[TemplateInfo] ADD  CONSTRAINT [DF_TemplateInfo_TTCreaterID]  DEFAULT ((1)) FOR [TICreaterID] ");
                 cmdTextList.Add(" ALTER TABLE [dbo].[TemplateInfo] ADD  CONSTRAINT [DF_TemplateInfo_TTCreateTime]  DEFAULT (getdate()) FOR [TICreateTime] ");
                 cmdTextList.Add(" ALTER TABLE [dbo].[TemplateInfo] ADD  CONSTRAINT [DF_TemplateInfo_TTIsEnable]  DEFAULT ((1)) FOR [TIIsEnable] ");
+                cmdTextList.Add(" ALTER TABLE [dbo].[TemplateInfo] ADD  CONSTRAINT [DF_TemplateInfo_TIIsPrintBg]  DEFAULT ((0)) FOR [TIIsPrintBg] ");
 
                 cmdTextList.Add(" ALTER TABLE [dbo].[TemplateType] ADD  CONSTRAINT [DF_TemplateType_TTName]  DEFAULT ('') FOR [TTName] ");
                 cmdTextList.Add(" ALTER TABLE [dbo].[TemplateType] ADD  CONSTRAINT [DF_TemplateType_TTBillSetID]  DEFAULT ((1)) FOR [TTBillSetID] ");

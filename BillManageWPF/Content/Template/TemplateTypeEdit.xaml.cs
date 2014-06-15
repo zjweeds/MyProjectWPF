@@ -57,7 +57,6 @@ namespace BillManageWPF.Content.Template
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -134,10 +133,14 @@ namespace BillManageWPF.Content.Template
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
+        /// <summary>
+        /// 取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnQuXiao_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

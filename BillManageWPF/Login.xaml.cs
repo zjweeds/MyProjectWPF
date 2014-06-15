@@ -113,9 +113,11 @@ namespace BillManageWPF
             calcMethod.BeginInvoke(true, new AsyncCallback(TaskFinished), null);//主进程不等待子进程
         }
 
-        ///<summary>
-        ///线程调用的函数
-        ///<summary>
+        /// <summary>
+        /// 线程调用的函数
+        /// </summary>
+        /// <param name="childThred"></param>
+        /// <returns></returns>
         public static bool LoadImage(bool childThred)
         {
             if (BSName != String.Empty)
@@ -129,9 +131,10 @@ namespace BillManageWPF
             }
         }
 
-        ///<summary>
-        ///线程完成之后回调的函数
-        ///<summary>
+        /// <summary>
+        /// 线程完成之后回调的函数
+        /// </summary>
+        /// <param name="childThred"></param>
         public static void TaskFinished(IAsyncResult childThred)
         {
             calcMethod.EndInvoke(childThred);
@@ -150,13 +153,15 @@ namespace BillManageWPF
             DoMove(imUserphoto, 150, 0, 0, 0);
             PBar.Visibility = Visibility.Visible;
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(3);
+            _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += _timer1_Tick;
             _timer.Start();
             #endregion
         }
 
-
+        /// <summary>
+        /// 加载公司信息
+        /// </summary>
         public void LoadCompanyName()
         {
             cbbCompany.ItemsSource = CompanyInfoManager.GetAllCompanyName().DefaultView;
@@ -164,7 +169,10 @@ namespace BillManageWPF
             cbbCompany.SelectedValuePath = "CIID";
         }
 
-
+        /// <summary>
+        /// 获取用户头像
+        /// </summary>
+        /// <param name="userCode"></param>
         private void GetUserPhotoFromDisk(String userCode)
         {
             String photoPath = AppDomain.CurrentDomain.BaseDirectory
@@ -201,6 +209,9 @@ namespace BillManageWPF
                
         }
 
+        /// <summary>
+        /// 加载保存到本地的登录信息
+        /// </summary>
         public void LoadLoginInfo()
         {
             String loginPath = AppDomain.CurrentDomain.BaseDirectory
@@ -208,10 +219,23 @@ namespace BillManageWPF
             string sfile = @"LoginConfig.xml";
             if(ConfigeManage.isFilesExist(loginPath,sfile))
             {
+                chbSavePassword.IsChecked = true;
                 UserItem uis= new MyXmlHelper().ReadLoginInfo(loginPath+@"\"+sfile);
                 txtPassWord.Password = uis.PassWorld;
                 cbbCompany.Text = uis.UserCompany;
                 cbbBillSet.Text = uis.Op_Bill;
+            }
+        }
+
+        public void DeleteLoginInfoFile()
+        {
+            String loginPath = AppDomain.CurrentDomain.BaseDirectory
+                                   + @"Configs\" + txtName.Text.Trim();
+            string sfile = @"LoginConfig.xml";
+            if (ConfigeManage.isFilesExist(loginPath, sfile))
+            {
+                String truePath = loginPath + "/" + sfile;
+                File.Delete(truePath);//删除文件
             }
         }
         #endregion
@@ -237,7 +261,7 @@ namespace BillManageWPF
                 {
                     if (MessageBox.Show("您是第一次运行程序！或者是系统配置文件丢失\n转到配置页面么？", "软件提示", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        WindowSoftConfig wsf = new WindowSoftConfig(this);
+                        WindowSoftConfig wsf = new WindowSoftConfig();
                         wsf.Top = this.Top;
                         wsf.Left = this.Left;
                         wsf.Show();
@@ -251,7 +275,6 @@ namespace BillManageWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -320,6 +343,10 @@ namespace BillManageWPF
                         {
                             SaveLoginInfo();//保存登录信息
                         }
+                        else
+                        {
+                            DeleteLoginInfoFile();//删除已有登陆信息文件
+                        }
                         #endregion
 
                     }
@@ -340,7 +367,6 @@ namespace BillManageWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -366,7 +392,6 @@ namespace BillManageWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -403,7 +428,6 @@ namespace BillManageWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -416,7 +440,6 @@ namespace BillManageWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -433,7 +456,6 @@ namespace BillManageWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
     }

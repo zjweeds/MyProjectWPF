@@ -65,10 +65,24 @@ namespace Controllers.Business
         {
             return  UserInfoService.SelectAllUserInfo();
         }
+
+        /// <summary>
+        /// 根据工号去用户信息
+        /// </summary>
+        /// <param name="uCode"></param>
+        /// <param name="comID"></param>
+        /// <returns></returns>
         public static DataTable SelectUserInfoByEINo(String uCode, int comID)
         {
             return UserInfoService.SelectUserInfoByEINo(uCode, comID);
         }
+
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <param name="uCode"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
         public static bool UpdateUserPWDByUIEINO(String uCode, String pwd)
         {
             return UserInfoService.UpdateUserPWDByUIEINO(uCode, pwd);

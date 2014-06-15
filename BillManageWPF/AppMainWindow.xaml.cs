@@ -31,7 +31,7 @@ namespace BillManageWPF
         }
         private void DazzleButton_Click(object sender, RoutedEventArgs e)
         {
-            MertoUIWindow muw = new MertoUIWindow();
+            ModerUIMain muw = new ModerUIMain();
             muw.Show();
             this.Close();
         }
@@ -48,7 +48,7 @@ namespace BillManageWPF
 
         private void btnGotoStart_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MertoUIWindow muw = new MertoUIWindow();
+            ModerUIMain muw = new ModerUIMain();
             muw.Show();
             this.Close();
         }

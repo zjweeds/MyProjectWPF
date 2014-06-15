@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace Controllers.Models
 {
+    /// <summary>
+    /// 保存用户临时信息
+    /// </summary>
     public class UserItem
     {
         private  String m_UserCode;

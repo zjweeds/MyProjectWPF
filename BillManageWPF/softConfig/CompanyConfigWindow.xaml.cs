@@ -54,7 +54,6 @@ namespace BillManageWPF.softConfig
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
         #endregion

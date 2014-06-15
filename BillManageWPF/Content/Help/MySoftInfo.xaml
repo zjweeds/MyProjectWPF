@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="BillManageWPF.Content.Help.MySoftInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ScrollViewer>
+        <StackPanel MinWidth="200">
+            <TextBlock Text="软件简介" Style="{StaticResource Heading2}" />
+            <TextBlock Text="票据通采用当今最先进的平台技术开发。其主要功能：" Margin="0,0,0,8" TextWrapping="Wrap"/>
+            <TextBlock Text=" l完善的支票管理流程，使您很方便地管理您所开据的支票和从登记到核销、打印一系列繁琐的手工劳动。 " Margin="0,0,0,8" TextWrapping="Wrap"/>
+            <TextBlock Text="l强大的票据查询和批量套打功能，可根据条件任意查询、分组汇总、多票联查，并可打印报表；批量套打可套打连续纸和单页纸。 " Margin="0,0,0,8" TextWrapping="Wrap"/>
+            <TextBlock Text="l智能导入导出功能，资料表、查询表、套打表、模板公式 、票据数据均可导入导出到Excel表格；票据模板导入导出功能解决了票据升级的困难，使您轻松拥有最新模板和分享模板设计的乐趣。 " Margin="0,0,0,8" TextWrapping="Wrap"/>
+            <TextBlock Text="l创新的模板设计功能，所有模板均由背景图片、模板控件组成，智能打印定位使您简单轻松设计个性化模板 " Margin="0,0,0,8" TextWrapping="Wrap"/>
+            <TextBlock Text=" l独立一体化账套设计，轻松支持远程维护；基于动态IP解析，真正实现异地ADSL数据共享。 " Margin="0,0,0,8" TextWrapping="Wrap"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

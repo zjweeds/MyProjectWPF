@@ -23,9 +23,51 @@ namespace Controllers.Business
        /// </summary>
        /// <param name="dIID">部门ID</param>
        /// <returns></returns>
-       static public DataTable GetAllDepartmentNameByCompanyName(int dIID)
+       static public DataTable GetAllPositionNameByDepartment(int dIID)
        {
-           return PositionService.GetAllDepartmentNameByCompanyName(dIID);
+           return PositionService.GetAllPositionNameByDepartment(dIID);
+       }
+       /// <summary>
+       /// 获取职位ID
+       /// </summary>
+       /// <param name="pIName">职位名称</param>
+       /// <param name="dIID">部门ID</param>
+       /// <returns></returns>
+       static public int GetPositionIDByPositionName(String pIName, int dIID)
+       {
+           return PositionService.GetPositionIDByPositionName(pIName,dIID);
+       }
+
+       /// <summary>
+       /// 删除职位信息
+       /// </summary>
+       /// <param name="pIID">职位ID</param>
+       /// <returns></returns>
+       static public bool DeletePosition(int pIID)
+       {
+           return PositionService.DeletePosition(pIID);
+       }
+
+       /// <summary>
+       /// 添加职位信息
+       /// </summary>
+       /// <param name="pIName"></param>
+       /// <param name="DIID"></param>
+       /// <returns></returns>
+       public static int AddPosition(String pIName, int DIID)
+       {
+           return PositionService.AddPosition(pIName, DIID);
+       }
+
+       /// <summary>
+       /// 更新职位名称
+       /// </summary>
+       /// <param name="pIName"></param>
+       /// <param name="PIID"></param>
+       /// <returns></returns>
+       public static int UpdatePosition(String pIName, int PIID)
+       {
+           return PositionService.UpdatePosition(pIName, PIID);
        }
     }
 }

@@ -221,6 +221,12 @@ namespace Controllers.DataAccess
           return new MySqlHelper().GetDataTable(String.Format("select * from {0} ", TabelName));
        }
 
+       /// <summary>
+       /// 根据DataTable更新数据库
+       /// </summary>
+       /// <param name="TabelName"></param>
+       /// <param name="dt"></param>
+       /// <returns></returns>
        static public bool UpdateByDt(String TabelName, DataTable dt)
        {
           return  new MySqlHelper().updateByDt(String.Format("select * from {0} ", TabelName), dt);

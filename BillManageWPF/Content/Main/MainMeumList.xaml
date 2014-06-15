@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="750">
     <Grid Style="{StaticResource ContentRoot}">
-        <Grid Background="#FF1A69B3">
+        <Grid Background="#FF4C9EEC">
             <UniformGrid  Margin="0,0,0,30" Columns="3" Rows="2">
                 <Grid Margin="5">
                     <Grid  Name="btnTemplateIcon" Margin="2,2,2,2"  Visibility="Visible" MouseEnter="btnTemplateIcon_MouseEnter">

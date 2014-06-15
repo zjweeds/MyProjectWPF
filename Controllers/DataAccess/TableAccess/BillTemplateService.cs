@@ -29,10 +29,10 @@ namespace Controllers.DataAccess
             try
             {
                 StringBuilder sbSql = new StringBuilder();
-                sbSql.Append("insert into TemplateInfo (TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth) ");
-                sbSql.Append("                 values (@TIName,@TIBackground,@TIWidth,@TIHeight,@TITTID,@TICodeLegth) ");
+                sbSql.Append("insert into TemplateInfo (TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth,TIIsPrintBg) ");
+                sbSql.Append("                 values (@TIName,@TIBackground,@TIWidth,@TIHeight,@TITTID,@TICodeLegth,@TIIsPrintBg) ");
                 sbSql.Append(" Select @@Identity ");
-                SqlParameter[] param = new SqlParameter[6];
+                SqlParameter[] param = new SqlParameter[7];
                 param[0] = new SqlParameter("@TIName", SqlDbType.NVarChar, 30);
                 param[0].Value = btm.TIName; ;
                 param[1] = new SqlParameter("@TIBackground ", SqlDbType.Image);
@@ -45,6 +45,8 @@ namespace Controllers.DataAccess
                 param[4].Value =btm.TITTID;
                 param[5] = new SqlParameter("@TICodeLegth ", SqlDbType.Int);
                 param[5].Value = btm.TICodeLegth;
+                param[6] = new SqlParameter("@TIIsPrintBg ", SqlDbType.Int);
+                param[6].Value = btm.TIIsPrintBg;
                 return new MySqlHelper().ExecSqlReturnId(sbSql.ToString(), param);
             }
             catch (Exception ex)
@@ -65,10 +67,10 @@ namespace Controllers.DataAccess
             try
             {
                 StringBuilder sbSql = new StringBuilder();
-                sbSql.Append("insert into TemplateInfo (TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth) ");
-                sbSql.Append("                 values (@TIName,@TIBackground,@TIWidth,@TIHeight,@TITTID,@TICodeLegth) ");
+                sbSql.Append("insert into TemplateInfo (TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth,TIIsPrintBg) ");
+                sbSql.Append("                 values (@TIName,@TIBackground,@TIWidth,@TIHeight,@TITTID,@TICodeLegth,@TIIsPrintBg) ");
                 sbSql.Append(" Select @@Identity ");
-                SqlParameter[] param = new SqlParameter[6];
+                SqlParameter[] param = new SqlParameter[7];
                 param[0] = new SqlParameter("@TIName", SqlDbType.NVarChar, 30);
                 param[0].Value = dt.Rows[0]["TIName"].ToString();
                 param[1] = new SqlParameter("@TIBackground ", SqlDbType.Image);
@@ -81,6 +83,8 @@ namespace Controllers.DataAccess
                 param[4].Value = Convert.ToInt32(dt.Rows[0]["TITTID"].ToString());
                 param[5] = new SqlParameter("@TICodeLegth ", SqlDbType.Int);
                 param[5].Value = Convert.ToInt32(dt.Rows[0]["TICodeLegth"].ToString());
+                param[6] = new SqlParameter("@TIIsPrintBg ", SqlDbType.Int);
+                param[6].Value = Convert.ToInt32(dt.Rows[0]["TIIsPrintBg"].ToString());
                 return new MySqlHelper().ExecSqlReturnId(sbSql.ToString(), param);
             }
             catch (Exception ex)
@@ -106,8 +110,9 @@ namespace Controllers.DataAccess
                 sbSql.Append("     ,TIHeight =@TIHeight ");
                 sbSql.Append("     ,TITTID =@TITTID ");
                 sbSql.Append("     ,TICodeLegth =@TICodeLegth ");
+                sbSql.Append("     ,TIIsPrintBg =@TIIsPrintBg ");
                 sbSql.Append(" where TIID=@TIID " );
-                SqlParameter[] param = new SqlParameter[7];
+                SqlParameter[] param = new SqlParameter[8];
                 param[0] = new SqlParameter("@TIName", SqlDbType.NVarChar, 30);
                 param[0].Value = btm.TIName; ;
                 param[1] = new SqlParameter("@TIBackground ", SqlDbType.Image);
@@ -120,8 +125,10 @@ namespace Controllers.DataAccess
                 param[4].Value = btm.TITTID;
                 param[5] = new SqlParameter("@TICodeLegth ", SqlDbType.Int);
                 param[5].Value = btm.TICodeLegth;
-                param[6] = new SqlParameter("@TIID ", SqlDbType.Int);
-                param[6].Value = btm.TIID;
+                param[6] = new SqlParameter("@TIIsPrintBg ", SqlDbType.Int);
+                param[6].Value = btm.TIIsPrintBg;
+                param[7] = new SqlParameter("@TIID ", SqlDbType.Int);
+                param[7].Value = btm.TIID;
                 return new MySqlHelper().ExecDataBySql(sbSql.ToString(), param);
             }
             catch (Exception ex)
@@ -138,7 +145,7 @@ namespace Controllers.DataAccess
         public static DataTable GetDataTableByID(int billTemplateID)
         {
             StringBuilder sbsql = new StringBuilder();
-            sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
+            sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth,TIIsPrintBg ");
             sbsql.Append(" from TemplateInfo with(nolock) ");
             sbsql.Append(" where 1=1 ");
             sbsql.AppendFormat("       and TIID ='{0}' ", billTemplateID);
@@ -169,6 +176,7 @@ namespace Controllers.DataAccess
                         btm.TIHeight = Convert.ToInt32(dtitem.Rows[i][4]);
                         btm.TITTID = Convert.ToInt32(dtitem.Rows[i][5]);
                         btm.TICodeLegth = Convert.ToInt32(dtitem.Rows[i][6]);
+                        btm.TIIsPrintBg = Convert.ToInt32(dtitem.Rows[i][7]);
                         btmlist.Add(btm);
                     }
                     return btmlist;
@@ -202,6 +210,7 @@ namespace Controllers.DataAccess
                 btm.TIHeight = Convert.ToInt32(dt.Rows[0]["TIHeight"]);
                 btm.TITTID = Convert.ToInt32(dt.Rows[0]["TITTID"]);
                 btm.TICodeLegth = Convert.ToInt32(dt.Rows[0]["TICodeLegth"]);
+                btm.TIIsPrintBg = Convert.ToInt32(dt.Rows[0]["TIIsPrintBg"]);
 
             }
             return btm;
@@ -215,7 +224,7 @@ namespace Controllers.DataAccess
         public static DataTable GetDataTableByTypeName(String sTemplateName)
         {
             StringBuilder sbsql = new StringBuilder();
-            sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth ");
+            sbsql.Append(" select TIID,TIName,TIBackground,TIWidth,TIHeight,TITTID,TICodeLegth,TIIsPrintBg ");
             sbsql.Append(" from TemplateInfo with(nolock) ");
             sbsql.Append("  join TemplateType with(nolock) ");
             sbsql.Append("     on TemplateType.TTID = TemplateInfo.TITTID ");

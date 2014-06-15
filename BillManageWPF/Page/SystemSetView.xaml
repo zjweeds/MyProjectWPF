@@ -103,7 +103,7 @@
             <Grid Margin="10">
                 <Grid  Name="btnOutIcon" Margin="5"  Visibility="Visible"   MouseEnter="btnOutIcon_MouseEnter">
                     <Border BorderThickness="5" BorderBrush="ForestGreen"  CornerRadius="10,10,10,10" >
-                        <Grid  Background="#FF1A1A1A">
+                        <Grid  Background="#FF101010">
                             <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/Icon/dark/pinterest_blk.png" OpacityMask="#FF6A6A6A" />
                             <TextBlock Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="导出账套" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
                         </Grid>

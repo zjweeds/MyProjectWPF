@@ -35,7 +35,7 @@
         </StackPanel>
         <StackPanel Grid.Row="6" Orientation="Horizontal">
             <Label Content="管理员账号：" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Foreground="WhiteSmoke"/>
-            <TextBox Name="txtAdmin" Width="180" Foreground="#FF1A69B3"/>
+            <TextBox TextAlignment="Center"  Name="txtAdmin" Width="180" Foreground="#FF1A69B3"  Text="00000" IsReadOnly="True"/>
         </StackPanel>
         <StackPanel Grid.Row="8" Orientation="Horizontal">
             <Label Content="管理员密码：" Width="100" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" FontSize="16" Foreground="WhiteSmoke"/>

@@ -27,7 +27,7 @@
             <ColumnDefinition Width="80"/>
 
         </Grid.ColumnDefinitions>
-        <Button  Name="btnEXIT" Grid.Column="5"  Grid.Row="0"  MaxHeight="45" Height="45" MinHeight="45" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,3,3,0" BorderThickness="0" Click="Button_Click" MouseEnter="Button_MouseEnter" Width="45" MinWidth="45" MaxWidth="45" MouseLeave="btnEXIT_MouseLeave" >
+        <Button  Name="btnEXIT"   VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-19,-18,0" BorderThickness="0" Click="Button_Click" MouseEnter="Button_MouseEnter" Width="31"  MouseLeave="btnEXIT_MouseLeave" Height="28" Grid.Column="5" >
             <Button.Background>
                 <ImageBrush ImageSource="Skin/Button/xn.png"/>
             </Button.Background>

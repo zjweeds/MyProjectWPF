@@ -17,6 +17,9 @@ using System.Data;
 
 namespace Controllers.DataAccess
 {
+    /// <summary>
+    /// BillInfo账单信息数据访问层
+    /// </summary>
     public class BillInfoService
     {
         /// <summary>

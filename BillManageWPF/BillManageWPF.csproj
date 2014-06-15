@@ -25,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>3</WarningLevel>
     <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>bin\Debug\BillManageWPF.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -88,6 +89,15 @@
     <Compile Include="Content\DataSourcesEdit\TableEditWindow.xaml.cs">
       <DependentUpon>TableEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Help\LoremIpsum.xaml.cs">
+      <DependentUpon>LoremIpsum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Help\MySoftInfo.xaml.cs">
+      <DependentUpon>MySoftInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Help\Programs.xaml.cs">
+      <DependentUpon>Programs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Main\MainMeumList.xaml.cs">
       <DependentUpon>MainMeumList.xaml</DependentUpon>
     </Compile>
@@ -121,9 +131,6 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MertoUIWindow.xaml.cs">
-      <DependentUpon>MertoUIWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ModerUIMain.xaml.cs">
       <DependentUpon>ModerUIMain.xaml</DependentUpon>
     </Compile>
@@ -132,6 +139,9 @@
     </Compile>
     <Compile Include="Page\DataSourceList.xaml.cs">
       <DependentUpon>DataSourceList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\HelpCenter.xaml.cs">
+      <DependentUpon>HelpCenter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\SystemSetView.xaml.cs">
       <DependentUpon>SystemSetView.xaml</DependentUpon>
@@ -168,6 +178,12 @@
     </Compile>
     <Compile Include="winFormUI\CompanyEidt\CompanyAddForm.Designer.cs">
       <DependentUpon>CompanyAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="winFormUI\CompanyEidt\DepartmentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="winFormUI\CompanyEidt\DepartmentEditForm.Designer.cs">
+      <DependentUpon>DepartmentEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="winFormUI\TemplateForms\CheckBoxProperyForm.cs">
       <SubType>Form</SubType>
@@ -247,6 +263,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Content\Help\LoremIpsum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Content\Help\MySoftInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Help\Programs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Main\MainMeumList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,10 +323,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MertoUIWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ModerUIMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -308,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Page\DataSourceList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\HelpCenter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -369,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\CompanyEidt\CompanyAddForm.resx">
       <DependentUpon>CompanyAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="winFormUI\CompanyEidt\DepartmentEditForm.resx">
+      <DependentUpon>DepartmentEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="winFormUI\TemplateForms\CheckBoxProperyForm.resx">
       <DependentUpon>CheckBoxProperyForm.cs</DependentUpon>

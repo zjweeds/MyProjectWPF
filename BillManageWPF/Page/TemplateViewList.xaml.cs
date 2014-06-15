@@ -1,4 +1,11 @@
-﻿
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-10-26 10:59
+ * 描    述：
+ *             TemplateViewList.xaml 的交互逻辑
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 
 #region 引入命名空间
 using System;
@@ -156,7 +163,8 @@ namespace BillManageWPF.Page
         private System.Windows.Forms.ListView SelectForce(List<System.Windows.Forms.ListView> lsvs)
         {
             int mark = 0;
-            foreach (System.Windows.Forms.ListView lsv in lsvs)
+            System.Windows.Forms.ListView lsv= lsvs[tabList.SelectedIndex];
+            if(lsv!=null)
             {
                 if (lsv.SelectedItems.Count > 0)
                 {
@@ -203,7 +211,7 @@ namespace BillManageWPF.Page
             }
             else
             {
-                return "";
+                return String.Empty;
             }
         }
         #endregion
@@ -241,7 +249,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -258,13 +265,12 @@ namespace BillManageWPF.Page
                 Button b = sender as Button;
                 if (b != null)
                 {
-                    b.Background = new SolidColorBrush(Color.FromRgb(150, 135, 199));
+                    b.Background = new SolidColorBrush(Color.FromRgb(67,212,234));
                     b.Foreground = new SolidColorBrush(Colors.Black);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -291,7 +297,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -304,13 +309,13 @@ namespace BillManageWPF.Page
         {
             try
             {
-                TemplateProperyEdit tpe = new TemplateProperyEdit(tabList.SelectedTab.Text);
+                String bsname = tabList.SelectedTab.Text;
+                TemplateProperyEdit tpe = new TemplateProperyEdit(bsname);
                 tpe.ShowDialog();
-                UpdataView(tabList.SelectedTab.Text);
+                UpdataView(bsname);                 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }   
 
@@ -339,7 +344,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -368,7 +372,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -397,7 +400,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -424,7 +426,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -448,7 +449,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -478,7 +478,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -542,7 +541,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -604,7 +602,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -658,7 +655,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
         #endregion
@@ -691,11 +687,16 @@ namespace BillManageWPF.Page
                             , dtTemp.Rows[0]["TIName"].ToString());
                         if (MessageBox.Show(mesg, "软件提示", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            //WaitWindow ww = new WaitWindow();
-                            //ww.Show();
                             ExcelHelper.ExportToExcel(ds, out path);
-                            String imagepath = path.Substring(0, path.LastIndexOf(@"\")) + @"\BackImage\" + dtTemp.Rows[0]["TIID"].ToString() + ".jpg";
-                            imahelper.SaveImage(imahelper.GetImageByByte(dtTemp.Rows[0]["TIBackground"] as byte[]), imagepath);
+                            String Dpath = path.Substring(0, path.LastIndexOf(@"\")) + @"\BackImage\" ;//+ dtTemp.Rows[0]["TIID"].ToString() + ".jpg";
+                            if (!Directory.Exists(Dpath))
+                            {
+                                Directory.CreateDirectory(Dpath);
+                            }
+                            String imagepath = Dpath+ dtTemp.Rows[0]["TIID"].ToString() + ".jpg";                            
+                            String pathfile = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + SoftUser.Op_Bill;
+                            String sourcePath = pathfile + @"\" + tabList.SelectedTab.Text + @"\" + dtTemp.Rows[0]["TIID"].ToString() + ".jpg";
+                            File.Copy(sourcePath, imagepath);
                             MessageBox.Show("导出成功！", "软件提示");
                         }
                     }
@@ -707,7 +708,6 @@ namespace BillManageWPF.Page
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -773,7 +773,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
     }

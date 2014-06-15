@@ -41,7 +41,6 @@ namespace BillManageWPF.Content.UserManage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
         private void Button_MouseEnter(object sender, MouseEventArgs e)
@@ -57,7 +56,6 @@ namespace BillManageWPF.Content.UserManage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -74,7 +72,6 @@ namespace BillManageWPF.Content.UserManage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -93,7 +90,6 @@ namespace BillManageWPF.Content.UserManage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -138,7 +134,6 @@ namespace BillManageWPF.Content.UserManage
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 

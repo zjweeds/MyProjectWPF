@@ -17,6 +17,9 @@ using Controllers.Models;
 
 namespace Controllers.DataAccess
 {
+    /// <summary>
+    /// BillSetS账套信息数据访问层
+    /// </summary>
     public class BillSetService
     {
         /// <summary>

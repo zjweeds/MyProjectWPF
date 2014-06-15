@@ -33,9 +33,9 @@ namespace Controllers.Common
 
             String NumStr;//整个数字字符串
             String NumStr_Zh;//整数部分
-            String NumSr_X = "";//小数部分
+            String NumSr_X = String.Empty;//小数部分
             String NumStr_DQ;//当前的数字字符
-            String NumStr_R = "";//返回的字符串
+            String NumStr_R = String.Empty;//返回的字符串
 
             Num = Math.Round(Num, 2);//四舍五入取两位
 
@@ -49,7 +49,9 @@ namespace Controllers.Common
 
             //判断是否有整数
             if (Num < 1.00)
+            {
                 iZhSh_bool = false;
+            }
 
             NumStr = Num.ToString();
 
@@ -68,14 +70,17 @@ namespace Controllers.Common
             }
 
             if (iZhSh_bool)
-            {//整数部分处理
+            {
+                //整数部分处理
                 NumStr_Zh = Reversion_Str(NumStr_Zh);//反转字符串
-
                 for (int a = 0; a < NumStr_Zh.Length; a++)
-                {//整数部分转换
+                {
+                    //整数部分转换
                     NumStr_DQ = NumStr_Zh.Substring(a, 1);
                     if (int.Parse(NumStr_DQ) != 0)
+                    {
                         NumStr_R = DaX_ShZ[int.Parse(NumStr_DQ)] + DaX_JiE_DW[a] + NumStr_R;
+                    }
                     else if (a == 0 || a == 4 || a == 8)
                     {
                         if (NumStr_Zh.Length > 8 && a == 4)
@@ -84,13 +89,9 @@ namespace Controllers.Common
                     }
                     else if (int.Parse(NumStr_Zh.Substring(a - 1, 1)) != 0)
                         NumStr_R = DaX_ShZ[int.Parse(NumStr_DQ)] + NumStr_R;
-
                 }
-
                 if (!iXSh_bool)
                     return NumStr_R + "整";
-
-                //NumStr_R += "零";
             }
 
             for (int b = 0; b < NumSr_X.Length; b++)
@@ -114,7 +115,7 @@ namespace Controllers.Common
         /// <returns>转换后的字符串</returns>
         public static String LowercaseGetCap(String NumStr, Boolean Dw)
         {
-            String CapStr = "";
+            String CapStr = String.Empty;
             String NumStr_LS;
 
             if (NumStr == String.Empty)
@@ -162,10 +163,9 @@ namespace Controllers.Common
         {
             Char[] LS_Str = Rstr.ToCharArray();
             Array.Reverse(LS_Str);
-            String ReturnSte = "";
+            String ReturnSte = String.Empty;
             ReturnSte = new String(LS_Str);//反转字符串
             return ReturnSte;
-
         }
     }
 }

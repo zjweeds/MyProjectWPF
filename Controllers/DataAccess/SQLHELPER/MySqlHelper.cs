@@ -1,10 +1,11 @@
-﻿//----------------------------------------------------------------//
-//功能：数据库帮助类                                              //
-//作者：赵建                                                      //
-//版本：v1.3                                                      //
-//创建时间：2013/11/7   15:34:00                                  //
-//最后一次修改时间：2014/3/23   17:22:00                          //
-//---------------------------------------------------------------//
+﻿/******************************************************************
+ * 创 建 人：  赵建
+ * 创建时间：  2013-10-26 10:59
+ * 描    述：
+ *             数据库帮助类 MySqlHelper
+ * 版    本：  V1.0      
+ * 环    境：  VS2013
+******************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,33 +13,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.OleDb;
 using Controllers.Common;
+using System.IO;
 
 namespace Controllers.DataAccess.SQLHELPER
 {
+   /// <summary>
+    /// 数据库帮助类 MySqlHelper
+   /// </summary>
    public  class MySqlHelper
    {
-        #region 只读属性
-        /// <summary>
-        /// 数据库连接
-        /// </summary>
+       #region 字段
         private SqlConnection m_Conn;
-        public SqlConnection Conn
-        {
-            get { return m_Conn; }
-        }
-             
-        /// <summary>
-        /// 数据库命令
-        /// </summary>
         private SqlCommand m_Cmd;
-        public SqlCommand Cmd
-        {
-            get{return m_Cmd;}
-        }
-        #endregion
+        private OleDbConnection ole_Conn;
+        private OleDbCommand ole_Cmd;
+        private String DBType = "SqlServer";
+       #endregion
 
-        #region 重载的构造函数
+       #region 重载的构造函数
         /// <summary>
         /// 直接根据 数据库连接字符串构建
         /// </summary>
@@ -56,48 +50,107 @@ namespace Controllers.DataAccess.SQLHELPER
                 throw e;
             }
         }
-        
-        /// <summary>
-        /// 无参构造函数，从配置文件中读取连接字符串
-        /// </summary>
-        public MySqlHelper()
-        {
+
+       /// <summary>
+       /// 含数据库类别的构造函数
+       /// </summary>
+       /// <param name="strConn"></param>
+       /// <param name="Type"></param>
+       public MySqlHelper(String strConn,String Type)
+       {
+            DBType = Type;
             try
             {
-                Models.SoftConfigModel scfm = new MyXmlHelper().readXMl(AppDomain.CurrentDomain.BaseDirectory + @"\Configs\SoftConfig.xml");
-                String strServer = scfm.softServerIP;//ReadFiles.GetIniFileString("DataBase", "Server", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-                String database = scfm.softDBName; //ReadFiles.GetIniFileString("DataBase", "Database", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-                //获取登录用户
-                String strUserID = scfm.softDBUser; //ReadFiles.GetIniFileString("DataBase", "UserID", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-                //获取登录密码
-                String strPwd = scfm.softDBPwd; //ReadFiles.GetIniFileString("DataBase", "Pwd", "", AppDomain.CurrentDomain.BaseDirectory + "\\BillManage.ini");
-                //数据库连接字符串
-                String strConn = "Server = " + strServer + ";Database = " + database + ";User id=" + strUserID + ";PWD=" + strPwd;
-                //strConn = "server=.;database = BillManage;User id =sa ; PWD = zhaojian ";
-
-                m_Conn = new SqlConnection(strConn);
-                m_Cmd = new SqlCommand();
-                m_Cmd.Connection = m_Conn;
+                if (DBType == "SqlServer")
+                {
+                    m_Conn = new SqlConnection(strConn);
+                    m_Cmd = new SqlCommand();
+                    m_Cmd.Connection = m_Conn;
+                }
+                else if (DBType == "Access")
+                {
+                    ole_Conn = new OleDbConnection(strConn);
+                    ole_Cmd = new OleDbCommand();
+                    ole_Cmd.Connection = ole_Conn;
+                }
             }
             catch (Exception e)
             {
                 throw e;
             }
-        }
-        #endregion
+       }
+
+       /// <summary>
+       /// 无参构造函数，从配置文件中读取连接字符串
+       /// </summary>
+       public MySqlHelper()
+       {
+           try
+           {
+                String spath = AppDomain.CurrentDomain.BaseDirectory + @"\\Configs\SoftConfig.xml";//配置文件路径
+                if (File.Exists(spath))
+                {
+                    DBType = "SqlServer";
+                    Models.SoftConfigModel scfm = new MyXmlHelper().readXMl(AppDomain.CurrentDomain.BaseDirectory + @"\Configs\SoftConfig.xml");
+                    String strServer = scfm.softServerIP;
+                    String database = scfm.softDBName;
+                    //获取登录用户
+                    String strUserID = scfm.softDBUser;
+                    //获取登录密码
+                    String strPwd = scfm.softDBPwd;
+                    //数据库连接字符串
+                    String strConn = "Server = " + strServer + ";Database = " + database + ";User id=" + strUserID + ";PWD=" + strPwd;
+                    m_Conn = new SqlConnection(strConn);
+                    m_Cmd = new SqlCommand();
+                    m_Cmd.Connection = m_Conn;
+                }
+                else
+                {
+                    DBType = "Access";
+                    String strConn = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=""" + AppDomain.CurrentDomain.BaseDirectory + @"\DefalutDB.mdb""";
+                    ole_Conn = new OleDbConnection(strConn);
+                    ole_Cmd = new OleDbCommand();
+                    m_Cmd.Connection = m_Conn;
+                }
+           }
+           catch (Exception e)
+           {
+                throw e;
+           }
+       }
+        
+       #endregion
        
-        #region  私有方法
-        public static void OpenConn(SqlConnection conn)
+       #region  私有方法
+       /// <summary>
+       /// 打开数据库链接
+       /// </summary>
+       /// <param name="conn"></param>
+ 
+       public static void OpenConn(SqlConnection conn)
         {
             if (conn != null && conn.State == ConnectionState.Closed)
                 conn.Open();
         }
-        public static void CloseConn(SqlConnection conn)
+      
+       /// <summary>
+       /// 关闭链接
+       /// </summary>
+       /// <param name="conn"></param>
+       public static void CloseConn(SqlConnection conn)
         {
             if (conn != null && conn.State == ConnectionState.Open)
                 conn.Close();
         }
-        private static SqlCommand CreateCMD(String cmdText, SqlParameter[] paramers, SqlConnection conn)
+       
+       /// <summary>
+       /// 创建新纪录
+       /// </summary>
+       /// <param name="cmdText"></param>
+       /// <param name="paramers"></param>
+       /// <param name="conn"></param>
+       /// <returns></returns>
+       private static SqlCommand CreateCMD(String cmdText, SqlParameter[] paramers, SqlConnection conn)
         {
             SqlCommand cmd = new SqlCommand(cmdText, conn);
             if (paramers != null)
@@ -105,71 +158,69 @@ namespace Controllers.DataAccess.SQLHELPER
             OpenConn(conn);
             return cmd;
         }
-        #endregion 
+       #endregion 
 
-        #region 公共方法
-        /// <summary>
-        /// 插入数据，返回自增ID
+       #region 公共方法
+       /// <summary>
+       /// 插入数据，返回自增ID
        /// </summary>
        /// <param name="strSql"></param>
        /// <returns></returns>
-        public int ExecSqlReturnId(String strSql)
+       public int ExecSqlReturnId(String strSql)
         {
-            int intReturnValue;
-            m_Cmd.CommandType = CommandType.Text;
-            m_Cmd.CommandText = strSql;
-            try
+            int intReturnValue=-1;
+            if (DBType == "SqlServer")
             {
-                OpenConn(m_Conn);
-                intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
+                m_Cmd.CommandType = CommandType.Text;
+                m_Cmd.CommandText = strSql;
+                try
+                {
+                    OpenConn(m_Conn);
+                    intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    CloseConn(m_Conn);//连接关闭，但不释放掉该对象所占的内存单元
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
-            }
-            finally
-            {
-                CloseConn(m_Conn);//连接关闭，但不释放掉该对象所占的内存单元
+                //access数据库
+                ole_Cmd.CommandType = CommandType.Text;
+                ole_Cmd.CommandText = strSql;
+                try
+                {
+                    if (ole_Conn.State != ConnectionState.Open)
+                    {
+                        ole_Conn.Open();
+                        intReturnValue = Convert.ToInt32(ole_Cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    if (ole_Conn.State != ConnectionState.Closed)
+                    {
+                        ole_Conn.Close();
+                    }
+                }
             }
             return intReturnValue;
-        }
+        }       
 
        /// <summary>
-        /// 插入数据，返回自增ID
+       /// 插入数据，返回自增ID
        /// </summary>
-       /// <param name="strSql"></param>
-       /// <param name="param"></param>
-       /// <param name="count"></param>
+       /// <param name="cmdText"></param>
+       /// <param name="paramers"></param>
        /// <returns></returns>
-       //public int ExecSqlReturnId(String strSql, SqlParameter[] param, int count)
-       // {
-       //     int intReturnValue;
-       //     m_Cmd.CommandType = CommandType.Text;
-       //     m_Cmd.CommandText = strSql;
-       //     m_Cmd.Parameters.Clear();
-       //     for (int i = 0; i < count; i++)
-       //     {
-       //         m_Cmd.Parameters.Add(param[i]);
-       //     }
-       //     try
-       //     {
-       //         if (m_Conn.State == ConnectionState.Closed)
-       //         {
-       //             m_Conn.Open();
-       //         }
-       //         intReturnValue = Convert.ToInt32(m_Cmd.ExecuteScalar());
-       //     }
-       //     catch (Exception e)
-       //     {
-       //         throw e;
-       //     }
-       //     finally
-       //     {
-       //         m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
-       //     }
-       //     return intReturnValue;
-       // }
-
        public int ExecSqlReturnId(String cmdText, params SqlParameter[] paramers)
        {
            int intReturnValue;
@@ -188,12 +239,12 @@ namespace Controllers.DataAccess.SQLHELPER
            }
            return intReturnValue;
        }
+            
        /// <summary>
        /// 通过Transact-SQL语句提交数据
        /// </summary>
-       /// <param name="strSql"></param>
-       /// <param name="param"></param>
-       /// <param name="count"></param>
+       /// <param name="cmdText"></param>
+       /// <param name="paramers"></param>
        /// <returns></returns>
        public int ExecDataBySql(String cmdText, params SqlParameter[] paramers)
        {
@@ -221,24 +272,50 @@ namespace Controllers.DataAccess.SQLHELPER
         /// <returns></returns>
         public int ExecDataBySql(String strSql)
         {
-            int intReturnValue;
-            m_Cmd.CommandType = CommandType.Text;
-            m_Cmd.CommandText = strSql;           
-            try
+            int intReturnValue=0;
+            if (DBType == "SqlServer")
             {
-                if (m_Conn.State == ConnectionState.Closed)
+                //sqlserver数据库
+                m_Cmd.CommandType = CommandType.Text;
+                m_Cmd.CommandText = strSql;
+                try
                 {
-                    m_Conn.Open();
+                    if (m_Conn.State == ConnectionState.Closed)
+                    {
+                        m_Conn.Open();
+                    }
+                    intReturnValue = m_Cmd.ExecuteNonQuery();
                 }
-                intReturnValue = m_Cmd.ExecuteNonQuery();
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
-            }
-            finally
-            {
-                m_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+                //access数据库
+                ole_Cmd.CommandType = CommandType.Text;
+                ole_Cmd.CommandText = strSql;
+                try
+                {
+                    if (ole_Conn.State == ConnectionState.Closed)
+                    {
+                        ole_Conn.Open();
+                    }
+                    intReturnValue = ole_Cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    ole_Conn.Close();//连接关闭，但不释放掉该对象所占的内存单元
+                }
             }
             return intReturnValue;
         }
@@ -306,13 +383,14 @@ namespace Controllers.DataAccess.SQLHELPER
             return ds;
         }
 
-        /// <summary>
-        /// 通过Transact-SQL语句得到DataSet实例
-        /// </summary>
-        /// <param name="strSql">Transact-SQL语句</param>
-        /// <param name="strTable">相关的数据表</param>
-        /// <returns>DataSet实例的引用</returns>
-        public DataSet GetDataSet(String cmdText, params SqlParameter[] paramers)
+        
+       /// <summary>
+       /// 通过Transact-SQL语句得到DataSet实例
+       /// </summary>
+       /// <param name="cmdText"></param>
+       /// <param name="paramers"></param>
+       /// <returns></returns>
+       public DataSet GetDataSet(String cmdText, params SqlParameter[] paramers)
         {
             DataSet ds = null;
             try
@@ -432,11 +510,13 @@ namespace Controllers.DataAccess.SQLHELPER
 
             return obj;
         }
+
         /// <summary>
         /// 重新封装ExecuteScalar方法，得到结果集中的第一行的第一列
         /// </summary>
-        /// <param name="strSql">Transact-SQL语句</param>
-        /// <returns>结果集中的第一行的第一列</returns>
+        /// <param name="cmdText"></param>
+        /// <param name="paramers"></param>
+        /// <returns></returns>
         public object GetSingleObject(String cmdText, params SqlParameter[] paramers)
         {
             object obj = null;
@@ -480,31 +560,7 @@ namespace Controllers.DataAccess.SQLHELPER
             }
 
             return dt; //dt.Rows.Count可能等于零
-        }
-
-        /// <summary>
-        /// 通过Transact-SQL语句，得到DataTable实例
-        /// </summary>
-        /// <param name="strSqlCode">Transact-SQL语句</param>
-        /// <param name="strTableName">数据表的名称</param>
-        /// <returns>DataTable实例的引用</returns>
-        //public DataTable GetDataTable(String cmdText, params SqlParameter[] paramers)
-        //{
-        //    DataTable dt = new DataTable(); ;
-        //    SqlDataAdapter sda = null;
-        //    try
-        //    {
-        //        m_Cmd = CreateCMD(cmdText, paramers, m_Conn);
-        //        sda= new SqlDataAdapter(m_Cmd);
-        //        sda.Fill(dt);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-
-        //    return dt; //dt.Rows.Count可能等于零
-        //}
+        }        
 
         /// <summary>
         /// 通过存储过程，得到DataTable实例
@@ -538,7 +594,6 @@ namespace Controllers.DataAccess.SQLHELPER
             return dt; //dt.Rows.Count可能等于零
         }
 
-
        /// <summary>
        /// 根据数据源更新数据库
        /// </summary>
@@ -563,6 +618,7 @@ namespace Controllers.DataAccess.SQLHELPER
                 throw ex;
             }
         }
+
         #endregion
    }
 }

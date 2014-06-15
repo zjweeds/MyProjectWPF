@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="BillManageWPF.Content.Help.Programs"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ScrollViewer>
+        <StackPanel MinWidth="200">
+            <TextBlock Text="常见问题信息" Style="{StaticResource Heading2}" />
+            <TextBlock Text=" 为什么还是打不准？ " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+
+
+            <TextBlock Text="答： " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text=" 1、打印机由于设计原因或硬件磨损会出现走纸不精确，这就会造成打印不准。 " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text=" 2、票据在多次印刷中也会有误差，会造成打印不准； " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text=" 3、设计票据的过程中，由于背景图片与实际票据比例不符，或尺寸设置有误，会造成打印不准； " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text=" 4、票据在放入打印机的时候进纸不正，会造成打印不准； " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text=" 5、打印方案没有设置准确，会造成打印不准。 " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text="  票据通支持什么打印机 ？  " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+
+            <TextBlock Text=" 答：理论上，只要是支持windows的打印机，都可以在票据通中很好的使用。但是在实际使用上，还是会有些区别的。决定选择打印机类型的因素取决于您所需打印票据的类型。我们将打印机分三类：激光、喷墨和针式打印机。我们举几个常见的例子来说明如何选择打印机： " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text="  支票：如果仅打印支票，那么三类打印机均可。但要注意如果打印机的最小的打印范围比支票尺寸大，那么这类打印机就不要选择，尤其是一些大型的多功能一体机。另外，如果是A4纸幅面的激光或喷墨打印机打印支票时尽量选择侧向进纸，因为支票正向的尺寸超出了A4纸的宽度。而A4纸幅面的平推打印机因为档板可以移动的关系，可以选择正向进纸。  " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text="  多联票据、多孔连续纸张：这类票据必须选择针式打印机，而且尽量是针式平推，如果是滚筒针式的打印机，我们在放纸时特别需要注意手工控制进纸，基本上滚筒针式只应用于打印多孔连续纸张。  " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+            <TextBlock Text=" 信封、证卡类：这类票据如果应用批量打印，即把一打信封或证卡放入打印机，点击一次打印后得到一打打印好的信封或证卡，那么我们就需要选择激光或者喷墨打印机，因这类打印机有一个进纸槽。  " Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text="  我们推荐购买EPSON LQ630K或LQ670K等系列平推打印机。 " Margin="0,0,0,8" TextWrapping="Wrap" />
+
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

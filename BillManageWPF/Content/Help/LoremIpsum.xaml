@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="FirstFloor.ModernUI.App.Content.LoremIpsum"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ScrollViewer>
+        <StackPanel MinWidth="200">
+            <TextBlock Text="常用帮助信息" Style="{StaticResource Heading2}" />
+            <TextBlock Text="系统使用账套分离技术，以便维护和更新，如果客户存在两个独立核算的部门，可以分两个或以上账套。 " Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text=" 单击账套名称输入框右侧按钮则可打开【对话框】，选择所需账套 。" Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text="【用户名称】系统默认为【系统管理员】，这用户为不可改名用户，只可修改密码。 " Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text="【用户密码】系统默认为空，进入后请及时在主界面中修改。 " Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text=" 指定账套不存在！ 是指账套找不到，请重新定位账套。 " Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text="第一步，登录系统后，我们直接点击打印方案，创建一个打印方案." Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text="第二步，选择票据打印，双击一张票据进入开票界面，填写数据后点击打印。" Margin="0,0,0,8" TextWrapping="Wrap" />
+            <TextBlock Text="第三步，根据打印效果，我们进行打印调整。点击票据设计，进入票据设计界面。" Margin="0,0,0,8" TextWrapping="Wrap" />            
+            <TextBlock Text="观察打印效果如果我们发现打印后的票据内容发生整体偏移现象，就需要进行调整。点击 打印预览，对票据进行整体打印偏移，如下图所示，所有红色标识的区域内容，即整体打印出的内容全部向右下角偏移 " Margin="0,0,0,8" TextWrapping="Wrap" />  
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

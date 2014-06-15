@@ -139,7 +139,7 @@
                     <Grid  Name="btnHelperIcon" Margin="2,2,2,2"  Visibility="Visible"   MouseEnter="btnHelperIcon_MouseEnter">
                         <Border BorderThickness="5" BorderBrush="DarkGreen"  CornerRadius="10,10,10,10" >
                             <Grid  Background="#FF3554D3">
-                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/HelperCenter.png" />
+                                <Image  HorizontalAlignment="Center" VerticalAlignment="Center" Source="/BillManageWPF;component/Skin/mainUIico/HelperCenter1.png" />
                                 <TextBlock  Margin="10" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Text="帮助中心" Foreground="White" FontFamily="微软雅黑" FontSize="16"/>
                             </Grid>
                         </Border>

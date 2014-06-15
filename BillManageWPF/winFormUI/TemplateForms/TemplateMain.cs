@@ -46,8 +46,6 @@ namespace BillManageWPF.winFormUI
         public PickBox pb = null; //响应用户拖拽事件的帮助类
         float fDpiX;//横向分辨率
         float fDpiY;//纵向分辨率
-        #region  记录控件个数
-        #endregion 
         public BillTemplatModel btm = new BillTemplatModel();
         public List<MyTextBox> mytextList = new List<MyTextBox>();
         public IList<MoneyPanel> mympList = new List<MoneyPanel>();
@@ -55,7 +53,6 @@ namespace BillManageWPF.winFormUI
         public IList<MyCheckBox> mychbList = new List<MyCheckBox>();
         public IList<MyComboBox> mycbbList = new List<MyComboBox>();
         public IList<MyLabel> mylbList = new List<MyLabel>();
-        //public ControlService cs = new ControlService();
         #endregion
 
         #region 自定义方法
@@ -91,8 +88,7 @@ namespace BillManageWPF.winFormUI
         #endregion
        
         #region 根据控件对象获取实体
-
-       private ControlInfo GetControlPropery(MyTextBox tmp)
+        private ControlInfo GetControlPropery(MyTextBox tmp)
         {
 
             ControlInfo textModel = new ControlInfo();
@@ -162,7 +158,6 @@ namespace BillManageWPF.winFormUI
             }
             return textModel;
         }
-
         private ControlInfo GetControlPropery(MyCheckBox tmp)
         {
             ControlInfo textModel = new ControlInfo();
@@ -193,7 +188,6 @@ namespace BillManageWPF.winFormUI
             }
             return textModel;
         }
-
         private ControlInfo GetControlPropery(MyComboBox tmp)
         {
             ControlInfo textModel = new ControlInfo();
@@ -225,7 +219,6 @@ namespace BillManageWPF.winFormUI
             }
             return textModel;
         }
-
         private ControlInfo GetControlPropery(MyDateTimePicker tmp)
         {
             ControlInfo textModel = new ControlInfo();
@@ -329,23 +322,6 @@ namespace BillManageWPF.winFormUI
             ControlsInfoManager.DeleteControlInfoByCIID(ControlsID);
         }
         #endregion
-
-       /// <summary>
-       /// 删除边框点
-       /// </summary>
-        private void DeletePixBoxLabels()
-        {
-            if( this.DesignContext.board.Controls!=null&& this.DesignContext.board.Controls.Count>0)
-            {
-            foreach (Control clabel in this.DesignContext.board.Controls)
-            {
-                if(clabel.GetType()==typeof(Label)&&clabel.BackColor==Color.SkyBlue)
-                {
-                    clabel.Dispose();
-                }
-            }
-            }
-        }
 
         /// <summary>
         /// 根据实体列表，保存控件信息到数据库
@@ -630,7 +606,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -648,7 +623,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -672,7 +646,6 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
-                //DeletePixBoxLabels();
                 MyLabel label = new MyLabel();
                 label.NewNumber = mylbList != null ? mylbList.Count : 0;
                 label.ControlID = 0;
@@ -683,7 +656,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -696,7 +668,6 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
-                //DeletePixBoxLabels();
                 MyTextBox label = new MyTextBox();
                 label.Multiline = true; 
                 label.NewNumber = mytextList != null ? mytextList.Count : 0;
@@ -708,7 +679,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -732,7 +702,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -745,7 +714,6 @@ namespace BillManageWPF.winFormUI
         {
             try
             {
-               // DeletePixBoxLabels();
                 MyComboBox label = new MyComboBox();
                 label.NewNumber = mycbbList != null ? mycbbList.Count : 0;
                 label.ControlID = 0;
@@ -756,7 +724,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -780,7 +747,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -804,7 +770,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
         #endregion
@@ -822,7 +787,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -844,7 +808,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -866,7 +829,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -891,7 +853,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 

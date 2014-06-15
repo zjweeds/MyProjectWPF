@@ -131,7 +131,7 @@ namespace Controllers.DataAccess
             {
                 StringBuilder cmdText = new StringBuilder();
                 PermissionInfo per = PermissionInfoService.GetPermissionInfoByEINo(_uCode, comID);
-                if (per.PIAdmin)
+                if (per != null && per.PIAdmin)
                 {
                     //是管理员，可以管理多个公司
                     cmdText.Append(" select  ");

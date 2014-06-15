@@ -19,7 +19,12 @@ namespace BillManageWPF.winFormUI.CompanyEidt
             InitializeComponent();
         }
 
-        
+        public String ItemName = String.Empty;
+
+        /// <summary>
+        /// 加载子公司节点
+        /// </summary>
+        /// <param name="prentNode"></param>
         private void LoadNode(TreeNode prentNode)
         {
             try
@@ -42,12 +47,16 @@ namespace BillManageWPF.winFormUI.CompanyEidt
             }
         }
 
+        /// <summary>
+        /// 加载公司信息
+        /// </summary>
+        /// <param name="CIID"></param>
         private void LoadInfo(int CIID)
         {
             try
             {
                 CompanyInfo ci = CompanyInfoManager.SelectCompanyInfoByCIID(CIID);
-                // txtCompanyName.Text = ci.CIName;
+                txtCompanyName.Text = ci.CIName;
                 txtDesription.Text = ci.CIDescription;
                 lbEMCount.Text = EmployeeInfoManager.ConutEmNumberByCompany(ci.CIID).ToString();
                 lbChildCount.Text = CompanyInfoManager.GetChildrenCountsByCompany(ci.CIID).ToString();
@@ -61,12 +70,22 @@ namespace BillManageWPF.winFormUI.CompanyEidt
                         lsvBillset.Items.Add(dtbs.Rows[i]["BSIName"].ToString());
                     }
                 }
+                DataTable dtDp = DepartmentManage.GetAllDepartmentNameByCompanyName(ci.CIName);
+                ListDpm.Items.Clear();
+                if (dtDp != null && dtDp.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dtDp.Rows.Count; i++)
+                    {
+                        ListDpm.Items.Add(dtDp.Rows[i]["DIName"].ToString());                       
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
+
         /// <summary>
         /// 窗体加载
         /// </summary>
@@ -94,10 +113,14 @@ namespace BillManageWPF.winFormUI.CompanyEidt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
+        /// <summary>
+        /// 点击节点展开下一级
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tvCompanyInfo_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             try
@@ -112,10 +135,14 @@ namespace BillManageWPF.winFormUI.CompanyEidt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
+        /// <summary>
+        /// 子公司添加
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void 添加子公司ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -130,13 +157,201 @@ namespace BillManageWPF.winFormUI.CompanyEidt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolbtnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        /// <summary>
+        /// 点击部门获得职位信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListDpm_Click(object sender, EventArgs e)
+        {
+            if (ListDpm.SelectedItem.ToString() != String.Empty)
+            {
+                int DIID = DepartmentManage.GetAllDepartmentIDByCompanyName(txtCompanyName.Text, ListDpm.SelectedItem.ToString());
+                DataTable dtpo = PositionManage.GetAllPositionNameByDepartment(DIID);
+                listPost.Items.Clear();
+                if (dtpo != null && dtpo.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dtpo.Rows.Count; i++)
+                    {
+                        listPost.Items.Add(dtpo.Rows[i]["PIName"].ToString());
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 添加部门
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolDadd_Click(object sender, EventArgs e)
+        {
+            DepartmentEditForm def = new DepartmentEditForm(this,0);
+            def.ShowDialog();
+            if (ItemName != String.Empty)
+            {
+                int ciid = CompanyInfoManager.GetIDByCompanyName(txtCompanyName.Text);
+                if (DepartmentManage.AddDepartment(ItemName, ciid)>0)
+                {
+                    ItemName = String.Empty;
+                    LoadInfo(ciid);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 修改部门信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolDModify_Click(object sender, EventArgs e)
+        {
+            DepartmentEditForm def = new DepartmentEditForm(this,0);
+            def.ShowDialog();
+            if (ItemName != String.Empty)
+            {
+                int ciid = CompanyInfoManager.GetIDByCompanyName(txtCompanyName.Text);
+                if (DepartmentManage.UpdateDepartment(ItemName, ciid) > 0)
+                {
+                    ItemName = String.Empty;
+                    LoadInfo(ciid);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 删除部门信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolDeleteD_Click(object sender, EventArgs e)
+        {
+            if (ListDpm.SelectedItem != null && ListDpm.SelectedItem.ToString() != String.Empty)
+            {
+                int DIID = DepartmentManage.GetAllDepartmentIDByCompanyName(txtCompanyName.Text, ListDpm.SelectedItem.ToString());
+                DepartmentManage.DeleteDepartment(DIID);
+                DataTable dtDp = DepartmentManage.GetAllDepartmentNameByCompanyName(txtCompanyName.Text);
+                ListDpm.Items.Clear();
+                if (dtDp != null && dtDp.Rows.Count > 0)
+                {
+
+                    for (int i = 0; i < dtDp.Rows.Count; i++)
+                    {
+                        ListDpm.Items.Add(dtDp.Rows[i]["DIName"].ToString());                       
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 增加职位信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tooladdP_Click(object sender, EventArgs e)
+        {
+            DepartmentEditForm def = new DepartmentEditForm(this,1);
+            def.ShowDialog();
+            if (ItemName != String.Empty)
+            {
+                if (ListDpm.SelectedItem != null && ListDpm.SelectedItem.ToString() != String.Empty)
+                {
+                    int DIID = DepartmentManage.GetAllDepartmentIDByCompanyName(txtCompanyName.Text, ListDpm.SelectedItem.ToString());
+                    if (PositionManage.AddPosition(ItemName, DIID) > 0)
+                    {
+                        ItemName = String.Empty;
+                        #region 刷新
+                        DataTable dtpo = PositionManage.GetAllPositionNameByDepartment(DIID);
+                        listPost.Items.Clear();
+                        if (dtpo != null && dtpo.Rows.Count > 0)
+                        {
+                            for (int i = 0; i < dtpo.Rows.Count; i++)
+                            {
+                                listPost.Items.Add(dtpo.Rows[i]["PIName"].ToString());
+                            }
+                        }
+                        #endregion
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        ///修改职位信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolModify_Click(object sender, EventArgs e)
+        {
+            DepartmentEditForm def = new DepartmentEditForm(this, 1);
+            def.ShowDialog();
+            if (ItemName != String.Empty)
+            {
+                if (ListDpm.SelectedItem != null && ListDpm.SelectedItem.ToString() != String.Empty
+                    && listPost.SelectedItem != null && listPost.SelectedItem.ToString() != String.Empty)
+                {
+                    int DIID = DepartmentManage.GetAllDepartmentIDByCompanyName(txtCompanyName.Text, ListDpm.SelectedItem.ToString());
+                    int PIID = PositionManage.GetPositionIDByPositionName(listPost.SelectedItem.ToString(), DIID);
+                    if (PositionManage.UpdatePosition(ItemName, PIID) > 0)
+                    {
+                        ItemName = String.Empty;
+                        #region 刷新
+                        DataTable dtpo = PositionManage.GetAllPositionNameByDepartment(DIID);
+                        listPost.Items.Clear();
+                        if (dtpo != null && dtpo.Rows.Count > 0)
+                        {
+                            for (int i = 0; i < dtpo.Rows.Count; i++)
+                            {
+                                listPost.Items.Add(dtpo.Rows[i]["PIName"].ToString());
+                            }
+                        }
+                        #endregion
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 删除职位信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolDelete_Click(object sender, EventArgs e)
+        {
+            if (ListDpm.SelectedItem != null && ListDpm.SelectedItem.ToString() != String.Empty
+                   && listPost.SelectedItem != null && listPost.SelectedItem.ToString() != String.Empty)
+            {
+                int DIID = DepartmentManage.GetAllDepartmentIDByCompanyName(txtCompanyName.Text, ListDpm.SelectedItem.ToString());
+                int PIID = PositionManage.GetPositionIDByPositionName(listPost.SelectedItem.ToString(), DIID);
+                if (PositionManage.DeletePosition(PIID))
+                {
+                    #region 刷新
+                    DataTable dtpo = PositionManage.GetAllPositionNameByDepartment(DIID);
+                    listPost.Items.Clear();
+                    if (dtpo != null && dtpo.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dtpo.Rows.Count; i++)
+                        {
+                            listPost.Items.Add(dtpo.Rows[i]["PIName"].ToString());
+                        }
+                    }
+                    #endregion
+                }
+            }
+        }
+
     }
 }

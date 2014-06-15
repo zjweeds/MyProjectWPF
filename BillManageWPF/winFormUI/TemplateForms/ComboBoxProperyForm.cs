@@ -184,7 +184,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -197,7 +196,6 @@ namespace BillManageWPF.winFormUI
                     font = tmp.Font;
                     bgc = tmp.BackColor;
                     frc = tmp.ForeColor;
-                    //combobox = tm.cbbList[tmp.NewNumber] as ComboBoxInfo;
                     DataTable dt= DataSourceManager.GetDataTableByCompanyName(SoftUser.UserCompany);
                     cbxTablename.Items.Add(String.Empty);
                     if (dt != null && dt.Rows.Count > 0)
@@ -212,7 +210,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -234,7 +231,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -257,7 +253,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -280,7 +275,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -304,7 +298,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
     }

@@ -19,6 +19,7 @@ using BillManageWPF.winFormUI;
 using System.Data;
 using BillManageWPF.MyCode;
 using System.Windows.Navigation;
+
 namespace BillManageWPF.Content.Template
 {
     /// <summary>
@@ -31,6 +32,7 @@ namespace BillManageWPF.Content.Template
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// 新增模板属性
         /// </summary>
@@ -59,12 +61,10 @@ namespace BillManageWPF.Content.Template
         public ImageHelper imaHelper = new ImageHelper();//图片帮助类
         public String Type = String.Empty; //操作类型（修改、添加）
         public String TemplateTypeName ; // 模板类型名称
-        //public BitmapImage bitImage = null; //保存图片
         public System.Drawing.Image bgimage = null;//保存图片
         public BillTemplatModel btm = new BillTemplatModel(); //模板实体
         private System.Windows.Forms.OpenFileDialog dlgPicture = new System.Windows.Forms.OpenFileDialog(); //文件选择对话框
         public DataTable dttype = new DataTable();
-        //public BillTemplateTypeService btts = new BillTemplateTypeService();
         #endregion
 
         #region 自定义方法
@@ -125,7 +125,6 @@ namespace BillManageWPF.Content.Template
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -194,7 +193,6 @@ namespace BillManageWPF.Content.Template
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -205,7 +203,6 @@ namespace BillManageWPF.Content.Template
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 dttype = BillTemplateTypeManage.GetAllTypeByBillsetName(SoftUser.Op_Bill);
@@ -213,13 +210,15 @@ namespace BillManageWPF.Content.Template
                 if (Type == "Update")
                 {
                     //更新
-
                     cbbTemplatetype.Text = BillTemplateTypeManage.GetTemplateTypeNameById(btm.TITTID);
                     txtTemplateName.Text = btm.TIName;
                     txtTemplateHeigth.Text = btm.TIHeight.ToString();
                     txtTemplateWidth.Text = btm.TIWidth.ToString();
                     txtBillCodeLength.Text = btm.TICodeLegth.ToString();
-                    //ImageBG.Image = new ImageHelper().GetImageByByte(btm.TIBackground);
+                    String path = AppDomain.CurrentDomain.BaseDirectory + @"Images\" + SoftUser.Op_Bill;
+                    String imagepath = path + @"\" + BillTemplateTypeManage.GetTemplateTypeNameById(btm.TITTID)+ @"\" + btm.TIID+ ".jpg";
+                    txtBgPath.Text = imagepath;
+                    ImageBG.Source = new BitmapImage(new Uri(imagepath, UriKind.Absolute));
                     if (btm.TIIsPrintBg != 0)
                     {
                         RadioIsPrint.IsChecked = true;
@@ -237,7 +236,6 @@ namespace BillManageWPF.Content.Template
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
         

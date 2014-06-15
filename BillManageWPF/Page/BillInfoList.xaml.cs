@@ -41,7 +41,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -74,7 +73,6 @@ namespace BillManageWPF.Page
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
     }

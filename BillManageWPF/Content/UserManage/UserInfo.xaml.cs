@@ -41,7 +41,6 @@ namespace BillManageWPF.Content.UserManage.SetInfo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -58,7 +57,6 @@ namespace BillManageWPF.Content.UserManage.SetInfo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -88,7 +86,6 @@ namespace BillManageWPF.Content.UserManage.SetInfo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -114,7 +111,6 @@ namespace BillManageWPF.Content.UserManage.SetInfo
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
     }

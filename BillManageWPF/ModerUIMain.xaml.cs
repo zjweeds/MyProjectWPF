@@ -70,7 +70,6 @@ namespace BillManageWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
         private void imUserPhoto_MouseEnter(object sender, MouseEventArgs e)

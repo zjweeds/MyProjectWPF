@@ -73,7 +73,6 @@ namespace BillManageWPF.Content.DataSourcesEdit
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
         }
 

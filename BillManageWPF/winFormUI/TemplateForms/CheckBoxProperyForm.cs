@@ -101,7 +101,6 @@ namespace BillManageWPF.winFormUI
             }            
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -124,7 +123,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -147,7 +145,6 @@ namespace BillManageWPF.winFormUI
             }            
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
 
@@ -166,7 +163,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -177,7 +173,6 @@ namespace BillManageWPF.winFormUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "软件提示");
             }
         }
     }
