@@ -48,6 +48,16 @@ namespace Controllers.Business
         {
             return BillTemplateService.UpdateByBillTemplatModel(btm);
         }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="tiid"></param>
+        /// <returns></returns>
+        public static int DeleteByID(Int32 tiid)
+        {
+            return BillTemplateService.DeleteByID(tiid);
+        }
         #endregion
 
         #region  select

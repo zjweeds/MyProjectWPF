@@ -721,7 +721,6 @@ namespace BillManageWPF.Page
                 String s_OpenPath = OpenPath();
                 if (s_OpenPath != String.Empty)
                 {
-                    //dsExcelTemp = ExcelHelper.ImportExcel(s_OpenPath);
                     dsExcelTemp = exh.GetExcelDs(s_OpenPath, "模板信息");
                     dsExcelControl = exh.GetExcelDs(s_OpenPath, "控件信息");
                     byte[] imageByte = null;
@@ -755,7 +754,7 @@ namespace BillManageWPF.Page
                     int TIID = BillTemplateManage.AddByDataTable(dsExcelTemp.Tables[0], imageByte);
                     if (TIID > 0)
                     {
-                        for (int j = 0; j < dsExcelControl.Tables[0].Rows.Count; j++)
+                        for (int j = 1; j < dsExcelControl.Tables[0].Rows.Count; j++)
                         {
                             dsExcelControl.Tables[0].Rows[j]["CTITIID"] = TIID;
                         }
@@ -768,6 +767,37 @@ namespace BillManageWPF.Page
                     else
                     {
                         MessageBox.Show("导入失败！");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void btnTemplateDelet_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Windows.Forms.ListView lsvItem = SelectForce(lsvs);
+                if (lsvItem != null)
+                {
+                    if (lsvItem.SelectedItems.Count > 0)
+                    {
+                        int  id = Convert.ToInt32(lsvItem.SelectedItems[0].Name.ToString());
+                        if (BillTemplateManage.DeleteByID(id) > 0)
+                        {
+                            MessageBox.Show("删除成功", "软件提示");
+                            UpdataView(tabList.SelectedTab.Text);
+                        }
+                        else
+                        {
+                            MessageBox.Show("删除失败", "软件提示");
+                        }                      
+                    }
+                    else
+                    {
+                        MessageBox.Show("请先选择票据", "软件提示");
                     }
                 }
             }

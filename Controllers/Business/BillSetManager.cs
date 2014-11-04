@@ -18,6 +18,9 @@ using Controllers.DataAccess;
 
 namespace Controllers.Business
 {
+    /// <summary>
+    /// BillSetInfo账套信息业务层逻辑 
+    /// </summary>
     public class BillSetManager
     {
         #region select 

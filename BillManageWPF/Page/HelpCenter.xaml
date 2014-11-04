@@ -13,7 +13,6 @@
                 <mui:Link DisplayName="常用问题信息" Source="/Content/Help/Programs.xaml" />
                 <mui:Link DisplayName="使用指南" Source="/Content/Help/LoremIpsum.xaml" />
             </mui:ModernTab.Links>
-        </mui:ModernTab>
-            
+        </mui:ModernTab>           
     </Grid>
 </UserControl>

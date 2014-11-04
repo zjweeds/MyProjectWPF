@@ -115,7 +115,7 @@
                 <Button Name="btnTemplateCopy" Content="复制模板" Background="#FF43D4EA" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateCopy_Click" />
                 </StackPanel>
                 <StackPanel Grid.Row="28" >
-                <Button  Name="btnTemplateDelet" Content="删除模板" Background="#FF43D4EA" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" />
+                <Button  Name="btnTemplateDelet" Content="删除模板" Background="#FF43D4EA" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateDelet_Click" />
                 </StackPanel>
                 <StackPanel Grid.Row="30" >
                 <Button Name="btnTemplateCut" Content="剪切模板" Background="#FF43D4EA" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Click="btnTemplateCut_Click" />

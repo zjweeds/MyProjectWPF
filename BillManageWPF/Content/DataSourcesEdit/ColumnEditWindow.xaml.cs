@@ -43,7 +43,7 @@ namespace BillManageWPF.Content.DataSourcesEdit
                 {
                     if (tdsl != null)
                     {
-                        bool isRepit = false;
+                        bool isRepit = false;//名称是否重复
                         for (int i = 0; i < tdsl.dgvList[pageIndex].ColumnCount; i++)
                         {
                             if (tdsl.dgvList[pageIndex].Columns[i].HeaderText == txtTypeName.Text.Trim())
@@ -85,6 +85,5 @@ namespace BillManageWPF.Content.DataSourcesEdit
         {
 
         }
-
     }
 }

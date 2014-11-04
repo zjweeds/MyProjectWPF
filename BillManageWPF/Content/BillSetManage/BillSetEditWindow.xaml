@@ -1,11 +1,11 @@
 ﻿<Window x:Class="BillManageWPF.Content.BillSetManage.BillSetEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BillSetEditWindow" Height="125.307" Width="246"  Loaded="Window_Loaded">
+        Title="BillSetEditWindow" Height="132.307" Width="246"  Loaded="Window_Loaded">
     <Grid>
         <Label Content="名称：" HorizontalAlignment="Left" Margin="42,16,0,0" VerticalAlignment="Top" Width="34" Height="18"/>
         <Label Content="所属公司：" HorizontalAlignment="Left" Margin="18,42,0,0" VerticalAlignment="Top" Width="62"/>
-        <TextBox Name="txtName" HorizontalAlignment="Left" Height="22" Margin="80,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txtName" HorizontalAlignment="Left" Height="22" Margin="80,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Name="lbCompanyName" Content="Label" HorizontalAlignment="Left" Margin="81,44,0,0" VerticalAlignment="Top" Width="119"/>
         <Button  Name="btnYes" Content="确定"  HorizontalAlignment="Left" Height="24" Margin="69,68,0,0" VerticalAlignment="Top" Width="63" Click="btnYes_Click"/>
         <Button  Name="btnCanel" Content="取消" HorizontalAlignment="Left" Height="24" Margin="140,68,0,0" VerticalAlignment="Top" Width="60" Click="btnCanel_Click"/>

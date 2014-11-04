@@ -136,7 +136,26 @@ namespace Controllers.DataAccess
                 throw ex;
             }
         }
-        
+
+        /// <summary>
+        /// 根据
+        /// </summary>
+        /// <param name="tiid"></param>
+        /// <returns></returns>
+        public static int DeleteByID(Int32 tiid)
+        {
+            try
+            {
+                StringBuilder sbSql = new StringBuilder();
+                sbSql.Append("update TemplateInfo set TIIsEnable ='0' ");
+                sbSql.AppendFormat(" where TIID='{0}' ", tiid);               
+                return new MySqlHelper().ExecDataBySql(sbSql.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         /// <summary>
         /// 根据模板编号返回datatable
         /// </summary>

@@ -189,6 +189,7 @@
             this.AddMyMoneyPanel.Size = new System.Drawing.Size(78, 52);
             this.AddMyMoneyPanel.Text = "金额明细";
             this.AddMyMoneyPanel.ToolTipText = "点击添加金额明细";
+            this.AddMyMoneyPanel.Visible = false;
             this.AddMyMoneyPanel.Click += new System.EventHandler(this.AddMyMoneyPanel_Click);
             this.AddMyMoneyPanel.MouseEnter += new System.EventHandler(this.toolSave_MouseEnter);
             this.AddMyMoneyPanel.MouseLeave += new System.EventHandler(this.toolSave_MouseLeave);
